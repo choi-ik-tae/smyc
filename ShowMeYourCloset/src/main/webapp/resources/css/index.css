@@ -1,0 +1,20 @@
+@charset "UTF-8";
+    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+    #section0{background-image: url(/imgs/cd1.jpg);opacity: 0.8}
+    #section1{background-image: url(/imgs/cd2.jpg);opacity: 0.8}
+    #section2{background-image: url(/imgs/cd3.jpg);opacity: 0.8}
+    #top{height: 80px;background-color:white;border-bottom: 1px solid gray;}
+    #bottom{height: 80px;line-height: 80px;background-color:white;border-top: 1px solid gray;}
+    #label1{position:absolute;left: 500px;top: 330px;color: white; font-weight: 800;}
+    #label2{position:absolute;font-weight: 800;}
+    #label3{position:absolute;left: 20px; top:670px;}
+    #label3>h1{font-weight: 800;color: black;}
+    #label4{position:absolute;left: 820px;top:420px}
+    #label4>h1{font-weight: 800;color: white;}
+    .circleBtn{display: inline-block;width: 200px;height: 200px;}
+    .circleBtn>img{border-radius: 20%;-webkit-transition: -webkit-transform .4s ease-in-out;transition:transform .4s ease-in-out;}
+    .circleBtn>img:hover {cursor: pointer;-webkit-transform: rotate(15deg);transform: rotate(15deg);}
+    #bottom{position: absolute; bottom: 0;width: 100%;height: 150px;}
+    #toTop{position: fixed;left: 1830px; top: 850px; z-index: 1;cursor: pointer; border: 1px solid white;background-color: white; border-radius: 50px; opacity: 0.8}
+    .nav-item>a{color: black; font-size: 15pt;}
+    .logo{font-size: 15pt;}
