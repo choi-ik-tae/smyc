@@ -29,6 +29,7 @@
 <body>
 <a href="#firstPage"><img id="toTop" src="/imgs/btn/ta1.png" style="width: 60px"></a>
 <div class="container-fluid p-0">
+
     <div class="row fixed-top align-items-center" id="top">
         <div class="col-2 text-center">
             <label class="m-0 logo">Show Your Closet</label>
