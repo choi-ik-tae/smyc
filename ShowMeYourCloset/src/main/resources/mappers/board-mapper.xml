@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+<!-- 	게시글 작성 -->
+	<insert id="boardWrite" parameterType="kh.spring.dto.BoardDTO">
+		insert into board values(board_seq.nextval,#{title},#{id},#{contents},0,sysdate)
+	</insert>
+<!-- 	게시물 출력 -->
+	<select id="selectAll" resultType="kh.spring.dto.BoardDTO">
+		select * from board
+	</select>
+<!-- 	시퀀스 번호 추출 -->
+	<select id="selectSeq" resultType="_int">
+		select seq from board order by 1 desc;
+	</select>
+	
+	
+</mapper>
