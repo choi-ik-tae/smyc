@@ -3,28 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Members">
-<!-- 	회원가입 -->
-	<insert id="signup" parameterType="kh.spring.dto.MemberDTO">
-		insert into members values(#{id},#{pw},#{name},#{phone})
-	</insert>
-<!-- 	로그인 -->
-	<select id="login" parameterType="java.util.Map" resultType="kh.spring.dto.MemberDTO">
-		select * from members where id = #{id} and pw = #{pw}
-	</select>
-<!-- 	마이페이지 -->
-	<select id="mypage" resultType="kh.spring.dto.MemberDTO">       
-		select * from members where id = #{id}
-	</select>
-<!-- 	회원목록 -->
-	<select id="memberlist" resultType="kh.spring.dto.MemberDTO">
-		select * from members
-	</select>
-<!-- 	회원탈퇴 -->
-	<delete id="memberout">
-		delete from members where id = #{id}
-	</delete>
-<!-- 	정보수정 -->
-	<update id="modify" parameterType="kh.spring.dto.MemberDTO">
-		update members set pw = #{pw},name = #{name},phone = #{phone} where id = #{id}
-	</update>
+
+
+
 </mapper>
