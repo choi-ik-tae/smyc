@@ -11,10 +11,6 @@ public class MembersDAO {
 	
 	private SqlSessionTemplate sst;
 	
-	public int insert(MembersDTO dto) {
-		Map<String ,String >parm = new HashMap<>();
-		
-		
-	}
+
 
 }
