@@ -10,8 +10,17 @@ import kh.spring.dto.MembersDTO;
 public class MemberController {
 	
 	@RequestMapping("signupProc")
-	public String signupProc() {
+	public String signup(MembersDTO dto) {
+		System.out.println();
 		
 		return "";
 	}
+	
+	@RequestMapping("signinProc")
+	public String signup(String email,String pw) {
+		System.out.println(email+"/"+pw);
+		
+		return "";
+	}
+
 }

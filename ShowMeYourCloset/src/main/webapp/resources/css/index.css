@@ -12,13 +12,11 @@
     #label2{position:absolute;font-weight: 800;}
     #label3{position:absolute;left: 20px; top:670px;}
     #label3>h1{font-weight: 800;color: black;}
-    #label4{position:absolute;left: 820px;top:420px}
     #label4>h1{font-weight: 800;color: white;}
     .circleBtn{display: inline-block;width: 200px;height: 200px;}
     .circleBtn>label{position: relative;z-index: 1; font-size: 15pt; font-weight: 800;}
     .circleBtn>img{-webkit-transition: -webkit-transform .4s ease-in-out;transition:transform .4s ease-in-out;}
     .circleBtn>img:hover{cursor: pointer;-webkit-transform: rotate(15deg);transform: rotate(15deg);}
     #btnBox{background-color:white;background:rgba(255, 255, 255, 0.8);height: 300px;margin-bottom: 80px;}
-    #toTop{position: fixed;left: 1830px; top: 850px; z-index: 1;cursor: pointer; border: 1px solid white;background-color: white; border-radius: 50px; opacity: 0.8}
     .nav-item>a{color: black; font-size: 15pt;}
     .logo{font-size: 15pt;}

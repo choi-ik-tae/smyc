@@ -1,12 +1,17 @@
 package kh.spring.service;
 
+import org.springframework.mail.javamail.JavaMailSender;
+
 import kh.spring.confirm.MailUtils;
 import kh.spring.confirm.TempKey;
 import kh.spring.dao.MembersDAO;
+import kh.spring.dto.MembersDTO;
 
 public class MemberService {
 	
 	private MembersDAO dao;
+	
+	private JavaMailSender mailSender;
 	
 	public void create(MembersDTO dto) throws Exception {
 		dao.insert(dto);
@@ -18,10 +23,10 @@ public class MemberService {
 		
 		MailUtils sendMail = new MailUtils(mailSender);
 		
-		sendMail.setSubject("[Test] 회원가입 이메일 인증");
+		sendMail.setSubject("[ShowMeYourCloset] 회원가입 이메일 인증");
 		sendMail.setText(new StringBuffer().append("<h1>이메일 인증</h1>")
 				.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료 됩니다.</p>")
-				.append("<a href='http://localhost:8080/project/joinConfirm?email='")
+				.append("<a href='http://localhost:8080/joinConfirm?email='")
 				.append(dto.getEmail())
 				.append("&authkey=")
 				.append(authkey)
