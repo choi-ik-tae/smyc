@@ -73,7 +73,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="InputEmail">Email</label>
-                                    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
+                                    <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
                                 </div>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="InputPassword">Password</label>
-                                            <input type="password" class="form-control" id="InputPassword">
+                                            <input type="password" name="pw" class="form-control" id="InputPassword">
                                         </div>
                                         <div class="col-6">
                                             <label for="InputRePassword">Password Check</label>
@@ -100,7 +100,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="InputName">Name</label>
-                                    <input type="text" class="form-control" id="InputName">
+                                    <input type="text" name="name" class="form-control" id="InputName">
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                                     <label for="InputNickName">NickName</label>
                                     <div class="row">
                                         <div class="col-9">
-                                            <input type="text" class="form-control" id="InputNickName">
+                                            <input type="text" name="nickname" class="form-control" id="InputNickName">
                                         </div>
                                         <div class="col-3">
                                             <button type="button" class="btn btn-secondary" style="width: 100%;">중복확인</button>
@@ -127,16 +127,16 @@
                                     <label for="secondPhone">Phone</label>
                                     <div class="row">
                                         <div class="col-4">
-                                            <select class="custom-select">
+                                            <select class="custom-select" name="phone1">
                                                 <option value="010">010</option>
                                                 <option value="011">011</option>
                                                 <option value="019">031</option>
                                             </select>
                                         </div>
                                         <div class="col-4">
-                                            <input type="text" id="secondPhone" class="form-control" > </div>
+                                            <input type="text" name="phone2" id="secondPhone" class="form-control" > </div>
                                         <div class="col-4">
-                                            <input type="text" id="thirdPhone" class="form-control">
+                                            <input type="text" name="phone3" id="thirdPhone" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -147,11 +147,11 @@
                                 <div class="form-group">
                                     <label> Gender</label>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="man" name="gender" class="custom-control-input">
+                                        <input type="radio" id="man" name="gender" value="M" class="custom-control-input">
                                         <label class="custom-control-label" for="man">남자</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="woman" name="gender" class="custom-control-input">
+                                        <input type="radio" id="woman" name="gender" value="W" class="custom-control-input">
                                         <label class="custom-control-label" for="woman">여자</label>
                                     </div>
                                 </div>

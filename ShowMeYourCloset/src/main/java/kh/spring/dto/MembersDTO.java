@@ -7,25 +7,25 @@ public class MembersDTO {
 	private String pw;
 	private String name;
 	private String nickname;
+	private String phone;
 	private String gender;
 	private Date join_date;
 	private String ban;
 	private String authkey;
 	private int authstatus;
-	
-	
-	
+
 	public MembersDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MembersDTO(String email, String pw, String name, String nickname, String gender, Date join_date, String ban,
+	public MembersDTO(String email, String pw, String name, String nickname, String phone, String gender, Date join_date, String ban,
 			String authkey, int authstatus) {
 		super();
 		this.email = email;
 		this.pw = pw;
 		this.name = name;
 		this.nickname = nickname;
+		this.phone = phone;
 		this.gender = gender;
 		this.join_date = join_date;
 		this.ban = ban;
@@ -55,6 +55,12 @@ public class MembersDTO {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getGender() {
 		return gender;
