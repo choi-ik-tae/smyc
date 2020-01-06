@@ -37,5 +37,9 @@ public class MembersDAO {
 		
 		
 	}
+	
+	public int updateAhthStatus(String email) {
+		return sst.update("Members.updateAuthStatus",email);
+	}
 
 }
