@@ -13,6 +13,16 @@
 
         <style>
             *{box-sizing: border-box;}
+            
+            .btn{
+                background: #99cda9;
+                border : none;
+                color: darkslategray;
+            }
+            .btn:hover{
+                background: #698474;
+                color: white;
+            }
         </style>
     </head>
     <body>
@@ -49,15 +59,16 @@
                 </div>
             </div>
             <div class="row">
+               <div class="col-12 mt-5"></div>
                 <div class="col-12 mt-5" style="text-align: center;">
                     <h1>회원 가입</h1>
-                    <hr class="m-0" style="">
+                    <hr class="mt-3">
                 </div>
             </div>
 
             <div class="row"> 
-                <div class="col-6 mt-5 mb-5" style="margin: auto;"> 
-                    <form>
+                <div class="col-sm-8 col-md-8 col-lg-4 p-3" style="margin: auto; background: #e5e4cc"> 
+                    <form action="${pageContext.request.contextPath}/member/signupProc">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -148,10 +159,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12 p-0">
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-secondary" style="float: left">돌아가기</button>
+                                <div class="form-group" style="text-align: center">
 
-                                    <button type="submit" class="btn btn-secondary" style="float: right;">가입하기</button>
+                                    <button type="submit" class="btn" style="width: 100%; height: 50px;">가입하기</button>
                                 </div>
                             </div>
                         </div>
@@ -162,6 +172,7 @@
 
         </div>
         <div class="row">
+           <div class="col-12"><hr class="mb-3"></div>
             <div class="col-12" id="bottom">
                 <div class="row">
                     <div class="col-2" id="bottom-logo">
