@@ -9,9 +9,16 @@ import kh.spring.dto.MembersDTO;
 @RequestMapping("/member")
 public class MemberController {
 	
-	@RequestMapping("/meber/signup.proc")
+	@RequestMapping("signupProc")
 	public String signup(MembersDTO dto) {
 		System.out.println();
+		
+		return "";
+	}
+	
+	@RequestMapping("signinProc")
+	public String signup(String email,String pw) {
+		System.out.println(email+"/"+pw);
 		
 		return "";
 	}
