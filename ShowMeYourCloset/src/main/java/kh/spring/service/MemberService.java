@@ -52,5 +52,15 @@ public class MemberService {
 		
 		dao.updateAhthStatus(email);
 	}
+	
+	public int checkNickName(String nickname) {
+		MembersDTO dto = dao.checkNickName(nickname);
+		int result = 0 ;
+		if(dto == null) {
+			result = 1;
+		}
+		
+		return result;
+	}
 
 }
