@@ -33,7 +33,20 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		return "";
+		return "login/signupConfirm";
+	}
+	
+	@RequestMapping("joinConfirm")
+	public String joinConrim(Model model,String email,String authkey) {
+		System.out.println(email);
+		System.out.println(authkey);
+		
+		memService.updateAuth(email);
+		
+		
+		model.addAttribute("auth_check", 1);
+		
+		return "login/signupConfirm";
 	}
 	
 	@RequestMapping("signinProc")

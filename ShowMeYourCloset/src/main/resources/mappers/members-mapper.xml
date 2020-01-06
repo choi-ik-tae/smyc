@@ -10,5 +10,9 @@
 	<update id="updateAuthkey">
 		update members set authkey=#{authkey} where email=#{email}
 	</update>
+	
+	<update id="updateAuthStatus">
+		update members set authstatus=1 where email=#{value}
+	</update>
 
 </mapper>
