@@ -3,6 +3,7 @@ package kh.spring.dto;
 import java.sql.Date;
 
 public class MembersDTO {
+
    private String email;
    private String pw;
    private String name;

@@ -7,5 +7,8 @@
 		insert into members values(#{email},#{pw},#{name},#{nickname},#{phone},#{gender},sysdate,'N','N',0)
 	</insert>
 
+	<update id="updateAuthkey">
+		update members set authkey=#{authkey} where email=#{email}
+	</update>
 
 </mapper>
