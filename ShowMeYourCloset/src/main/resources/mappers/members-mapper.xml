@@ -14,5 +14,9 @@
 	<update id="updateAuthStatus">
 		update members set authstatus=1 where email=#{value}
 	</update>
+	
+	<select id="checkNickName" resultType="kh.spring.dto.MembersDTO">
+		select * from members where nickname=#{value}
+	</select>
 
 </mapper>

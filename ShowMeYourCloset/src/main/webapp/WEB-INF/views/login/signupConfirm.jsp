@@ -15,6 +15,7 @@
 	<c:if test="${auth_check == 1 }">
 		회원 가입이 완료 되었습니다.
 		
+		
 	</c:if>
 
 </body>
