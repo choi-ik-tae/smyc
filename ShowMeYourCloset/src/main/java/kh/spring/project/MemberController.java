@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.MembersDTO;
 import kh.spring.service.MemberService;
@@ -52,6 +53,14 @@ public class MemberController {
 	@RequestMapping("signinProc")
 	public String signup(String email,String pw) {
 		System.out.println(email+"/"+pw);
+		
+		return "";
+	}
+	
+	@RequestMapping("clothesUpload")
+	public String clothesUpload(MultipartFile file) {
+		
+		
 		
 		return "";
 	}
