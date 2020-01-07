@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>Insert title here</title>
+<!-- signin.css -->
+<link rel="stylesheet" type="text/css" href="/css/signin.css">
 </head>
 <body>
 	<div>
@@ -20,11 +22,13 @@
 			var pwOk = "${authkey}";
 		
 			if(pw == pwOk){
-				location.href="${pageContext.request.contextPath}/pwChange";
+				location.href="${pageContext.request.contextPath}/pwChange?email=${email}";
 			}else{
 				alert("불일치!");
 			}
 		})
+		
+		
 	</script>
 
 </body>

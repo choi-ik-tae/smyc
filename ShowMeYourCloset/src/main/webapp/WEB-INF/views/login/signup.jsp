@@ -15,43 +15,29 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+<!-- signin.css -->
+<link rel="stylesheet" type="text/css" href="/css/signin.css">
 
 <style>
-* {
-	box-sizing: border-box;
-}
+* {box-sizing: border-box;}
 
-.btn {
-	background: #99cda9;
-	border: none;
-	color: darkslategray;
-}
-
-.btn:hover {
-	background: #698474;
-	color: white;
-}
 </style>
-<!-- index.css -->
-<link rel="stylesheet" type="text/css" href="/css/index.css">
+
 </head>
 <body>
 	<div class="container-fluid p-0">
 
-		<!-- 헤더 -->
-		<jsp:include page="../standard/header.jsp" />
 
 		<div class="row">
 			<div class="col-12 mt-5"></div>
 			<div class="col-12 mt-5" style="text-align: center;">
-				<h1>회원 가입</h1>
-				<hr class="mt-3">
+				<h2>Sign Up</h2>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-sm-8 col-md-8 col-lg-4 p-3"
-				style="margin: auto; background: #e5e4cc">
+			<div class="col-sm-8 col-md-8 col-lg-4 p-3 mb-3" style="margin:auto;background:rgba(255, 255, 255, 0.9); border-radius:20px;">
 				<form action="${pageContext.request.contextPath}/member/signupProc" method="post" id="signupFrm">
 					<div class="row">
 						<div class="col-12">
@@ -80,7 +66,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-12"><span id="pwResult"></span></div>
+						<div class="col-12"><span id="pwResult" style="font-size:13px;"></span></div>
 					</div>
 					<div class="row">
 						<div class="col-12">
@@ -101,8 +87,8 @@
 											id="InputNickName">
 									</div>
 									<div class="col-3">
-										<button type="button" id="nickCheck" class="btn btn-secondary"
-											style="width: 100%;">중복확인</button>
+										<button type="button" id="nickCheck" class="btn btn-info"
+											style="width: 100%;">OVERLAP</button>
 									</div>
 								</div>
 
@@ -151,11 +137,8 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-12 p-0">
-							<div class="form-group" style="text-align: center">
-
-								<button type="button" class="btn" id="signupBtn" style="width: 100%; height: 50px;">가입하기</button>
-							</div>
+						<div class="form-group col-12" style="text-align: center">
+							<button type="button" class="btn btn-info" id="signupBtn" style="width: 100%; height: 50px;">SIGN UP</button>
 						</div>
 					</div>
 
@@ -163,8 +146,6 @@
 			</div>
 		</div>
 
-		<!-- 푸터 -->
-		<jsp:include page="../standard/footer.jsp" />
 
 	</div>
 	
@@ -205,7 +186,8 @@
       
                 
                 if(result==null){
-                    $("#pwResult").text("영문자 포함 6자 이상 12자 이하");
+                    $("#pwResult").text("* 영문자 포함 6자 이상 12자 이하")
+                    .css("color","#bcbcbc");
                     $("#InputPassword").val("");
                     $("#InputPassword").focus();
                 }else{
@@ -219,9 +201,11 @@
                 var pwOk = $("#InputRePassword").val();
                 
                 if(pw == pwOk){
-                    $("#pwResult").text("비밀번호가 일치합니다.");
+                    $("#pwResult").text("* 비밀번호가 일치합니다.")
+                    .css("color","green");
                 }else{
-                     $("#pwResult").text("비밀번호가 일치하지 않습니다.");
+                     $("#pwResult").text("* 비밀번호가 일치하지 않습니다.")
+                     .css("color","#ba5932");
                 }
             })
 
@@ -262,6 +246,7 @@
                 
                 if(nickNameCheck==false){
                 	alert("닉네임 중복체크 필수~~~");
+                	return;
                 }
                 
        

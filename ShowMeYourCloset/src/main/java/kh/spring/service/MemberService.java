@@ -118,4 +118,8 @@ public class MemberService {
 		
 		return email;
 	}
+	
+	public void changePwProc(String email, String pw) {
+		mdao.changePwProc(email, pw);
+	}
 }

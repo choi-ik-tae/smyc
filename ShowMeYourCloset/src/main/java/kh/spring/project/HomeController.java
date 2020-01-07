@@ -1,6 +1,7 @@
 package kh.spring.project;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -46,7 +47,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/pwChange")
-	public String pwChange() {
+	public String pwChange(Model model,String email) {
+		model.addAttribute("email", email);
 		return "login/pwChange";
 	}
+
 }
