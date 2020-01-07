@@ -153,6 +153,7 @@ public class MemberController {
 			String authkey=memService.sendFindPWEmail(email);
 			
 			model.addAttribute("authkey", authkey);
+			model.addAttribute("email",email);
 			
 			return "login/pwConfirm";
 		} catch (Exception e) {
@@ -175,6 +176,15 @@ public class MemberController {
 		}
 		
 		return "good";
+	}
+	
+	@RequestMapping("/changePwProc")
+	public String changePwProc(String pw,String email) {
+		System.out.println(email + " : "+pw);
+		
+		memService.changePwProc(email, pw);
+		
+		return "login/pwChangeConfirm";
 	}
 
 }

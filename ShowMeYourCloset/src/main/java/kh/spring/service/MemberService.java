@@ -142,4 +142,7 @@ public class MemberService {
 		return ddao.insert(dto);
 	}
 	
+	public void changePwProc(String email, String pw) {
+		mdao.changePwProc(email, pw);
+	}
 }

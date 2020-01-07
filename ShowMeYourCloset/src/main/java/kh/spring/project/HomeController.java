@@ -66,7 +66,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/pwChange")
-	public String pwChange() {
+	public String pwChange(Model model,String email) {
+		model.addAttribute("email", email);
 		return "login/pwChange";
 	}
+
 }

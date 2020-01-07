@@ -30,9 +30,6 @@
 		<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required>
 		<input type="password" id="inputPassword" name="pw" class="form-control mb-3" placeholder="Password" required>
 		<div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" value="remember-me"> Remember me
-			</label>
 		</div>
 		<button class="btn btn-lg btn-outline-secondary btn-block" type="submit">Sign in</button>
 		<div class="signBox mt-2" style="font-size:10px;">

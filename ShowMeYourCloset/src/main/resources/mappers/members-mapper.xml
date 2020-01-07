@@ -34,5 +34,9 @@
 	<select id="findEmail" resultType="String">
 		select email from members where name=#{name} and phone=#{phone}
 	</select>
+	
+	<update id="changePwProc">
+		update members set pw=#{pw} where email=#{email}
+	</update>
 
 </mapper>
