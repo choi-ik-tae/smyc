@@ -29,6 +29,10 @@
 			</label>
 		</div>
 		<button class="btn btn-lg btn-outline-secondary btn-block" type="submit">Sign in</button>
+		<div class="signBox">
+			<span><a href="${pageContext.request.contextPath}/signup">회원가입</a></span> 
+			<span><a href="#">이메일/비밀번호 찾기</a></span>
+		</div>
 	</form>
 </body>
 </html>

@@ -18,5 +18,17 @@
 	<select id="checkNickName" resultType="kh.spring.dto.MembersDTO">
 		select * from members where nickname=#{value}
 	</select>
+	
+	<select id="logInOk" resultType="kh.spring.dto.MembersDTO">
+		select * from members where email=#{email} and pw=#{pw}
+	</select>
+	
+	<select id="returnAuthStatus" resultType="Integer">
+		select authstatus from members where email=#{value}
+	</select>
+	
+	<select id="returnNickname" resultType="String">
+		select nickname from members where email=#{value}
+	</select>
 
 </mapper>

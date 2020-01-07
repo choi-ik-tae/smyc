@@ -20,6 +20,7 @@ public class MemberService {
 	
 	@Autowired
 	private DressDAO ddao;
+
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -65,6 +66,29 @@ public class MemberService {
 		}
 		
 		return result;
+	}
+	
+	public int logInOk(String email, String pw) {
+		
+		MembersDTO dto =mdao.loginOk(email, pw);
+		int result = 1;
+		if(dto == null) {
+			result = 0;
+		}
+		
+		return result;
+	}
+	
+	public int returnAuthStatus(String email) {
+		int authstatus = mdao.returnAuthStatus(email);
+		
+		return authstatus;
+		
+	}
+	
+	public String returnNickname(String email) {
+		
+		return mdao.returnNickname(email);
 	}
 
 }

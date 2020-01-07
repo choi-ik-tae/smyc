@@ -58,10 +58,29 @@ public class MemberController {
 	}
 	
 	@RequestMapping("signinProc")
-	public String signup(String email,String pw) {
+	public String signup(Model model,String email,String pw) {
 		System.out.println(email+"/"+pw);
 		
-		return "";
+		int result = memService.logInOk(email, pw);
+		
+		if(result > 0) {
+			int auth = memService.returnAuthStatus(email);
+			System.out.println(auth);
+			if(auth == 1) {
+				
+				String nickname = memService.returnNickname(email);
+				
+				session.setAttribute("email", email);
+				session.setAttribute("nick", nickname);
+				
+				return "index";
+			}
+			
+		}
+		model.addAttribute("result", result);
+		
+		return "trySignup";
+		
 	}
 	
 
