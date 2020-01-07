@@ -32,21 +32,21 @@
 				        <div class="col-auto m-auto p-0 align-items-center preview">
 				            <img src="imgs/closet/closet1.png" class="w-100">
 				        </div>
-                        <input type="radio" name="img" id="closet1" value="closet1">
+                        <input type="radio" name="img" id="closet1" value="closet1" required>
                     </label>
 
                     <label for="closet2">
                         <div class="col-auto m-auto p-0 align-items-center preview">
                             <img src="imgs/closet/closet2.png" class="w-100">
                         </div>
-                        <input type="radio" name="img" id="closet2" value="closet2">
+                        <input type="radio" name="img" id="closet2" value="closet2" required>
                     </label>
 
                     <label for="closet3">
                         <div class="col-auto m-auto p-0 align-items-center preview">
                             <img src="imgs/closet/closet3.png" class="w-100">
                         </div>
-                        <input type="radio" name="img" id="closet3" value="closet3">
+                        <input type="radio" name="img" id="closet3" value="closet3" required>
                     </label>
                 </div>
 			</div>

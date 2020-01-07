@@ -104,12 +104,10 @@
 				</div>
 				<div class="col-10">
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="pub" id="y"
-							value="y"> <label class="form-check-label" for="y">YES</label>
+						<input class="form-check-input" type="radio" name="pub" id="y" value="Y" required> <label class="form-check-label" for="y">YES</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="pub" id="n"
-							value="n"> <label class="form-check-label" for="n">NO</label>
+						<input class="form-check-input" type="radio" name="pub" id="n" value="N" required> <label class="form-check-label" for="n">NO</label>
 					</div>
 				</div>
 			</div>

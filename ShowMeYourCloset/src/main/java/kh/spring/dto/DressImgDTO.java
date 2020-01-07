@@ -2,19 +2,19 @@ package kh.spring.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class DressImgsDTO {
+public class DressImgDTO {
 	private int no;
 	private int d_no;
 	private String ori_name;
 	private String sys_name;
 	private String path;
 	
-	public DressImgsDTO() {
+	public DressImgDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public DressImgsDTO(int no, int d_no, String ori_name, String sys_name, String path) {
+	public DressImgDTO(int no, int d_no, String ori_name, String sys_name, String path) {
 		super();
 		this.no = no;
 		this.d_no = d_no;

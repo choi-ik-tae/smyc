@@ -124,12 +124,4 @@ public class DressDTO {
 		this.buy_date = buy_date;
 	}
 
-	@Override
-	public String toString() {
-		return "DressDTO [no=" + no + ", c_no=" + c_no + ", email=" + email + ", name=" + name + ", category="
-				+ category + ", pub=" + pub + ", season=" + season + ", write_date=" + write_date + ", memo=" + memo
-				+ ", price=" + price + ", buy_date=" + buy_date + "]";
-	}
-	
-	
 }
