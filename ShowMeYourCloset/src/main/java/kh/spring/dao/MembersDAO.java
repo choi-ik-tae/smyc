@@ -67,6 +67,14 @@ public class MembersDAO {
 		parm.put("phone",phone);
 		return sst.selectOne("Members.findEmail", parm);
 	}
+	
+	public int changePwProc(String email, String pw) {
+		Map<String, String> parm = new HashMap<String, String>();
+		parm.put("email",email);
+		parm.put("pw",pw);
+		
+		return sst.update("Members.changePwProc",parm);
+	}
 
 
 }

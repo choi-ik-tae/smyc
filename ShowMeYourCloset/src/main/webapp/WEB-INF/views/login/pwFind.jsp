@@ -7,17 +7,17 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <meta charset="UTF-8">
         <title>Document</title>
-
+        <!-- signin.css -->
+		<link rel="stylesheet" type="text/css" href="/css/signin.css">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container-fuild">
-            <hr>
+        <div class="container">
             <div class="row">
-                <div class="col-5" style="margin: auto; border:1px solid #bcbcbc; border-radius: 10px;">
-                    <div class="row mt-3" style="border-bottom: 1px solid #bcbcbc;">
+                <div class="col-5" style="margin: auto; border-radius: 20px; background:rgba(255, 255, 255, 0.9);">
+                    <div class="row mt-3">
                         <div class="col-6">
                             <button id="findIDBtn" class="btn btn-info" style="width: 100%;">이메일 찾기</button>
                         </div>
@@ -42,9 +42,10 @@
                                     <input type="email" class="form-control" id="email" name="email">
                                 </div>
                             </div>
-                            <div class="form-group row mt-4">
-                                <div class="col-5" style="margin: auto">
-                                    <button  type="button" id="findBtn" class="btn btn-info" style="width: 100%;">FIND</button>
+                             <div class="form-group row mt-4">
+                                <div class="col-7" style="margin: auto">
+                                    <button id="findBtn" type="button" class="btn btn-info" style="width: 49%;">FIND</button>
+                                    <button id="signinGo" type="button" class="btn btn-info" style="width: 49%;">SIGN IN</button>
                                 </div>
                             </div>
                             
@@ -63,6 +64,9 @@
         </div>
         
         <script>
+	        $("#signinGo").on("click",function(){
+	    		location.href="${pageContext.request.contextPath}/signin";
+	    	})
         	$("#findIDBtn").on("click",function(){
         		location.href="${pageContext.request.contextPath}/idFind";
         	})
@@ -71,9 +75,7 @@
         	})
         	
         	$("#findBtn").on("click",function(){
-        		
-        		
-        		
+ 
         		$.ajax({
         			url:"${pageContext.request.contextPath}/member/emailCheck",
         			data:{

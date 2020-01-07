@@ -25,14 +25,11 @@
 
 </head>
 <body>
-	<form class="form-signin" action="" id="frm" method="post">
+	<form class="form-signin" action="${pageContext.request.contextPath}/member/signinProc" id="frm" method="post">
 		<h1 class="h3 mb-3 font-weight-normal text-center">Show Me Your Closet</h1>
 		<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required>
 		<input type="password" id="inputPassword" name="pw" class="form-control mb-3" placeholder="Password" required>
 		<div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" value="remember-me"> Remember me
-			</label>
 		</div>
 		<button class="btn btn-lg btn-outline-secondary btn-block" type="submit">Sign in</button>
 		<div class="signBox mt-2" style="font-size:10px;">
