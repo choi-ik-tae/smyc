@@ -19,7 +19,7 @@
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">MyPage</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="#">Info</a>
-					<a class="dropdown-item" href="#">Closet</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/myCloset">Closet</a>
 					<a class="dropdown-item" href="#">Style</a>
 				</div>
 			</li>

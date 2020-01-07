@@ -74,7 +74,7 @@
 	                        </label>
 	                     </div>
 	                     <div class="col-4">
-	                         <label class="circleBtn"">
+	                         <label class="circleBtn" id="toCloset">
 	                            <img class="mt-5" id="btnHelp" src="/imgs/btn/btnCloset.png">
 	                            <label class="mt-2">옷장 등록</label>
 	                        </label>
@@ -97,6 +97,9 @@
 	
 	$("#toClothes").on("click",function(){
 		location.href = "${pageContext.request.contextPath}/clothesUpload";
+	});
+	$("#toCloset").on("click",function(){
+		location.href = "${pageContext.request.contextPath}/closetUpload";
 	});
 </script>
 </body>

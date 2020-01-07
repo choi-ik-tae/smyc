@@ -29,4 +29,13 @@ public class HomeController {
 		return "member/closet/clothesUpload";
 	}
 	
+	@RequestMapping("/myCloset")
+	public String myCloset() {
+		return "member/closet/myCloset";
+	}
+	
+	@RequestMapping("/closetUpload")
+	public String closetUpload() {
+		return "member/closet/closetUpload";
+	}
 }

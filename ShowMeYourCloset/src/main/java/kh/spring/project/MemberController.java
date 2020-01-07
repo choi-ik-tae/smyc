@@ -92,6 +92,11 @@ public class MemberController {
 		
 		return "";
 	}
+	
+	@RequestMapping("/closet/closetUploadProc")
+	public void closetUpload() {
+		
+	}
 
 	@RequestMapping("nickCheckProc")
 	@ResponseBody
