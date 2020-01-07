@@ -73,7 +73,7 @@ public class MemberController {
 				session.setAttribute("email", email);
 				session.setAttribute("nick", nickname);
 				
-				return "index";
+				return "redirect:/";
 			}
 			
 		}
@@ -110,7 +110,59 @@ public class MemberController {
 			return "fail";
 		}
 
-
+	}
+	
+	@RequestMapping("logoutProc")
+	public String logoutProc() {
+		
+		session.invalidate();
+		
+		return "redirect:/";
+				
+	}
+	
+	@RequestMapping(value="/idFindProc",produces = "text/html; charset=UTF-8")
+	@ResponseBody
+	public String idFindProc(String name, String phone) {
+	
+		String email=memService.findEmail(name, phone);
+		if(email==null) {
+			return "이메일이 존재하지 않습니다.";			
+		}
+		
+		return email;
+	}
+	
+	@RequestMapping("/findPWProc")
+	public String findPWProc(Model model ,String email) {
+		System.out.println("하하하하핳 :: "+email);
+		
+		try {
+			String authkey=memService.sendFindPWEmail(email);
+			
+			model.addAttribute("authkey", authkey);
+			
+			return "login/pwConfirm";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "";
+		
+	}
+	
+	@RequestMapping("/emailCheck")
+	@ResponseBody
+	public String emailCheck(String email) {
+		System.out.println(email);
+		
+		String result = memService.returnNickname(email);
+		if(result == null) {
+			return "fail";
+		}
+		
+		return "good";
 	}
 
 }

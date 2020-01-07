@@ -60,6 +60,13 @@ public class MembersDAO {
 	public String returnNickname(String email) {
 		return sst.selectOne("Members.returnNickname", email);
 	}
+	
+	public String findEmail(String name, String phone) {
+		Map<String ,String >parm = new HashMap<String, String>();
+		parm.put("name",name);
+		parm.put("phone",phone);
+		return sst.selectOne("Members.findEmail", parm);
+	}
 
 
 }

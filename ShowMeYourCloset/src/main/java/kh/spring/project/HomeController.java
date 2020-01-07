@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	@RequestMapping("/")
 	public String home() {
-
 		return "index";
 	}
 
@@ -18,14 +17,11 @@ public class HomeController {
 
 	@RequestMapping("/signin")
 	public String signin() {
-		
 		return "login/signin";
-
 	}
 	
 	@RequestMapping("/clothesUpload")
 	public String clothesUpload() {
-		
 		return "member/closet/clothesUpload";
 	}
 	
@@ -37,5 +33,20 @@ public class HomeController {
 	@RequestMapping("/closetUpload")
 	public String closetUpload() {
 		return "member/closet/closetUpload";
+	}
+	
+	@RequestMapping("/idFind")
+	public String idFind() {
+		return "login/idFind";
+	}
+	
+	@RequestMapping("/pwFind")
+	public String pwFind() {
+		return "login/pwFind";
+	}
+	
+	@RequestMapping("/pwChange")
+	public String pwChange() {
+		return "login/pwChange";
 	}
 }
