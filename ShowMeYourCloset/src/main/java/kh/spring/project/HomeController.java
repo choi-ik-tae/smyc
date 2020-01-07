@@ -29,4 +29,18 @@ public class HomeController {
 		return "member/closet/clothesUpload";
 	}
 	
+	@RequestMapping("/idFind")
+	public String idFind() {
+		return "login/idFind";
+	}
+	
+	@RequestMapping("/pwFind")
+	public String pwFind() {
+		return "login/pwFind";
+	}
+	
+	@RequestMapping("/pwChange")
+	public String pwChange() {
+		return "login/pwChange";
+	}
 }

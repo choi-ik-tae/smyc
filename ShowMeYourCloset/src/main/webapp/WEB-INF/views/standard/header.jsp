@@ -27,11 +27,11 @@
 			<!-- 로그인/로그아웃 확인 -->
 			<c:choose>
 				<c:when test="${email == null}">
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login/signin">Login</a>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/signin">Login</a>
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login/logoutProc">Logout</a>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/logoutProc">Logout</a>
 					</li>
 				</c:otherwise>
 			</c:choose>

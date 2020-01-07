@@ -21,10 +21,8 @@ public class MemberService {
 	@Autowired
 	private DressDAO ddao;
 
-	
 	@Autowired
 	private JavaMailSender mailSender;
-	
 	
 	@Transactional("txManager")
 	public void create(MembersDTO dto) throws Exception {
@@ -51,6 +49,28 @@ public class MemberService {
 		sendMail.send();
 	
 		
+	}
+	
+	public String sendFindPWEmail(String email) throws Exception {
+		
+		String authkey = new TempKey().getKey(8, false);
+		
+		
+		System.out.println("암호 발급 키 :: "+authkey);
+		
+		MailUtils sendMail = new MailUtils(mailSender);
+		sendMail.setSubject("[ShowMeYourCloset] 비밀번호 찾기");
+		sendMail.setText(new StringBuffer().append("<h1>비밀번호 인증</h1>")
+				.append("<p>아래 숫자를 입력해주세요</p>")
+				.append("<h3>")
+				.append(authkey)
+				.append("</h3>")
+				.toString());
+		sendMail.setFrom("codud966@gmail.com", "[ShowMeYourCloset]");
+		sendMail.setTo(email);
+		sendMail.send();
+		
+		return authkey;
 	}
 	
 	public void updateAuth(String email) {
@@ -91,4 +111,11 @@ public class MemberService {
 		return mdao.returnNickname(email);
 	}
 
+	
+	public String findEmail(String name, String phone) {
+		
+		String email = mdao.findEmail(name, phone);
+		
+		return email;
+	}
 }
