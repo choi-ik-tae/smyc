@@ -62,7 +62,7 @@
 	            <div class="col-12 section article-6" id="section5">
 	                <div class="row text-center reposition" id="btnBox">
 	                     <div class="col-4">
-	                        <label class="circleBtn" id="toClothes">
+	                        <label class="circleBtn" id="toDress">
 	                            <img class="mt-5" id="btnCoordi" src="/imgs/btn/btnClothes.png">
 	                            <label class="mt-2">옷 등록</label>
 	                        </label>
@@ -95,8 +95,8 @@
 		navigationPosition: 'right'
     });
 	
-	$("#toClothes").on("click",function(){
-		location.href = "${pageContext.request.contextPath}/clothesUpload";
+	$("#toDress").on("click",function(){
+		location.href = "${pageContext.request.contextPath}/dressUpload";
 	});
 	$("#toCloset").on("click",function(){
 		location.href = "${pageContext.request.contextPath}/closetUpload";

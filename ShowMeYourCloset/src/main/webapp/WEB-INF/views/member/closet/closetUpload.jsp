@@ -25,28 +25,28 @@
     <div class="container text-center">
         <!-- 헤더 -->
         
-		<form action="${pageContext.request.contextPath}/member/closetUpload" enctype="multipart/form-data" method="post">
+		<form action="${pageContext.request.contextPath}/member/closet/closetUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
                 <div class="col-12">
                     <label for="closet1">
 				        <div class="col-auto m-auto p-0 align-items-center preview">
 				            <img src="imgs/closet/closet1.png" class="w-100">
 				        </div>
-                        <input type="radio" name="closet" id="closet1" value="closet1">
+                        <input type="radio" name="img" id="closet1" value="closet1">
                     </label>
 
                     <label for="closet2">
                         <div class="col-auto m-auto p-0 align-items-center preview">
                             <img src="imgs/closet/closet2.png" class="w-100">
                         </div>
-                        <input type="radio" name="closet" id="closet2" value="closet1">
+                        <input type="radio" name="img" id="closet2" value="closet2">
                     </label>
 
                     <label for="closet3">
                         <div class="col-auto m-auto p-0 align-items-center preview">
                             <img src="imgs/closet/closet3.png" class="w-100">
                         </div>
-                        <input type="radio" name="closet" id="closet3" value="closet1">
+                        <input type="radio" name="img" id="closet3" value="closet3">
                     </label>
                 </div>
 			</div>
@@ -55,7 +55,7 @@
 					<label for="" class="m-0 ">옷장 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="name" type="text">
+					<input id="name" class="w-100 form-control" name="name" type="text">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -65,11 +65,11 @@
 				<div class="col-10">
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" name="pub" id="y"
-							value="y"> <label class="form-check-label" for="y">YES</label>
+							value="Y"> <label class="form-check-label" for="y">YES</label>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" name="pub" id="n"
-							value="n"> <label class="form-check-label" for="n">NO</label>
+							value="N"> <label class="form-check-label" for="n">NO</label>
 					</div>
 				</div>
 			</div>

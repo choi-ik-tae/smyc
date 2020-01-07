@@ -20,17 +20,6 @@ public class DressDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
-	@Override
-	public String toString() {
-		return "DressDTO [no=" + no + ", c_no=" + c_no + ", email=" + email + ", name=" + name + ", category="
-				+ category + ", pub=" + pub + ", season=" + season + ", write_date=" + write_date + ", memo=" + memo
-				+ ", price=" + price + ", buy_date=" + buy_date + "]";
-	}
-
-
-
 	public DressDTO(int no, int c_no, String email, String name, String category, String pub, String season,
 			Date write_date, String memo, String price, String buy_date) {
 		super();
@@ -134,4 +123,13 @@ public class DressDTO {
 	public void setBuy_date(String buy_date) {
 		this.buy_date = buy_date;
 	}
+
+	@Override
+	public String toString() {
+		return "DressDTO [no=" + no + ", c_no=" + c_no + ", email=" + email + ", name=" + name + ", category="
+				+ category + ", pub=" + pub + ", season=" + season + ", write_date=" + write_date + ", memo=" + memo
+				+ ", price=" + price + ", buy_date=" + buy_date + "]";
+	}
+	
+	
 }

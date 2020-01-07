@@ -1,10 +1,26 @@
 package kh.spring.project;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kh.spring.dto.ClosetDTO;
+import kh.spring.service.MemberService;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private MemberService memService;
+	
+	@Autowired
+	private HttpSession session;
+	
 	@RequestMapping("/")
 	public String home() {
 		return "index";
@@ -21,7 +37,11 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/clothesUpload")
-	public String clothesUpload() {
+	public String clothesUpload(Model m) {
+		String email = (String)session.getAttribute("email");
+		List<ClosetDTO> list = memService.closetSeleteNoByEmail(email);
+		m.addAttribute("list", list);
+		
 		return "member/closet/clothesUpload";
 	}
 	

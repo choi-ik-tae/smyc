@@ -24,7 +24,6 @@ public class DressDAO {
 		parm.put("category",dto.getCategory());
 		parm.put("pub",dto.getPub());
 		parm.put("season",dto.getSeason());
-		parm.put("write_date",dto.getWrite_date());
 		parm.put("memo",dto.getMemo());
 		parm.put("price",dto.getPrice());
 		parm.put("buy_date",dto.getBuy_date());

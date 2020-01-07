@@ -1,5 +1,7 @@
 package kh.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -7,8 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.confirm.MailUtils;
 import kh.spring.confirm.TempKey;
+import kh.spring.dao.ClosetDAO;
 import kh.spring.dao.DressDAO;
 import kh.spring.dao.MembersDAO;
+import kh.spring.dto.ClosetDTO;
+import kh.spring.dto.DressDTO;
+import kh.spring.dto.DressImgsDTO;
 import kh.spring.dto.MembersDTO;
 
 
@@ -21,6 +27,9 @@ public class MemberService {
 	@Autowired
 	private DressDAO ddao;
 
+	@Autowired
+	private ClosetDAO cdao;
+	
 	@Autowired
 	private JavaMailSender mailSender;
 	
@@ -40,7 +49,7 @@ public class MemberService {
 		sendMail.setSubject("[ShowMeYourCloset] 회원가입 이메일 인증");
 		sendMail.setText(new StringBuffer().append("<h1>이메일 인증</h1>")
 				.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료 됩니다.</p>")
-				.append("<a href='http://192.168.60.54/member/joinConfirm?email=")
+				.append("<a href='http://192.168.60.11/member/joinConfirm?email=")
 				.append(dto.getEmail())
 				.append("' target='_blenk'>이메일 인증 확인 </a>")
 				.toString());
@@ -118,4 +127,19 @@ public class MemberService {
 		
 		return email;
 	}
+	
+	// 옷장 등록
+	public int closetUpload(ClosetDTO dto) {
+		return cdao.insert(dto);
+	}
+	// 옷장 번호 및 이미지 가져오기
+	public List<ClosetDTO> closetSeleteNoByEmail(String email) {
+		return cdao.selectNoByEmail(email);
+	}
+	
+	// 옷 등록
+	public int dressUpload(DressDTO dto,DressImgsDTO fdto) {
+		return ddao.insert(dto);
+	}
+	
 }

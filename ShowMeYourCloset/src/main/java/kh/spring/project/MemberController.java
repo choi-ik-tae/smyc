@@ -1,5 +1,7 @@
 package kh.spring.project;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.MembersDTO;
 import kh.spring.service.MemberService;
@@ -84,18 +87,27 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping("/closet/clothesUploadProc")
+	@RequestMapping("/closet/dressUploadProc")
 	public String clothesUpload(DressDTO dto,MultipartFile file) {
+		String email = (String)session.getAttribute("email");
+		String nick = (String)session.getAttribute("nick");
 		
 		System.out.println(dto.toString());
 		System.out.println(file.getOriginalFilename());
 		
-		return "";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/closet/closetUploadProc")
-	public void closetUpload() {
+	public String closetUpload(ClosetDTO dto) {
+		String email = (String)session.getAttribute("email");
+		dto.setEmail(email);
 		
+		System.out.println(dto.getImg());
+		
+		int result = memService.closetUpload(dto);
+		
+		return "redirect:/"; 
 	}
 
 	@RequestMapping("nickCheckProc")

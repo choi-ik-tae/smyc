@@ -25,7 +25,7 @@
     <div class="container text-center">
         <!-- 헤더 -->
         
-		<form action="${pageContext.request.contextPath}/member/closet/clothesUploadProc" enctype="multipart/form-data" method="post">
+		<form action="${pageContext.request.contextPath}/member/closet/dressUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
 				<div class="col-auto m-auto p-0 align-items-center"
 					style="border: 1px solid gray;" id="preview"></div>
@@ -45,11 +45,14 @@
 				<div class="col-10">
 					<!-- 여기 옷장 가져와서 뿌려야 함 -->
 					<select class="custom-select" name="c_no">
-                      <option selected>봄</option>
-                      <option value="1">여름</option>
-                      <option value="2">가을</option>
-                      <option value="3">겨울</option>
-                    </select>
+						<c:choose>						
+							<c:when test="${list.size() > 0}">
+								<c:forEach items="${list}" var="dto">
+									<option value="${dto.no}">${dto.name}</option>
+								</c:forEach>
+							</c:when>
+						</c:choose>
+					</select>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -112,18 +115,18 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
-					<label for="" class="m-0 ">가격</label>
+					<label for="price" class="m-0 ">가격</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="price" type="text">
+					<input id="price" class="w-100 form-control" name="price" type="text">
 				</div>
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
-					<label for="" class="m-0 ">구매일자</label>
+					<label for="buy_date" class="m-0 ">구매일자</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" min="2030-12-31">
+					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" min="2030-12-31">
 				</div>
 			</div>
 			<div class="row m-2">
