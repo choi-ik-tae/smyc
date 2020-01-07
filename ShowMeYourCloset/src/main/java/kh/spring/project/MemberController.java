@@ -1,12 +1,15 @@
 package kh.spring.project;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.dto.DressDTO;
 import kh.spring.dto.MembersDTO;
 import kh.spring.service.MemberService;
 
@@ -16,6 +19,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memService;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("signupProc")
 	public String signup(Model model,MembersDTO dto,String phone1,String phone2,String phone3) {
@@ -59,10 +65,11 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping("clothesUpload")
-	public String clothesUpload(MultipartFile file) {
+	@RequestMapping("/closet/clothesUploadProc")
+	public String clothesUpload(DressDTO dto,MultipartFile file) {
 		
-		
+		System.out.println(dto.toString());
+		System.out.println(file.getOriginalFilename());
 		
 		return "";
 	}

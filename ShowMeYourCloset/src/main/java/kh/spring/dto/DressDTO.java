@@ -9,7 +9,7 @@ public class DressDTO {
 	private String name;
 	private String category;
 	private String pub;
-	private int season;
+	private String season;
 	private Date write_date;
 	private String memo;
 	private String price;
@@ -19,8 +19,19 @@ public class DressDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "DressDTO [no=" + no + ", c_no=" + c_no + ", email=" + email + ", name=" + name + ", category="
+				+ category + ", pub=" + pub + ", season=" + season + ", write_date=" + write_date + ", memo=" + memo
+				+ ", price=" + price + ", buy_date=" + buy_date + "]";
+	}
 
-	public DressDTO(int no, int c_no, String email, String name, String category, String pub, int season,
+
+
+	public DressDTO(int no, int c_no, String email, String name, String category, String pub, String season,
 			Date write_date, String memo, String price, String buy_date) {
 		super();
 		this.no = no;
@@ -84,11 +95,11 @@ public class DressDTO {
 		this.pub = pub;
 	}
 
-	public int getSeason() {
+	public String getSeason() {
 		return season;
 	}
 
-	public void setSeason(int season) {
+	public void setSeason(String season) {
 		this.season = season;
 	}
 

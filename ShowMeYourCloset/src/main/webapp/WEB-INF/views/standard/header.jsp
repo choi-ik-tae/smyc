@@ -23,7 +23,7 @@
 					<a class="dropdown-item" href="#">Style</a>
 				</div>
 			</li>
-			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login/signin">Login</a></li>
+			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/signin">Login</a></li>
 			<!-- 로그인 후 회원가입 및 마이페이지 메뉴 추가 생성 -->
 		</ul>
 	</div>

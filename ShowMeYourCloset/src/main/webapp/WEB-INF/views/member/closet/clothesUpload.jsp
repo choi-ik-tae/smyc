@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +25,7 @@
     <div class="container text-center">
         <!-- 헤더 -->
         
-		<form action="${pageContext.request.contextPath}/member/clothesUpload" enctype="multipart/form-data" method="post">
+		<form action="${pageContext.request.contextPath}/member/closet/clothesUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
 				<div class="col-auto m-auto p-0 align-items-center"
 					style="border: 1px solid gray;" id="preview"></div>
@@ -37,10 +40,24 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
+					<label for="imgud" class="m-0 ">옷장</label>
+				</div>
+				<div class="col-10">
+					<!-- 여기 옷장 가져와서 뿌려야 함 -->
+					<select class="custom-select" name="c_no">
+                      <option selected>봄</option>
+                      <option value="1">여름</option>
+                      <option value="2">가을</option>
+                      <option value="3">겨울</option>
+                    </select>
+				</div>
+			</div>
+			<div class="row m-2">
+				<div class="col-2 align-self-center">
 					<label for="" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="ctitle" type="text">
+					<input id="" class="w-100 form-control" name="name" type="text">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -57,23 +74,23 @@
 				</div>
 				<div class="col-10">
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="spring"
-							value="option1"> <label class="form-check-label"
+						<input class="form-check-input" type="checkbox" name="season" id="spring"
+							value="spring"> <label class="form-check-label"
 							for="spring">봄</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="summer"
-							value="option2"> <label class="form-check-label"
+						<input class="form-check-input" type="checkbox" name="season" id="summer"
+							value="summer"> <label class="form-check-label"
 							for="summer">여름</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="fall"
-							value="option3"> <label class="form-check-label"
+						<input class="form-check-input" type="checkbox" name="season" id="fall"
+							value="fall"> <label class="form-check-label"
 							for="fall">가을</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="winter"
-							value="option3"> <label class="form-check-label"
+						<input class="form-check-input" type="checkbox" name="season" id="winter"
+							value="winter"> <label class="form-check-label"
 							for="winter">겨울</label>
 					</div>
 				</div>
@@ -85,12 +102,28 @@
 				<div class="col-10">
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" name="pub" id="y"
-							value="option1"> <label class="form-check-label" for="y">YES</label>
+							value="y"> <label class="form-check-label" for="y">YES</label>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" name="pub" id="n"
-							value="option2"> <label class="form-check-label" for="n">NO</label>
+							value="n"> <label class="form-check-label" for="n">NO</label>
 					</div>
+				</div>
+			</div>
+			<div class="row m-2">
+				<div class="col-2 align-self-center">
+					<label for="" class="m-0 ">가격</label>
+				</div>
+				<div class="col-10">
+					<input id="" class="w-100 form-control" name="price" type="text">
+				</div>
+			</div>
+			<div class="row m-2">
+				<div class="col-2 align-self-center">
+					<label for="" class="m-0 ">구매일자</label>
+				</div>
+				<div class="col-10">
+					<input id="" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" min="2030-12-31">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -110,37 +143,37 @@
 
 		<!-- 푸터 -->
     </div>
-<script>
-	// 등록 이미지 등록 미리보기
-	function readInputFile(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#preview').html(
-						"<img class='w-100 h-100' src="+ e.target.result +">");
+	<script>
+		// 등록 이미지 등록 미리보기
+		function readInputFile(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#preview').html(
+							"<img class='w-100 h-100' src="+ e.target.result +">");
+				}
+				reader.readAsDataURL(input.files[0]);
 			}
-			reader.readAsDataURL(input.files[0]);
 		}
-	}
-	$("#imgud").on('change', function() {
-		readInputFile(this);
-	});
-
-	// 등록 이미지 삭제 ( input file reset )
-	function resetInputFile($input, $preview) {
-		var agent = navigator.userAgent.toLowerCase();
-		if ((navigator.appName == 'Netscape' && navigator.userAgent
-				.search('Trident') != -1)
-				|| (agent.indexOf("msie") != -1)) {
-			// ie 일때
-			$input.replaceWith($input.clone(true));
-			$preview.empty();
-		} else {
-			//other
-			$input.val("");
-			$preview.empty();
+		$("#imgud").on('change', function() {
+			readInputFile(this);
+		});
+	
+		// 등록 이미지 삭제 ( input file reset )
+		function resetInputFile($input, $preview) {
+			var agent = navigator.userAgent.toLowerCase();
+			if ((navigator.appName == 'Netscape' && navigator.userAgent
+					.search('Trident') != -1)
+					|| (agent.indexOf("msie") != -1)) {
+				// ie 일때
+				$input.replaceWith($input.clone(true));
+				$preview.empty();
+			} else {
+				//other
+				$input.val("");
+				$preview.empty();
+			}
 		}
-	}
-</script>
+	</script>
 </body>
 </html>

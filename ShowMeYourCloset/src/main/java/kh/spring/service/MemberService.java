@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.confirm.MailUtils;
 import kh.spring.confirm.TempKey;
+import kh.spring.dao.DressDAO;
 import kh.spring.dao.MembersDAO;
 import kh.spring.dto.MembersDTO;
 
@@ -15,7 +16,10 @@ import kh.spring.dto.MembersDTO;
 public class MemberService {
 	
 	@Autowired
-	private MembersDAO dao;
+	private MembersDAO mdao;
+	
+	@Autowired
+	private DressDAO ddao;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -23,13 +27,13 @@ public class MemberService {
 	
 	@Transactional("txManager")
 	public void create(MembersDTO dto) throws Exception {
-		dao.insert(dto);
+		mdao.insert(dto);
 		
 		
 		String authkey = new TempKey().getKey(50, false);
 		
 		dto.setAuthkey(authkey);
-		dao.updateAuthkey(dto);
+		mdao.updateAuthkey(dto);
 		
 		MailUtils sendMail = new MailUtils(mailSender);
 		
@@ -50,11 +54,11 @@ public class MemberService {
 	
 	public void updateAuth(String email) {
 		
-		dao.updateAhthStatus(email);
+		mdao.updateAhthStatus(email);
 	}
 	
 	public int checkNickName(String nickname) {
-		MembersDTO dto = dao.checkNickName(nickname);
+		MembersDTO dto = mdao.checkNickName(nickname);
 		int result = 0 ;
 		if(dto == null) {
 			result = 1;
