@@ -17,9 +17,15 @@
 <!-- signin.css -->
 <link rel="stylesheet" type="text/css" href="/css/signin.css">
 
+<style>
+	a{
+		color : black;
+	}
+</style>
+
 </head>
 <body>
-	<form class="form-signin" action="${pageContext.request.contextPath}/member/signinProc" id="frm" method="post">
+	<form class="form-signin" action="" id="frm" method="post">
 		<h1 class="h3 mb-3 font-weight-normal text-center">Show Me Your Closet</h1>
 		<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required>
 		<input type="password" id="inputPassword" name="pw" class="form-control mb-3" placeholder="Password" required>
@@ -29,9 +35,9 @@
 			</label>
 		</div>
 		<button class="btn btn-lg btn-outline-secondary btn-block" type="submit">Sign in</button>
-		<div class="signBox">
-			<span><a href="${pageContext.request.contextPath}/signup">회원가입</a></span> 
-			<span><a href="#">이메일/비밀번호 찾기</a></span>
+		<div class="signBox mt-2" style="font-size:10px;">
+			<span style="float:left"><a href="${pageContext.request.contextPath}/idFind">이메일/비밀번호 찾기</a></span>
+			<span style="float:right"><a href="${pageContext.request.contextPath}/signup">회원가입</a></span> 
 		</div>
 	</form>
 </body>
