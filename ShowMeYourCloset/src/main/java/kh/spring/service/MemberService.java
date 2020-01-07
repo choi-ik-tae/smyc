@@ -15,7 +15,7 @@ import kh.spring.dto.MembersDTO;
 public class MemberService {
 	
 	@Autowired
-	private MembersDAO dao;
+	private MembersDAO mdao;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -23,13 +23,13 @@ public class MemberService {
 	
 	@Transactional("txManager")
 	public void create(MembersDTO dto) throws Exception {
-		dao.insert(dto);
+		mdao.insert(dto);
 		
 		
 		String authkey = new TempKey().getKey(50, false);
 		
 		dto.setAuthkey(authkey);
-		dao.updateAuthkey(dto);
+		mdao.updateAuthkey(dto);
 		
 		MailUtils sendMail = new MailUtils(mailSender);
 		
@@ -50,17 +50,40 @@ public class MemberService {
 	
 	public void updateAuth(String email) {
 		
-		dao.updateAhthStatus(email);
+		mdao.updateAhthStatus(email);
 	}
 	
 	public int checkNickName(String nickname) {
-		MembersDTO dto = dao.checkNickName(nickname);
+		MembersDTO dto = mdao.checkNickName(nickname);
 		int result = 0 ;
 		if(dto == null) {
 			result = 1;
 		}
 		
 		return result;
+	}
+	
+	public int logInOk(String email, String pw) {
+		
+		MembersDTO dto =mdao.loginOk(email, pw);
+		int result = 1;
+		if(dto == null) {
+			result = 0;
+		}
+		
+		return result;
+	}
+	
+	public int returnAuthStatus(String email) {
+		int authstatus = mdao.returnAuthStatus(email);
+		
+		return authstatus;
+		
+	}
+	
+	public String returnNickname(String email) {
+		
+		return mdao.returnNickname(email);
 	}
 
 }

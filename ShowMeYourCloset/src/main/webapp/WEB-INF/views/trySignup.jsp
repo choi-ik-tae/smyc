@@ -8,13 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<c:if test="${auth_check == 0}">
-		인증 메일을 보냈습니다.
-	</c:if>
-	<c:if test="${auth_check == 1 }">
-		회원 가입이 완료 되었습니다.	
-	</c:if>
-
+	<c:choose>
+		<c:when test="${result == 0 }">
+			회원가입 하러 가십시오
+		</c:when>
+		<c:otherwise>
+			이메일 체크 하십시오
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

@@ -45,5 +45,20 @@ public class MembersDAO {
 	public MembersDTO checkNickName(String nickname) {
 		return sst.selectOne("Members.checkNickName", nickname);
 	}
+	
+	public MembersDTO loginOk(String email, String pw) {
+		Map<String ,String >parm = new HashMap<String, String>();
+		parm.put("email",email);
+		parm.put("pw",pw);
+		return sst.selectOne("Members.logInOk",parm);
+	}
+	
+	public int returnAuthStatus(String email) {
+		return sst.selectOne("Members.returnAuthStatus",email);
+	}
+	
+	public String returnNickname(String email) {
+		return sst.selectOne("Members.returnNickname", email);
+	}
 
 }

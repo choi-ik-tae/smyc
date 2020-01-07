@@ -1,5 +1,7 @@
 package kh.spring.project;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memService;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("signupProc")
 	public String signup(Model model,MembersDTO dto,String phone1,String phone2,String phone3) {
@@ -51,10 +56,29 @@ public class MemberController {
 	}
 	
 	@RequestMapping("signinProc")
-	public String signup(String email,String pw) {
+	public String signup(Model model,String email,String pw) {
 		System.out.println(email+"/"+pw);
 		
-		return "";
+		int result = memService.logInOk(email, pw);
+		
+		if(result > 0) {
+			int auth = memService.returnAuthStatus(email);
+			System.out.println(auth);
+			if(auth == 1) {
+				
+				String nickname = memService.returnNickname(email);
+				
+				session.setAttribute("email", email);
+				session.setAttribute("nick", nickname);
+				
+				return "index";
+			}
+			
+		}
+		model.addAttribute("result", result);
+		
+		return "trySignup";
+		
 	}
 	
 	@RequestMapping("nickCheckProc")
