@@ -23,6 +23,7 @@
 					<a class="dropdown-item" href="#">Style</a>
 				</div>
 			</li>
+
 			<!-- 로그인/로그아웃 확인 -->
 			<c:choose>
 				<c:when test="${email == null}">
@@ -34,6 +35,7 @@
 					</li>
 				</c:otherwise>
 			</c:choose>
+
 			<!-- 로그인 후 회원가입 및 마이페이지 메뉴 추가 생성 -->
 		</ul>
 	</div>

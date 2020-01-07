@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.dto.DressDTO;
 import kh.spring.dto.MembersDTO;
 import kh.spring.service.MemberService;
 
@@ -81,6 +83,16 @@ public class MemberController {
 		
 	}
 	
+
+	@RequestMapping("/closet/clothesUploadProc")
+	public String clothesUpload(DressDTO dto,MultipartFile file) {
+		
+		System.out.println(dto.toString());
+		System.out.println(file.getOriginalFilename());
+		
+		return "";
+	}
+
 	@RequestMapping("nickCheckProc")
 	@ResponseBody
 	public String nickCheckProc(String nickname) {
@@ -92,6 +104,7 @@ public class MemberController {
 		}else {
 			return "fail";
 		}
+
 
 	}
 

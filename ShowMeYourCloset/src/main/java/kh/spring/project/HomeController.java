@@ -10,18 +10,23 @@ public class HomeController {
 
 		return "index";
 	}
-	
 
 	@RequestMapping("/signup")
 	public String signup() {
 		return "login/signup";
 	}
 
-	@RequestMapping("login/signin")
+	@RequestMapping("/signin")
 	public String signin() {
 		
 		return "login/signin";
 
+	}
+	
+	@RequestMapping("/clothesUpload")
+	public String clothesUpload() {
+		
+		return "member/closet/clothesUpload";
 	}
 	
 }

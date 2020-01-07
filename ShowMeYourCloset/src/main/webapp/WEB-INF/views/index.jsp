@@ -62,7 +62,7 @@
 	            <div class="col-12 section article-6" id="section5">
 	                <div class="row text-center reposition" id="btnBox">
 	                     <div class="col-4">
-	                        <label class="circleBtn">
+	                        <label class="circleBtn" id="toClothes">
 	                            <img class="mt-5" id="btnCoordi" src="/imgs/btn/btnClothes.png">
 	                            <label class="mt-2">옷 등록</label>
 	                        </label>
@@ -74,7 +74,7 @@
 	                        </label>
 	                     </div>
 	                     <div class="col-4">
-	                         <label class="circleBtn">
+	                         <label class="circleBtn"">
 	                            <img class="mt-5" id="btnHelp" src="/imgs/btn/btnCloset.png">
 	                            <label class="mt-2">옷장 등록</label>
 	                        </label>
@@ -94,6 +94,10 @@
         navigation: true,
 		navigationPosition: 'right'
     });
+	
+	$("#toClothes").on("click",function(){
+		location.href = "${pageContext.request.contextPath}/clothesUpload";
+	});
 </script>
 </body>
 </html>

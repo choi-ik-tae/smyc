@@ -61,4 +61,5 @@ public class MembersDAO {
 		return sst.selectOne("Members.returnNickname", email);
 	}
 
+
 }

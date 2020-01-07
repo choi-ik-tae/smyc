@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.confirm.MailUtils;
 import kh.spring.confirm.TempKey;
+import kh.spring.dao.DressDAO;
 import kh.spring.dao.MembersDAO;
 import kh.spring.dto.MembersDTO;
 
@@ -16,6 +17,10 @@ public class MemberService {
 	
 	@Autowired
 	private MembersDAO mdao;
+	
+	@Autowired
+	private DressDAO ddao;
+
 	
 	@Autowired
 	private JavaMailSender mailSender;
