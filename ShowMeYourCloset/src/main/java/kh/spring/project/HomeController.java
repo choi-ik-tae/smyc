@@ -47,7 +47,19 @@ public class HomeController {
 	
 	@RequestMapping("/myCloset")
 	public String myCloset() {
+		String email = (String)session.getAttribute("email");
+		
 		return "member/closet/myCloset";
+	}
+	
+	@RequestMapping("myInfo")
+	public String myInfo() {
+		return "member/info/myInfo";
+	}
+	
+	@RequestMapping("myStyle")
+	public String myStyle() {
+		return "member/style/myStyle";
 	}
 	
 	@RequestMapping("/closetUpload")
