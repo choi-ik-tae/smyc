@@ -91,7 +91,8 @@ public class MemberController {
 		String email = (String)session.getAttribute("email");
 		String nick = (String)session.getAttribute("nick");
 		dto.setEmail(email);
-		String path = session.getServletContext().getRealPath(nick);		
+		
+		String path = session.getServletContext().getRealPath("files/"+nick);
 		fdto.setPath(path);
 		
 		System.out.println(dto.toString());
