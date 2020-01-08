@@ -25,7 +25,7 @@
     <div class="container text-center">
         <!-- 헤더 -->
         
-		<form action="${pageContext.request.contextPath}/member/closet/closetUploadProc" enctype="multipart/form-data" method="post">
+		<form action="${pageContext.request.contextPath}/closet/closetUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
                 <div class="col-12">
                     <label for="closet1">

@@ -25,7 +25,7 @@
     <div class="container text-center">
         <!-- 헤더 -->
         
-		<form action="${pageContext.request.contextPath}/member/closet/dressUploadProc" enctype="multipart/form-data" method="post">
+		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
 				<div class="col-auto m-auto p-0 align-items-center"
 					style="border: 1px solid gray;" id="preview"></div>
