@@ -46,7 +46,9 @@ public class MemberController {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("등록된 이메일 :::: ");
+			return "login/emailConfirm";
+			
 		}
 		
 		return "login/signupConfirm";

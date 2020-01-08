@@ -164,6 +164,7 @@ public class MemberService {
 		mdao.withDraw(email);
 	}
 	
+	//회원 수정
 	public void modify(MembersDTO dto) {
 		dto.setPw(EncrypyUtil.encrypt(dto.getPw()));
 		mdao.modify(dto);
