@@ -57,7 +57,11 @@
 
 		<c:choose>
 			<c:when test="${result==0}">
-							비밀번호가 일치하지 않습니다.
+				<div class="row">
+					<div class="col-sm-8 col-md-8 col-lg-4 p-3 mb-3" style="margin: auto; background: rgba(255, 255, 255, 0.9); border-radius: 20px;">
+						<h4>비밀번호가 일치하지 않습니다.</h4>
+					</div>
+				</div>			
 			</c:when>
 			<c:otherwise>
 
