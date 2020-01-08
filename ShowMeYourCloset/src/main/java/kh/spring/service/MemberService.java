@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import kh.spring.confirm.MailUtils;
-import kh.spring.confirm.TempKey;
+import kh.spring.Utils.EncrypyUtil;
+import kh.spring.Utils.MailUtils;
+import kh.spring.Utils.TempKey;
 import kh.spring.dao.ClosetDAO;
 import kh.spring.dao.DressDAO;
 import kh.spring.dao.MembersDAO;
@@ -37,6 +38,10 @@ public class MemberService {
 	
 	@Transactional("txManager")
 	public void create(MembersDTO dto) throws Exception {
+		
+		
+		dto.setPw(EncrypyUtil.encrypt(dto.getPw()));
+		
 		mdao.insert(dto);
 		
 		
@@ -58,6 +63,15 @@ public class MemberService {
 		sendMail.setFrom("codud966@gmail.com", "[ShowMeYourCloset]");
 		sendMail.setTo(dto.getEmail());
 		sendMail.send();
+		
+		ClosetDTO cdto = new ClosetDTO();
+		cdto.setEmail(dto.getEmail());
+		cdto.setName("기본옷장");
+		cdto.setPub("Y");
+		cdto.setMemo("");
+		cdto.setImg("closet1");
+		
+		cdao.insert(cdto);
 	
 		
 	}
@@ -84,6 +98,8 @@ public class MemberService {
 		return authkey;
 	}
 	
+	
+	@Transactional("txManager")
 	public void updateAuth(String email) {
 		
 		mdao.updateAhthStatus(email);
@@ -101,6 +117,7 @@ public class MemberService {
 	
 	public int logInOk(String email, String pw) {
 		
+		pw=EncrypyUtil.encrypt(pw);
 		MembersDTO dto =mdao.loginOk(email, pw);
 		int result = 1;
 		if(dto == null) {
@@ -170,6 +187,7 @@ public class MemberService {
 	}
 	
 	public void changePwProc(String email, String pw) {
+		pw=EncrypyUtil.encrypt(pw);
 		mdao.changePwProc(email, pw);
 	}
 }

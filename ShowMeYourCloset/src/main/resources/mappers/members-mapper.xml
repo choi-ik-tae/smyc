@@ -3,38 +3,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Members">
+<!-- 	멤버 등록 -->
 	<insert id="insert" parameterType="java.util.Map">
 		insert into members values(#{email},#{pw},#{name},#{nickname},#{phone},#{gender},sysdate,'N','N',0)
 	</insert>
 
+<!-- 권한 키 업데이트 -->
 	<update id="updateAuthkey">
 		update members set authkey=#{authkey} where email=#{email}
 	</update>
 	
+<!-- 	권한 업데이트 -->
 	<update id="updateAuthStatus">
 		update members set authstatus=1 where email=#{value}
 	</update>
 	
+<!-- 	닉네임 중복 확인 -->
 	<select id="checkNickName" resultType="kh.spring.dto.MembersDTO">
 		select * from members where nickname=#{value}
 	</select>
 	
+<!-- 	로그인 체크 -->
 	<select id="logInOk" resultType="kh.spring.dto.MembersDTO">
 		select * from members where email=#{email} and pw=#{pw}
 	</select>
 	
+<!-- 	권한 상태 확인 -->
 	<select id="returnAuthStatus" resultType="Integer">
 		select authstatus from members where email=#{value}
 	</select>
 	
+<!-- 	닉네임 가져오기 -->
 	<select id="returnNickname" resultType="String">
 		select nickname from members where email=#{value}
 	</select>
 	
+<!-- 	이메일 찾기 -->
 	<select id="findEmail" resultType="String">
 		select email from members where name=#{name} and phone=#{phone}
 	</select>
 	
+<!-- 	비밀번호 변경 -->
 	<update id="changePwProc">
 		update members set pw=#{pw} where email=#{email}
 	</update>
