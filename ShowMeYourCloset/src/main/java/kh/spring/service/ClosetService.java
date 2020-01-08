@@ -23,6 +23,7 @@ public class ClosetService {
 	@Autowired
 	private ClosetDAO cdao;
 	
+
 	// 옷장 등록
 	public int closetUpload(ClosetDTO dto) {
 		return cdao.insert(dto);
@@ -42,6 +43,7 @@ public class ClosetService {
 
 		// 이미지 DB 저장 및 서버 저장
 		if (result > 0) {
+
 			int seq = ddao.selectNo().get(0).getNo();
 			File filePath = new File(path);
 
@@ -63,7 +65,4 @@ public class ClosetService {
 		}
 	}
 
-	// 옷 정보 가져오기
-
-	// 옷장 정보 가져오기
 }

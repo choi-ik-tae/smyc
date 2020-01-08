@@ -26,22 +26,20 @@ public class MemberService {
 	
 	@Autowired
 	private MembersDAO mdao;
-	
+
 	@Autowired
 	private ClosetDAO cdao;
 	
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	// 회원가입 -> 이메일 인증까지
 	@Transactional("txManager")
 	public void create(MembersDTO dto) throws Exception {
-		
-		
 		dto.setPw(EncrypyUtil.encrypt(dto.getPw()));
 		
 		mdao.insert(dto);
-		
-		
+
 		String authkey = new TempKey().getKey(50, false);
 		
 		dto.setAuthkey(authkey);
@@ -73,6 +71,7 @@ public class MemberService {
 		
 	}
 	
+	// 비밀번호 인증번호 발송	
 	public String sendFindPWEmail(String email) throws Exception {
 		
 		String authkey = new TempKey().getKey(8, false);
@@ -95,13 +94,14 @@ public class MemberService {
 		return authkey;
 	}
 	
-	
+	// 사용자 권한 주기
 	@Transactional("txManager")
 	public void updateAuth(String email) {
 		
 		mdao.updateAhthStatus(email);
 	}
 	
+	// 닉네임 가져오기
 	public int checkNickName(String nickname) {
 		MembersDTO dto = mdao.checkNickName(nickname);
 		int result = 0 ;
@@ -112,6 +112,7 @@ public class MemberService {
 		return result;
 	}
 	
+	// 로그인 체크
 	public int logInOk(String email, String pw) {
 		
 		pw=EncrypyUtil.encrypt(pw);
@@ -124,6 +125,7 @@ public class MemberService {
 		return result;
 	}
 	
+	// 권한 가져오기
 	public int returnAuthStatus(String email) {
 		int authstatus = mdao.returnAuthStatus(email);
 		
@@ -131,12 +133,13 @@ public class MemberService {
 		
 	}
 	
+	// 닉네임 가져오기 (닉네임 중복체크)
 	public String returnNickname(String email) {
 		
 		return mdao.returnNickname(email);
 	}
 
-	
+	// 이메일 찾기
 	public String findEmail(String name, String phone) {
 		
 		String email = mdao.findEmail(name, phone);
@@ -144,9 +147,27 @@ public class MemberService {
 		return email;
 	}
 	
+
+	// 비밀번호 변경
 	public void changePwProc(String email, String pw) {
 		pw=EncrypyUtil.encrypt(pw);
 		mdao.changePwProc(email, pw);
 	}
+	
+	// 회원 정보 가져오기
+	public MembersDTO selectDTO(String email) {
+		return mdao.selectDTO(email);
+	}
+	
+	//회원 탈퇴
+	public void withDraw(String email) {
+		mdao.withDraw(email);
+	}
+	
+	public void modify(MembersDTO dto) {
+		dto.setPw(EncrypyUtil.encrypt(dto.getPw()));
+		mdao.modify(dto);
+	}
+	
 	
 }
