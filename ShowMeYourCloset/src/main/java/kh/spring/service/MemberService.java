@@ -26,9 +26,6 @@ public class MemberService {
 	
 	@Autowired
 	private MembersDAO mdao;
-	
-	@Autowired
-	private DressDAO ddao;
 
 	@Autowired
 	private ClosetDAO cdao;
@@ -36,15 +33,13 @@ public class MemberService {
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	// 회원가입 -> 이메일 인증까지
 	@Transactional("txManager")
 	public void create(MembersDTO dto) throws Exception {
-		
-		
 		dto.setPw(EncrypyUtil.encrypt(dto.getPw()));
 		
 		mdao.insert(dto);
-		
-		
+
 		String authkey = new TempKey().getKey(50, false);
 		
 		dto.setAuthkey(authkey);
@@ -76,6 +71,7 @@ public class MemberService {
 		
 	}
 	
+	// 비밀번호 인증번호 발송	
 	public String sendFindPWEmail(String email) throws Exception {
 		
 		String authkey = new TempKey().getKey(8, false);
@@ -98,13 +94,14 @@ public class MemberService {
 		return authkey;
 	}
 	
-	
+	// 사용자 권한 주기
 	@Transactional("txManager")
 	public void updateAuth(String email) {
 		
 		mdao.updateAhthStatus(email);
 	}
 	
+	// 닉네임 가져오기
 	public int checkNickName(String nickname) {
 		MembersDTO dto = mdao.checkNickName(nickname);
 		int result = 0 ;
@@ -115,6 +112,7 @@ public class MemberService {
 		return result;
 	}
 	
+	// 로그인 체크
 	public int logInOk(String email, String pw) {
 		
 		pw=EncrypyUtil.encrypt(pw);
@@ -127,6 +125,7 @@ public class MemberService {
 		return result;
 	}
 	
+	// 권한 가져오기
 	public int returnAuthStatus(String email) {
 		int authstatus = mdao.returnAuthStatus(email);
 		
@@ -134,12 +133,13 @@ public class MemberService {
 		
 	}
 	
+	// 닉네임 가져오기 (닉네임 중복체크)
 	public String returnNickname(String email) {
 		
 		return mdao.returnNickname(email);
 	}
 
-	
+	// 이메일 찾기
 	public String findEmail(String name, String phone) {
 		
 		String email = mdao.findEmail(name, phone);
@@ -147,47 +147,10 @@ public class MemberService {
 		return email;
 	}
 	
-	// 옷장 등록
-	public int closetUpload(ClosetDTO dto) {
-		return cdao.insert(dto);
-	}
-	// 옷장 번호 및 이미지 가져오기
-	public List<ClosetDTO> closetSeleteNoByEmail(String email) {
-		return cdao.selectNoByEmail(email);
-	}
-	
-	// 옷 등록
-	@Transactional("txManager")
-	public void dressUpload(DressDTO dto,DressImgDTO fdto,MultipartFile file,String path) {
-		int result = ddao.insert(dto);
-		
-		System.out.println(file.getOriginalFilename());
-		
-		// 이미지 DB 저장 및 서버 저장
-		if(result > 0) {
-			int seq = ddao.selectNo().get(0).getNo();
-			File filePath = new File(path);
-
-			if (!filePath.exists()) {
-				filePath.mkdir();
-			}
-			
-			String oriName = file.getOriginalFilename();
-			String sysName = System.currentTimeMillis() + "_" + oriName;
-			fdto.setOri_name(oriName);
-			fdto.setSys_name(sysName);
-			try {
-				file.transferTo(new File(path + "/" + sysName));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			fdto.setD_no(seq);
-			ddao.insertImgs(fdto);
-		}
-	}
-	
+	// 비밀번호 변경
 	public void changePwProc(String email, String pw) {
 		pw=EncrypyUtil.encrypt(pw);
 		mdao.changePwProc(email, pw);
 	}
+	
 }

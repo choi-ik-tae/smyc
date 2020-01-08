@@ -16,6 +16,11 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
 <body>
-	마이 인포 헤위~~
+	<c:choose>
+	<c:when test="${email ==null }">
+		로그인을 하십시오.
+	</c:when>
+	</c:choose>
+	
 </body>
 </html>

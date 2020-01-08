@@ -13,6 +13,7 @@ import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
 import kh.spring.dto.MembersDTO;
+import kh.spring.service.ClosetService;
 import kh.spring.service.MemberService;
 
 @Controller
@@ -21,6 +22,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memService;
+	
+	@Autowired
+	private ClosetService cloService;
 	
 	@Autowired
 	private HttpSession session;
@@ -97,7 +101,7 @@ public class MemberController {
 		
 		System.out.println(dto.toString());
 		
-		memService.dressUpload(dto, fdto, file, path);
+		cloService.dressUpload(dto, fdto, file, path);
 		
 		return "redirect:/";
 	}
@@ -110,7 +114,7 @@ public class MemberController {
 		
 		System.out.println(dto.getImg());
 		
-		int result = memService.closetUpload(dto);
+		int result = cloService.closetUpload(dto);
 		
 		return "redirect:/"; 
 	}

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.spring.dto.ClosetDTO;
+import kh.spring.service.ClosetService;
 import kh.spring.service.MemberService;
 
 @Controller
@@ -17,6 +18,9 @@ public class HomeController {
 	
 	@Autowired
 	private MemberService memService;
+	
+	@Autowired
+	private ClosetService cloService;
 	
 	@Autowired
 	private HttpSession session;
@@ -39,7 +43,7 @@ public class HomeController {
 	@RequestMapping("/dressUpload")
 	public String clothesUpload(Model m) {
 		String email = (String)session.getAttribute("email");
-		List<ClosetDTO> list = memService.closetSeleteNoByEmail(email);
+		List<ClosetDTO> list = cloService.closetSeleteNoByEmail(email);
 		m.addAttribute("list", list);
 		
 		return "member/closet/dressUpload";
