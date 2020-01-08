@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.spring.dto.ClosetDTO;
+import kh.spring.dto.DressDTO;
+import kh.spring.dto.DressImgDTO;
 import kh.spring.service.ClosetService;
 import kh.spring.service.MemberService;
 
@@ -52,8 +54,33 @@ public class HomeController {
 	
 	// 내 옷장 가기 전 옷장,옷 정보 가져가기
 	@RequestMapping("/myCloset")
-	public String myCloset() {
+	public String myCloset(Model m) {
 		String email = (String)session.getAttribute("email");
+		String target = "기본옷장";
+		// 선택에 따른 옷장 정보 리스트 default 기본옷장으로 선택
+		ClosetDTO closet = cloService.closetSelectByName(target);
+		List<DressDTO> list = cloService.dressSelectByCloset(closet.getNo());
+		// 각각의 옷 정보들
+		List<DressDTO> topList = cloService.dressSelectByCategory("top", closet.getNo());
+		List<DressDTO> pantsList = cloService.dressSelectByCategory("pants", closet.getNo());
+		List<DressDTO> shoesList = cloService.dressSelectByCategory("shoes", closet.getNo());
+		List<DressDTO> accList = cloService.dressSelectByCategory("acc", closet.getNo());
+		// 각각의 옷 이미지
+		List<DressImgDTO> topImgList = cloService.topImgSelect(target, "top");
+		List<DressImgDTO> pantsImgList = cloService.pantsImgSelect(target, "pants");
+		List<DressImgDTO> shoesImgList = cloService.shoesImgSelect(target, "shoes");
+		List<DressImgDTO> accImgList = cloService.accImgSelect(target, "acc");
+		
+		m.addAttribute("img", closet.getImg());
+		m.addAttribute("list", list);
+		m.addAttribute("topList", topList);
+		m.addAttribute("pantsList", pantsList);
+		m.addAttribute("shoesList", shoesList);
+		m.addAttribute("accList", accList);
+		m.addAttribute("topImgList", topImgList);
+		m.addAttribute("pantsImgList", pantsImgList);
+		m.addAttribute("shoesImgList", shoesImgList);
+		m.addAttribute("accImgList", accImgList);
 		
 		return "mypage/closet/myCloset";
 	}
@@ -68,6 +95,7 @@ public class HomeController {
 		return "mypage/style/myStyle";
 	}
 	
+	// 옷장 추가 등록
 	@RequestMapping("/closetUpload")
 	public String closetUpload() {
 		return "mypage/closet/closetUpload";

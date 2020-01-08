@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DressImg">
+<!-- 	옷 이미지 등록 -->
+	<insert id="insert">
+		insert into dress_img values(dress_img_seq.nextval,#{d_no},#{ori_name},#{sys_name},#{path})
+	</insert>
+<!-- 	옷 이미지 가져오기 -->
+	<select id="selectByDress" resultType="kh.spring.dto.DressImgDTO">
+		select * from dress_img where d_no = #{d_no}
+	</select>
+	
+</mapper>

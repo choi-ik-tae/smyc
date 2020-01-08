@@ -7,13 +7,17 @@
 	<insert id="insert" parameterType="java.util.Map">
 		insert into dress values(dress_seq.nextval,#{c_no},#{email},#{name},#{category},#{pub},#{season},sysdate,#{memo},#{price},#{buy_date})
 	</insert>
-<!-- 	옷 이미지 등록 -->
-	<insert id="insertImg">
-		insert into dress_img values(dress_img_seq.nextval,#{d_no},#{ori_name},#{sys_name},#{path})
-	</insert>
 <!-- 	옷 번호 가져오기 -->
 	<select id="selectNo" resultType="kh.spring.dto.DressDTO">
 		select * from dress order by 1 desc
+	</select>
+<!-- 	옷장 옷 정보 가져오기 -->
+	<select id="selectByCloset" resultType="kh.spring.dto.DressDTO">
+		select * from dress where c_no = #{value}
+	</select>
+<!-- 	선택한 옷장 카테고리 별 옷 정보 가져오기 -->
+	<select id="selectByCategory" parameterType="java.util.Map" resultType="kh.spring.dto.DressDTO">
+		select * from dress where category = #{category} and c_no = #{c_no}
 	</select>
 	
 	

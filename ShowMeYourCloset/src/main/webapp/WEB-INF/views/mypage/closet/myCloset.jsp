@@ -33,7 +33,8 @@
     #bottom-contents{font-size: 10pt;color: gray;}
     .imgBox{position: relative; width:100%; height: 100%; overflow: auto; -ms-overflow-style: none;}
     .imgBox::-webkit-scrollbar {display:none;}
-    .imgBox>img{border: 1px solid white;height: 130px;float: left;}
+    .imgBox>img{border-radius: 20px;height: 130px;float: left;}
+    .closetTag{position: relative;width: 100%;height: 50px;line-height: 50px;}
 </style>
 </head>
 <body>
@@ -63,44 +64,84 @@
     <div class="row" id="dressBox">
         <div class="col-12">
         <c:choose>
-        <c:when test=${list.size() == 0}>
-            <img src="imgs/closet/closet1.png" id="closet">
+	        <c:when test="${list.size() == 0}">
+	            <img src="imgs/closet/${img}.png" id="closet">
+	            <div id="topBox">
+	                TOP
+	            </div>
+	            <div id="pantsBox">
+	                PANTS
+	            </div>
+	            <div id="shoesBox">
+	                SHOES
+	            </div>
+	            <div id="accBox">
+	                ACC
+	            </div>
+	        </c:when>
+			<c:when test="${list.size() > 0}">
+            <img src="imgs/closet/${img}.png" id="closet">
             <div id="topBox">
-                TOP
+                <div class="imgBox text-left">
+                <c:choose>
+                	<c:when test="${topImgList.size() > 0}">
+                	    <div class="closetTag text-center">TOP</div>
+                		<c:forEach items="${topImgList}" var="topImg">
+                			<img src="${topImg.path}" class="w-50 p-1">
+                		</c:forEach>
+                	</c:when>
+                	<c:otherwise>
+                		<span class="d-block text-center">TOP</span>
+                	</c:otherwise>
+                </c:choose>
+                </div>
             </div>
             <div id="pantsBox">
-                PANTS
-            </div>
-            <div id="shoesBox">
-                SHOES
-            </div>
-            <div id="accBox">
-                ACC
-            </div>
-        </c:when>
-        <c:when test=${"list.size() > 0"}>
-            <img src="imgs/closet/closet1.png" id="closet">
-            <div id="topBox">
                 <div class="imgBox text-left">
-                    <img src="" class="w-50">
-                </div>
-            </div>
-            <div id="pantsBox">
-                <div class="imgBox text-left">
-                    <img src="" class="w-50">
+                <c:choose>
+                	<c:when test="${pantsImgList.size() > 0}">
+                	<div class="closetTag text-center">PANTS</div>
+	                    <c:forEach items="${pantsImgList}" var="pantsImg">
+	                		<img src="${pantsImg.path}" class="w-50 p-1">
+	                	</c:forEach>
+                	</c:when>
+                	<c:otherwise>
+                		<span class="d-block text-center">PANTS</span>
+                	</c:otherwise>
+                </c:choose>
                 </div>
             </div>
             <div id="shoesBox">
                 <div class="imgBox text-left">
-                    <img src="" class="w-50">
+                <c:choose>
+                    <c:when test="${shoesImgList.size() > 0}">
+                    <div class="closetTag text-center">SHOES</div>
+	                    <c:forEach items="${shoesImgList}" var="shoesImg">
+	                		<img src="${shoesImg.path}" class="w-50 p-1">
+	                	</c:forEach>
+                	</c:when>
+                	<c:otherwise>
+                		<span class="d-block text-center">SHOES</span>
+                	</c:otherwise>
+                </c:choose>
                 </div>
             </div>
             <div id="accBox">
                 <div class="imgBox text-left">
-                    <img src="" class="w-50">
+                <c:choose>
+                    <c:when test="${accImgList.size() > 0}">
+                    <div class="closetTag text-center">ACC</div>
+	                    <c:forEach items="${accImgList}" var="accImg">
+	                		<img src="${accImg.path}" class="w-50 p-1">
+	                	</c:forEach>
+                	</c:when>
+                	<c:otherwise>
+                		<span class="d-block text-center">ACC</span>
+                	</c:otherwise>
+                </c:choose>
                 </div>
             </div>
-        </c:when>
+        	</c:when>
         </c:choose>
         </div>
     </div><hr>

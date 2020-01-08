@@ -32,20 +32,21 @@ public class DressDAO {
 		
 		return sst.insert("Dress.insert", parm);
 	}
-	// 옷이미지 등록
-	public int insertImgs(DressImgDTO fdto) {
-		Map<String, Object> parm = new HashMap<>();
-		parm.put("d_no",fdto.getD_no());
-		parm.put("ori_name",fdto.getOri_name());
-		parm.put("sys_name",fdto.getSys_name());
-		parm.put("path",fdto.getPath());
-		
-		return sst.insert("Dress.insertImg", parm);
-	}
 	// 옷 번호 가져오기
 	public List<DressDTO> selectNo() {
 		return sst.selectList("Dress.selectNo");
 	}
-
+	// 옷 정보 가져오기 옷장바탕
+	public List<DressDTO> selectByCloset(int num) {
+		return sst.selectList("Dress.selectByCloset", num);
+	}
+	// 선택한 옷장 카테고리 별 정보 가져오기
+	public List<DressDTO> selectByCategory(String category, int c_no) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("category",category);
+		parm.put("c_no",c_no);
+		
+		return sst.selectList("Dress.selectByCategory", parm);
+	}
 	
 }
