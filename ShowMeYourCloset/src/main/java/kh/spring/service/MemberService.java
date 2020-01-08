@@ -154,4 +154,20 @@ public class MemberService {
 		mdao.changePwProc(email, pw);
 	}
 	
+	// 회원 정보 가져오기
+	public MembersDTO selectDTO(String email) {
+		return mdao.selectDTO(email);
+	}
+	
+	//회원 탈퇴
+	public void withDraw(String email) {
+		mdao.withDraw(email);
+	}
+	
+	public void modify(MembersDTO dto) {
+		dto.setPw(EncrypyUtil.encrypt(dto.getPw()));
+		mdao.modify(dto);
+	}
+	
+	
 }

@@ -29,6 +29,8 @@ public class MemberController {
 	@Autowired
 	private HttpSession session;
 	
+	
+	// 회원가입
 	@RequestMapping("signupProc")
 	public String signup(Model model,MembersDTO dto,String phone1,String phone2,String phone3) {
 		String phone = phone1+phone2+phone3;
@@ -50,6 +52,7 @@ public class MemberController {
 		return "login/signupConfirm";
 	}
 	
+	//회원가입 확인 (이메일 인증 보내고 넘어가는 창)
 	@RequestMapping("joinConfirm")
 	public String joinConrim(Model model,String email,String authkey) {
 		System.out.println(email);
@@ -63,6 +66,7 @@ public class MemberController {
 		return "login/signupConfirm";
 	}
 	
+	// 로그인
 	@RequestMapping("signinProc")
 	public String signup(Model model,String email,String pw) {
 		System.out.println(email+"/"+pw);
@@ -89,7 +93,7 @@ public class MemberController {
 		
 	}
 
-
+	// 닉네임 중복확인
 	@RequestMapping("nickCheckProc")
 	@ResponseBody
 	public String nickCheckProc(String nickname) {
@@ -104,6 +108,7 @@ public class MemberController {
 
 	}
 	
+	// 로그아웃
 	@RequestMapping("logoutProc")
 	public String logoutProc() {
 		
@@ -113,6 +118,7 @@ public class MemberController {
 				
 	}
 	
+	//이메일 찾기
 	@RequestMapping(value="/idFindProc",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String idFindProc(String name, String phone) {
@@ -125,6 +131,7 @@ public class MemberController {
 		return email;
 	}
 	
+	//비밀번호 찾기
 	@RequestMapping("/findPWProc")
 	public String findPWProc(Model model ,String email) {
 		System.out.println("하하하하핳 :: "+email);
@@ -141,14 +148,13 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		return "";
-		
+		return "";	
 	}
 	
+	// 비밀번호 찾기에서 등록된 이메일인지 확인하는거였음
 	@RequestMapping("/emailCheck")
 	@ResponseBody
 	public String emailCheck(String email) {
-		System.out.println(email);
 		
 		String result = memService.returnNickname(email);
 		if(result == null) {
@@ -158,13 +164,49 @@ public class MemberController {
 		return "good";
 	}
 	
+	// 비밀번호 변경
 	@RequestMapping("/changePwProc")
 	public String changePwProc(String pw,String email) {
-		System.out.println(email + " : "+pw);
 		
 		memService.changePwProc(email, pw);
 		
 		return "login/pwChangeConfirm";
 	}
+	
+	// 회원 정보 보기
+	@RequestMapping("/InfoCheck")
+	public String pwCheck(Model model,String email,String pw) {
+		
+		int result = memService.logInOk(email, pw);
+		
+		if(result > 0) {
+			MembersDTO dto = memService.selectDTO(email);
+			model.addAttribute("dto", dto);
+		}
+		model.addAttribute("result", result);
+		
+		return "mypage/info/infoModify";
+	}
+	
+	// 탈퇴
+	@RequestMapping("/withDrawProc")
+	public String withDrawProc() {
+		String email = (String)session.getAttribute("email");
+		memService.withDraw(email);
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	// 수정
+	@RequestMapping("/modifyProc")
+	public String modifyProc(MembersDTO dto) {
+		System.out.println(dto.getPhone());
+	
+		memService.modify(dto);
+		
+		return "mypage/info/modifyConfirm";
+	}
+	
 
 }

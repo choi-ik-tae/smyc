@@ -83,6 +83,29 @@ public class MembersDAO {
 		
 		return sst.update("Members.changePwProc",parm);
 	}
+	
+	// 회원 정보 가져오기
+	public MembersDTO selectDTO(String email) {
+		return sst.selectOne("Members.selectDTO",email);
+	}
+	
+	// 회원 탈퇴
+	public int withDraw(String email) {
+		return sst.delete("Members.withDraw",email);
+	}
+	
+	//회원 수정
+	public int modify(MembersDTO dto) {
+		Map<String ,String >parm = new HashMap<>();
+		parm.put("email",dto.getEmail());
+		parm.put("pw",dto.getPw());
+		parm.put("name",dto.getName());
+		parm.put("nickname",dto.getNickname());
+		parm.put("phone",dto.getPhone());
+		parm.put("gender",dto.getGender());
+		
+		return sst.update("Members.Infomodify",parm);
+	}
 
 
 }

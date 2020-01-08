@@ -47,5 +47,21 @@
 	<update id="changePwProc">
 		update members set pw=#{pw} where email=#{email}
 	</update>
+	
+<!-- 	회원 정보가져오기 -->
+	<select id="selectDTO" resultType="kh.spring.dto.MembersDTO">
+		select * from members where email=#{value}
+	</select>
+	
+<!-- 	회원 탈퇴 -->
+	<delete id="withDraw">
+		delete from members where email=#{value}
+	</delete>
+	
+<!-- 	회원수정 -->
+	<update id="Infomodify">
+		update members set pw=#{pw}, name=#{name}, nickname=#{nickname}, phone=#{phone} where email=#{email}
+	</update>
+	
 
 </mapper>
