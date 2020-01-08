@@ -68,7 +68,12 @@
 					<label for="" class="m-0 ">카테고리</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="category" type="text">
+					<select class="custom-select" name="category">
+						<option value="top">상의</option>
+						<option value="pants">하의</option>
+						<option value="shoes">신발</option>
+						<option value="acc">액세서리</option>
+					</select>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -124,7 +129,7 @@
 					<label for="buy_date" class="m-0 ">구매일자</label>
 				</div>
 				<div class="col-10">
-					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" min="2030-12-31">
+					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31">
 				</div>
 			</div>
 			<div class="row m-2">
