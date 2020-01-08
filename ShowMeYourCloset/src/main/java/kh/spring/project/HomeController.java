@@ -70,5 +70,12 @@ public class HomeController {
 		model.addAttribute("email", email);
 		return "login/pwChange";
 	}
+	
+	
+	@RequestMapping("/pwConfirm")
+	public String pwConfirm() {
+		return "login/pwConfirm";
+		
+	}
 
 }
