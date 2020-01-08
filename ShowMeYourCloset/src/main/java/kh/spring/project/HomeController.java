@@ -40,35 +40,37 @@ public class HomeController {
 		return "login/signin";
 	}
 	
+	// 옷 등록 이동시 옷장 정보 가져가기
 	@RequestMapping("/dressUpload")
 	public String clothesUpload(Model m) {
 		String email = (String)session.getAttribute("email");
 		List<ClosetDTO> list = cloService.closetSeleteNoByEmail(email);
 		m.addAttribute("list", list);
 		
-		return "member/closet/dressUpload";
+		return "mypage/closet/dressUpload";
 	}
 	
+	// 내 옷장 가기 전 옷장,옷 정보 가져가기
 	@RequestMapping("/myCloset")
 	public String myCloset() {
 		String email = (String)session.getAttribute("email");
 		
-		return "member/closet/myCloset";
+		return "mypage/closet/myCloset";
 	}
 	
 	@RequestMapping("myInfo")
 	public String myInfo() {
-		return "member/info/myInfo";
+		return "mypage/info/myInfo";
 	}
 	
 	@RequestMapping("myStyle")
 	public String myStyle() {
-		return "member/style/myStyle";
+		return "mypage/style/myStyle";
 	}
 	
 	@RequestMapping("/closetUpload")
 	public String closetUpload() {
-		return "member/closet/closetUpload";
+		return "mypage/closet/closetUpload";
 	}
 	
 	@RequestMapping("/idFind")

@@ -88,36 +88,7 @@ public class MemberController {
 		return "trySignup";
 		
 	}
-	
-	// 옷 등록 및 이미지 등록
-	@RequestMapping("/closet/dressUploadProc")
-	public String clothesUpload(DressDTO dto,DressImgDTO fdto,MultipartFile file) {
-		String email = (String)session.getAttribute("email");
-		String nick = (String)session.getAttribute("nick");
-		dto.setEmail(email);
-		
-		String path = session.getServletContext().getRealPath("files/"+nick);
-		fdto.setPath(path);
-		
-		System.out.println(dto.toString());
-		
-		cloService.dressUpload(dto, fdto, file, path);
-		
-		return "redirect:/";
-	}
-	
-	// 옷장 등록
-	@RequestMapping("/closet/closetUploadProc")
-	public String closetUpload(ClosetDTO dto) {
-		String email = (String)session.getAttribute("email");
-		dto.setEmail(email);
-		
-		System.out.println(dto.getImg());
-		
-		int result = cloService.closetUpload(dto);
-		
-		return "redirect:/"; 
-	}
+
 
 	@RequestMapping("nickCheckProc")
 	@ResponseBody

@@ -147,6 +147,7 @@ public class MemberService {
 		return email;
 	}
 	
+
 	// 비밀번호 변경
 	public void changePwProc(String email, String pw) {
 		pw=EncrypyUtil.encrypt(pw);
