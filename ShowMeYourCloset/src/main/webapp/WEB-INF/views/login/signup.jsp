@@ -49,7 +49,7 @@
 						<div class="col-12">
 							<div class="form-group">
 								<label for="InputEmail">Email</label> <input type="email"
-									name="email" class="form-control" id="InputEmail1"
+									name="email" class="form-control" id="InputEmail"
 									aria-describedby="emailHelp">
 							</div>
 						</div>
@@ -183,7 +183,19 @@
 		
 	 <!-- 유효성 검사! -->
         <script>
-            
+        
+        	$("#InputEmail").on("blur",function(){
+        		var email = $("#InputEmail").val();
+        		var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+        		var result = regex.exec(email);
+        		
+        		if(result == null){
+        			alert("이메일 형식에 맞게 작성해주세요.");
+        			$("#InputEmail").val("");
+        		}
+
+        	})
+        
             $("#InputPassword").on("blur",function(){
                 var pw = $("#InputPassword").val();
       
