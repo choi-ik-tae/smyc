@@ -36,13 +36,13 @@ public class HomeController {
 		return "login/signin";
 	}
 	
-	@RequestMapping("/clothesUpload")
+	@RequestMapping("/dressUpload")
 	public String clothesUpload(Model m) {
 		String email = (String)session.getAttribute("email");
 		List<ClosetDTO> list = memService.closetSeleteNoByEmail(email);
 		m.addAttribute("list", list);
 		
-		return "member/closet/clothesUpload";
+		return "member/closet/dressUpload";
 	}
 	
 	@RequestMapping("/myCloset")
