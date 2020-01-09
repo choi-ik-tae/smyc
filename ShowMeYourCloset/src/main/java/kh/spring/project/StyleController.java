@@ -48,6 +48,8 @@ public class StyleController {
 		if(dto.getShose()==null) {dto.setShose(null);}
 		if(dto.getAcc()==null) {dto.setAcc(null);}
 		
+		dto.setSeason("봄");
+		
 		sService.insert(dto);
 		
 		return "";
