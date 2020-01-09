@@ -28,8 +28,8 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.10.0</version>
 		</dependency>
-
- 		<!-- Spring Mail Event  -->
+		
+		<!-- Spring Mail Event -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
