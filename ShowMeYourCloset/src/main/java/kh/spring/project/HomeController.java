@@ -116,5 +116,11 @@ public class HomeController {
 		model.addAttribute("email", email);
 		return "login/pwChange";
 	}
+	
+	//지울거예요~~!
+	@RequestMapping("/styleUpload")
+	public String styleUpload() {
+		return "mypage/style/styleUpload";
+	}
 
 }

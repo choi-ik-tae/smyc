@@ -1,0 +1,10 @@
+@charset "UTF-8";
+	.imgBox{position:absolute; left:580px;top:68px;}
+	.category{position: absolute; width: 134px; z-index: 1; border-radius: 10px; color : white; font-size: 28px; background-color: darkgrey; opacity: 0.7; text-align: center;}
+	.category:hover{background-color: grey;}
+	.top{height: 100px; line-height: 100px;left: 640px; top:165px;}
+	.pants{ left: 640px; top: 276px; height: 160px; line-height: 160px;}
+	.shose{left: 640px; top: 448px; height: 80px;line-height: 80px;}
+	.acc{ top:180px; left: 450px; height: 100px;line-height: 100px;}
+	.categoryMenu{ position:absolute;display: none;height: 600px;width: 500px;left: 950px;top:30px;border: 1px solid black;}
+         

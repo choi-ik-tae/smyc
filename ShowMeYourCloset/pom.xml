@@ -22,7 +22,14 @@
 	</repositories>
 	<dependencies>
 
- 		<!-- Spring Mail Event  -->
+		<!-- JSon 데이터 응답/처리 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.10.0</version>
+		</dependency>
+
+		<!-- Spring Mail Event -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
