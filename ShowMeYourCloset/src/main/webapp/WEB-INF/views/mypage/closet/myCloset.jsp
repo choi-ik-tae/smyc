@@ -35,11 +35,20 @@
     .imgBox::-webkit-scrollbar {display:none;}
     .imgBox>img{border-radius: 20px;height: 130px;float: left;}
     .closetTag{position: relative;width: 100%;height: 50px;line-height: 50px;}
+    .nav-link:hover{cursor: pointer;}
 </style>
 </head>
 <body>
+<c:choose>
+<c:when test="${email == null}">
+	<script>
+		alert("로그인 해주세요!");
+		location.href="${pageContext.request.contextPath}/";
+	</script>
+</c:when>
+<c:otherwise>
 <div class="container-fuild">
-    
+ 	
     <!-- 헤더 -->
     <jsp:include page="../../standard/header.jsp" />
     
@@ -64,7 +73,7 @@
     <div class="row" id="dressBox">
         <div class="col-12">
         <c:choose>
-	        <c:when test="${list.size() == 0}">
+	        <c:when test="${dressList.size() == 0}">
 	            <img src="imgs/closet/${img}.png" id="closet">
 	            <div id="topBox">
 	                TOP
@@ -79,7 +88,7 @@
 	                ACC
 	            </div>
 	        </c:when>
-			<c:when test="${list.size() > 0}">
+			<c:when test="${dressList.size() > 0}">
             <img src="imgs/closet/${img}.png" id="closet">
             <div id="topBox">
                 <div class="imgBox text-left">
@@ -149,62 +158,98 @@
         <div class="col-8 m-auto p-0">
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link" href="#"><span class="nav-font">All</span></a>
+                <a id="allView" class="nav-link"><span class="nav-font">All</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><span class="nav-font">Top</span></a>
+                <a id="topView" class="nav-link"><span class="nav-font">Top</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><span class="nav-font">Pants</span></a>
+                <a id="pantsView" class="nav-link"><span class="nav-font">Pants</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><span class="nav-font">Shose</span></a>
+                <a id="shoesView" class="nav-link"><span class="nav-font">Shose</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><span class="nav-font">Acc</span></a>
+                <a id="accView" class="nav-link"><span class="nav-font">Acc</span></a>
               </li>
             </ul>
         </div>
     </div>
     <div class="row mt-1 mb-5">
-		<div class="col-8 m-auto p-0 item-page">
-		
-        <!-- 파일 가져와서 뿌려주면 됨. 반복문사용 -->
-	    <div class="row row-cols-3 m-auto">
-	      <div class="col-4 mb-4 mt-4">
-	        <div class="card h-100">
-	          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
-	          <div class="card-body">
-	            <h5 class="card-title">Card title</h5>
-	            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-	          </div>
+		<div class="col-8 m-auto p-0">
+			<div class="row row-cols-3 m-auto item-page">
+	        <!-- 파일 가져와서 뿌려주면 됨. 반복문사용 -->
+	        <c:choose>
+		        <c:when test="">
+		        	옷을 등록해주세요!!
+		        </c:when>
+		        <c:otherwise>
+		        <c:forEach var="i" begin="0" end="${dressList.size() - 1}">
+				      <div class="col-4 mb-4 mt-4">
+				        <div class="card h-100">
+				          <img src="${dressImgList.get(i)}" class="card-img-top" style="height:200px;">
+				          <div class="card-body">
+				            <h5 class="card-title">${dressList.get(i).name}</h5>
+				            <p class="card-text">
+				            	${dressList.get(i).memo}
+				            </p>
+				          </div>
+				        </div>
+				     </div>
+				</c:forEach>
+		        </c:otherwise>
+	        </c:choose>
 	        </div>
-	      </div>
-	      <div class="col-4 mb-4 mt-4">
-	        <div class="card h-100">
-	          <img src="imgs/bg/bg2.jpg" class="card-img-top" alt="...">
-	          <div class="card-body">
-	            <h5 class="card-title">Card title</h5>
-	            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-	          </div>
-	        </div>
-	      </div>
-	      <div class="col-4 mb-4 mt-4">
-	        <div class="card h-100">
-	          <img src="imgs/bg/bg3.jpg" class="card-img-top" alt="...">
-	          <div class="card-body">
-	            <h5 class="card-title">Card title</h5>
-	            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-
 		</div>
     </div>
-    
     <!-- 푸터 -->
     <jsp:include page="../../standard/footer.jsp" />
 </div>
+<script>
+	$("#allView").on("click",function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/closet/allView",
+			method:"POST",
+			data:{
+				email:"${email}",
+				closet:"${closetNo}",
+				category:$().val,
+			},
+			dataType:"json"
+		}).done(function(data){
+			$(".item-page").html("");
+			// for문 감싸기~
+			for(i=0;i<data.length;i++) {	
+				var contents = $("<div class='col-4 mb-4 mt-4'>");
+				var card = $("<div class='card h-100'>");
+				var img = $("<img class='card-img-top' src='"+data[i].dressImg+"'style='height:200px;'>");
+				var cardbody = $("<div class='card-body'>");
+				var htag = $("<h5 class='card-title'>");
+				var ptag = $("<p class='card-text'>");
+				
+				//container.append(contents);
+				contents.append(card);
+				card.append(img);
+				card.append(cardbody);
+				htag.append(data[i].dress.name)
+				ptag.append(data[i].dress.memo)
+				cardbody.append(htag);
+				cardbody.append(ptag);
+				
+				$(".item-page").append(contents);
+			}
+			//
+		}).fail(function(data){
+			console.log("못가져왔어!");
+			
+		});
+	});
+	
+	
+	
+	
+</script>
+</c:otherwise>
+</c:choose>
 </body>
 </html>

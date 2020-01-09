@@ -33,7 +33,7 @@ public class ClosetService {
 	public int closetUpload(ClosetDTO dto) {
 		return cdao.insert(dto);
 	}
-	// 옷장 번호 및 이미지 가져오기
+	// 옷장 정보 가져오기
 	public List<ClosetDTO> closetSeleteNoByEmail(String email) {
 		return cdao.selectNoByEmail(email);
 	}
@@ -41,12 +41,8 @@ public class ClosetService {
 	@Transactional("txManager")
 	public void dressUpload(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick) {
 		int result = ddao.insert(dto);
-
-		System.out.println(file.getOriginalFilename());
-
 		// 이미지 DB 저장 및 서버 저장
 		if (result > 0) {
-
 			int seq = ddao.selectNo().get(0).getNo();
 			File filePath = new File(path);
 
@@ -68,12 +64,11 @@ public class ClosetService {
 			dmdao.insertImgs(fdto);
 		}
 	}
-
 	// 선택한 옷장정보 가져오기
 	public ClosetDTO closetSelectByName(String name) {
 		return cdao.selectByName(name);
 	}
-	// 옷 정보 가져오기 선택한 옷장
+	// 선택한 옷장 옷 정보 가져오기
 	public List<DressDTO> dressSelectByCloset(int num) {
 		return ddao.selectByCloset(num);
 	}
@@ -137,6 +132,10 @@ public class ClosetService {
 			accImgList.add(target);
 		}
 		return accImgList;
+	}
+	// 사용자 옷 이미지 전체 가져오기
+	public List<String> selectByEmail(String email) {
+		return dmdao.selectPathByEmail(email);
 	}
 	
 }

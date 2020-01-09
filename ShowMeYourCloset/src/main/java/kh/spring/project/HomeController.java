@@ -28,7 +28,7 @@ public class HomeController {
 	private HttpSession session;
 	
 	@RequestMapping("/")
-	public String home() {
+	public String home(Model m) {		
 		return "index";
 	}
 
@@ -59,7 +59,7 @@ public class HomeController {
 		String target = "기본옷장";
 		// 선택에 따른 옷장 정보 리스트 default 기본옷장으로 선택
 		ClosetDTO closet = cloService.closetSelectByName(target);
-		List<DressDTO> list = cloService.dressSelectByCloset(closet.getNo());
+		List<DressDTO> dressList = cloService.dressSelectByCloset(closet.getNo());
 		// 각각의 옷 정보들
 		List<DressDTO> topList = cloService.dressSelectByCategory("top", closet.getNo());
 		List<DressDTO> pantsList = cloService.dressSelectByCategory("pants", closet.getNo());
@@ -70,9 +70,13 @@ public class HomeController {
 		List<DressImgDTO> pantsImgList = cloService.pantsImgSelect(target, "pants");
 		List<DressImgDTO> shoesImgList = cloService.shoesImgSelect(target, "shoes");
 		List<DressImgDTO> accImgList = cloService.accImgSelect(target, "acc");
+		// 사용자 옷 이미지
+		List<String> dressImgList = cloService.selectByEmail(email);
 		
+		m.addAttribute("closetNo", closet.getNo());
 		m.addAttribute("img", closet.getImg());
-		m.addAttribute("list", list);
+		m.addAttribute("dressList", dressList);
+		m.addAttribute("dressImgList", dressImgList);
 		m.addAttribute("topList", topList);
 		m.addAttribute("pantsList", pantsList);
 		m.addAttribute("shoesList", shoesList);

@@ -25,7 +25,6 @@
 </head>
 <body>
 <div class="container-fluid p-0">
-
 	<!-- 헤더 -->
     <jsp:include page="standard/header.jsp" />
 
@@ -60,27 +59,53 @@
 	                </span>
 	            </div>
 	            <div class="col-12 section article-6" id="section5">
-	                <div class="row text-center reposition" id="btnBox">
+	            <c:choose>
+				<c:when test="${email == null}">
+	            	<div class="row text-center reposition" id="btnBox">
 	                     <div class="col-4">
-	                        <label class="circleBtn" id="toDress">
-	                            <img class="mt-5" id="btnCoordi" src="/imgs/btn/btnClothes.png">
+	                        <label class="circleBtn loginck">
+	                            <img class="mt-5" id="btnDress" src="/imgs/btn/btnClothes.png">
 	                            <label class="mt-2">옷 등록</label>
 	                        </label>
 	                     </div>
 	                     <div class="col-4">
-	                        <label class="circleBtn">
-	                            <img class="mt-5" id="btnBoast" src="/imgs/btn/btnStyle.png">
+	                        <label class="circleBtn loginck">
+	                            <img class="mt-5" id="btnStyle" src="/imgs/btn/btnStyle.png">
+	                            <label class="mt-2">코디 등록</label>
+	                        </label>
+	                     </div>
+	                     <div class="col-4">
+	                         <label class="circleBtn loginck">
+	                            <img class="mt-5" id="btnCloset" src="/imgs/btn/btnCloset.png">
+	                            <label class="mt-2">옷장 등록</label>
+	                        </label>
+	                    </div>
+	                </div>
+	            </c:when>
+	            <c:otherwise>
+	            	<div class="row text-center reposition" id="btnBox">
+	                     <div class="col-4">
+	                        <label class="circleBtn" id="toDress">
+	                            <img class="mt-5" id="btnDress" src="/imgs/btn/btnClothes.png">
+	                            <label class="mt-2">옷 등록</label>
+	                        </label>
+	                     </div>
+	                     <div class="col-4">
+	                        <label class="circleBtn" id="toStyle">
+	                            <img class="mt-5" id="btnStyle" src="/imgs/btn/btnStyle.png">
 	                            <label class="mt-2">코디 등록</label>
 	                        </label>
 	                     </div>
 	                     <div class="col-4">
 	                         <label class="circleBtn" id="toCloset">
-	                            <img class="mt-5" id="btnHelp" src="/imgs/btn/btnCloset.png">
+	                            <img class="mt-5" id="btnCloset" src="/imgs/btn/btnCloset.png">
 	                            <label class="mt-2">옷장 등록</label>
 	                        </label>
 	                    </div>
 	                </div>
-					<!-- 푸터 -->
+	            </c:otherwise>
+	            </c:choose>
+	                <!-- 푸터 -->
 					<jsp:include page="standard/footer.jsp" />
 	            </div>
             </div>
@@ -94,12 +119,17 @@
         navigation: true,
 		navigationPosition: 'right'
     });
-	
 	$("#toDress").on("click",function(){
 		location.href = "${pageContext.request.contextPath}/dressUpload";
 	});
 	$("#toCloset").on("click",function(){
 		location.href = "${pageContext.request.contextPath}/closetUpload";
+	});
+	$("#toStyle").on("click",function(){
+		location.href = "${pageContext.request.contextPath}/styleUpload";
+	});
+	$(".loginck").on("click",function(){
+		alert("로그인하라우!")
 	});
 </script>
 </body>

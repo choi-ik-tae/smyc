@@ -7,11 +7,11 @@
 	<insert id="insert" parameterType="java.util.Map">
 		insert into dress values(dress_seq.nextval,#{c_no},#{email},#{name},#{category},#{pub},#{season},sysdate,#{memo},#{price},#{buy_date})
 	</insert>
-<!-- 	옷 번호 가져오기 -->
-	<select id="selectNo" resultType="kh.spring.dto.DressDTO">
+<!-- 	옷 정보 가져오기 -->
+	<select id="selectDress" resultType="kh.spring.dto.DressDTO">
 		select * from dress order by 1 desc
 	</select>
-<!-- 	옷장 옷 정보 가져오기 -->
+<!-- 	선택한 옷장 옷 정보 가져오기 -->
 	<select id="selectByCloset" resultType="kh.spring.dto.DressDTO">
 		select * from dress where c_no = #{value}
 	</select>

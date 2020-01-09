@@ -11,5 +11,8 @@
 	<select id="selectByDress" resultType="kh.spring.dto.DressImgDTO">
 		select * from dress_img where d_no = #{d_no}
 	</select>
-	
+<!-- 	사용자 별 가지고 있는 이미지 경로 추출 -->
+	<select id="selectByEmail" resultType="String">
+		select path from dress_img img, dress d where d.no = img.d_no and d.email= #{email} order by d_no desc
+	</select>
 </mapper>

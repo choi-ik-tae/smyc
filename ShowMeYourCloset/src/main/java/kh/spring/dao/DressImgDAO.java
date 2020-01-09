@@ -30,5 +30,9 @@ public class DressImgDAO {
 	public DressImgDTO selectPathByDress(int num) {
 		return sst.selectOne("DressImg.selectByDress",num);
 	}
+	// 사용자 옷 이미지 경로 전체 가져오기
+	public List<String> selectPathByEmail(String email) {
+		return sst.selectList("DressImg.selectByEmail",email);
+	}
 	
 }

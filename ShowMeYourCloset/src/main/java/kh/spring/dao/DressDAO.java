@@ -32,15 +32,15 @@ public class DressDAO {
 		
 		return sst.insert("Dress.insert", parm);
 	}
-	// 옷 번호 가져오기
+	// 옷 정보 가져오기
 	public List<DressDTO> selectNo() {
-		return sst.selectList("Dress.selectNo");
+		return sst.selectList("Dress.selectDress");
 	}
-	// 옷 정보 가져오기 옷장바탕
+	// 선택한 옷장 옷 정보 가져오기
 	public List<DressDTO> selectByCloset(int num) {
 		return sst.selectList("Dress.selectByCloset", num);
 	}
-	// 선택한 옷장 카테고리 별 정보 가져오기
+	// 선택한 옷장 카테고리 별 옷 정보 가져오기
 	public List<DressDTO> selectByCategory(String category, int c_no) {
 		Map<String, Object> parm = new HashMap<>();
 		parm.put("category",category);
