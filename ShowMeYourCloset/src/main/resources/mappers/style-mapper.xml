@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="Style">
+<!--  	카테고리 별 이미지 가져오기 -->
+ 	<select id="selectCategoryAll" resultType="String">
+ 		select distinct path from dress d, dress_img img where d.no = img.d_no and d.email=#{email} and d.category=#{category}
+ 	</select>
+<!--  	코디 등록 -->
+ 	<insert id="insert">
+ 		insert into style values(style_seq.nextval,#{name},#{email},#{top},#{pants},#{shose},#{acc},#{season},#{memo},sysdate)		
+ 	</insert>
+ </mapper>
