@@ -27,13 +27,16 @@ public class ClosetDAO {
 		
 		return sst.insert("Closet.insert", parm);
 	}
-	// 옷장 번호 가져오기
-	public List<ClosetDTO> selectNoByEmail(String email) {
-		return sst.selectList("Closet.selectNoByEmail", email);
+	// 옷장 정보 가져오기
+	public List<ClosetDTO> selectByEmail(String email) {
+		return sst.selectList("Closet.selectByEmail", email);
 	}
 	// 선택한 옷장 정보 가져오기
-	public ClosetDTO selectByName(String name) {
-		return sst.selectOne("Closet.selectByName", name);
+	public ClosetDTO selectByName(String name,String email) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("email",email);
+		parm.put("name",name);
+		return sst.selectOne("Closet.selectByName", parm);
 	}
 	
 	

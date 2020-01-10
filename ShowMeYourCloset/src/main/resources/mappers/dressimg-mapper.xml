@@ -13,6 +13,10 @@
 	</select>
 <!-- 	사용자 별 가지고 있는 이미지 경로 추출 -->
 	<select id="selectByEmail" resultType="String">
-		select path from dress_img img, dress d where d.no = img.d_no and d.email= #{email} order by d_no desc
+		select path from dress_img img, dress d where d.no = img.d_no and d.email= #{email} and d.c_no = #{c_no} order by d_no desc
+	</select>
+<!-- 	사용자 선택 옷장 카테고리 별 이미지 경로 추출 -->
+	<select id="selectByCategory" parameterType="java.util.Map" resultType="String">
+		select path from dress_img img, dress d where d.no = img.d_no and d.email = #{email} and d.category = #{category} and d.c_no = #{c_no} order by d_no desc
 	</select>
 </mapper>
