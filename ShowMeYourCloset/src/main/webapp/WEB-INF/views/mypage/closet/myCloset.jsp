@@ -219,7 +219,7 @@
 				        </div>
 				      </div>
 				      <form action="${pageContext.request.contextPath}/dressDetailView" id="frm${dressList.get(i).no}">
-				      	<input type="hidden" name="dress" value="${dressList.get(i).no}">;
+				      	<input type="hidden" name="dress" value="${dressList.get(i).no}">
 				      </form>
 				      <script>
 				      	$("#dress${dressList.get(i).no}").on("click",function(){

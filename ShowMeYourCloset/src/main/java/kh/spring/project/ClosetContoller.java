@@ -53,6 +53,14 @@ public class ClosetContoller {
 
 		return "redirect:/";
 	}
+	
+	// 옷정보 디테일 뷰
+	@RequestMapping("/dressDetailView")
+	public String dressDetailView(int d_no) {
+		
+		return "redirect:/";
+	}
+	
 	// 내 옷장 조회
 	@RequestMapping("myCloset")
 	public String myCloset(Model m,String target) {
