@@ -18,43 +18,49 @@ import kh.spring.dto.DressImgDTO;
 
 @Service
 public class ClosetService {
-	
+
 	@Autowired
 	private DressDAO ddao;
 
 	@Autowired
 	private DressImgDAO dmdao;
-	
+
 	@Autowired
 	private ClosetDAO cdao;
-	
 
 	// 옷장 등록
 	public int closetUpload(ClosetDTO dto) {
 		return cdao.insert(dto);
 	}
+
 	// 옷장 정보 가져오기
 	public List<ClosetDTO> closetSeleteNoByEmail(String email) {
 		return cdao.selectNoByEmail(email);
 	}
+
 	// 옷 등록
 	@Transactional("txManager")
-	public void dressUpload(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick) {
+	public void dressUpload(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick,
+			String rootPath) {
 		int result = ddao.insert(dto);
 		// 이미지 DB 저장 및 서버 저장
 		if (result > 0) {
 			int seq = ddao.selectNo().get(0).getNo();
 			File filePath = new File(path);
+			File fileRootPath = new File(rootPath);
 
-			if (!filePath.exists()) {
-				filePath.mkdir();
+			if (!fileRootPath.exists()) {
+				fileRootPath.mkdir();
+				if (!filePath.exists()) {
+					filePath.mkdir();
+				}
 			}
 
 			String oriName = file.getOriginalFilename();
 			String sysName = System.currentTimeMillis() + "_" + oriName;
 			fdto.setOri_name(oriName);
 			fdto.setSys_name(sysName);
-			fdto.setPath("/files/"+nick+"/"+sysName);
+			fdto.setPath("/files/" + nick + "/" + sysName);
 			try {
 				file.transferTo(new File(path + "/" + sysName));
 			} catch (Exception e) {
@@ -64,78 +70,86 @@ public class ClosetService {
 			dmdao.insertImgs(fdto);
 		}
 	}
+
 	// 선택한 옷장정보 가져오기
 	public ClosetDTO closetSelectByName(String name) {
 		return cdao.selectByName(name);
 	}
+
 	// 선택한 옷장 옷 정보 가져오기
 	public List<DressDTO> dressSelectByCloset(int num) {
 		return ddao.selectByCloset(num);
 	}
+
 	// 선택한 옷장 카테고리 별 정보 가져오기
-	public List<DressDTO> dressSelectByCategory(String category,int c_no) {
-		return ddao.selectByCategory(category,c_no);
+	public List<DressDTO> dressSelectByCategory(String category, int c_no) {
+		return ddao.selectByCategory(category, c_no);
 	}
+
 	// 선택한 옷장 카테고리 별 옷 이미지경로 가져오기
 	// 상의
-	public List<DressImgDTO> topImgSelect(String closet,String category) {
+	public List<DressImgDTO> topImgSelect(String closet, String category) {
 		ClosetDTO cs = closetSelectByName(closet);
 		List<DressDTO> list = dressSelectByCategory(category, cs.getNo());
 		List<DressImgDTO> topImgList = new ArrayList<DressImgDTO>();
-		
-		for(DressDTO tmp : list) {
+
+		for (DressDTO tmp : list) {
 			int num = tmp.getNo();
 			DressImgDTO target = dmdao.selectPathByDress(num);
-			
+
 			topImgList.add(target);
 		}
 		return topImgList;
 	}
+
 	// 하의
-	public List<DressImgDTO> pantsImgSelect(String closet,String category) {
+	public List<DressImgDTO> pantsImgSelect(String closet, String category) {
 		ClosetDTO cs = closetSelectByName(closet);
 		List<DressDTO> list = dressSelectByCategory(category, cs.getNo());
 		List<DressImgDTO> pantsImgList = new ArrayList<DressImgDTO>();
-		
-		for(DressDTO tmp : list) {
+
+		for (DressDTO tmp : list) {
 			int num = tmp.getNo();
 			DressImgDTO target = dmdao.selectPathByDress(num);
-			
+
 			pantsImgList.add(target);
 		}
 		return pantsImgList;
 	}
+
 	// 신발
-	public List<DressImgDTO> shoesImgSelect(String closet,String category) {
+	public List<DressImgDTO> shoesImgSelect(String closet, String category) {
 		ClosetDTO cs = closetSelectByName(closet);
 		List<DressDTO> list = dressSelectByCategory(category, cs.getNo());
 		List<DressImgDTO> shoesImgList = new ArrayList<DressImgDTO>();
-		
-		for(DressDTO tmp : list) {
+
+		for (DressDTO tmp : list) {
 			int num = tmp.getNo();
 			DressImgDTO target = dmdao.selectPathByDress(num);
-			
+
 			shoesImgList.add(target);
 		}
 		return shoesImgList;
 	}
+
 	// 액세서리
-	public List<DressImgDTO> accImgSelect(String closet,String category) {
+	public List<DressImgDTO> accImgSelect(String closet, String category) {
 		ClosetDTO cs = closetSelectByName(closet);
 		List<DressDTO> list = dressSelectByCategory(category, cs.getNo());
 		List<DressImgDTO> accImgList = new ArrayList<DressImgDTO>();
-		
-		for(DressDTO tmp : list) {
+
+		for (DressDTO tmp : list) {
 			int num = tmp.getNo();
 			DressImgDTO target = dmdao.selectPathByDress(num);
-			
+
 			accImgList.add(target);
 		}
 		return accImgList;
 	}
+
 	// 사용자 옷 이미지 전체 가져오기
 	public List<String> selectByEmail(String email) {
 		return dmdao.selectPathByEmail(email);
 	}
-	
+
 }

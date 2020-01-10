@@ -106,6 +106,10 @@ public class MembersDAO {
 		
 		return sst.update("Members.Infomodify",parm);
 	}
+	
+	public String selectGender(String email) {
+		return sst.selectOne("Members.selectGender", email);	
+	}
 
 
 }

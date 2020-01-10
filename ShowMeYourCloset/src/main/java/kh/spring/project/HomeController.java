@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
+import kh.spring.dto.StyleDTO;
 import kh.spring.service.ClosetService;
 import kh.spring.service.MemberService;
+import kh.spring.service.StyleService;
 
 @Controller
 public class HomeController {
@@ -23,6 +25,9 @@ public class HomeController {
 	
 	@Autowired
 	private ClosetService cloService;
+	
+	@Autowired
+	private StyleService styleService;
 	
 	@Autowired
 	private HttpSession session;
@@ -95,7 +100,12 @@ public class HomeController {
 	}
 	
 	@RequestMapping("myStyle")
-	public String myStyle() {
+	public String myStyle(Model model) {
+		String email = (String)session.getAttribute("email");
+		
+		List<StyleDTO> styleList =styleService.selectAll(email);
+		model.addAttribute("styleList", styleList);
+				
 		return "mypage/style/myStyle";
 	}
 	
@@ -121,9 +131,11 @@ public class HomeController {
 		return "login/pwChange";
 	}
 	
-	//지울거예요~~!
 	@RequestMapping("/styleUpload")
-	public String styleUpload() {
+	public String styleUpload(Model model) {
+		String email = (String) session.getAttribute("email");
+		String gender = memService.selectGender(email);
+		model.addAttribute("gender", gender);
 		return "mypage/style/styleUpload";
 	}
 

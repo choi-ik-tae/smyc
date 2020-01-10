@@ -37,5 +37,9 @@ public class StyleDAO {
 		return sst.insert("Style.insert",parm);
 		
 	}
+	
+	public List<StyleDTO> selectAll(String email){
+		return sst.selectList("Style.selectAll",email);
+	}
 
 }

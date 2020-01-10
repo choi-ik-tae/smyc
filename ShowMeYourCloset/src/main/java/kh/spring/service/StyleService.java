@@ -21,9 +21,13 @@ public class StyleService {
 		return pathList;
 	}
 	
-	
 	public void insert(StyleDTO dto) {
 		
 		sdao.insert(dto);
 	}
+	
+	public List<StyleDTO> selectAll(String email){
+		return sdao.selectAll(email);
+	}
+	
 }

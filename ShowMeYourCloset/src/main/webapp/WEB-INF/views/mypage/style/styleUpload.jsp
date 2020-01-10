@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,13 +62,13 @@
             }
             .categoryMenu{
                 position:absolute;
-                display: none;
                 height: 780px;
-                width: 558px;
+                width: 530px;
                 left: 950px;
                 top:80px;
-                border: 1px solid black;
                 z-index:2;
+                border-radius:10px;
+                background:#e8dfd8;
 
             }
             #shilouette{
@@ -98,9 +99,18 @@
             .categoryImgDiv{
 			   width:150px;
 			   height:150px;
-			   border: 1px solid #bcbcbc;
 			   display:inline-block;
 			   padding:5px;
+			}
+			.noneDiv {
+			   width:150px;
+			   height:150px;
+			   display:inline-block;
+			   padding:5px;
+			}
+			.noneDiv>img{
+				width:100%;
+			    height:100%;
 			}
 			.categoryImgDiv>img{
 			   width:100%;
@@ -110,7 +120,13 @@
 			   width:100%;
 			   height:100%;
 			}
-
+			 .checkLabel{
+                background: darkgrey;
+            }
+            .categoryTitle{
+            	font-size:15px; 
+            	text-align:center;
+            }
 
         </style>
 
@@ -118,16 +134,26 @@
 <body>
         <div class="wrapper-All">
 
-            <div class="categoryMenu"></div>
+
+            <div class="categoryMenu p-3" >
+            	
+            </div>
 
             <div class="wrapper">
 
-                <div class="category top" id="top">Top</div>
-                <div class="category pants" id="pants">Pants</div>
-                <div class="category shose" id="shose">Shose</div>
-                <div class="category acc" id="acc">Acc</div>
+                <div class="category top" id="top">top</div>
+                <div class="category pants" id="pants">pants</div>
+                <div class="category shose" id="shose">shose</div>
+                <div class="category acc" id="acc">acc</div>
                 <div class="imgBox">
-                    <img src="imgs/shilouette/man.png" id="shilouette">
+                <c:choose>
+                	<c:when test="${gender == 'W' }">
+                		  <img src="imgs/shilouette/woman.png" id="shilouette">
+                	</c:when>
+                	<c:otherwise>
+                		  <img src="imgs/shilouette/man.png" id="shilouette">
+                	</c:otherwise>
+                </c:choose>
                 </div>
 
             </div>
@@ -146,14 +172,20 @@
                         <div class="col-12 pl-5 pb-5">
                             <label>Season</label>
                             <div style="padding-left: 30px;">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-secondary seasonBtn">봄</button>
-                                    <button type="button" class="btn btn-secondary seasonBtn">여름</button>
-                                    <button type="button" class="btn btn-secondary seasonBtn">가을</button>
-                                    <button type="button" class="btn btn-secondary seasonBtn">
-                                        겨울
-                                    </button>
-                                </div>
+                                 <div class="btn-group-toggle" data-toggle="buttons">
+					                <label class="btn checkLabel" id="springLabel">
+					                    <input type="checkbox" name="season" class="checkList" id="spring" value="spring"> 봄
+					                </label>
+					                <label class="btn checkLabel" id="summerLabel">
+					                    <input type="checkbox" name="season" class="checkList" id="summer" value="summer"> 여름
+					                </label>
+					                <label class="btn checkLabel" id="fallLabel">
+					                    <input type="checkbox" name="season" class="checkList" id="fall" value="fall"> 가을
+					                </label>
+					                <label class="btn checkLabel" id="winterLabel">
+					                    <input type="checkbox" name="season" class="checkList" id="winter" value="winter"> 겨울
+					                </label>
+					            </div>
                             </div>
                         </div>
                         <div class="col-12 pl-5 pb-5 pr-5">
@@ -176,14 +208,28 @@
             </form>
         </div>
         
+        
+		<script>
+            $(".checkList").on("change",function(){
+                var checkid=$(this).attr("id");
+
+                console.log($(this).prop("checked"));
+                if($(this).prop("checked")){
+                    $("#"+checkid+"Label").css("background","dimgrey")
+                    .css("border","2px solid dimgrey");
+                }else{
+                    $("#"+checkid+"Label").css("background","darkgrey")
+                    .css("border","none");
+                }
+            })
+        </script>
+        
         <script>
         	$("#styleInsertBtn").on("click",function(){
         		var topSrc= $(".top").children("img").attr("src");
         		var pantsSrc= $(".pants").children("img").attr("src");
         		var shoseSrc= $(".shose").children("img").attr("src");
         		var accSrc = $(".acc").children("img").attr("src");
-        		
-        		console.log(topSrc);
         		
         		$("#topHidden").val(topSrc);
         		$("#pantsHidden").val(pantsSrc);
@@ -198,32 +244,47 @@
         
         <!-- 코디 시키기 이벤트 -->
         <script>
+    	
+	     	// 카테고리 아이디
+	    	var cid ="옷을 선택해주세요";
         
         	// 메뉴 초기화
         	var divInit = function(){
         		$(".categoryMenu").html("");
+        		
+        		var title = $("<div class='categoryTitle'>");
+        		title.html(cid).css("font-size","28px").css("font-weight","700");
+        		$(".categoryMenu").append(title);
+        		var div = $("<div class='noneDiv'>");
+        		var img = $("<img src='imgs/shilouette/none.png'>")
+        		div.append(img);
+        		$(".categoryMenu").append(div);
         	}
-        	
-         	// 카테고리 아이디
-        	var cid ="none";
+
          	
          	// 동적 바인딩 이벤트 (끌어온 이미지 클릭 이벤트) 
         	$("body").on("click",".categoryImgDiv",function(){
-        		console.log(cid);
         		var src= $(this).children("img").attr("src");
          		var img = $("<img class='loadImg' id='"+cid+"Img'>");
         		img.attr("src",src);
         		
-        		$("."+cid).css("opacity","1");
+        		$("."+cid).css("opacity","0.9").css("line-height","0px");
         		$("."+cid).html(img);
         		
         	})
         	
+        	$("body").on("click",".noneDiv",function(){
+        		var height = $("."+cid).css("height");
+        		$("."+cid).html("");
+        		$("."+cid).text(cid).css("opacity","0.7").css("line-height",height);
+        	})
+        	
         	// 카테고리 div 클릭 이벤트
             $(".category").on("click",function(){
-            	divInit();
-            	
+            	           	
             	cid= $(this).attr("id");
+            	
+            	divInit();
             	
             	$.ajax({
             		url:"${pageContext.request.contextPath}/style/selectCategoryProc",
@@ -244,8 +305,7 @@
             		console.log("fail");            		
             	})
                 
-                $(".categoryMenu").css("display","block")
-                .css("opacity","0")
+                $(".categoryMenu").css("opacity","0")
                 .animate({'opacity':1},300);
 
             })
