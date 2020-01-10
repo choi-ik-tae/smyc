@@ -9,10 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.StyleDTO;
+import kh.spring.service.MemberService;
 import kh.spring.service.StyleService;
 
 @Controller
@@ -21,7 +23,7 @@ public class StyleController {
 	
 	@Autowired
 	private StyleService sService;
-	
+
 	@Autowired
 	private HttpSession session;
 	
@@ -42,16 +44,25 @@ public class StyleController {
 	}
 	
 	@RequestMapping("/insertProc")
-	public String insertProc(StyleDTO dto) {
+	public String insertProc(Model model,StyleDTO dto) {
 		if(dto.getTop()==null) { dto.setTop(null);}
 		if(dto.getPants()==null) {dto.setPants(null);}
-		if(dto.getShose()==null) {dto.setShose(null);}
+		if(dto.getShoes()==null) {dto.setShoes(null);}
 		if(dto.getAcc()==null) {dto.setAcc(null);}
-		
+				
 		sService.insert(dto);
 		
-		return "";
+		return "redirect:/myStyle";	
+	}
+	
+	@RequestMapping("/searchStyle")
+	public String searchStyle(Model model,String name) {
 		
+		String email = (String) session.getAttribute("email");
+		List<StyleDTO> styleList=sService.searchStyle(name, email);
+		model.addAttribute("styleList", styleList);
+		
+		return "mypage/style/myStyle";		
 	}
 
 }

@@ -29,13 +29,32 @@ public class StyleDAO {
 		parm.put("email",dto.getEmail());
 		parm.put("top",dto.getTop());
 		parm.put("pants",dto.getPants());
-		parm.put("shose",dto.getShose());
+		parm.put("shoes",dto.getShoes());
 		parm.put("acc",dto.getAcc());
 		parm.put("season",dto.getSeason());
 		parm.put("memo",dto.getMemo());
 		
 		return sst.insert("Style.insert",parm);
 		
+	}
+	
+	public List<StyleDTO> selectAll(String email){
+		return sst.selectList("Style.selectAll",email);
+	}
+	
+	public List<StyleDTO> selectSeason(String season, String email){
+		Map<String, String> parm = new HashMap<>();
+		parm.put("email",email);
+		parm.put("season","%"+season+"%");
+		
+		return sst.selectList("Style.selectSeason",parm);
+	}
+	
+	public List<StyleDTO> searchStyle(String name, String email){
+		Map<String, String> parm = new HashMap<>();
+		parm.put("email",email);
+		parm.put("name","%"+name+"%");
+		return sst.selectList("Style.searchStyle", parm);
 	}
 
 }

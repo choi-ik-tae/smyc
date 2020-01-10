@@ -63,5 +63,10 @@
 		update members set pw=#{pw}, name=#{name}, nickname=#{nickname}, phone=#{phone} where email=#{email}
 	</update>
 	
+<!-- 	성별 찾기 -->
+	<select id="selectGender" resultType="String">
+		select gender from members where email=#{value}
+	</select>
+	
 
 </mapper>
