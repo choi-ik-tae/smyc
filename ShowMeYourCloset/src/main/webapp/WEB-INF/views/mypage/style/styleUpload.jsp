@@ -36,25 +36,25 @@
             .category:hover{
                 background-color: grey;
             }
-            .top{
+            .Top{
                 height: 200px;
                 line-height: 180px;
                 left: 350px;
                 top:210px;
             }
-            .pants{
+            .Pants{
                 left: 350px;
                 top: 420px;
                 height: 210px;
                 line-height: 210px;
             }
-            .shose{
+            .Shoes{
                 left: 350px;
                 top: 640px;
                 height: 150px;
                 line-height: 150px;
             }
-            .acc{
+            .Acc{
                 top:300px;
                 left: 80px;
                 height: 150px;
@@ -141,13 +141,13 @@
 
             <div class="wrapper">
 
-                <div class="category top" id="top">top</div>
-                <div class="category pants" id="pants">pants</div>
-                <div class="category shose" id="shose">shose</div>
-                <div class="category acc" id="acc">acc</div>
+                <div class="category Top" id="Top">Top</div>
+                <div class="category Pants" id="Pants">Pants</div>
+                <div class="category Shoes" id="Shoes">Shoes</div>
+                <div class="category Acc" id="Acc">Acc</div>
                 <div class="imgBox">
                 <c:choose>
-                	<c:when test="${gender == 'W' }">
+                	<c:when test="${gender == 'W'}">
                 		  <img src="imgs/shilouette/woman.png" id="shilouette">
                 	</c:when>
                 	<c:otherwise>
@@ -161,7 +161,7 @@
     				<input type="hidden" name="email" value="${email}">
 	            	<input type="hidden" name="top" id="topHidden">
 	            	<input type="hidden" name="pants" id="pantsHidden">
-	            	<input type="hidden" name="shose" id="shoseHidden">
+	            	<input type="hidden" name="shoes" id="shoseHidden">
 	            	<input type="hidden" name="acc" id="accHidden">
                 <div class="form-wrapper">
                     <div class="row">
@@ -213,7 +213,6 @@
             $(".checkList").on("change",function(){
                 var checkid=$(this).attr("id");
 
-                console.log($(this).prop("checked"));
                 if($(this).prop("checked")){
                     $("#"+checkid+"Label").css("background","dimgrey")
                     .css("border","2px solid dimgrey");
@@ -226,10 +225,10 @@
         
         <script>
         	$("#styleInsertBtn").on("click",function(){
-        		var topSrc= $(".top").children("img").attr("src");
-        		var pantsSrc= $(".pants").children("img").attr("src");
-        		var shoseSrc= $(".shose").children("img").attr("src");
-        		var accSrc = $(".acc").children("img").attr("src");
+        		var topSrc= $(".Top").children("img").attr("src");
+        		var pantsSrc= $(".Pants").children("img").attr("src");
+        		var shoseSrc= $(".Shoes").children("img").attr("src");
+        		var accSrc = $(".Acc").children("img").attr("src");
         		
         		$("#topHidden").val(topSrc);
         		$("#pantsHidden").val(pantsSrc);

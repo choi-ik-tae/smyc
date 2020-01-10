@@ -50,9 +50,9 @@ public class ClosetService {
 			
 			if(!fileRootPath.exists()) {
 				fileRootPath.mkdir();
-				if (!filePath.exists()) {
-					filePath.mkdir();
-				}
+			}
+			if (!filePath.exists()) {
+				filePath.mkdir();
 			}
 
 			String oriName = file.getOriginalFilename();

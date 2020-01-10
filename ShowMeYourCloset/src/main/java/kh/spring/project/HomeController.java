@@ -101,16 +101,22 @@ public class HomeController {
 		return "mypage/closet/myCloset";
 	}
 	
-	@RequestMapping("myInfo")
+	@RequestMapping("/myInfo")
 	public String myInfo() {
 		return "mypage/info/myInfo";
 	}
 	
-	@RequestMapping("myStyle")
-	public String myStyle(Model model) {
+	@RequestMapping("/myStyle")
+	public String myStyle(Model model, String season) {
 		String email = (String)session.getAttribute("email");
 		
-		List<StyleDTO> styleList =styleService.selectAll(email);
+		List<StyleDTO> styleList =null;
+		if(season ==null || season.equals("all")) {
+			 styleList =styleService.selectAll(email);
+		}else {
+			styleList = styleService.selectSeason(email, season);
+		}
+		
 		model.addAttribute("styleList", styleList);
 				
 		return "mypage/style/myStyle";

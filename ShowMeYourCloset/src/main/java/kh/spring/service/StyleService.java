@@ -30,4 +30,12 @@ public class StyleService {
 		return sdao.selectAll(email);
 	}
 	
+	public List<StyleDTO> selectSeason(String email,String season){
+		return sdao.selectSeason(season, email);
+	}
+	
+	public List<StyleDTO> searchStyle(String name, String email){
+		return sdao.searchStyle(name, email);
+	}
+	
 }

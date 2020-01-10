@@ -47,12 +47,22 @@ public class StyleController {
 	public String insertProc(Model model,StyleDTO dto) {
 		if(dto.getTop()==null) { dto.setTop(null);}
 		if(dto.getPants()==null) {dto.setPants(null);}
-		if(dto.getShose()==null) {dto.setShose(null);}
+		if(dto.getShoes()==null) {dto.setShoes(null);}
 		if(dto.getAcc()==null) {dto.setAcc(null);}
 				
 		sService.insert(dto);
 		
 		return "redirect:/myStyle";	
+	}
+	
+	@RequestMapping("/searchStyle")
+	public String searchStyle(Model model,String name) {
+		
+		String email = (String) session.getAttribute("email");
+		List<StyleDTO> styleList=sService.searchStyle(name, email);
+		model.addAttribute("styleList", styleList);
+		
+		return "mypage/style/myStyle";		
 	}
 
 }
