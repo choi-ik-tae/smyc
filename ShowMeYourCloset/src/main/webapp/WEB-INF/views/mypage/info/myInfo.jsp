@@ -43,9 +43,9 @@
 						<div class="row mt-3">
 							<div class="col-12 text-center">
 								<div class="btn-group" role="group" aria-label="Basic example">
-									<button type="button" class="btn btn-outline-dark">Info</button>
-									<button type="button" class="btn btn-outline-dark">Closet</button>
-									<button type="button" class="btn btn-outline-dark">Style</button>
+			                      <button id="toInfo" type="button" class="btn btn-outline-dark">Info</button>
+			                      <button id="toCloset" type="button" class="btn btn-outline-dark">Closet</button>
+			                      <button id="toStyle" type="button" class="btn btn-outline-dark">Style</button>
 								</div>
 								<hr>
 							</div>
@@ -84,6 +84,16 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-
+	<script>
+		$("#toInfo").on("click",function(){
+			location.href="${pageContext.request.contextPath}/myInfo";
+		});
+		$("#toCloset").on("click",function(){
+			location.href="${pageContext.request.contextPath}/myCloset";	
+		});
+		$("#toStyle").on("click",function(){
+			location.href="${pageContext.request.contextPath}/myStyle";
+		});
+	</script>
 </body>
 </html>

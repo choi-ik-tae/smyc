@@ -18,25 +18,26 @@ import kh.spring.dto.DressImgDTO;
 
 @Service
 public class ClosetService {
-	
+
 	@Autowired
 	private DressDAO ddao;
 
 	@Autowired
 	private DressImgDAO dmdao;
-	
+
 	@Autowired
 	private ClosetDAO cdao;
-	
 
 	// 옷장 등록
 	public int closetUpload(ClosetDTO dto) {
 		return cdao.insert(dto);
 	}
+
 	// 옷장 정보 가져오기
 	public List<ClosetDTO> closetSeleteByEmail(String email) {
 		return cdao.selectByEmail(email);
 	}
+
 	// 옷 등록
 	@Transactional("txManager")
 	public void dressUpload(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick, String rootPath) {
@@ -58,7 +59,7 @@ public class ClosetService {
 			String sysName = System.currentTimeMillis() + "_" + oriName;
 			fdto.setOri_name(oriName);
 			fdto.setSys_name(sysName);
-			fdto.setPath("/files/"+nick+"/"+sysName);
+			fdto.setPath("/files/" + nick + "/" + sysName);
 			try {
 				file.transferTo(new File(path + "/" + sysName));
 			} catch (Exception e) {
@@ -68,6 +69,7 @@ public class ClosetService {
 			dmdao.insertImgs(fdto);
 		}
 	}
+
 	// 사용자 옷 이미지 전체 가져오기
 	public List<String> selectImgByEmail(String email,int c_no) {
 		List<String> imgList = dmdao.selectPathByEmail(email, c_no);
@@ -78,18 +80,23 @@ public class ClosetService {
 	public ClosetDTO closetSelectByName(String name,String email) {
 		return cdao.selectByName(name,email);
 	}
+
 	// 선택한 옷장 옷 정보 가져오기
 	public List<DressDTO> dressSelectByCloset(int num) {
 		List<DressDTO> dressList = ddao.selectByCloset(num);
 
 		return dressList;
 	}
+
 	// 선택한 옷장 카테고리 별 정보 가져오기
+
 	public List<DressDTO> dressSelectByCategory(String email,String category,int c_no) {
 		List<DressDTO> dressList = ddao.selectByCategory(email,category,c_no); 
 
 		return dressList;
+
 	}
+
 	// 선택한 옷장 카테고리 별 옷 이미지경로 가져오기
 	public List<DressImgDTO> targetImgSelect(String email,int closet,String category) {
 		List<DressDTO> list = ddao.selectByCategory(email,category,closet);
@@ -104,4 +111,5 @@ public class ClosetService {
 		}
 		return targetImgList;
 	}
+
 }

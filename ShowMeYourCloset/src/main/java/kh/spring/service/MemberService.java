@@ -170,5 +170,9 @@ public class MemberService {
 		mdao.modify(dto);
 	}
 	
+	public String selectGender(String email) {
+		return mdao.selectGender(email);
+	}
+	
 	
 }

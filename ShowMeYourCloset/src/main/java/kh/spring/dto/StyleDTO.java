@@ -8,7 +8,7 @@ public class StyleDTO {
 	private String email;
 	private String top;
 	private String pants;
-	private String shose;
+	private String shoes;
 	private String acc;
 	private String season;
 	private String memo;
@@ -26,7 +26,7 @@ public class StyleDTO {
 		this.email = email;
 		this.top = top;
 		this.pants = pants;
-		this.shose = shose;
+		this.shoes = shose;
 		this.acc = acc;
 		this.season = season;
 		this.memo = memo;
@@ -62,11 +62,11 @@ public class StyleDTO {
 	public void setPants(String pants) {
 		this.pants = pants;
 	}
-	public String getShose() {
-		return shose;
+	public String getShoes() {
+		return shoes;
 	}
-	public void setShose(String shose) {
-		this.shose = shose;
+	public void setShoes(String shose) {
+		this.shoes = shose;
 	}
 	public String getAcc() {
 		return acc;
@@ -96,7 +96,7 @@ public class StyleDTO {
 	@Override
 	public String toString() {
 		return "StyleDTO [no=" + no + ", name=" + name + ", email=" + email + ", top=" + top + ", pants=" + pants
-				+ ", shose=" + shose + ", acc=" + acc + ", season=" + season + ", memo=" + memo + ", write_date="
+				+ ", shose=" + shoes + ", acc=" + acc + ", season=" + season + ", memo=" + memo + ", write_date="
 				+ write_date + "]";
 	}
 }
