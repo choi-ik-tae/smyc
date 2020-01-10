@@ -40,11 +40,12 @@ public class DressDAO {
 	public List<DressDTO> selectByCloset(int num) {
 		return sst.selectList("Dress.selectByCloset", num);
 	}
-	// 선택한 옷장 카테고리 별 옷 정보 가져오기
-	public List<DressDTO> selectByCategory(String category, int c_no) {
+	// 사용자가 선택한 옷장 카테고리 별 옷 정보 가져오기
+	public List<DressDTO> selectByCategory(String email, String category, int c_no) {
 		Map<String, Object> parm = new HashMap<>();
 		parm.put("category",category);
 		parm.put("c_no",c_no);
+		parm.put("email",email);
 		
 		return sst.selectList("Dress.selectByCategory", parm);
 	}

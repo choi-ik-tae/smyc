@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +37,8 @@ public class ClosetContoller {
 		dto.setEmail(email);
 		
 		String path = session.getServletContext().getRealPath("files/" + nick);
-		cloService.dressUpload(dto, fdto, file, path, nick);
+		String rootPath = session.getServletContext().getRealPath("files");
+		cloService.dressUpload(dto, fdto, file, path, nick, rootPath);
 
 		return "redirect:/";
 	}
@@ -45,51 +47,49 @@ public class ClosetContoller {
 	public String closetUpload(ClosetDTO dto) {
 		String email = (String) session.getAttribute("email");
 		dto.setEmail(email);
-
-		System.out.println(dto.getImg());
-
+		
 		int result = cloService.closetUpload(dto);
 
 		return "redirect:/";
 	}
-	// 카테고리별 옷 정보 ajax 전송
+	// 전체 옷 정보 ajax 통신
 	@RequestMapping("/allView")
 	@ResponseBody
 	public List<Map<String,Object>> allview(String closet,String email) {
 		// 옷장 번호 받아온거 int형 변환
 		int closetNo = Integer.parseInt(closet);
 		List<DressDTO> dressList = cloService.dressSelectByCloset(closetNo);
-		List<String> dressImgList = cloService.selectByEmail(email);
+		List<String> dressImgList = cloService.selectImgByEmail(email,closetNo);
 		List<Map<String,Object>> jsonList = new ArrayList<>();
 		
-		for(int i = 0;i < dressList.size();i++) {
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("dress",dressList.get(i));
-			map.put("dressImg",dressImgList.get(i));
-			jsonList.add(map);
+		if(!(dressList == null)) {
+			for(int i = 0;i < dressList.size();i++) {
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("dress",dressList.get(i));
+				map.put("dressImg",dressImgList.get(i));
+				jsonList.add(map);
+			}
 		}
-		
-		System.out.println(closet+"/"+email);
-		
 		return jsonList;
 	}
+	// 선택한 옷 정보 ajax 통신
 	@RequestMapping("/targetView")
 	@ResponseBody
-	public List<Map<String,Object>> targetView(String closet,String email,String category) {
+	public List<Map<String,Object>> targetView(String closet,String email,String category) {		
 		// 옷장 번호 받아온거 int형 변환
 		int closetNo = Integer.parseInt(closet);
-		List<DressDTO> dressList = cloService.dressSelectByCloset(closetNo);
-		List<String> dressImgList = cloService.selectByEmail(email);
+		List<DressDTO> dressList = cloService.dressSelectByCategory(email, category, closetNo);
+		List<DressImgDTO> targetImgList = cloService.targetImgSelect(email, closetNo, category);
 		List<Map<String,Object>> jsonList = new ArrayList<>();
 		
-		for(int i = 0;i < dressList.size();i++) {
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("dress",dressList.get(i));
-			map.put("dressImg",dressImgList.get(i));
-			jsonList.add(map);
+		if(!(dressList == null)) {
+			for(int i = 0;i < dressList.size();i++) {
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("dress",dressList.get(i));
+				map.put("dressImg",targetImgList.get(i));
+				jsonList.add(map);
+			}
 		}
-		
-		System.out.println(closet+"/"+email);
 		
 		return jsonList;
 	}

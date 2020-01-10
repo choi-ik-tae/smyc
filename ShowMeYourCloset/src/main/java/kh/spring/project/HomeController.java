@@ -46,7 +46,7 @@ public class HomeController {
 	@RequestMapping("/dressUpload")
 	public String clothesUpload(Model m) {
 		String email = (String)session.getAttribute("email");
-		List<ClosetDTO> list = cloService.closetSeleteNoByEmail(email);
+		List<ClosetDTO> list = cloService.closetSeleteByEmail(email);
 		m.addAttribute("list", list);
 		
 		return "mypage/closet/dressUpload";
@@ -54,28 +54,34 @@ public class HomeController {
 	
 	// 내 옷장 가기 전 옷장,옷 정보 가져가기
 	@RequestMapping("/myCloset")
-	public String myCloset(Model m) {
+	public String myCloset(Model m,String target) {
 		String email = (String)session.getAttribute("email");
-		String target = "기본옷장";
-		// 선택에 따른 옷장 정보 리스트 default 기본옷장으로 선택
-		ClosetDTO closet = cloService.closetSelectByName(target);
-		List<DressDTO> dressList = cloService.dressSelectByCloset(closet.getNo());
-		// 각각의 옷 정보들
-		List<DressDTO> topList = cloService.dressSelectByCategory("top", closet.getNo());
-		List<DressDTO> pantsList = cloService.dressSelectByCategory("pants", closet.getNo());
-		List<DressDTO> shoesList = cloService.dressSelectByCategory("shoes", closet.getNo());
-		List<DressDTO> accList = cloService.dressSelectByCategory("acc", closet.getNo());
-		// 각각의 옷 이미지
-		List<DressImgDTO> topImgList = cloService.topImgSelect(target, "top");
-		List<DressImgDTO> pantsImgList = cloService.pantsImgSelect(target, "pants");
-		List<DressImgDTO> shoesImgList = cloService.shoesImgSelect(target, "shoes");
-		List<DressImgDTO> accImgList = cloService.accImgSelect(target, "acc");
-		// 사용자 옷 이미지
-		List<String> dressImgList = cloService.selectByEmail(email);
+		if(target == null) {
+			target="기본옷장";
+		}
+		// 사용자 옷장 정보 가져가기
+		List<ClosetDTO> closetList = cloService.closetSeleteByEmail(email);
 		
+		// 선택에 따른 옷장 정보 리스트 default 기본옷장으로 선택
+		ClosetDTO closet = cloService.closetSelectByName(target,email);
+		List<DressDTO> dressList = cloService.dressSelectByCloset(closet.getNo());
+		List<String> dressImgList = cloService.selectImgByEmail(email,closet.getNo());
+
+		// 각각의 옷 정보들
+		List<DressDTO> topList = cloService.dressSelectByCategory(email,"Top", closet.getNo());
+		List<DressDTO> pantsList = cloService.dressSelectByCategory(email,"Pants", closet.getNo());
+		List<DressDTO> shoesList = cloService.dressSelectByCategory(email,"Shoes", closet.getNo());
+		List<DressDTO> accList = cloService.dressSelectByCategory(email,"Acc", closet.getNo());
+		// 각각의 옷 이미지
+		List<DressImgDTO> topImgList = cloService.targetImgSelect(email,closet.getNo(),"Top");
+		List<DressImgDTO> pantsImgList = cloService.targetImgSelect(email,closet.getNo(),"Pants");
+		List<DressImgDTO> shoesImgList = cloService.targetImgSelect(email,closet.getNo(),"Shoes");
+		List<DressImgDTO> accImgList = cloService.targetImgSelect(email,closet.getNo(),"Acc");
+		
+		m.addAttribute("closetList", closetList);
 		m.addAttribute("closetNo", closet.getNo());
+		m.addAttribute("target", target);
 		m.addAttribute("img", closet.getImg());
-		m.addAttribute("dressList", dressList);
 		m.addAttribute("dressImgList", dressImgList);
 		m.addAttribute("topList", topList);
 		m.addAttribute("pantsList", pantsList);
@@ -85,6 +91,7 @@ public class HomeController {
 		m.addAttribute("pantsImgList", pantsImgList);
 		m.addAttribute("shoesImgList", shoesImgList);
 		m.addAttribute("accImgList", accImgList);
+		m.addAttribute("dressList", dressList);
 		
 		return "mypage/closet/myCloset";
 	}

@@ -18,7 +18,8 @@
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #closet{transform: translate(45%,5%); margin-bottom: 70px;}
     .nav-font{font-size: 10pt; font-weight: 800;}
-    .item-page{border: 1px solid lightgray; border-radius: 5px;}
+    .item-page{border: 1px solid lightgray; border-radius: 5px; max-height:700px; overflow:auto;}
+    .item-page::-webkit-scrollbar {display:none;}
     .card>img{}
     #dressBox>div>div{background:rgba(255, 255, 255, 0.2);border-radius: 5px;color: white;font-size: 20pt;font-weight: 800;}
     #accBox{position: absolute;left: 480px;top:50px;width:198px;height:500px;line-height: 500px; text-align: center;}
@@ -68,28 +69,34 @@
                     </div><hr>
                 </div>   
             </div>
+            <div class="row mt-4">
+                <div class="col-3 text-center m-auto">
+                    <select class="form-control" name="closetName" id="closetName">
+						<c:choose>
+							<c:when test="${closetList.size() > 0}">
+								<c:forEach items="${closetList}" var="closet">
+									<option id="${closet.name}" value="${closet.name}">${closet.name}</option>
+									<c:if test="${closet.name == target}">
+										<script>
+											$("#${closet.name}").prop("selected",true);
+										</script>
+									</c:if>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<option value="기본옷장">기본옷장</option>
+							</c:otherwise>
+						</c:choose>                        
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row" id="dressBox">
         <div class="col-12">
         <c:choose>
-	        <c:when test="${dressList.size() == 0}">
-	            <img src="imgs/closet/${img}.png" id="closet">
-	            <div id="topBox">
-	                TOP
-	            </div>
-	            <div id="pantsBox">
-	                PANTS
-	            </div>
-	            <div id="shoesBox">
-	                SHOES
-	            </div>
-	            <div id="accBox">
-	                ACC
-	            </div>
-	        </c:when>
-			<c:when test="${dressList.size() > 0}">
-            <img src="imgs/closet/${img}.png" id="closet">
+	        <c:when test="${dressList.size() > 0}">
+	        <img src="imgs/closet/${img}.png" id="closet">
             <div id="topBox">
                 <div class="imgBox text-left">
                 <c:choose>
@@ -150,7 +157,22 @@
                 </c:choose>
                 </div>
             </div>
-        	</c:when>
+	        </c:when>
+			<c:otherwise>
+           		<img src="imgs/closet/${img}.png" id="closet">
+	            <div id="topBox">
+	                TOP
+	            </div>
+	            <div id="pantsBox">
+	                PANTS
+	            </div>
+	            <div id="shoesBox">
+	                SHOES
+	            </div>
+	            <div id="accBox">
+	                ACC
+	            </div>
+        	</c:otherwise>
         </c:choose>
         </div>
     </div><hr>
@@ -161,16 +183,16 @@
                 <a id="allView" class="nav-link"><span class="nav-font">All</span></a>
               </li>
               <li class="nav-item">
-                <a id="topView" class="nav-link"><span class="nav-font">Top</span></a>
+                <a id="topView" class="nav-link targetView"><span class="nav-font">Top</span></a>
               </li>
               <li class="nav-item">
-                <a id="pantsView" class="nav-link"><span class="nav-font">Pants</span></a>
+                <a id="pantsView" class="nav-link targetView"><span class="nav-font">Pants</span></a>
               </li>
               <li class="nav-item">
-                <a id="shoesView" class="nav-link"><span class="nav-font">Shose</span></a>
+                <a id="shoesView" class="nav-link targetView"><span class="nav-font">Shoes</span></a>
               </li>
               <li class="nav-item">
-                <a id="accView" class="nav-link"><span class="nav-font">Acc</span></a>
+                <a id="accView" class="nav-link targetView"><span class="nav-font">Acc</span></a>
               </li>
             </ul>
         </div>
@@ -180,10 +202,7 @@
 			<div class="row row-cols-3 m-auto item-page">
 	        <!-- 파일 가져와서 뿌려주면 됨. 반복문사용 -->
 	        <c:choose>
-		        <c:when test="">
-		        	옷을 등록해주세요!!
-		        </c:when>
-		        <c:otherwise>
+		        <c:when test="${dressList.size() > 0}">
 		        <c:forEach var="i" begin="0" end="${dressList.size() - 1}">
 				      <div class="col-4 mb-4 mt-4">
 				        <div class="card h-100">
@@ -197,6 +216,18 @@
 				        </div>
 				     </div>
 				</c:forEach>
+		        </c:when>
+		        <c:otherwise>
+		        	<div class="col-12" style="height:350px; font-weight:800;">
+		        		<div class="row text-center">
+		        			<div class="col-12" style="height:250px; line-height:250px;">옷장이 비었습니다.</div>
+		        		</div>
+		        		<div class="row text-center">
+		        			<div class="col-12" style="height:100px; line-height:100px;">
+		        				<button class="btn btn-outline-dark" type="button">옷 등록하러 가기</button>
+		        			</div>
+		        		</div>
+		        	</div>
 		        </c:otherwise>
 	        </c:choose>
 	        </div>
@@ -212,8 +243,7 @@
 			method:"POST",
 			data:{
 				email:"${email}",
-				closet:"${closetNo}",
-				category:$().val,
+				closet:"${closetNo}"
 			},
 			dataType:"json"
 		}).done(function(data){
@@ -244,10 +274,69 @@
 			
 		});
 	});
-	
-	
-	
-	
+	$(".targetView").on("click",function(){
+		var item = $(this).text();
+		$.ajax({
+			url:"${pageContext.request.contextPath}/closet/targetView",
+			method:"POST",
+			data:{
+				email:"${email}",
+				closet:"${closetNo}",
+				category:item
+			},
+			dataType:"json"
+		}).done(function(data){
+			console.log(data.length)
+			$(".item-page").html("");
+			if(data.length == 0) {
+				var contents = $("<div class='col-12' style='height:350px; font-weight:800;'>");
+				var row1 = $("<div class='row text-center'>");
+				var box1 = $("<div class='col-12' style='height:250px; line-height:250px;'>")
+				var text1 = "옷장이 비었습니다."
+				var row2 = $("<div class='row text-center'>");
+				var box2 = $("<div class='col-12' style='height:100px; line-height:100px;'>")
+				var btn = $("<button class='btn btn-outline-dark' type='button'>");
+				var text2 = "옷 등록하러 가기";
+				
+				contents.append(row1);
+				row1.append(box1);
+				box1.append(text1);
+				contents.append(row2);
+				row2.append(box2);
+				box2.append(btn);
+				btn.append(text2);
+				
+				$(".item-page").append(contents);
+			} else {
+				// for문 감싸기~
+				for(i=0;i<data.length;i++) {	
+					var contents = $("<div class='col-4 mb-4 mt-4'>");
+					var card = $("<div class='card h-100'>");
+					var img = $("<img class='card-img-top' src='"+data[i].dressImg.path+"'style='height:200px;'>");
+					var cardbody = $("<div class='card-body'>");
+					var htag = $("<h5 class='card-title'>");
+					var ptag = $("<p class='card-text'>");
+					
+					//container.append(contents);
+					contents.append(card);
+					card.append(img);
+					card.append(cardbody);
+					htag.append(data[i].dress.name)
+					ptag.append(data[i].dress.memo)
+					cardbody.append(htag);
+					cardbody.append(ptag);
+					
+					$(".item-page").append(contents);
+				}
+				//	
+			}
+		}).fail(function(data){
+			console.log("못가져왔어!");
+		});
+	});
+	$("#closetName").on("change",function(){
+		location.href = "${pageContext.request.contextPath}/myCloset?target="+$("#closetName option:selected").val();
+	});
 </script>
 </c:otherwise>
 </c:choose>

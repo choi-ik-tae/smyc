@@ -69,10 +69,10 @@
 				</div>
 				<div class="col-10">
 					<select class="custom-select" name="category">
-						<option value="top">상의</option>
-						<option value="pants">하의</option>
-						<option value="shoes">신발</option>
-						<option value="acc">액세서리</option>
+						<option value="Top">상의</option>
+						<option value="Pants">하의</option>
+						<option value="Shoes">신발</option>
+						<option value="Acc">액세서리</option>
 					</select>
 				</div>
 			</div>
