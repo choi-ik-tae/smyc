@@ -27,8 +27,8 @@ public class DressImgDAO {
 		return sst.insert("DressImg.insert", parm);
 	}
 	// 선택한 옷 이미지 경로 가져오기
-	public DressImgDTO selectPathByDress(int num) {
-		return sst.selectOne("DressImg.selectByDress",num);
+	public DressImgDTO selectImgByDress(int d_no) {
+		return sst.selectOne("DressImg.selectByDress",d_no);
 	}
 	// 사용자 옷 이미지 경로 전체 가져오기
 	public List<String> selectPathByEmail(String email, int c_no) {
@@ -41,7 +41,10 @@ public class DressImgDAO {
 	// 사용자 선택 옷장 카테고리 별 이미지 경로 추출
 	public List<DressImgDTO> selectPathByCategory(String email,String category) {
 		// 미완성
-		
 		return sst.selectList("DressImg.selectByCateogry");
+	}
+	// 옷 이미지 삭제
+	public int delete(int d_no) {
+		return sst.delete("DressImg.delete", d_no);
 	}
 }

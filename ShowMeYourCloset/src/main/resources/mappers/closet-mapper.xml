@@ -15,6 +15,9 @@
 	<select id="selectByName" parameterType="java.util.Map" resultType="kh.spring.dto.ClosetDTO">
 		select * from closet where name = #{name} and email = #{email}
 	</select>
-	
+<!-- 	옷이 무슨 옷장에 있는가 알기 위함 -->
+	<select id="selectByDress" resultType="kh.spring.dto.ClosetDTO">
+		select * from closet where no = #{no}
+	</select>
 	
 </mapper>

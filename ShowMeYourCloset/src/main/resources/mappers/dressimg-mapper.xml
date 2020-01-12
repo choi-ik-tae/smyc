@@ -19,4 +19,8 @@
 	<select id="selectByCategory" parameterType="java.util.Map" resultType="String">
 		select path from dress_img img, dress d where d.no = img.d_no and d.email = #{email} and d.category = #{category} and d.c_no = #{c_no} order by d_no desc
 	</select>
+<!-- 	옷 이미지 삭제 -->
+	<delete id="delete">
+		delete from dress_img where d_no = #{d_no}
+	</delete>
 </mapper>

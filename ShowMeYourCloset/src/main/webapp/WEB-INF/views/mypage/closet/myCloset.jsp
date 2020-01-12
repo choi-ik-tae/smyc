@@ -39,13 +39,16 @@
     .closetTag{position: relative;width: 100%;height: 50px;line-height: 50px;}
     .nav-link:hover{cursor: pointer;}
 </style>
+<script>
+	$(body)
+</script>
 </head>
 <body>
 <c:choose>
 <c:when test="${email == null}">
 	<script>
 		alert("로그인 해주세요!");
-		location.href="${pageContext.request.contextPath}/";
+		location.href="${pageContext.request.contextPath}/signin";
 	</script>
 </c:when>
 <c:otherwise>
@@ -219,7 +222,8 @@
 				        </div>
 				      </div>
 				      <form action="${pageContext.request.contextPath}/dressDetailView" id="frm${dressList.get(i).no}">
-				      	<input type="hidden" name="dress" value="${dressList.get(i).no}">
+				      	<input type="hidden" name="d_no" value="${dressList.get(i).no}">
+				      	<input type="hidden" name="c_no" value="${dressList.get(i).c_no}">
 				      </form>
 				      <script>
 				      	$("#dress${dressList.get(i).no}").on("click",function(){

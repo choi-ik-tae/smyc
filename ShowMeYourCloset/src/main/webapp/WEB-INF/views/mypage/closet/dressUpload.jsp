@@ -142,7 +142,8 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-12 align-self-center">
-					<button class="btn btn-outline-secondary">등록하기</button>
+					<button class="btn btn-outline-dark">등록하기</button>
+					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
 				</div>
 			</div>
 		</form>
@@ -150,6 +151,9 @@
 		<!-- 푸터 -->
     </div>
 	<script>
+		$("#toHome").on("click",function(){
+		   	location.href="${pageContext.request.contextPath}/"; 
+		});
 		// 등록 이미지 등록 미리보기
 		function readInputFile(input) {
 			if (input.files && input.files[0]) {

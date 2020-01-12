@@ -1,6 +1,7 @@
 package kh.spring.dto;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class DressDTO {
 	private int no;
@@ -123,5 +124,4 @@ public class DressDTO {
 	public void setBuy_date(String buy_date) {
 		this.buy_date = buy_date;
 	}
-
 }

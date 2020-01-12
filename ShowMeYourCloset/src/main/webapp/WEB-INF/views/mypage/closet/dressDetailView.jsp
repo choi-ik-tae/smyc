@@ -24,11 +24,10 @@
 <body>
     <div class="container text-center">
         <!-- 헤더 -->
-        
 		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
 				<div class="col-auto m-auto p-0 align-items-center" style="border: 1px solid gray;" id="preview">
-                    <img class='w-100 h-100' src="">
+                    <img class='w-100 h-100' src="${img.path}">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -36,7 +35,7 @@
 					<label for="imgud" class="m-0 ">옷장</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="closet" type="text" value="" readonly>
+					<input id="" class="w-100 form-control" name="closet" type="text" value="${closet.name}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -44,7 +43,7 @@
 					<label for="" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="name" type="text" value="" readonly>
+					<input id="" class="w-100 form-control" name="name" type="text" value="${info.name}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -93,7 +92,7 @@
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" name="pub" id="n" value="N" required disabled>
-                        <label class="form-check-label" for="n" disabled>NO</label>
+                        <label class="form-check-label" for="n">NO</label>
 					</div>
 				</div>
 			</div>
@@ -102,7 +101,7 @@
 					<label for="price" class="m-0 ">가격</label>
 				</div>
 				<div class="col-10">
-					<input id="price" class="w-100 form-control" name="price" type="text" readonly>
+					<input id="price" class="w-100 form-control" name="price" type="text" value="${info.price}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -110,7 +109,7 @@
 					<label for="buy_date" class="m-0 ">구매일자</label>
 				</div>
 				<div class="col-10">
-					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31" value="" readonly>
+					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31" value="${info.buy_date}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -118,25 +117,50 @@
 					<label for="" class="m-0 ">메모</label>
 				</div>
 				<div class="col-10">
-					<textarea class="form-control" rows="5" style="resize: none" name="memo" id="memo" readonly></textarea>
+					<textarea class="form-control" rows="5" style="resize: none" name="memo" id="memo" readonly>${info.memo}</textarea>
 				</div>
 			</div>
 			<div class="row m-2">
 				<div class="col-12 align-self-center">
-					<button id="toModify" class="btn btn-outline-secondary">수정하기</button>
-					<button id="toDelete" class="btn btn-outline-secondary">삭제하기</button>
+					<button id="toModify" type="button" class="btn btn-outline-dark">수정하기</button>
+					<button id="toDelete" type="button" class="btn btn-outline-dark">삭제하기</button>
+					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
 				</div>
 			</div>
 		</form>
-
+		<form action="${pageContext.request.contextPath}/closet/dressDelete" method="post" id="frm">
+			<input type="hidden" name="no" value="${info.no}">
+		</form>
 		<!-- 푸터 -->
     </div>
+    <c:choose>
+	    <c:when test="${info.pub eq 'Y'}"><script>$("#y").prop("checked",true);</script></c:when>
+	    <c:when test="${info.pub eq 'N'}"><script>$("#n").prop("checked",true);</script></c:when>
+    </c:choose>
+    <c:choose>
+    	<c:when test="${info.category eq 'Top'}"><script>$("#category").val("상의");</script></c:when>
+	    <c:when test="${info.category eq 'Pants'}"><script>$("#category").val("하의");</script></c:when>
+	    <c:when test="${info.category eq 'Shoes'}"><script>$("#category").val("신발");</script></c:when>
+	    <c:when test="${info.category eq 'Acc'}"><script>$("#category").val("액세서리");</script></c:when>
+    </c:choose>
+    <c:forEach items="${season}" var="season">
+    	<script>
+	    	$("input[name=season]").each(function(){
+	            if($(this).val() == '${season}') {
+	                $(this).prop("checked",true);
+	            }
+	        });
+    	</script>
+    </c:forEach>
 	<script>
 		$("#toModify").on("click",function(){
 			location.href="${pageContext.request.contextPath}/dressModify";
 		});
 		$("#toDelete").on("click",function(){
-			location.href="${pageContext.request.contextPath}/dressDelete";
+			$("#frm").submit();
+		});
+		$("#toHome").on("click",function(){
+		   	location.href="${pageContext.request.contextPath}/"; 
 		});
 	</script>
 </body>

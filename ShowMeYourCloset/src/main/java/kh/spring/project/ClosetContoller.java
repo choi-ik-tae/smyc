@@ -35,11 +35,11 @@ public class ClosetContoller {
 		String email = (String) session.getAttribute("email");
 		String nick = (String) session.getAttribute("nick");
 		dto.setEmail(email);
-
+		
 		String path = session.getServletContext().getRealPath("files/" + nick);
 		String rootPath = session.getServletContext().getRealPath("files");
 		cloService.dressUpload(dto, fdto, file, path, nick, rootPath);
-
+		
 		return "redirect:/";
 	}
 
@@ -54,10 +54,13 @@ public class ClosetContoller {
 		return "redirect:/";
 	}
 	
-	// 옷정보 디테일 뷰
-	@RequestMapping("/dressDetailView")
-	public String dressDetailView(int d_no) {
+	// 옷 정보 삭제
+	@RequestMapping("/dressDelete")
+	public String dressDetailView(int no) {
+		String nick = (String) session.getAttribute("nick");
+		String path = session.getServletContext().getRealPath("files/" + nick);
 		
+		cloService.dressDelete(no,path);
 		return "redirect:/";
 	}
 	
@@ -67,6 +70,9 @@ public class ClosetContoller {
 		String email = (String)session.getAttribute("email");
 		if(target == null) {
 			target="기본옷장";
+		}
+		if(email == null) {
+			return "/mypage/closet/myCloset";
 		}
 		// 사용자 옷장 정보 가져가기
 		List<ClosetDTO> closetList = cloService.closetSeleteByEmail(email);

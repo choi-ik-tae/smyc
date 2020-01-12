@@ -32,13 +32,17 @@ public class DressDAO {
 		
 		return sst.insert("Dress.insert", parm);
 	}
-	// 옷 정보 가져오기
+	// 옷 정보 오름차순 가져오기
 	public List<DressDTO> selectNo() {
-		return sst.selectList("Dress.selectDress");
+		return sst.selectList("Dress.selectDressNo");
+	}
+	// 선택한 옷 정보 가져오기
+	public DressDTO selectDress(int no) {
+		return sst.selectOne("Dress.selectDressInfo", no);
 	}
 	// 선택한 옷장 옷 정보 가져오기
-	public List<DressDTO> selectByCloset(int num) {
-		return sst.selectList("Dress.selectByCloset", num);
+	public List<DressDTO> selectByCloset(int c_no) {
+		return sst.selectList("Dress.selectByCloset", c_no);
 	}
 	// 사용자가 선택한 옷장 카테고리 별 옷 정보 가져오기
 	public List<DressDTO> selectByCategory(String email, String category, int c_no) {
@@ -49,5 +53,8 @@ public class DressDAO {
 		
 		return sst.selectList("Dress.selectByCategory", parm);
 	}
-	
+	// 옷 정보 삭제
+	public int delete(int no) {
+		return sst.delete("Dress.delete",no);
+	}
 }
