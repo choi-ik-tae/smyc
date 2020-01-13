@@ -52,7 +52,6 @@
 				}
 				
 			}).done(function(data){
-				console.log(data);
 				if(data == 0){
 					$("#result").html("* 가입하지 않은 회원이거나, 이메일 혹은 패스워드가 일치하지 않습니다.")
 					.css("color","red");

@@ -254,6 +254,31 @@
         		var shoseSrc= $(".Shoes").children("img").attr("src");
         		var accSrc = $(".Acc").children("img").attr("src");
         		
+        		
+        		if( topSrc == null && pantsSrc==null && shoseSrc==null && accSrc ==null){
+        			alert("하나 이상 옷을 선택해주세요");
+        			return;
+        		}
+        		
+        		if( $("#InputName").val() == ""){
+        			alert("옷의 이름을 정해주세요");
+        			return;
+        		}
+        		
+        		var checkListBox = $("input[name=season]");
+        		var checkFinish = 0;
+        		for(var i=0;i<checkListBox.length;i++){
+        			if($(checkListBox[i]).prop("checked") == true){
+        				checkFinish =1;
+        				break;
+        			}
+        		}
+        		
+        		if(checkFinish == 0){
+        			alert("계절을 하나 이상 선택해주세요");
+        			return;
+        		}
+        		
         		$("#topHidden").val(topSrc);
         		$("#pantsHidden").val(pantsSrc);
         		$("#shoseHidden").val(shoseSrc);

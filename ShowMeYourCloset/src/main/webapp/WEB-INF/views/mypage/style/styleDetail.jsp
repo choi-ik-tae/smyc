@@ -149,23 +149,23 @@
 
 			<div class="category Top" id="Top">
 				<c:if test="${dto.top !=null}">
-					<img src="${dto.top}" onError="javascript:this.src='/imgs/shilouette/none.png'" class="categoryImg">
+					<img src="${dto.top}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="categoryImg">
 				</c:if>
 
 			</div>
 			<div class="category Pants" id="Pants">
 				<c:if test="${dto.pants !=null }">
-					<img src="${dto.pants}" onError="javascript:this.src='/imgs/shilouette/none.png'" class="categoryImg">
+					<img src="${dto.pants}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="categoryImg">
 				</c:if>
 			</div>
 			<div class="category Shoes" id="Shoes">
 				<c:if test="${dto.shoes != null}">
-					<img src="${dto.shoes}" onError="javascript:this.src='/imgs/shilouette/none.png'" class="categoryImg">
+					<img src="${dto.shoes}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="categoryImg">
 				</c:if>
 			</div>
 			<div class="category Acc" id="Acc">
 				<c:if test="${dto.acc !=null }">
-					<img src="${dto.acc}" onError="javascript:this.src='/imgs/shilouette/none.png'" class="categoryImg">
+					<img src="${dto.acc}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="categoryImg">
 				</c:if>
 			</div>
 			<div class="imgBox">
@@ -250,7 +250,7 @@
 							init();
 							var src = $(this).children("img").attr("src");
 
-							var img = $("<img onError='javascript:this.src='/imgs/shilouette/none.png''>");
+							var img = $("<img onError='javascript:this.src='/imgs/shilouette/whiteBack.JPG''>");
 							img.attr("src", src);
 
 							$(".imgDetail").append(img);

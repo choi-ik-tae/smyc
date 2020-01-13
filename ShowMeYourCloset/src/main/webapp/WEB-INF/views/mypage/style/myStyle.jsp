@@ -143,16 +143,15 @@
 												<div class="card-img-top topImg" style="background: grey;"></div>
 											</c:when>
 											<c:otherwise>
-												<img src="${dto.top}" onError="javascript:this.src='/imgs/shilouette/none.png'" class="card-img-top topImg">
+												<img src="${dto.top}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="card-img-top topImg">
 											</c:otherwise>
 										</c:choose>
 										<c:choose>
-											<c:when test="${dto.top == null}">
-												<div class="card-img-bottom bottomImg"
-													style="background: grey;"></div>
+											<c:when test="${dto.pants == null}">
+												<div class="card-img-bottom bottomImg" style="background: grey;"></div>
 											</c:when>
 											<c:otherwise>
-												<img src="${dto.pants}" onError="javascript:this.src='/imgs/shilouette/none.png'" class="card-img-bottom bottomImg">
+												<img src="${dto.pants}" class="card-img-bottom bottomImg" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'">
 											</c:otherwise>
 										</c:choose>
 

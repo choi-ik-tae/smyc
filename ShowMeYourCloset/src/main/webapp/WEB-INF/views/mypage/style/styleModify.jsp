@@ -189,22 +189,22 @@
 
 			<div class="category Top" id="Top">
 				<c:if test="${dto.top !=null}">
-					<img src="${dto.top}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/none.png'" id="topImg">
+					<img src="${dto.top}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" id="topImg">
 				</c:if>
 			</div>
 			<div class="category Pants" id="Pants">
 				<c:if test="${dto.pants !=null }">
-					<img src="${dto.pants}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/none.png'" id="bottomImg">
+					<img src="${dto.pants}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" id="bottomImg">
 				</c:if>
 			</div>
 			<div class="category Shoes" id="Shoes">
 				<c:if test="${dto.shoes != null}">
-					<img src="${dto.shoes}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/none.png'" id="shoesImg">
+					<img src="${dto.shoes}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" id="shoesImg">
 				</c:if>
 			</div>
 			<div class="category Acc" id="Acc">
 				<c:if test="${dto.acc !=null }">
-					<img src="${dto.acc}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/none.png'" id="accImg">
+					<img src="${dto.acc}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" id="accImg">
 				</c:if>
 			</div>
 			<div class="imgBox">
@@ -422,7 +422,7 @@
 
 			$(".categoryMenu").css("opacity", "0").animate({'opacity' : '1'}, 300);
 
-		});
+		})
 	</script>
 
 </body>
