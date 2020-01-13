@@ -31,11 +31,39 @@
 		<input type="password" id="inputPassword" name="pw" class="form-control mb-3" placeholder="Password" required>
 		<div class="checkbox mb-3">
 		</div>
-		<button class="btn btn-lg btn-outline-secondary btn-block" type="submit">Sign in</button>
+		<button class="btn btn-lg btn-outline-secondary btn-block" type="button" id="signInBtn">Sign in</button>
+		<div class="resultBox">
+			<span id="result" style="font-size:12px;"></span>
+		</div>
 		<div class="signBox mt-2" style="font-size:10px;">
 			<span style="float:left"><a href="${pageContext.request.contextPath}/idFind">이메일/비밀번호 찾기</a></span>
 			<span style="float:right"><a href="${pageContext.request.contextPath}/signup">회원가입</a></span> 
 		</div>
 	</form>
+	
+	<script>
+		$("#signInBtn").on("click",function(){
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/member/signinProc",
+				data:{
+					email:$("#inputEmail").val(),
+					pw:$("#inputPassword").val()
+				}
+				
+			}).done(function(data){
+				if(data == 0){
+					$("#result").html("* 가입하지 않은 회원이거나, 이메일 혹은 패스워드가 일치하지 않습니다.")
+					.css("color","red");
+				}else if(data == 1){
+					$("#result").html("* 인증되지 않은 이메일입니다. 이메일 인증을 진행해주세요.")
+					.css("color","green");
+				}else{
+					location.href="${pageContext.request.contextPath}/";
+				}
+			})
+		
+		})
+	</script>
 </body>
 </html>

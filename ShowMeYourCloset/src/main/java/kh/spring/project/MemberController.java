@@ -70,9 +70,8 @@ public class MemberController {
 	
 	// 로그인
 	@RequestMapping("signinProc")
+	@ResponseBody
 	public String signup(Model model,String email,String pw) {
-		System.out.println(email+"/"+pw);
-		
 		int result = memService.logInOk(email, pw);
 		
 		if(result > 0) {
@@ -85,13 +84,12 @@ public class MemberController {
 				session.setAttribute("email", email);
 				session.setAttribute("nick", nickname);
 				
-				return "redirect:/";
+				return "do";
 			}
 			
 		}
-		model.addAttribute("result", result);
 		
-		return "trySignup";
+		return result+"";
 		
 	}
 
