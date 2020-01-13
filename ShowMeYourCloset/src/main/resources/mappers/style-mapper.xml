@@ -5,7 +5,7 @@
  <mapper namespace="Style">
 <!--  	카테고리 별 이미지 가져오기 -->
  	<select id="selectCategoryAll" resultType="String">
- 		select distinct path from dress d, dress_img img where d.no = img.d_no and d.email=#{email} and d.category=#{category}
+ 		select distinct path from dress d, dress_img img where d.no = img.d_no and d.email=#{email} and d.category=#{category} and d.c_no=#{c_no}
  	</select>
 <!--  	코디 등록 -->
  	<insert id="insert">
@@ -23,4 +23,16 @@
  	<select id="searchStyle" resultType="kh.spring.dto.StyleDTO">
  		select * from style where (name like #{name} or memo like #{name}) and email=#{email}
  	</select>
+<!--  	코디 상세보기 -->
+ 	<select id="detailStyle" resultType="kh.spring.dto.StyleDTO">
+ 		select * from style where no=#{value}
+ 	</select>
+<!--  	코디 수정하기 -->
+ 	<update id="styleModify">
+ 		update style set name=#{name}, top=#{top},pants=#{pants}, shoes=#{shoes} ,acc=#{acc},season=#{season},memo=#{memo} where no=#{no}
+ 	</update>
+<!--  	코디 삭제 -->
+ 	<delete id="styleDelete">
+ 		delete from style where no=#{value}
+ 	</delete>
  </mapper>

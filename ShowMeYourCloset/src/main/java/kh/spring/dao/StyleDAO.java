@@ -16,10 +16,11 @@ public class StyleDAO {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	public List<String> selectCategoryAll(String email, String category){
-		Map<String, String> parm = new HashMap<>();
+	public List<String> selectCategoryAll(String email, String category,int c_no){
+		Map<String, Object> parm = new HashMap<>();
 		parm.put("email",email);
 		parm.put("category",category);
+		parm.put("c_no",c_no);
 		return sst.selectList("Style.selectCategoryAll", parm); 
 	}
 	
@@ -55,6 +56,32 @@ public class StyleDAO {
 		parm.put("email",email);
 		parm.put("name","%"+name+"%");
 		return sst.selectList("Style.searchStyle", parm);
+	}
+	
+	// 코디 상세보기
+	public StyleDTO detailStyle(int no) {
+		return sst.selectOne("Style.detailStyle",no);
+	}
+	
+	// 코디 수정
+	public int styleModify(StyleDTO dto) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("no",dto.getNo());
+		parm.put("name",dto.getName());
+		parm.put("email",dto.getEmail());
+		parm.put("top",dto.getTop());
+		parm.put("pants",dto.getPants());
+		parm.put("shoes",dto.getShoes());
+		parm.put("acc",dto.getAcc());
+		parm.put("season",dto.getSeason());
+		parm.put("memo",dto.getMemo());
+		
+		return sst.insert("Style.styleModify",parm);
+	}
+	
+	//	코디 삭제
+	public int styleDelete(int no) {
+		return sst.delete("Style.styleDelete",no);
 	}
 
 }

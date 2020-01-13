@@ -138,4 +138,8 @@ public class ClosetService {
 		}
 		
 	}
+	// 이미지 경로 통해서 옷 상세정보 가져오기
+	public DressDTO pathDetailDress(String path) {
+		return ddao.pathDetailDress(path);
+	}
 }
