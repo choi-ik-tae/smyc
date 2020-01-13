@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-    #closet{transform: translate(45%,5%); margin-bottom: 70px;}
+    #closetImg{transform: translate(45%,5%); margin-bottom: 70px;}
     .nav-font{font-size: 10pt; font-weight: 800;}
     .item-page{border: 1px solid lightgray; border-radius: 5px; max-height:700px; overflow:auto;}
     .item-page::-webkit-scrollbar {display:none;}
@@ -101,7 +101,7 @@
         <div class="col-12">
         <c:choose>
 	        <c:when test="${dressList.size() > 0}">
-	        <img src="${pageContext.request.contextPath}/imgs/closet/${img}.png" id="closet">
+	        <img src="${pageContext.request.contextPath}/imgs/closet/${img}.png" id="closetImg">
             <div id="topBox">
                 <div class="imgBox text-left">
                 <c:choose>
@@ -164,7 +164,7 @@
             </div>
 	        </c:when>
 			<c:otherwise>
-           		<img src="${pageContext.request.contextPath}/imgs/closet/${img}.png" id="closet">
+           		<img src="${pageContext.request.contextPath}/imgs/closet/${img}.png" id="closetImg">
 	            <div id="topBox">
 	                TOP
 	            </div>
@@ -249,7 +249,7 @@
 		location.href="${pageContext.request.contextPath}/dressUpload";
 	}
 	$("#toClosetModify").on("click",function(){
-		location.href="${pageContext.request.contextPath}/closetModify?c_no="$("targetCloset").val();
+		location.href="${pageContext.request.contextPath}/closet/closetModify?c_no="+$('#targetCloset').val();
 	});
 	$("#allView").on("click",function(){
 		$.ajax({

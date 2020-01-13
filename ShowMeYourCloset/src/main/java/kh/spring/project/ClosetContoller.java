@@ -125,6 +125,53 @@ public class ClosetContoller {
 
 		return "mypage/closet/myCloset";
 	}
+	// 옷장 수정 모드
+	@RequestMapping("/closetModify")
+	public String closetModify(int c_no,Model m) {
+		String email = (String) session.getAttribute("email");
+		System.out.println(c_no);
+		
+		// 옷장 정보
+		ClosetDTO closet = cloService.closetSelectName(c_no);
+		// 각각의 옷 정보들
+		List<DressDTO> topList = cloService.dressSelectByCategory(email, "Top", closet.getNo());
+		List<DressDTO> pantsList = cloService.dressSelectByCategory(email, "Pants", closet.getNo());
+		List<DressDTO> shoesList = cloService.dressSelectByCategory(email, "Shoes", closet.getNo());
+		List<DressDTO> accList = cloService.dressSelectByCategory(email, "Acc", closet.getNo());
+		// 각각의 옷 이미지
+		List<DressImgDTO> topImgList = cloService.targetImgSelect(email, closet.getNo(), "Top");
+		List<DressImgDTO> pantsImgList = cloService.targetImgSelect(email, closet.getNo(), "Pants");
+		List<DressImgDTO> shoesImgList = cloService.targetImgSelect(email, closet.getNo(), "Shoes");
+		List<DressImgDTO> accImgList = cloService.targetImgSelect(email, closet.getNo(), "Acc");
+		
+		m.addAttribute("closet", closet);
+		m.addAttribute("topList", topList);
+		m.addAttribute("pantsList", pantsList);
+		m.addAttribute("shoesList", shoesList);
+		m.addAttribute("accList", accList);
+		m.addAttribute("topImgList", topImgList);
+		m.addAttribute("pantsImgList", pantsImgList);
+		m.addAttribute("shoesImgList", shoesImgList);
+		m.addAttribute("accImgList", accImgList);
+		
+		return "mypage/closet/closetModify";
+	}
+	// 옷장 수정 - 수정완료
+	@RequestMapping("closetModifyProc")
+	public String closetModifyProc(String[] targets,int no, String closet, String dg,Model m) {
+		List<Integer> nos = new ArrayList<>();
+		for(String tmp : targets) {
+			nos.add(Integer.parseInt(tmp));
+		}
+		String path = session.getServletContext().getRealPath("");
+		cloService.closetDeleteDress(nos,path);
+		cloService.closetUpdate(no, dg, closet);
+		// 변경된 옷장 이름 보내주기 위함
+		String target = cloService.closetSelectName(no).getName();
+		m.addAttribute("target", target);
+		
+		return "redirect:/";
+	}
 
 	// 전체 옷 정보 ajax 통신
 	@RequestMapping("/allView")

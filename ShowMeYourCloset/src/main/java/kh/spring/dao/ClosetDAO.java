@@ -42,5 +42,13 @@ public class ClosetDAO {
 	public ClosetDTO selectByDress(int no) {
 		return sst.selectOne("Closet.selectByDress", no);
 	}
+	// 옷장 수정
+	public int update(int no, String name, String img) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("no",no);
+		parm.put("name",name);
+		parm.put("img",img);
+		return sst.update("Closet.update",parm);
+	}
 	
 }

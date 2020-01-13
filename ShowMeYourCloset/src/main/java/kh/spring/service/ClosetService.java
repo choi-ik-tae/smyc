@@ -176,13 +176,32 @@ public class ClosetService {
 		}
 		return result;
 	}
-	// 옷장 삭제
+	// 옷장 수정모드 - 옷 삭제
 	@Transactional("txManager")
-	public int closetDelete(int c_no,String email) {
-		int result = 0;
-		
-		
-		return result;
+	public void closetDeleteDress(List<Integer> no,String path) {
+		if(no.size() > 0) {
+			for(int tmp : no) {
+				if(dmdao.selectImgByDress(tmp) != null) {
+					String target = path + dmdao.selectImgByDress(tmp).getPath();
+					File file = new File(target);
+					if( file.exists() ){ 
+						if(file.delete()){ 
+							System.out.println("파일삭제 성공");
+							ddao.delete(tmp);
+							dmdao.delete(tmp);
+						}else{ 
+							System.out.println("파일삭제 실패");
+						} 
+					}else{ 
+						System.out.println("파일이 존재하지 않습니다.");
+					}
+				}
+			}
+		}
+	}
+	// 옷장 수정모드 - 옷장 이름, 이미지 변경
+	public void closetUpdate(int no,String img, String name) {
+		cdao.update(no, name, img);
 	}
 	// 이미지 경로 통해서 옷 상세정보 가져오기
 	public DressDTO pathDetailDress(String path) {

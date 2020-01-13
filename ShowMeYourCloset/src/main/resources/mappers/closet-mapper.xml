@@ -19,5 +19,9 @@
 	<select id="selectByDress" resultType="kh.spring.dto.ClosetDTO">
 		select * from closet where no = #{no}
 	</select>
+<!-- 	옷장 수정 -->
+	<select id="update" parameterType="java.util.Map">
+		update closet set name=#{name},img=#{img} where no = #{no}
+	</select>
 	
 </mapper>
