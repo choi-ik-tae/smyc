@@ -189,22 +189,22 @@
 
 			<div class="category Top" id="Top">
 				<c:if test="${dto.top !=null}">
-					<img src="${dto.top}" class="categoryImg" id="topImg">
+					<img src="${dto.top}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/none.png'" id="topImg">
 				</c:if>
 			</div>
 			<div class="category Pants" id="Pants">
 				<c:if test="${dto.pants !=null }">
-					<img src="${dto.pants}" class="categoryImg" id="bottomImg">
+					<img src="${dto.pants}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/none.png'" id="bottomImg">
 				</c:if>
 			</div>
 			<div class="category Shoes" id="Shoes">
 				<c:if test="${dto.shoes != null}">
-					<img src="${dto.shoes}" class="categoryImg" id="shoesImg">
+					<img src="${dto.shoes}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/none.png'" id="shoesImg">
 				</c:if>
 			</div>
 			<div class="category Acc" id="Acc">
 				<c:if test="${dto.acc !=null }">
-					<img src="${dto.acc}" class="categoryImg" id="accImg">
+					<img src="${dto.acc}" class="categoryImg" onError="javascript:this.src='/imgs/shilouette/none.png'" id="accImg">
 				</c:if>
 			</div>
 			<div class="imgBox">
@@ -377,31 +377,25 @@
 
 		// 카테고리 클릭이나 옷장 변경 시  실행되는 ajax
 		var selectDressAll = function(category, closet) {
-
-			$
-					.ajax(
-							{
-								url : "${pageContext.request.contextPath}/style/selectCategoryProc",
-								data : {
-									category : category,
-									c_no : closet
-								},
-								dataType : "json"
-							}).done(function(data) {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/style/selectCategoryProc",
+				data : {
+					category : category,
+					c_no : closet
+					},
+					dataType : "json"
+					}).done(function(data) {
 						for (i = 0; i < data.length; i++) {
-							var div = $("<div class='categoryImgDiv'>")
+							var div = $("<div class='categoryImgDiv'>");
 							var img = $("<img>");
 							img.attr("src", data[i].file);
 							div.append(img);
 							$(".categoryMenu").append(div);
-						}
-
-					}).fail(function() {
-						console.log("fail");
-					})
-
-		}
-
+							}
+						}).fail(function() {
+							console.log("fail");
+						})
+				}
 		// 옷장 변경 이벤트
 		var changeClosetSelect = function() {
 
@@ -426,11 +420,9 @@
 
 			selectDressAll(cid, closet);
 
-			$(".categoryMenu").css("opacity", "0").animate({
-				'opacity' : 1
-			}, 300);
+			$(".categoryMenu").css("opacity", "0").animate({'opacity' : '1'}, 300);
 
-		})
+		});
 	</script>
 
 </body>

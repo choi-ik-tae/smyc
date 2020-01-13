@@ -133,9 +133,14 @@
             }
 
         </style>
+        
+        <script type="text/javascript">
+			 window.history.forward();
+			 function noBack(){window.history.forward();}
+		</script>
 
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
         <div class="wrapper-All">
 
 			
@@ -211,7 +216,7 @@
                                 <button type="button" id="styleInsertBtn" class="btn btn-secondary">저장하기</button>
                             </span>
                             <span style="float: left">
-                                <button type="button" class="btn btn-secondary">돌아가기</button>
+                                <button type="button" class="btn btn-secondary" id="goBack">돌아가기</button>
                             </span>
                         </div>
                     </div>
@@ -222,6 +227,10 @@
         
         
 		<script>
+		
+			$("#goBack").on("click",function(){
+				history.back();
+			})
 				
 		//계절 선택
             $(".checkList").on("change",function(){
@@ -270,7 +279,7 @@
         		title.html(cid).css("font-size","28px").css("font-weight","700");
         		$(".categoryMenu").append(title);
         		var div = $("<div class='noneDiv'>");
-        		var img = $("<img src='imgs/shilouette/none.png'>")
+        		var img = $("<img src='/imgs/shilouette/none.png'>")
         		div.append(img);
         		$(".categoryMenu").append(div);
         	}
