@@ -58,9 +58,20 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/dressDetailView")
-	public String dressModify() {
+	public String dressModify(int c_no,int d_no,Model m) {
 		System.out.println("잘 도착!");
-		return "redirect:/";
+		
+		DressDTO info = cloService.dressSelectInfo(d_no);
+		DressImgDTO img = cloService.dressSelectImg(d_no);
+		ClosetDTO closet = cloService.closetSelectName(c_no);
+		String[] season = cloService.splitDressSeason(d_no);
+		
+		m.addAttribute("info", info);
+		m.addAttribute("img", img);
+		m.addAttribute("closet", closet);
+		m.addAttribute("season", season);
+				
+		return "mypage/closet/dressDetailView";
 	}
 	
 	@RequestMapping("myCloset")
@@ -118,5 +129,9 @@ public class HomeController {
 		model.addAttribute("gender", gender);
 		return "mypage/style/styleUpload";
 	}
-
+	// 에러페이지 이동
+	@RequestMapping("/error")
+	public String error() {
+		return "error";
+	}
 }
