@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.StyleDTO;
 import kh.spring.service.MemberService;
 import kh.spring.service.StyleService;
@@ -23,17 +24,21 @@ public class StyleController {
 	
 	@Autowired
 	private StyleService sService;
+	
+	@Autowired
+	private MemberService memService;
 
 	@Autowired
 	private HttpSession session;
 	
+	
+	// 카테고리별 옷 끌고오기
 	@RequestMapping("/selectCategoryProc")
 	@ResponseBody
-	public List<Map<String,String>> selectCategoryProc(String category) {
-		System.out.println(category);
-	
+	public List<Map<String,String>> selectCategoryProc(String category,int c_no) {
+
 		String email = (String) session.getAttribute("email");
-		List<String> list = sService.selectCategoryAll(email, category);
+		List<String> list = sService.selectCategoryAll(email, category,c_no);
 		List<Map<String,String>> jsonList = new ArrayList<>();
 		for(int i = 0; i<list.size();i++) {
 			Map<String,String> map = new HashMap<String, String>();
@@ -43,6 +48,7 @@ public class StyleController {
 		return jsonList;	
 	}
 	
+	// 코디 등록	
 	@RequestMapping("/insertProc")
 	public String insertProc(Model model,StyleDTO dto) {
 		if(dto.getTop()==null) { dto.setTop(null);}
@@ -55,6 +61,7 @@ public class StyleController {
 		return "redirect:/myStyle";	
 	}
 	
+	//코디 검색
 	@RequestMapping("/searchStyle")
 	public String searchStyle(Model model,String name) {
 		
@@ -63,6 +70,59 @@ public class StyleController {
 		model.addAttribute("styleList", styleList);
 		
 		return "mypage/style/myStyle";		
+	}
+	
+	@RequestMapping("/detailStyle")
+	public String detailStyle(Model model , int no) {
+		
+		System.out.println("넘어옴? :::::"+no);
+		
+		String email  = (String)session.getAttribute("email");
+		
+		String gender = memService.selectGender(email);
+		StyleDTO dto = sService.detailStyle(no);
+		String[] season = dto.getSeason().split(",");
+		
+		model.addAttribute("season",season);
+		model.addAttribute("gender", gender);
+		model.addAttribute("dto", dto);
+		return "mypage/style/styleDetail";
+	}
+	
+	@RequestMapping("/modifyPage")
+	public String modifyPage(Model model, int no) {
+		String email  = (String)session.getAttribute("email");
+		System.out.println("수정 페이지 넘겨받은 no."+no);
+		
+		String gender = memService.selectGender(email);
+		StyleDTO dto = sService.detailStyle(no);
+		String[] season = dto.getSeason().split(",");
+		List<ClosetDTO> closetList= sService.selectClosetAll(email);
+		
+		model.addAttribute("closetList", closetList);
+		model.addAttribute("season",season);
+		model.addAttribute("gender", gender);
+		model.addAttribute("dto", dto);
+		return "mypage/style/styleModify";
+		
+	}
+	
+	@RequestMapping("/modifyProc")
+	public String modifyProc(StyleDTO dto) {
+		System.out.println(dto.getNo()+ dto.getTop());
+		
+		sService.styleModify(dto);
+		
+		return "redirect:/myStyle";
+	}
+	
+	@RequestMapping("/styleDelete")
+	public String styleDelete(int no) {
+		
+		System.out.println("삭제할려고 넘겨받은 no."+no);
+		sService.styleDelete(no);
+		
+		return "redirect:/myStyle";
 	}
 
 }

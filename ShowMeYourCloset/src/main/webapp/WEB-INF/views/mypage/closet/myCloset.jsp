@@ -278,7 +278,7 @@
 				// for문 감싸기~
 				for(i=0;i<data.length;i++) {	
 					var contents = $("<div class='col-4 mb-4 mt-4'>");
-					var card = $("<div class='card h-100'>");
+					var card = $("<div class='card h-100')>");
 					var img = $("<img class='card-img-top' src='"+data[i].dressImg+"'style='height:200px;'>");
 					var cardbody = $("<div class='card-body'>");
 					var htag = $("<h5 class='card-title'>");
