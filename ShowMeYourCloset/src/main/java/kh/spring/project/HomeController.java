@@ -107,7 +107,7 @@ public class HomeController {
 		}else {
 			styleList = styleService.selectSeason(email, season);
 		}
-		
+
 		model.addAttribute("styleList", styleList);
 				
 		return "mypage/style/myStyle";
@@ -138,6 +138,9 @@ public class HomeController {
 	public String styleUpload(Model model) {
 		String email = (String) session.getAttribute("email");
 		String gender = memService.selectGender(email);
+		List<ClosetDTO> closetList= styleService.selectClosetAll(email);
+		
+		model.addAttribute("closetList", closetList);
 		model.addAttribute("gender", gender);
 		return "mypage/style/styleUpload";
 	}

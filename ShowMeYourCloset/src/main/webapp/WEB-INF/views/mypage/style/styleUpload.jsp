@@ -69,7 +69,6 @@
                 z-index:2;
                 border-radius:10px;
                 background:#e8dfd8;
-
             }
             #shilouette{
                 width: 400px;
@@ -127,6 +126,11 @@
             	font-size:15px; 
             	text-align:center;
             }
+            .closetSelc{
+            	position:absolute;
+            	left: 770px;
+            	top:30px;
+            }
 
         </style>
 
@@ -134,13 +138,21 @@
 <body>
         <div class="wrapper-All">
 
-
+			
             <div class="categoryMenu p-3" >
             	
             </div>
 
             <div class="wrapper">
-
+            
+            	<div class="closetSelc" style="width:300px;">
+					<select class="form-control" id="closet" name="closet" onchange="changeClosetSelect()">
+						<c:forEach var="closetDTO" items="${closetList}">
+							<option value="${closetDTO.no}" >${closetDTO.name}</option>
+						</c:forEach>
+					</select>
+				</div>
+	
                 <div class="category Top" id="Top">Top</div>
                 <div class="category Pants" id="Pants">Pants</div>
                 <div class="category Shoes" id="Shoes">Shoes</div>
@@ -148,10 +160,10 @@
                 <div class="imgBox">
                 <c:choose>
                 	<c:when test="${gender == 'W'}">
-                		  <img src="imgs/shilouette/woman.png" id="shilouette">
+                		  <img src="/imgs/shilouette/woman.png" id="shilouette">
                 	</c:when>
                 	<c:otherwise>
-                		  <img src="imgs/shilouette/man.png" id="shilouette">
+                		  <img src="/imgs/shilouette/man.png" id="shilouette">
                 	</c:otherwise>
                 </c:choose>
                 </div>
@@ -174,16 +186,16 @@
                             <div style="padding-left: 30px;">
                                  <div class="btn-group-toggle" data-toggle="buttons">
 					                <label class="btn checkLabel" id="springLabel">
-					                    <input type="checkbox" name="season" class="checkList" id="spring" value="spring"> 봄
+					                    <input type="checkbox" name="season" class="checkList" id="spring" value="spring"> spring
 					                </label>
 					                <label class="btn checkLabel" id="summerLabel">
-					                    <input type="checkbox" name="season" class="checkList" id="summer" value="summer"> 여름
+					                    <input type="checkbox" name="season" class="checkList" id="summer" value="summer"> summer
 					                </label>
 					                <label class="btn checkLabel" id="fallLabel">
-					                    <input type="checkbox" name="season" class="checkList" id="fall" value="fall"> 가을
+					                    <input type="checkbox" name="season" class="checkList" id="fall" value="fall"> fall
 					                </label>
 					                <label class="btn checkLabel" id="winterLabel">
-					                    <input type="checkbox" name="season" class="checkList" id="winter" value="winter"> 겨울
+					                    <input type="checkbox" name="season" class="checkList" id="winter" value="winter"> winter
 					                </label>
 					            </div>
                             </div>
@@ -210,6 +222,8 @@
         
         
 		<script>
+				
+		//계절 선택
             $(".checkList").on("change",function(){
                 var checkid=$(this).attr("id");
 
@@ -224,6 +238,7 @@
         </script>
         
         <script>
+        //코디 등록하기
         	$("#styleInsertBtn").on("click",function(){
         		var topSrc= $(".Top").children("img").attr("src");
         		var pantsSrc= $(".Pants").children("img").attr("src");
@@ -245,7 +260,7 @@
         <script>
     	
 	     	// 카테고리 아이디
-	    	var cid ="옷을 선택해주세요";
+	    	var cid ="Top";
         
         	// 메뉴 초기화
         	var divInit = function(){
@@ -272,23 +287,22 @@
         		
         	})
         	
+        	// 카테고리 로고 띄워주기
         	$("body").on("click",".noneDiv",function(){
         		var height = $("."+cid).css("height");
         		$("."+cid).html("");
         		$("."+cid).text(cid).css("opacity","0.7").css("line-height",height);
         	})
         	
-        	// 카테고리 div 클릭 이벤트
-            $(".category").on("click",function(){
-            	           	
-            	cid= $(this).attr("id");
-            	
-            	divInit();
-            	
-            	$.ajax({
+         	
+        	// 카테고리 클릭이나 옷장 변경 시  실행되는 ajax
+         	var selectDressAll = function(category , closet){
+         		
+         		$.ajax({
             		url:"${pageContext.request.contextPath}/style/selectCategoryProc",
             		data:{
-            			category : cid
+            			category : category,
+            			c_no : closet
             		},
             		dataType:"json"
             	}).done(function(data){          		
@@ -303,6 +317,34 @@
             	}).fail(function(){
             		console.log("fail");            		
             	})
+         		
+         	}
+         	
+         	
+         	// 옷장 변경 이벤트
+			var changeClosetSelect = function(){
+         		
+				divInit();
+	
+				var closet = $("#closet option:selected").val();
+				console.log(closet);
+				if(cid == "none"){
+					cid="Top";
+				}
+				selectDressAll(cid, closet);
+				
+			}
+        	
+        	
+        	// 카테고리 div 클릭 이벤트
+            $(".category").on("click",function(){
+            	           	
+            	cid= $(this).attr("id");
+            	var closet = $("#closet").val();
+            	
+            	divInit();
+            	
+            	selectDressAll(cid, closet);
                 
                 $(".categoryMenu").css("opacity","0")
                 .animate({'opacity':1},300);

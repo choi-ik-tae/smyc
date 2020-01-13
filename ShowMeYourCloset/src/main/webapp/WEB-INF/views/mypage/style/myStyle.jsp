@@ -110,7 +110,7 @@
 						</c:when>
 						<c:otherwise>
 						<c:forEach var="dto" items="${styleList}">
-							<div class="col-12 col-md-3 mt-2">
+							<div class="col-12 col-md-3 mt-2" onclick="detailStyle(${dto.no})">
 								<div class="card" style="width: 18rem; margin: auto;">
 									<div class="card-Img-div">
 										<c:choose>
@@ -150,6 +150,11 @@
 	</c:choose>
 	
 		<script>
+		
+			var detailStyle = function(no){
+				location.href="${pageContext.request.contextPath}/style/detailStyle?no="+no;
+				
+			}
 			$("#searchBtn").on("click",function(){
 				var name = $("#InputSearch").val();
 				location.href="${pageContext.request.contextPath}/style/searchStyle?name="+name;

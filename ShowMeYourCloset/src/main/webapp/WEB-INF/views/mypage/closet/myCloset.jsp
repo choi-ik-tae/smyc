@@ -82,7 +82,7 @@
 									<c:if test="${closet.name == target}">
 										<script>
 											$("#${closet.name}").prop("selected",true);
-											$("#targetCloset").val(${closet.no});
+											$("#targetCloset").val("${closet.no}");
 										</script>
 									</c:if>
 								</c:forEach>

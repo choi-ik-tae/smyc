@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kh.spring.dao.ClosetDAO;
 import kh.spring.dao.StyleDAO;
+import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.StyleDTO;
 
 @Service
@@ -14,9 +16,12 @@ public class StyleService {
 	@Autowired
 	private StyleDAO sdao;
 	
-	public List<String> selectCategoryAll(String email, String category){
+	@Autowired
+	private ClosetDAO cdao;
+	
+	public List<String> selectCategoryAll(String email, String category,int c_no){
 		
-		List<String> pathList = sdao.selectCategoryAll(email, category);
+		List<String> pathList = sdao.selectCategoryAll(email, category,c_no);
 		
 		return pathList;
 	}
@@ -36,6 +41,24 @@ public class StyleService {
 	
 	public List<StyleDTO> searchStyle(String name, String email){
 		return sdao.searchStyle(name, email);
+	}
+	
+	public List<ClosetDTO> selectClosetAll(String email){
+		return cdao.selectByEmail(email);
+	}
+	
+	// 코디 상세보기
+	public StyleDTO detailStyle(int no) {
+		return sdao.detailStyle(no);
+	}
+	
+	public void styleModify(StyleDTO dto) {
+		sdao.styleModify(dto);
+	}
+	
+	// 코디 삭제
+	public void styleDelete(int no) {
+		sdao.styleDelete(no);
 	}
 	
 }

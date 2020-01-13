@@ -72,4 +72,8 @@ public class DressDAO {
 		
 		return sst.insert("Dress.update", parm);
 	}
+	// 이미지 경로를 통해서 옷 상세정보 가져오기
+	public DressDTO pathDetailDress(String path) {
+		return sst.selectOne("Dress.pathDetailDress", path);
+	}
 }

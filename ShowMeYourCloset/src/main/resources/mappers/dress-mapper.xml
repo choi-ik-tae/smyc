@@ -31,6 +31,11 @@
 	<update id="update" parameterType="java.util.Map">
 		update dress set c_no=#{c_no},category=#{category},name=#{name},pub=#{pub},season=#{season},memo=#{memo},price=#{price},buy_date=#{buy_date}  where no = #{no}
 	</update>
+<!-- 	경로를 통해서 옷 정보 가져오기 -->
+	<select id="pathDetailDress" resultType="kh.spring.dto.DressDTO">
+		select d.* from dress d, dress_img i where d.no = i.d_no and i.path = #{value}
+	</select>
+
 	
 	
 </mapper>
