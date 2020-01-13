@@ -133,9 +133,14 @@
             }
 
         </style>
+        
+        <script type="text/javascript">
+			 window.history.forward();
+			 function noBack(){window.history.forward();}
+		</script>
 
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
         <div class="wrapper-All">
 
 			
@@ -211,7 +216,7 @@
                                 <button type="button" id="styleInsertBtn" class="btn btn-secondary">저장하기</button>
                             </span>
                             <span style="float: left">
-                                <button type="button" class="btn btn-secondary">돌아가기</button>
+                                <button type="button" class="btn btn-secondary" id="goBack">돌아가기</button>
                             </span>
                         </div>
                     </div>
@@ -222,6 +227,10 @@
         
         
 		<script>
+		
+			$("#goBack").on("click",function(){
+				history.back();
+			})
 				
 		//계절 선택
             $(".checkList").on("change",function(){
@@ -244,6 +253,31 @@
         		var pantsSrc= $(".Pants").children("img").attr("src");
         		var shoseSrc= $(".Shoes").children("img").attr("src");
         		var accSrc = $(".Acc").children("img").attr("src");
+        		
+        		
+        		if( topSrc == null && pantsSrc==null && shoseSrc==null && accSrc ==null){
+        			alert("하나 이상 옷을 선택해주세요");
+        			return;
+        		}
+        		
+        		if( $("#InputName").val() == ""){
+        			alert("옷의 이름을 정해주세요");
+        			return;
+        		}
+        		
+        		var checkListBox = $("input[name=season]");
+        		var checkFinish = 0;
+        		for(var i=0;i<checkListBox.length;i++){
+        			if($(checkListBox[i]).prop("checked") == true){
+        				checkFinish =1;
+        				break;
+        			}
+        		}
+        		
+        		if(checkFinish == 0){
+        			alert("계절을 하나 이상 선택해주세요");
+        			return;
+        		}
         		
         		$("#topHidden").val(topSrc);
         		$("#pantsHidden").val(pantsSrc);
@@ -270,7 +304,7 @@
         		title.html(cid).css("font-size","28px").css("font-weight","700");
         		$(".categoryMenu").append(title);
         		var div = $("<div class='noneDiv'>");
-        		var img = $("<img src='imgs/shilouette/none.png'>")
+        		var img = $("<img src='/imgs/shilouette/none.png'>")
         		div.append(img);
         		$(".categoryMenu").append(div);
         	}

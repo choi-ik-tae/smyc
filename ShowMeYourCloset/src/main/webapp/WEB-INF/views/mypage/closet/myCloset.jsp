@@ -249,7 +249,7 @@
 		location.href="${pageContext.request.contextPath}/dressUpload";
 	}
 	$("#toClosetModify").on("click",function(){
-		location.href="${pageContext.request.contextPath}/closetModify?c_no="$("targetCloset").val();
+		location.href="${pageContext.request.contextPath}/closetModify?c_no="+$('targetCloset').val();
 	});
 	$("#allView").on("click",function(){
 		$.ajax({
