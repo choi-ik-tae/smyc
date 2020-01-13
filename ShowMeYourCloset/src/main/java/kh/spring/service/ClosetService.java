@@ -121,21 +121,67 @@ public class ClosetService {
 	}
 	// 옷 정보 및 이미지 삭제
 	@Transactional("txManager")
-	public void dressDelete(int no,String path) {
-		String target = path + "/" + dmdao.selectImgByDress(no).getSys_name();
-
-		File file = new File(target);
-		if( file.exists() ){ 
-			if(file.delete()){ 
-				System.out.println("파일삭제 성공");
-				ddao.delete(no);
-				dmdao.delete(no);
+	public int dressDelete(int no,String path) {
+		int result = 0;
+	
+		if(dmdao.selectImgByDress(no) != null) {
+			String target = path + "/" + dmdao.selectImgByDress(no).getSys_name();
+			
+			File file = new File(target);
+			if( file.exists() ){ 
+				if(file.delete()){ 
+					System.out.println("파일삭제 성공");
+					ddao.delete(no);
+					dmdao.delete(no);
+					result = 1;
+				}else{ 
+					System.out.println("파일삭제 실패");
+					result = 0;
+				} 
 			}else{ 
-				System.out.println("파일삭제 실패"); 
-			} 
-		}else{ 
-			System.out.println("파일이 존재하지 않습니다."); 
+				System.out.println("파일이 존재하지 않습니다.");
+				result = 0;
+			}
 		}
+		return result;
+	}
+	// 옷 정보 수정 및 이미지 교체
+	@Transactional("txManager")
+	public int dressModify(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick) {
+		int result = ddao.update(dto);
+		if (result > 0) {
+			int seq = dto.getNo();
+			
+			File target = new File(path+"/"+fdto.getSys_name());
+			if (target.exists()) {
+				if(target.delete()){ 
+					System.out.println("파일삭제 성공");
+					String oriName = file.getOriginalFilename();
+					String sysName = System.currentTimeMillis() + "_" + oriName;
+					fdto.setOri_name(oriName);
+					fdto.setSys_name(sysName);
+					fdto.setPath("/files/" + nick + "/" + sysName);
+					try {
+						file.transferTo(new File(path + "/" + sysName));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					fdto.setD_no(seq);
+					dmdao.update(fdto);
+				}else{ 
+					System.out.println("파일삭제 실패");
+					result = 0;
+				}
+			}
+		}
+		return result;
+	}
+	// 옷장 삭제
+	@Transactional("txManager")
+	public int closetDelete(int c_no,String email) {
+		int result = 0;
 		
+		
+		return result;
 	}
 }

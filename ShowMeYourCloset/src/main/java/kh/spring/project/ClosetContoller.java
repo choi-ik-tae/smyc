@@ -40,9 +40,8 @@ public class ClosetContoller {
 		String rootPath = session.getServletContext().getRealPath("files");
 		cloService.dressUpload(dto, fdto, file, path, nick, rootPath);
 		
-		return "redirect:/";
+		return "redirect:/myCloset";
 	}
-
 	// 옷장 등록
 	@RequestMapping("/closetUploadProc")
 	public String closetUpload(ClosetDTO dto) {
@@ -51,19 +50,35 @@ public class ClosetContoller {
 		
 		int result = cloService.closetUpload(dto);
 
-		return "redirect:/";
+		return "redirect:/myCloset";
 	}
-	
 	// 옷 정보 삭제
 	@RequestMapping("/dressDelete")
 	public String dressDetailView(int no) {
 		String nick = (String) session.getAttribute("nick");
-		String path = session.getServletContext().getRealPath("files/" + nick);
+		String path = session.getServletContext().getRealPath("files/" + nick);	
+		int result = cloService.dressDelete(no,path);
 		
-		cloService.dressDelete(no,path);
-		return "redirect:/";
+		if(result == 0) {
+			return "redirect:/errorFile";
+		}
+		return "redirect:/myCloset";
 	}
-	
+	// 옷 정보 수정
+	@RequestMapping("/dressModifyProc")
+	public String dressModify(DressDTO dto, DressImgDTO fdto, MultipartFile file) {
+		String email = (String) session.getAttribute("email");
+		String nick = (String) session.getAttribute("nick");
+		dto.setEmail(email);
+		
+		String path = session.getServletContext().getRealPath("files/" + nick);
+		DressImgDTO img = cloService.dressSelectImg(dto.getNo());
+		fdto.setSys_name(img.getSys_name());
+		
+		cloService.dressModify(dto, fdto, file, path, nick);
+		
+		return "redirect:/myCloset";
+	}	
 	// 내 옷장 조회
 	@RequestMapping("myCloset")
 	public String myCloset(Model m,String target) {

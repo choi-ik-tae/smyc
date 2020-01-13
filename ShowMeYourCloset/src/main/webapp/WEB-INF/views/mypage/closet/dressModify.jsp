@@ -20,14 +20,28 @@
     body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;}
     #preview{width:300px;height: 300px;}
 </style>
+<script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
 </head>
 <body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
     <div class="container text-center">
         <!-- 헤더 -->
-		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post">
+        
+		<form action="${pageContext.request.contextPath}/closet/dressModifyProc" enctype="multipart/form-data" method="post">
+			<input type="hidden" name="no" value="${info.no}">
 			<div class="row m-2">
-				<div class="col-auto m-auto p-0 align-items-center" style="border: 1px solid gray;" id="preview">
-                    <img class='w-100 h-100' src="${img.path}">
+				<div class="col-auto m-auto p-0 align-items-center"
+					style="border: 1px solid gray;" id="preview"></div>
+			</div>
+			<div class="row m-2">
+				<div class="col-2 align-self-center">
+					<label for="imgud" class="m-0 ">이미지</label>
+				</div>
+				<div class="col-10">
+					<input id="imgud" class="form-control p-1" name="file" type="file">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -35,7 +49,16 @@
 					<label for="imgud" class="m-0 ">옷장</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="closet" type="text" value="${closet.name}" readonly>
+					<!-- 여기 옷장 가져와서 뿌려야 함 -->
+					<select class="custom-select" name="c_no">
+						<c:choose>						
+							<c:when test="${closet.size() > 0}">
+								<c:forEach items="${closet}" var="clo">
+									<option value="${clo.no}">${clo.name}</option>
+								</c:forEach>
+							</c:when>
+						</c:choose>
+					</select>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -43,7 +66,7 @@
 					<label for="" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="name" type="text" value="${info.name}" readonly>
+					<input id="" class="w-100 form-control" name="name" type="text" value="${info.name}">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -51,7 +74,12 @@
 					<label for="" class="m-0 ">카테고리</label>
 				</div>
 				<div class="col-10">
-					<input id="category" class="w-100 form-control" name="category" type="text" value="" readonly>
+					<select class="custom-select" name="category">
+						<option value="Top">상의</option>
+						<option value="Pants">하의</option>
+						<option value="Shoes">신발</option>
+						<option value="Acc">액세서리</option>
+					</select>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -61,22 +89,22 @@
 				<div class="col-10">
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="checkbox" name="season" id="spring"
-							value="spring" disabled> <label class="form-check-label"
+							value="spring"> <label class="form-check-label"
 							for="spring">봄</label>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="checkbox" name="season" id="summer"
-							value="summer" disabled> <label class="form-check-label"
+							value="summer"> <label class="form-check-label"
 							for="summer">여름</label>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="checkbox" name="season" id="fall"
-							value="fall" disabled> <label class="form-check-label"
+							value="fall"> <label class="form-check-label"
 							for="fall">가을</label>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="checkbox" name="season" id="winter"
-							value="winter" disabled> <label class="form-check-label"
+							value="winter"> <label class="form-check-label"
 							for="winter">겨울</label>
 					</div>
 				</div>
@@ -87,12 +115,10 @@
 				</div>
 				<div class="col-10">
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="pub" id="y" value="Y" required disabled>
-						<label class="form-check-label" for="y">YES</label>
+						<input class="form-check-input" type="radio" name="pub" id="y" value="Y" required> <label class="form-check-label" for="y">YES</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="pub" id="n" value="N" required disabled>
-                        <label class="form-check-label" for="n">NO</label>
+						<input class="form-check-input" type="radio" name="pub" id="n" value="N" required> <label class="form-check-label" for="n">NO</label>
 					</div>
 				</div>
 			</div>
@@ -101,7 +127,7 @@
 					<label for="price" class="m-0 ">가격</label>
 				</div>
 				<div class="col-10">
-					<input id="price" class="w-100 form-control" name="price" type="text" value="${info.price}" readonly>
+					<input id="price" class="w-100 form-control" name="price" type="text" value="${info.price}">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -109,7 +135,7 @@
 					<label for="buy_date" class="m-0 ">구매일자</label>
 				</div>
 				<div class="col-10">
-					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31" value="${info.buy_date}" readonly>
+					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31" value="${info.buy_date}">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -117,33 +143,24 @@
 					<label for="" class="m-0 ">메모</label>
 				</div>
 				<div class="col-10">
-					<textarea class="form-control" rows="5" style="resize: none" name="memo" id="memo" readonly>${info.memo}</textarea>
+					<textarea class="form-control" rows="5" style="resize: none" name="memo" id="memo">${info.memo}</textarea>
 				</div>
 			</div>
 			<div class="row m-2">
 				<div class="col-12 align-self-center">
-					<button id="toModify" type="button" class="btn btn-outline-dark">수정하기</button>
-					<button id="toDelete" type="button" class="btn btn-outline-dark">삭제하기</button>
+					<button class="btn btn-outline-dark">수정하기</button>
 					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
 				</div>
 			</div>
 		</form>
-		<form action="${pageContext.request.contextPath}/closet/dressDelete" method="post" id="frm">
-			<input type="hidden" name="no" value="${info.no}">
-		</form>
+
 		<!-- 푸터 -->
     </div>
     <c:choose>
 	    <c:when test="${info.pub eq 'Y'}"><script>$("#y").prop("checked",true);</script></c:when>
 	    <c:when test="${info.pub eq 'N'}"><script>$("#n").prop("checked",true);</script></c:when>
     </c:choose>
-    <c:choose>
-    	<c:when test="${info.category eq 'Top'}"><script>$("#category").val("상의");</script></c:when>
-	    <c:when test="${info.category eq 'Pants'}"><script>$("#category").val("하의");</script></c:when>
-	    <c:when test="${info.category eq 'Shoes'}"><script>$("#category").val("신발");</script></c:when>
-	    <c:when test="${info.category eq 'Acc'}"><script>$("#category").val("액세서리");</script></c:when>
-    </c:choose>
-    <c:forEach items="${season}" var="season">
+   	<c:forEach items="${season}" var="season">
     	<script>
 	    	$("input[name=season]").each(function(){
 	            if($(this).val() == '${season}') {
@@ -153,18 +170,40 @@
     	</script>
     </c:forEach>
 	<script>
-		$("#toModify").on("click",function(){
-			location.href="${pageContext.request.contextPath}/dressModify?no="+${info.no};
-		});
-		$("#toDelete").on("click",function(){
-			var q = confirm("정말 삭제하시겠습니까??");
-			if(q) {
-				$("#frm").submit();	
-			}
-		});
 		$("#toHome").on("click",function(){
-		   	location.href="${pageContext.request.contextPath}/myCloset"; 
+		   	//location.href="${pageContext.request.contextPath}/";
+		   	history.back();
 		});
+		// 등록 이미지 등록 미리보기
+		function readInputFile(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#preview').html(
+							"<img class='w-100 h-100' src="+ e.target.result +">");
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$("#imgud").on('change', function() {
+			readInputFile(this);
+		});
+	
+		// 등록 이미지 삭제 ( input file reset )
+		function resetInputFile($input, $preview) {
+			var agent = navigator.userAgent.toLowerCase();
+			if ((navigator.appName == 'Netscape' && navigator.userAgent
+					.search('Trident') != -1)
+					|| (agent.indexOf("msie") != -1)) {
+				// ie 일때
+				$input.replaceWith($input.clone(true));
+				$preview.empty();
+			} else {
+				//other
+				$input.val("");
+				$preview.empty();
+			}
+		}
 	</script>
 </body>
 </html>

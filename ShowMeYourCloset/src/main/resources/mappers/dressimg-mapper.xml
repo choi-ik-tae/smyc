@@ -23,4 +23,8 @@
 	<delete id="delete">
 		delete from dress_img where d_no = #{d_no}
 	</delete>
+<!-- 	이미지 수정 -->
+	<update id="update" parameterType="java.util.Map">
+		update dress_img set ori_name=#{ori_name},sys_name=#{sys_name},path=#{path}  where d_no = #{d_no}
+	</update>
 </mapper>

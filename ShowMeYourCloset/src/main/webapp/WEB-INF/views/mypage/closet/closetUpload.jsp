@@ -20,8 +20,13 @@
     body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;}
     .preview{width:300px;height: 210px}
 </style>
+<script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
 </head>
 <body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
     <div class="container text-center">
         <!-- 헤더 -->
         
@@ -93,7 +98,8 @@
     </div>
     <script>
 	    $("#toHome").on("click",function(){
-		   	location.href="${pageContext.request.contextPath}/"; 
+	    	history.back();
+		   	//location.href="${pageContext.request.contextPath}/"; 
 		});
     </script>
 </body>

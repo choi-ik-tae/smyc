@@ -47,4 +47,14 @@ public class DressImgDAO {
 	public int delete(int d_no) {
 		return sst.delete("DressImg.delete", d_no);
 	}
+	// 옷 이미지 수정
+	public int update(DressImgDTO fdto) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("d_no",fdto.getD_no());
+		parm.put("ori_name",fdto.getOri_name());
+		parm.put("sys_name",fdto.getSys_name());
+		parm.put("path",fdto.getPath());
+		
+		return sst.insert("DressImg.update", parm);
+	}
 }

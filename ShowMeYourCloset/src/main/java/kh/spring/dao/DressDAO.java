@@ -57,4 +57,19 @@ public class DressDAO {
 	public int delete(int no) {
 		return sst.delete("Dress.delete",no);
 	}
+	// 옷 정보 수정
+	public int update(DressDTO dto) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("c_no",dto.getC_no());
+		parm.put("name",dto.getName());
+		parm.put("category",dto.getCategory());
+		parm.put("pub",dto.getPub());
+		parm.put("season",dto.getSeason());
+		parm.put("memo",dto.getMemo());
+		parm.put("price",dto.getPrice());
+		parm.put("buy_date",dto.getBuy_date());
+		parm.put("no",dto.getNo());
+		
+		return sst.insert("Dress.update", parm);
+	}
 }

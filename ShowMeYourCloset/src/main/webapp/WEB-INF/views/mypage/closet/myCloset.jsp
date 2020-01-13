@@ -20,8 +20,7 @@
     .nav-font{font-size: 10pt; font-weight: 800;}
     .item-page{border: 1px solid lightgray; border-radius: 5px; max-height:700px; overflow:auto;}
     .item-page::-webkit-scrollbar {display:none;}
-    .item-page>div{cursor:pointer;}
-    .card>img{}
+    .item-page>div>div[class~='card']{cursor:pointer;}
     #dressBox>div>div{background:rgba(255, 255, 255, 0.2);border-radius: 5px;color: white;font-size: 20pt;font-weight: 800;}
     #accBox{position: absolute;left: 480px;top:50px;width:198px;height:500px;line-height: 500px; text-align: center;}
     #topBox{position: absolute;left: 690px;top:50px;width:269px;height:668px;line-height: 668px; text-align: center;}
@@ -39,9 +38,6 @@
     .closetTag{position: relative;width: 100%;height: 50px;line-height: 50px;}
     .nav-link:hover{cursor: pointer;}
 </style>
-<script>
-	$(body)
-</script>
 </head>
 <body>
 <c:choose>
@@ -77,7 +73,8 @@
             </div>
             <div class="row mt-4">
                 <div class="col-3 text-center m-auto">
-                    <select class="form-control" name="closetName" id="closetName">
+                	<input type="hidden" name="c_no" value="" id="targetCloset">
+                    <select class="form-control d-inline-block" name="closetName" id="closetName" style="width: 80%;">
 						<c:choose>
 							<c:when test="${closetList.size() > 0}">
 								<c:forEach items="${closetList}" var="closet">
@@ -85,6 +82,7 @@
 									<c:if test="${closet.name == target}">
 										<script>
 											$("#${closet.name}").prop("selected",true);
+											$("#targetCloset").val(${closet.no});
 										</script>
 									</c:if>
 								</c:forEach>
@@ -94,6 +92,7 @@
 							</c:otherwise>
 						</c:choose>                        
                     </select>
+                    <button class="btn btn-outline-dark mb-2" type="button" id="toClosetModify">수정모드</button>
                 </div>
             </div>
         </div>
@@ -210,7 +209,7 @@
 	        <c:choose>
 		        <c:when test="${dressList.size() > 0}">
 		        <c:forEach var="i" begin="0" end="${dressList.size() - 1}">
-				      <div class="col-4 mb-4 mt-4" id="dress${dressList.get(i).no}">
+				      <div class="col-4 mb-4 mt-4" id="dress${dressList.get(i).no}" onclick="toDetail(${dressList.get(i).no},${dressList.get(i).c_no})">
 				        <div class="card h-100">
 				          <img src="${dressImgList.get(i)}" class="card-img-top" style="height:200px;">
 				          <div class="card-body">
@@ -221,25 +220,16 @@
 				          </div>
 				        </div>
 				      </div>
-				      <form action="${pageContext.request.contextPath}/dressDetailView" id="frm${dressList.get(i).no}">
-				      	<input type="hidden" name="d_no" value="${dressList.get(i).no}">
-				      	<input type="hidden" name="c_no" value="${dressList.get(i).c_no}">
-				      </form>
-				      <script>
-				      	$("#dress${dressList.get(i).no}").on("click",function(){
-				      		$("#frm${dressList.get(i).no}").submit();
-				      	});
-				      </script>
 				</c:forEach>
 		        </c:when>
 		        <c:otherwise>
 		        	<div class="col-12" style="height:350px; font-weight:800;">
 		        		<div class="row text-center">
-		        			<div class="col-12" style="height:250px; line-height:250px;">옷장이 비었습니다.</div>
+		        			<div class="col-12" style="height:250px; line-height:250px;">비어있습니다.</div>
 		        		</div>
 		        		<div class="row text-center">
 		        			<div class="col-12" style="height:100px; line-height:100px;">
-		        				<button id="toDressUpload" class="btn btn-outline-dark" type="button">옷 등록하러 가기</button>
+		        				<button onclick="toDressUpload()" class="btn btn-outline-dark" type="button">옷 등록하러 가기</button>
 		        			</div>
 		        		</div>
 		        	</div>
@@ -252,6 +242,15 @@
     <jsp:include page="../../standard/footer.jsp" />
 </div>
 <script>
+	var toDetail = function(d_no,c_no){
+		location.href="${pageContext.request.contextPath}/dressDetailView?d_no="+d_no+"&c_no="+c_no;
+	}
+	var toDressUpload = function(){
+		location.href="${pageContext.request.contextPath}/dressUpload";
+	}
+	$("#toClosetModify").on("click",function(){
+		location.href="${pageContext.request.contextPath}/closetModify?c_no="$("targetCloset").val();
+	});
 	$("#allView").on("click",function(){
 		$.ajax({
 			url:"${pageContext.request.contextPath}/closet/allView",
@@ -266,18 +265,27 @@
 			if(data.length == 0) {
 				var contents = $("<div class='col-12' style='height:350px; font-weight:800;'>");
 				var row1 = $("<div class='row text-center'>");
-				var box1 = $("<div class='col-12' style='height:3500px; line-height:350px;'>")
-				var text1 = "비어있습니다"
+				var box1 = $("<div class='col-12' style='height:250px; line-height:250px;'>");
+				var text1 = "비어있습니다."
+				
+				var row2 = $("<div class='row text-center'>");
+				var box2 = $("<div class='col-12' style='height:100px; line-height:100px;'>")
+				var btn = $("<button onclick='toDressUpload()' class='btn btn-outline-dark' type='button'>");
+				var text2 = "옷 등록하러 가기"
 				
 				contents.append(row1);
 				row1.append(box1);
 				box1.append(text1);
+				contents.append(row2);
+				row2.append(box2);
+				box2.append(btn);
+				btn.append(text2);
 				
 				$(".item-page").append(contents);
 			} else {
 				// for문 감싸기~
 				for(i=0;i<data.length;i++) {	
-					var contents = $("<div class='col-4 mb-4 mt-4'>");
+					var contents = $("<div class='col-4 mb-4 mt-4' onclick='toDetail("+data[i].dress.no+","+data[i].dress.c_no+")'>");
 					var card = $("<div class='card h-100'>");
 					var img = $("<img class='card-img-top' src='"+data[i].dressImg+"'style='height:200px;'>");
 					var cardbody = $("<div class='card-body'>");
@@ -291,7 +299,7 @@
 					ptag.append(data[i].dress.memo)
 					cardbody.append(htag);
 					cardbody.append(ptag);
-					
+
 					$(".item-page").append(contents);
 				}
 				//	
@@ -317,25 +325,33 @@
 			if(data.length == 0) {
 				var contents = $("<div class='col-12' style='height:350px; font-weight:800;'>");
 				var row1 = $("<div class='row text-center'>");
-				var box1 = $("<div class='col-12' style='height:350px; line-height:350px;'>")
+				var box1 = $("<div class='col-12' style='height:250px; line-height:250px;'>")
 				var text1 = "비어있습니다."
+				
+				var row2 = $("<div class='row text-center'>");
+				var box2 = $("<div class='col-12' style='height:100px; line-height:100px;'>")
+				var btn = $("<button onclick='toDressUpload()' class='btn btn-outline-dark' type='button'>");
+				var text2 = "옷 등록하러 가기"
 				
 				contents.append(row1);
 				row1.append(box1);
 				box1.append(text1);
+				contents.append(row2);
+				row2.append(box2);
+				box2.append(btn);
+				btn.append(text2);
 				
 				$(".item-page").append(contents);
 			} else {
 				// for문 감싸기~
 				for(i=0;i<data.length;i++) {	
-					var contents = $("<div class='col-4 mb-4 mt-4'>");
+					var contents = $("<div class='col-4 mb-4 mt-4' onclick='toDetail("+data[i].dress.no+","+data[i].dress.c_no+")'>");
 					var card = $("<div class='card h-100'>");
 					var img = $("<img class='card-img-top' src='"+data[i].dressImg.path+"'style='height:200px;'>");
 					var cardbody = $("<div class='card-body'>");
 					var htag = $("<h5 class='card-title'>");
 					var ptag = $("<p class='card-text'>");
 					
-					//container.append(contents);
 					contents.append(card);
 					card.append(img);
 					card.append(cardbody);
@@ -363,9 +379,6 @@
 	});
 	$("#toStyle").on("click",function(){
 		location.href="${pageContext.request.contextPath}/myStyle";
-	});
-	$("#toDressUpload").on("click",function(){
-		location.href="${pageContext.request.contextPath}/dressUpload";
 	});
 </script>
 </c:otherwise>
