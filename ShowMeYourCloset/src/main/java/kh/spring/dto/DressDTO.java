@@ -1,6 +1,7 @@
 package kh.spring.dto;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class DressDTO {
@@ -15,7 +16,7 @@ public class DressDTO {
 	private String memo;
 	private String price;
 	private String buy_date;
-	
+		
 	public DressDTO() {
 		super();
 		// TODO Auto-generated constructor stub

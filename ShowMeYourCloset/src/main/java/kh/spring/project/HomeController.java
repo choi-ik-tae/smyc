@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kh.spring.Utils.DateFormat;
 import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
@@ -68,11 +69,19 @@ public class HomeController {
 		DressImgDTO img = cloService.dressSelectImg(d_no);
 		ClosetDTO closet = cloService.closetSelectName(c_no);
 		String[] season = cloService.splitDressSeason(d_no);
-
+		String day = null;
+		try {
+			day = DateFormat.dateformat(info.getBuy_date());
+			System.out.println(day);
+		} catch (Exception e) {
+			day = null;
+		}
+		
 		m.addAttribute("info", info);
 		m.addAttribute("img", img);
 		m.addAttribute("closet", closet);
 		m.addAttribute("season", season);
+		m.addAttribute("day", day);
 
 		return "mypage/closet/dressDetailView";
 	}
