@@ -2,6 +2,7 @@ package kh.spring.project;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +107,7 @@ public class HomeController {
 
 	// 내 코디 이동
 	@RequestMapping("/myStyle")
-	public String myStyle(Model model, String season) {
+	public String myStyle(Model model, String season, HttpServletResponse response) {
 		String email = (String) session.getAttribute("email");
 
 		List<StyleDTO> styleList = null;
@@ -120,6 +121,10 @@ public class HomeController {
 		}
 
 		model.addAttribute("styleList", styleList);
+		
+		response.setHeader("Cache-Control","no-cache");
+		response.setHeader("Pragma","no-cache");
+		response.setDateHeader("Expires",0);
 
 		return "mypage/style/myStyle";
 	}
