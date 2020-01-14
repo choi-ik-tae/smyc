@@ -83,11 +83,11 @@ public class ClosetContoller {
 	@RequestMapping("myCloset")
 	public String myCloset(Model m, String target) {
 		String email = (String) session.getAttribute("email");
+		if (email == null) { return "/mypage/closet/myCloset"; }
 		if (target == null) {
-			target = "기본옷장";
-		}
-		if (email == null) {
-			return "/mypage/closet/myCloset";
+			List<String> base = cloService.closetSelectNameByEmail(email);
+			target = base.get(0);
+			System.out.println(target);
 		}
 		// 사용자 옷장 정보 가져가기
 		List<ClosetDTO> closetList = cloService.closetSeleteByEmail(email);

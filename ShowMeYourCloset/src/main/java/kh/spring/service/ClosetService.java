@@ -36,6 +36,10 @@ public class ClosetService {
 	public List<ClosetDTO> closetSeleteByEmail(String email) {
 		return cdao.selectByEmail(email);
 	}
+	// 옷장 이름 가져오기
+	public List<String> closetSelectNameByEmail(String email) {
+		return cdao.selectNameByEmail(email);
+	}
 	// 옷 등록
 	@Transactional("txManager")
 	public void dressUpload(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick, String rootPath) {

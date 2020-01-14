@@ -31,6 +31,10 @@ public class ClosetDAO {
 	public List<ClosetDTO> selectByEmail(String email) {
 		return sst.selectList("Closet.selectByEmail", email);
 	}
+	// 옷장 이름 가져오기
+	public List<String> selectNameByEmail(String email) {
+		return sst.selectList("Closet.selectNameByEmail", email);
+	}
 	// 사용자가 옷장 선택 했을 때 정보 가져오기
 	public ClosetDTO selectByName(String name,String email) {
 		Map<String, Object> parm = new HashMap<>();
