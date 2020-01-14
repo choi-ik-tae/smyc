@@ -82,10 +82,12 @@ public class HomeController {
 	public String dressModify(int no, Model m) {
 		String email = (String) session.getAttribute("email");
 		DressDTO info = cloService.dressSelectInfo(no);
+		DressImgDTO infoImg = cloService.dressSelectImg(no);
 		List<ClosetDTO> closet = cloService.closetSeleteByEmail(email);
 		String[] season = cloService.splitDressSeason(no);
 
 		m.addAttribute("info", info);
+		m.addAttribute("infoImg", infoImg);
 		m.addAttribute("closet", closet);
 		m.addAttribute("season", season);
 
@@ -120,7 +122,7 @@ public class HomeController {
 		}
 
 		model.addAttribute("styleList", styleList);
-
+		
 		return "mypage/style/myStyle";
 	}
 

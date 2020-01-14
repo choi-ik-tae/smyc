@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -135,12 +136,15 @@
 			<div class="detailDress">
 				<div class="imgDetail"></div>
 				<div class="infoDetail">
-					<label>옷 이름</label> <input class="form-control" type="text"
-						id="name" disabled> <label>카테고리</label> <input
-						class="form-control" type="text" id="categoryInput" disabled>
-					<label>공개여부</label> <input class="form-control" type="text"
-						id="pub" disabled> <label>계절</label> <input
-						class="form-control" type="text" id="season" disabled> <label>메모</label>
+					<label>옷 이름</label> 
+					<input class="form-control" type="text" id="name" disabled> 
+					<label>카테고리</label> 
+					<input class="form-control" type="text" id="categoryInput" disabled>
+					<label>공개여부</label> 
+					<input class="form-control" type="text" id="pub" disabled> 
+					<label>계절</label> 
+					<input class="form-control" type="text" id="season" disabled> 
+					<label>메모</label>
 					<input class="form-control" type="text" id="memo" disabled>
 				</div>
 			</div>
@@ -240,6 +244,11 @@
 	  // 디테일 초기화
 		var init = function() {
 			$(".imgDetail").html("");
+			$("#name").val("");
+			$("#categoryInput").val("");
+			$("#pub").val("");
+			$("#season").val("");
+			$("#memo").val("");
 		}
 
 		$(".category")

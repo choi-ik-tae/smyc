@@ -18,7 +18,6 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
-	
 <style>
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #closet{transform: translate(45%,5%); margin-bottom: 70px;}
@@ -199,5 +198,12 @@
 				location.href="${pageContext.request.contextPath}/myStyle";
 			});
 		</script>
+	<script>
+       var url = location.href;
+       var tmpUrl = url + ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime();
+       var oReq = new XMLHttpRequest();
+       oReq.open("GET", tmpUrl,  false); //또는 oReq.open("GET", tmpUrl,  true);
+       oReq.send(null);
+	</script>
 </body>
 </html>
