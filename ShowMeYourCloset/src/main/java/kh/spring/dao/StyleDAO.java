@@ -101,5 +101,13 @@ public class StyleDAO {
 		
 		return sst.update("Style.updateItem",parm);
 	}
+	
+	// 옷 삭제시 코디 번호 받기
+	public List<Integer> selectNo(String category, String path) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("category",category);
+		parm.put("path",path);
+		return sst.selectList("Style.selectNo",parm);
+	}
 
 }

@@ -43,5 +43,9 @@
 	<update id="updateItem">
 		update style set ${category}=#{val} where ${category}=#{path}
 	</update>
+<!-- 	옷 삭제 시 코디 번호 받기 -->
+	<select id="selectNo" resultType="Integer">
+		select no from style where ${category}=#{path}
+	</select>
  	
  </mapper>

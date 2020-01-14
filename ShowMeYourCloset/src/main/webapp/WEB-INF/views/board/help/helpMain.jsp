@@ -68,7 +68,7 @@
     </head>
     <body>
 
-        <div id="menuDiv" class="InfoMenu-container" style="position:absolute; width: 100%; height: 100%; background: grey; z-index: 2; background: rgba(0,0,0,0.5);display: none;">
+        <div id="menuDiv" class="InfoMenu-container" style="position:absolute; width: 100%; height: 1350px; background: grey; z-index: 2; background: rgba(0,0,0,0.5);display: none;">
             <div class="InfoMenu" style="position:fixed;width: 380px; height: 100%; background: white; z-index: 3">
                 <div class="row mt-2">
                     <div class="col-12">

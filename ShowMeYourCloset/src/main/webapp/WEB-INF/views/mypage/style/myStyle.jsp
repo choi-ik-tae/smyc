@@ -266,7 +266,7 @@
 											<div class="card-Img-div">
 												<c:choose>
 													<c:when test="${dto.top == null}">
-														<div class="card-img-top topImg" style="background: grey;"></div>
+														<div class="card-img-top topImg" style="background: white;"></div>
 													</c:when>
 													<c:otherwise>
 														<img src="${dto.top}"
@@ -277,7 +277,7 @@
 												<c:choose>
 													<c:when test="${dto.pants == null}">
 														<div class="card-img-bottom bottomImg"
-															style="background: grey;"></div>
+															style="background: white;"></div>
 													</c:when>
 													<c:otherwise>
 														<img src="${dto.pants}" class="card-img-bottom bottomImg"
