@@ -187,6 +187,9 @@
     	}
     	location.href="${pageContext.request.contextPath}/closet/closetModifyProc?targets="+arr+"&no="+${closet.no}+"&closet="+$("#closet").val()+"&dg="+$("input[name='closetDesign']:checked").val();
     });
+    $("#delete").on("click",function(){
+    	location.href="${pageContext.request.contextPath}/closet/closetDeleteProc?no="+${closet.no};
+    })
 </script>
 </body>
 </html>
