@@ -21,7 +21,7 @@
                 text-align: center;
             }
             .mainLogo:after{
-                background-image:url('Img/clothesLogo2.jpg');
+                background-image:url('/imgs/bg/clothesLogo2.jpg');
                 display: block;
                 position:absolute;
                 top:0;
@@ -159,20 +159,22 @@
                         <div class="d-none d-sm-block col-sm-2 col-md-1">hit</div>
                         <div class="d-none d-md-block col-2">date</div>
                     </div>
+                    <c:forEach items="${list}" var="dto">
                     <div class="row contents">
                         <div class="d-none d-md-block col-md-1">
-                            1
+                            ${dto.no}
                         </div>
                         <div class="col-8 col-sm-7 col-md-6" style="text-align: left;">
-                            놀이동산 가는데 옷 입는거 도와주실 분~~
+                            ${dto.title}
                         </div>
                         <div class="col-4 col-sm-3 col-md-2">
-                            쁘띠때옹
+                            ${dto.nickname }
                         </div>
-                        <div class="d-none d-sm-block col-sm-2 col-md-1">20</div>
-                        <div class="d-none d-md-block col-2">2020.01.14</div>
+                        <div class="d-none d-sm-block col-sm-2 col-md-1">${dto.views}</div>
+                        <div class="d-none d-md-block col-2">${dto.write_date}</div>
                     </div>
-
+                    
+                    </c:forEach>
                 </div>
                 <div class="col-12 mt-2 mb-5"  style="text-align: center;">
                     1 2 3 4 5 6 7 8

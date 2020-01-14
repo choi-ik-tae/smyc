@@ -15,9 +15,7 @@ public class BoardService {
 	private BoardDAO boardDAO;
 	
 	public List<BoardDTO>helpBoardSelectAll(){
-		
 		return boardDAO.helpBoardSelectAll();
-		
 	}
 
 }
