@@ -187,6 +187,12 @@
     	}
     	location.href="${pageContext.request.contextPath}/closet/closetModifyProc?targets="+arr+"&no="+${closet.no}+"&closet="+$("#closet").val()+"&dg="+$("input[name='closetDesign']:checked").val();
     });
+	$("#delete").on("click",function(){
+		var q = confirm("옷장안에 모든 옷이 삭제됩니다. 정말 삭제하시겠습니까??");
+		if(q) {
+			location.href="${pageContext.request.contextPath}/closet/closetDeleteProc?no="+${closet.no};
+		}
+	});
 </script>
 </body>
 </html>

@@ -30,7 +30,7 @@
     <div class="container text-center">
         <!-- 헤더 -->
         
-		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post">
+		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post" id="frm">
 			<div class="row m-2">
 				<div class="col-auto m-auto p-0 align-items-center"
 					style="border: 1px solid gray;" id="preview"></div>
@@ -147,7 +147,7 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-12 align-self-center">
-					<button class="btn btn-outline-dark">등록하기</button>
+					<button id="upload" type="button" class="btn btn-outline-dark">등록하기</button>
 					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
 				</div>
 			</div>
@@ -156,6 +156,14 @@
 		<!-- 푸터 -->
     </div>
 	<script>
+		$("#upload").on("click",function(){
+			var target = $("#imgud").val();
+			if(target == "") {
+				alert("이미지를 등록해 주세요!")
+			} else {
+				$("#frm").submit();
+			}
+		});
 		$("#toHome").on("click",function(){
 		   	//location.href="${pageContext.request.contextPath}/";
 		   	history.back();
@@ -169,27 +177,13 @@
 							"<img class='w-100 h-100' src="+ e.target.result +">");
 				}
 				reader.readAsDataURL(input.files[0]);
+			} else {
+				$('#preview').html("");
 			}
 		}
 		$("#imgud").on('change', function() {
 			readInputFile(this);
 		});
-	
-		// 등록 이미지 삭제 ( input file reset )
-		function resetInputFile($input, $preview) {
-			var agent = navigator.userAgent.toLowerCase();
-			if ((navigator.appName == 'Netscape' && navigator.userAgent
-					.search('Trident') != -1)
-					|| (agent.indexOf("msie") != -1)) {
-				// ie 일때
-				$input.replaceWith($input.clone(true));
-				$preview.empty();
-			} else {
-				//other
-				$input.val("");
-				$preview.empty();
-			}
-		}
 	</script>
 </body>
 </html>

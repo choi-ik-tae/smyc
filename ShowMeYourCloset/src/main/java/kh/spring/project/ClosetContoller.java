@@ -56,8 +56,10 @@ public class ClosetContoller {
 	@RequestMapping("/dressDelete")
 	public String dressDetailView(int no) {
 		String nick = (String) session.getAttribute("nick");
-		String path = session.getServletContext().getRealPath("files/" + nick);	
-		int result = cloService.dressDelete(no,path);
+		String path = session.getServletContext().getRealPath("files/" + nick);
+		String category = cloService.dressSelectInfo(no).getCategory();
+		String itemPath = cloService.dressSelectImg(no).getPath();
+		int result = cloService.dressDelete(no,path,category,itemPath);
 		
 		if(result == 0) {
 			return "redirect:/errorFile";
@@ -74,8 +76,8 @@ public class ClosetContoller {
 		String path = session.getServletContext().getRealPath("files/" + nick);
 		DressImgDTO img = cloService.dressSelectImg(dto.getNo());
 		fdto.setSys_name(img.getSys_name());
-		
-		cloService.dressModify(dto, fdto, file, path, nick);
+		String itemPath = img.getPath();
+		cloService.dressModify(dto, fdto, file, path, nick, itemPath);
 		
 		return "redirect:/myCloset";
 	}	
@@ -84,6 +86,7 @@ public class ClosetContoller {
 	public String myCloset(Model m, String target) {
 		String email = (String) session.getAttribute("email");
 		if (email == null) { return "/mypage/closet/myCloset"; }
+		if (cloService.closetSeleteByEmail(email).size() <= 0) { int closetEmpty = 1; m.addAttribute("closetEmpty", closetEmpty); return "/mypage/closet/myCloset"; }
 		if (target == null) {
 			List<String> base = cloService.closetSelectNameByEmail(email);
 			target = base.get(0);
@@ -129,7 +132,6 @@ public class ClosetContoller {
 	@RequestMapping("/closetModify")
 	public String closetModify(int c_no,Model m) {
 		String email = (String) session.getAttribute("email");
-		System.out.println(c_no);
 		
 		// 옷장 정보
 		ClosetDTO closet = cloService.closetSelectName(c_no);
@@ -170,6 +172,16 @@ public class ClosetContoller {
 		String target = cloService.closetSelectName(no).getName();
 		m.addAttribute("target", target);
 		
+		return "redirect:/myCloset";
+	}
+	// 옷장 수정  - 수정삭제
+	@RequestMapping("closetDeleteProc")
+	public String closetDeleteProc(int no) {
+		String email = (String)session.getAttribute("email");
+		String path = session.getServletContext().getRealPath("");
+		
+		cloService.closetDelete(no, email, path);
+	
 		return "redirect:/";
 	}
 

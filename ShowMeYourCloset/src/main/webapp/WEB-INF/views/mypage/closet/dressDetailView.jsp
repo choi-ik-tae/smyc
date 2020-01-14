@@ -32,18 +32,18 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
-					<label for="imgud" class="m-0 ">옷장</label>
+					<label for="closet" class="m-0 ">옷장</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="closet" type="text" value="${closet.name}" readonly>
+					<input id="closet" class="w-100 form-control" name="closet" type="text" value="${closet.name}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
-					<label for="" class="m-0 ">옷 이름</label>
+					<label for="name" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="name" type="text" value="${info.name}" readonly>
+					<input id="name" class="w-100 form-control" name="name" type="text" value="${info.name}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">

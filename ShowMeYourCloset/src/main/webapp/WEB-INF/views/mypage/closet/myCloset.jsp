@@ -47,6 +47,12 @@
 		location.href="${pageContext.request.contextPath}/signin";
 	</script>
 </c:when>
+<c:when test="${closetEmpty == 1}">
+	<script>
+		alert("가지고 있는 옷장이 없습니다. 옷장을 만들어주세요!");
+		location.href="${pageContext.request.contextPath}/#sixthPage";
+	</script>
+</c:when>
 <c:otherwise>
 <div class="container-fuild">
  	
@@ -71,6 +77,12 @@
                     </div><hr>
                 </div>   
             </div>
+           	<div class="row">
+				<div class="col-12" style="text-align: center">
+					<h3>MY Closet</h3>
+					<hr style="width: 500px;">
+				</div>
+			</div>
             <div class="row mt-4">
                 <div class="col-3 text-center m-auto">
                 	<input type="hidden" name="c_no" value="" id="targetCloset">

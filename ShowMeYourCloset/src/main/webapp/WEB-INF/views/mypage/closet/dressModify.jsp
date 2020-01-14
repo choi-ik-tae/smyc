@@ -30,18 +30,30 @@
     <div class="container text-center">
         <!-- 헤더 -->
         
-		<form action="${pageContext.request.contextPath}/closet/dressModifyProc" enctype="multipart/form-data" method="post">
+		<form action="${pageContext.request.contextPath}/closet/dressModifyProc" enctype="multipart/form-data" method="post" id="frm">
 			<input type="hidden" name="no" value="${info.no}">
 			<div class="row m-2">
-				<div class="col-auto m-auto p-0 align-items-center"
-					style="border: 1px solid gray;" id="preview"></div>
+				<div class="col-auto m-auto p-0 align-items-center" style="border: 1px solid gray;" id="preview">
+					<img class='w-100 h-100' src="${infoImg.path}">
+				</div>
 			</div>
 			<div class="row m-2">
-				<div class="col-2 align-self-center">
-					<label for="imgud" class="m-0 ">이미지</label>
+				<div class="col-12">
+					<button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+						이미지 변경
+		  			</button>
 				</div>
-				<div class="col-10">
-					<input id="imgud" class="form-control p-1" name="file" type="file">
+				<div class="collapse col-12" id="collapseExample">
+					<div class="card card-body p-0 border-0 mt-2">
+						<div class="row">
+							<div class="col-2 align-self-center">
+								<label for="imgud" class="m-0 ">이미지</label>
+							</div>
+							<div class="col-10">
+								<input id="imgud" class="form-control p-1" name="file" type="file" value="${infoImg.path}">
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -66,7 +78,7 @@
 					<label for="" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="name" type="text" value="${info.name}">
+					<input id="closet" class="w-100 form-control" name="name" type="text" value="${info.name}">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -148,7 +160,7 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-12 align-self-center">
-					<button class="btn btn-outline-dark">수정하기</button>
+					<button id="modify" type="button" class="btn btn-outline-dark">수정하기</button>
 					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
 				</div>
 			</div>
@@ -170,6 +182,14 @@
     	</script>
     </c:forEach>
 	<script>
+		$("#modify").on("click",function(){
+			var target = $("#imgud").val();
+			if(target == "") {
+				alert("이미지를 등록해 주세요!")
+			} else {
+				$("#frm").submit();
+			}
+		});
 		$("#toHome").on("click",function(){
 		   	//location.href="${pageContext.request.contextPath}/";
 		   	history.back();
@@ -183,27 +203,13 @@
 							"<img class='w-100 h-100' src="+ e.target.result +">");
 				}
 				reader.readAsDataURL(input.files[0]);
+			} else {
+				$('#preview').html("");
 			}
 		}
 		$("#imgud").on('change', function() {
 			readInputFile(this);
 		});
-	
-		// 등록 이미지 삭제 ( input file reset )
-		function resetInputFile($input, $preview) {
-			var agent = navigator.userAgent.toLowerCase();
-			if ((navigator.appName == 'Netscape' && navigator.userAgent
-					.search('Trident') != -1)
-					|| (agent.indexOf("msie") != -1)) {
-				// ie 일때
-				$input.replaceWith($input.clone(true));
-				$preview.empty();
-			} else {
-				//other
-				$input.val("");
-				$preview.empty();
-			}
-		}
 	</script>
 </body>
 </html>

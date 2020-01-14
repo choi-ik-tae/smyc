@@ -27,5 +27,8 @@
 	<select id="update" parameterType="java.util.Map">
 		update closet set name=#{name},img=#{img} where no = #{no}
 	</select>
-	
+<!-- 	옷장 삭제 -->
+	<delete id="delete">
+		delete closet where email = #{email} and no = #{no}
+	</delete>
 </mapper>

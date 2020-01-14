@@ -57,6 +57,10 @@ public class DressDAO {
 	public int delete(int no) {
 		return sst.delete("Dress.delete",no);
 	}
+	// 옷장 삭제 시 해당 옷장 옷 삭제
+	public int deleteByCloset(int c_no) {
+		return sst.delete("Dress.deleteByCloset", c_no);
+	}
 	// 옷 정보 수정
 	public int update(DressDTO dto) {
 		Map<String, Object> parm = new HashMap<>();

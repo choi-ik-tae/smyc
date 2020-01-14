@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -74,8 +75,7 @@ public class StyleController {
 	}
 	
 	@RequestMapping("/detailStyle")
-	public String detailStyle(Model model , int no, HttpServletResponse response) {
-		
+	public String detailStyle(Model model , int no) {		
 		System.out.println("넘어옴? :::::"+no);
 		
 		String email  = (String)session.getAttribute("email");
@@ -87,12 +87,7 @@ public class StyleController {
 		model.addAttribute("season",season);
 		model.addAttribute("gender", gender);
 		model.addAttribute("dto", dto);
-		
-	
-		response.setHeader("Cache-Control","no-cache");
-		response.setHeader("Pragma","no-cache");
-		response.setDateHeader("Expires",0);
-	
+			
 		return "mypage/style/styleDetail";
 	}
 	

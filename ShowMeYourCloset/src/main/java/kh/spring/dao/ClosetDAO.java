@@ -54,5 +54,12 @@ public class ClosetDAO {
 		parm.put("img",img);
 		return sst.update("Closet.update",parm);
 	}
+	// 옷장 삭제
+	public int delete(int no,String email) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("no",no);
+		parm.put("email",email);
+		return sst.delete("Closet.delete",parm);
+	}
 	
 }

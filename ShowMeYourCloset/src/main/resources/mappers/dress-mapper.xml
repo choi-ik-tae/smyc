@@ -27,6 +27,10 @@
 	<delete id="delete">
 		delete from dress where no = #{no}
 	</delete>
+<!-- 	옷장 삭제 시 해당 옷장 옷 삭제 -->
+	<delete id="deleteByCloset">
+		delete from dress where c_no = #{c_no}
+	</delete>
 <!-- 	옷 정보 수정 -->
 	<update id="update" parameterType="java.util.Map">
 		update dress set c_no=#{c_no},category=#{category},name=#{name},pub=#{pub},season=#{season},memo=#{memo},price=#{price},buy_date=#{buy_date}  where no = #{no}

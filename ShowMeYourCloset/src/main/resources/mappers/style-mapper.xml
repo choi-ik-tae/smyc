@@ -35,4 +35,13 @@
  	<delete id="styleDelete">
  		delete from style where no=#{value}
  	</delete>
+<!--  	옷 삭제 시 코디 수정 -->
+	<update id="deleteItem">
+		update style set ${category}='' where ${category}=#{path}
+	</update>
+<!-- 	옷 수정 시 코디 같이 수정 -->
+	<update id="updateItem">
+		update style set ${category}=#{val} where ${category}=#{path}
+	</update>
+ 	
  </mapper>

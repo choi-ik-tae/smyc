@@ -83,5 +83,23 @@ public class StyleDAO {
 	public int styleDelete(int no) {
 		return sst.delete("Style.styleDelete",no);
 	}
+	
+	// 옷 삭제시 코디 아이템 삭제
+	public int deleteItem(String category,String path) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("category",category);
+		parm.put("path",path);
+		
+		return sst.update("Style.deleteItem",parm);
+	}
+	// 옷 수정시 코디 아이템 수정
+	public int updateItem(String category,String path,String val) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("category",category);
+		parm.put("path",path);
+		parm.put("val",val);
+		
+		return sst.update("Style.updateItem",parm);
+	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kh.spring.dao.ClosetDAO;
 import kh.spring.dao.DressDAO;
 import kh.spring.dao.DressImgDAO;
+import kh.spring.dao.StyleDAO;
 import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
@@ -28,6 +29,9 @@ public class ClosetService {
 	@Autowired
 	private ClosetDAO cdao;
 
+	@Autowired 
+	private StyleDAO sdao;
+	
 	// 옷장 등록
 	public int closetUpload(ClosetDTO dto) {
 		return cdao.insert(dto);
@@ -125,14 +129,16 @@ public class ClosetService {
 	}
 	// 옷 정보 및 이미지 삭제
 	@Transactional("txManager")
-	public int dressDelete(int no,String path) {
+	public int dressDelete(int no,String path,String category,String itemPath) {
 		int result = 0;
 	
 		if(dmdao.selectImgByDress(no) != null) {
 			String target = path + "/" + dmdao.selectImgByDress(no).getSys_name();
 			
 			File file = new File(target);
-			if( file.exists() ){ 
+			if( file.exists() ){
+				// 옷 삭제 시 코디에서 옷 삭제
+				sdao.deleteItem(category, itemPath);
 				if(file.delete()){ 
 					System.out.println("파일삭제 성공");
 					ddao.delete(no);
@@ -151,7 +157,7 @@ public class ClosetService {
 	}
 	// 옷 정보 수정 및 이미지 교체
 	@Transactional("txManager")
-	public int dressModify(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick) {
+	public int dressModify(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick, String itemPath) {
 		int result = ddao.update(dto);
 		if (result > 0) {
 			int seq = dto.getNo();
@@ -171,6 +177,8 @@ public class ClosetService {
 						e.printStackTrace();
 					}
 					fdto.setD_no(seq);
+					// 옷 수정 시 코디 아이템 수정
+					sdao.updateItem(dto.getCategory(), itemPath, "/files/" + nick + "/" + sysName);
 					dmdao.update(fdto);
 				}else{ 
 					System.out.println("파일삭제 실패");
@@ -189,6 +197,8 @@ public class ClosetService {
 					String target = path + dmdao.selectImgByDress(tmp).getPath();
 					File file = new File(target);
 					if( file.exists() ){ 
+						// 옷 삭제 시 코디에서 옷 삭제
+						sdao.deleteItem(ddao.selectDress(tmp).getCategory(), dmdao.selectImgByDress(tmp).getPath());
 						if(file.delete()){ 
 							System.out.println("파일삭제 성공");
 							ddao.delete(tmp);
@@ -210,5 +220,39 @@ public class ClosetService {
 	// 이미지 경로 통해서 옷 상세정보 가져오기
 	public DressDTO pathDetailDress(String path) {
 		return ddao.pathDetailDress(path);
+	}
+	// 옷장 수정모드 - 옷장 삭제
+	public void closetDelete(int c_no,String email,String path) {
+		List<DressDTO> dress = ddao.selectByCloset(c_no);
+		List<Integer> dressNo = new ArrayList<>();
+		// 옷장 속 옷 번호 담기
+		for(DressDTO tmp : dress) {
+			dressNo.add(tmp.getNo());
+		}
+		if(dressNo.size() > 0) {
+			// 옷장 별 이미지 삭제
+			for(int tmp : dressNo) {
+				if(dmdao.selectImgByDress(tmp) != null) {
+					String target = path + dmdao.selectImgByDress(tmp).getPath();
+					File file = new File(target);
+					if( file.exists() ){ 
+						// 옷 삭제 시 코디에서 옷 삭제
+						sdao.deleteItem(ddao.selectDress(tmp).getCategory(), dmdao.selectImgByDress(tmp).getPath());
+						if(file.delete()){ 
+							System.out.println("파일삭제 성공");
+							ddao.delete(tmp);
+							dmdao.delete(tmp);
+							cdao.delete(c_no, email);
+						}else{ 
+							System.out.println("파일삭제 실패");
+						} 
+					}else{ 
+						System.out.println("파일이 존재하지 않습니다.");
+					}
+				}
+			}
+		} else {
+			cdao.delete(c_no, email);
+		}
 	}
 }
