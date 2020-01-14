@@ -109,7 +109,14 @@
 					<label for="buy_date" class="m-0 ">구매일자</label>
 				</div>
 				<div class="col-10">
-					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31" value="${info.buy_date}" readonly>
+					<c:choose>
+					<c:when test="${day eq null}">
+						<input class="w-100 form-control" type="text" readonly>
+					</c:when>
+					<c:otherwise>
+						<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31" value="${day}" readonly>
+					</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="row m-2">
