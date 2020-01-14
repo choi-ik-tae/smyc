@@ -12,7 +12,7 @@
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">StyleBoard</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="#">StyleBoast</a> 
-					<a class="dropdown-item" href="#">StyleHelp</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/board/helpBoard">StyleHelp</a>
 				</div>
 			</li>
 			<li class="nav-item dropdown">
