@@ -3,7 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
-
+	<select id="helpBoardSelectAll" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category='H' order by 1 desc
+	</select>
 	
 	
 </mapper>
