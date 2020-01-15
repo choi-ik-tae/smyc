@@ -18,7 +18,7 @@
 /*    div{border: 1px solid black;}*/
    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #bk{
-        background-image:url('imgs/bg/bg8.jpg');
+        background-image:url('/imgs/bg/bg8.jpg');
         background-attachment: fixed; 
     }
     #bottom{width: 100%;height: 150px; color:white;}
@@ -91,7 +91,24 @@
     #searchBox>div{border: 1px solid black; border-radius: 5px; width:90px;}
     #searchBar{width: 95%; height: 80%; margin-top:10px; display: none;}
     .borderDelete{border: 0px;}
+    #boast>div>div>p{font-size: 20pt; font-weight: 800;}
+/*    #boardList{max-height: 978px; overflow: hidden;}*/
+    .boardItem{display: none;}
 </style>
+<script>
+	// load more 이벤트
+	$(function() {
+		$(".boardItem").slice(0, 4).show(); // select the first ten
+		$("#load").click(function(e) { // click event for load more
+			e.preventDefault();
+			$(".boardItem:hidden").slice(0, 4).show(); // select next 10 hidden divs and show them
+			if ($(".boardItem:hidden").length == 0) { // check if any hidden divs still exist
+				alert("마지막 게시물 입니다."); // alert if there are none left
+				$(this).css("display", "none");
+			}
+		});
+	});
+</script>
     </head>
     <body>
     <!-- 숨김 메뉴 -->
@@ -175,10 +192,10 @@
                 <div id="searchBox" class="col-1 p-0 m-0">
                     <div class="row" style="margin-top: 4px;">
                         <div id="btnSearch" class="col-12 p-0">
-                            <img class="w-100" src="imgs/btn/btnSearch.png">
+                            <img class="w-100" src="/imgs/btn/btnSearch.png">
                         </div>
                         <div id="btnCloseSearch" class="col-12 p-0" style="background-color: black; display: none;">
-                            <img class="p-3 w-100" src="imgs/btn/btnSearchClose.png">
+                            <img class="p-3 w-100" src="/imgs/btn/btnSearchClose.png">
                         </div>
                     </div>
                 </div>
@@ -193,18 +210,13 @@
                             <div class="col-12" id="boast">
                                 <div class="row">
                                     <div class="col-12 mt-4 text-center" id="boastTitle">
-                                        Boast Board
+                                        <span style="color: indianred">S</span>tyle <span style="color: darkred">B</span>oast
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mt-4">
                                     <div class="col-12 text-center">
-                                        <p class="m-0">설명 주루룩</p>
-                                        <p class="m-0">설명 주루룩</p>
-                                        <p class="m-0">설명 주루룩</p>
-                                        <p class="m-0">설명 주루룩</p>
-                                        <p class="m-0">설명 주루룩</p>
-                                        <p class="m-0">설명 주루룩</p>
-                                        <p class="m-0">설명 주루룩</p>
+                                        <p class="mt-3">당신의 <span style="color: indianred">스타일</span>을</p>
+                                        <p><span style="color: darkred">자랑</span>해 보세요!</p>
                                     </div>
                                 </div>
                             </div>
@@ -213,11 +225,151 @@
                 </div>
             </div>
             <!-- 게시글 주루룩 -->
-            <div class="row m-0 bg-white" style="height: 500px;">
+            <div class="row m-0 bg-white">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            주룩주룩
+                        
+<div class="row row-cols-4 m-auto" id="boardList">
+     
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">코디 이름</h5>
+            <p class="card-text">
+                코디 메모
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg2.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg3.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+       <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+       <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-3 mb-4 mt-4 boardItem">
+        <div class="card h-100">
+          <img src="imgs/bg/bg1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-12 mb-3 text-center">
+          <a id="load" class="btn btn-outline-dark">Load More</a>
+      </div>
+            
+    
+    </div>
                         </div>
                     </div>
                     
@@ -252,7 +404,7 @@
             </div>
         </div>
         
-    <script>
+    <script>        
         $("#btnMenu").on("click",function(){
             $(".menu").css("display","flex");
             $(".navigator").css("z-index","1");
