@@ -164,7 +164,7 @@
 			location.href="${pageContext.request.contextPath}/dressModify?no="+${info.no};
 		});
 		$("#toDelete").on("click",function(){
-			var q = confirm("정말 삭제하시겠습니까??");
+			var q = confirm("삭제 시 저장된 코디에 영향을 끼치게 됩니다. 정말 삭제하시겠습니까??");
 			if(q) {
 				$("#frm").submit();	
 			}

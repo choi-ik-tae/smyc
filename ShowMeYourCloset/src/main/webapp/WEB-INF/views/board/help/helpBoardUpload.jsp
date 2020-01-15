@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -112,14 +111,8 @@
                 border-radius: 3px;
             }
             .gotoDetail{
-            	text-decoration: none;
+                text-decoration: none !important;
                 color: black;
-                width:100%;
-                hegiht:100%;
-            }
-            .gotoDetail:hover{
-            	text-decoration: none !important;
-            	color : black;        	
             }
         </style>
     </head>
@@ -202,10 +195,6 @@
                     </div>                    
                 </div>
                 <div class="col-1" >
-                    <div id="searchBtn" style="background: white; width: 100; height: 100px;">
-                        <img src="/imgs/btn/searchIcon4.png" style="width: 100px; height: 100%;">
-                    </div>
-                    <div id="closeBtn">X</div>
                 </div>
             </div> 
             <div class="form-wrapper row">
@@ -219,51 +208,42 @@
                         <span style="display: block;">오늘 점심은 떡볶이를 먹을 것이다.</span>
                         <span style="display: block;">크레이지 후라이.. 볶음밥 존맛탱구리...</span>
                         <span style="display: block;">그렇다 좀 더 글을 길게 쓰기 위함이다.</span>
-                        좀 예쁘게
+                        <span style="display: block;">좀 예쁘게</span>
                     </div>
 
                 </div>
-            </div> 
+            </div>
+            <form action="${pageContext.request.contextPath}/board/helpUploadProc.do" method="post" id="inputFrm"> 
             <div class="row" style="background: white">
-                <div class="col-10 mt-5" style="margin:auto; text-align: right;">
-                    <button class="btn btn-info" id="helpUploadBtn" style="width: 130px;">도움 요청</button>
-                </div>
-                <div class="col-10 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">
-                    <div class="row" style="height: 40px; line-height: 35px; border-bottom: 1px solid #bcbcbc;">
-                        <div class="d-none d-md-block col-md-1">
-                            no
-                        </div>
-                        <div class="col-8 col-sm-7 col-md-6">
-                            title
-                        </div>
-                        <div class="col-4 col-sm-3 col-md-2">
-                            nick
-                        </div>
-                        <div class="d-none d-sm-block col-sm-2 col-md-1">hit</div>
-                        <div class="d-none d-md-block col-2">date</div>
-                    </div>
-					<c:forEach items="${list}" var="dto">
-	                    <div class="row contents">
-	                        <div class="d-none d-md-block col-md-1">
-	                            ${dto.no}
-	                        </div>
-	                        <div class="col-8 col-sm-7 col-md-6" style="text-align: left;">
-	                            <a href="${pageContext.request.contextPath}/board/helpDetail?no=${dto.no}" class="gotoDetail">${dto.title}</a>
-	                        </div>
-	                        <div class="col-4 col-sm-3 col-md-2">
-	                            ${dto.nickname }
-	                        </div>
-	                        <div class="d-none d-sm-block col-sm-2 col-md-1">${dto.views}</div>
-	                        <div class="d-none d-md-block col-2">${dto.write_date}</div>
-	                    </div>
-                    
-                    </c:forEach>
-                </div>
-                <div class="col-12 mt-2 mb-5"  style="text-align: center;">
-                    ${page}
-                </div>
+                <div class="col-10  mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px;">
+                    <span class="mb-1" style="display: block; font-weight: 600; font-size: 15px;"> * Help 게시판 등록 이용 설명</span>
+                    <span style="display: block">1. 다른 사용자들에게 내 옷장 안 옷들로 코디 도움을 요청하는 게시판 입니다.</span>
+                    <span style="display: block">2. <span style="color:indianred; font-weight: 600;">코디 도움 요청</span>에 벗어난 글 혹은 잡담의 글은 <span style="color:indianred; font-weight: 600;">삼가</span>해 주세요.</span>
+                    <span style="display: block">3. 비공개로 설정한 옷장은 다른 사람들이 볼 수 없으나, <span style="color:indianred; font-weight: 600;">공개 설정한 옷장은 다른 사용자들에게도 공개 됩니다.</span> </span>
+                    <span style="display: block">4. 옷 등록 시 비공개로 설정한 옷은 공개된 옷장안에 등록되어 있다 하더라도 다른 사용자에게 공개되지 않습니다. 옷이 공개되기를 원치 않는다면 글 등록 전 <span style="color:indianred; font-weight: 600;">MYPAGE-CLOSET</span>에서 공개 설정을 변경하시기를 바랍니다.  </span>
+                    <span style="display: block">5. 반복적인 중복글은 <span style="color:indianred; font-weight: 600;">사이트 이용 금지</span> 사유에 포함됩니다. </span>
+                    <span style="display: block">6. 광고 혹은 스팸 게시글은 <span style="color:indianred; font-weight: 600;">강제 삭제</span> 사유에 포함 됩니다. 주의해 주십시오.</span>
 
+                </div>
+                
+	                <div class="col-10 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">     	
+	                        <div class="form-row form-group">
+	                            <div class="col-2">
+	                                <label for="title">글 제목</label>
+	                            </div>
+	                            <div class="col-10"> 
+	                                <input type="text" class="form-control" id="title" name="title">
+	                            </div>
+	                        </div>
+	                        <div class="form-group">
+	                            <textarea class="form-control" style="resize: none;" rows="20" name="contents" id="contents"></textarea>
+	                        </div>
+	                </div>
+	                <div class="col-10  mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px; text-align: right;">
+	                    <button id="uploadBtn" class="btn btn-info" type="button">도움 요청하기</button>
+	                </div>
             </div> 
+             </form>
             <div class="row">
                 <div class="col-12" id="bottom" style="background: #5e5e5e; height: 250px;">
                     <div class="row mt-5" style="margin:auto;">
@@ -285,31 +265,20 @@
         </div>
 
         <script>
-            $("#searchBtn").on("click",function(){
-                $(".LogoDiv").css("display","none");
-                $(".searchDiv").css("height","100px");
-                $("#searchBtn").css("display","none");
-                $("#closeBtn").css("display","block");
-            })
-            $("#closeBtn").on("click",function(){
-                $(".LogoDiv").css("display","block");
-                $(".searchDiv").css("height","0px");
-                $("#searchBtn").css("display","block");
-                $("#closeBtn").css("display","none");      
-            })
+        	$("#uploadBtn").on("click",function(){
+        		console.log($("#title").val());
+        		console.log($("#contents").val());
+        		if($("#title").val() == "" || $("#contents").val() == ""){
+        			alert("게시글의 제목과 내용을 제대로 입력해주세요!");
+        			return;
+        		}
+        		$("#inputFrm").submit();    		
+        	})
             $("#menuCheck").on("click",function(){
                 $("#menuDiv").css("display","block");
             })
             $("#menuDiv").on("click",function(){
                 $("#menuDiv").css("display","none");
-            })
-            $("#helpUploadBtn").on("click",function(){
-            	if('${email}' == ""){
-            		alert("로그인을 해주세요!");
-            		location.href="${pageContext.request.contextPath}/signin";
-            	}else{
-            		location.href="${pageContext.request.contextPath}/helpUpload";
-            	}
             })
         </script>
     </body>

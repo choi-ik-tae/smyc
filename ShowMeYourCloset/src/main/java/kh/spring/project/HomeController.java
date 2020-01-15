@@ -120,17 +120,22 @@ public class HomeController {
 	public String myStyle(Model model, String season) {
 		String email = (String) session.getAttribute("email");
 
-		List<StyleDTO> styleList = null;
 		if (email != null) {
-			
+			List<StyleDTO> styleList = styleService.selectAll(email);
+			for(StyleDTO dto : styleList) {
+				if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
+					styleService.styleDelete(dto.getNo());
+				}
+			}
 			if (season == null || season.equals("all")) {
 				styleList = styleService.selectAll(email);
 			} else {
-				styleList = styleService.selectSeason(email, season);
+				styleList = styleService.selectSeason(email, season);	
 			}
+			model.addAttribute("styleList", styleList);
 		}
-
-		model.addAttribute("styleList", styleList);
+		
+		
 		
 		return "mypage/style/myStyle";
 	}
@@ -181,5 +186,10 @@ public class HomeController {
 	@RequestMapping("/errorFile")
 	public String errorFile() {
 		return "errorFile";
+	}
+	
+	@RequestMapping("/helpUpload")
+	public String helpUpload() {
+		return "board/help/helpBoardUpload";
 	}
 }
