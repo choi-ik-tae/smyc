@@ -17,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
+import kh.spring.dto.StyleDTO;
 import kh.spring.service.ClosetService;
+import kh.spring.service.StyleService;
 
 @Controller
 @RequestMapping("/closet")
@@ -25,6 +27,9 @@ public class ClosetContoller {
 
 	@Autowired
 	private ClosetService cloService;
+	
+	@Autowired
+	private StyleService styleService;
 
 	@Autowired
 	private HttpSession session;
@@ -58,7 +63,7 @@ public class ClosetContoller {
 		String nick = (String) session.getAttribute("nick");
 		String path = session.getServletContext().getRealPath("files/" + nick);
 		String category = cloService.dressSelectInfo(no).getCategory();
-		String itemPath = cloService.dressSelectImg(no).getPath();
+		String itemPath = cloService.dressSelectImg(no).getPath();		
 		int result = cloService.dressDelete(no,path,category,itemPath);
 		
 		if(result == 0) {

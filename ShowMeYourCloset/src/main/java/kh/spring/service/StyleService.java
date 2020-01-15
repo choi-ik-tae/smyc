@@ -60,5 +60,4 @@ public class StyleService {
 	public void styleDelete(int no) {
 		sdao.styleDelete(no);
 	}
-	
 }

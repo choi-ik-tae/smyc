@@ -101,5 +101,4 @@ public class StyleDAO {
 		
 		return sst.update("Style.updateItem",parm);
 	}
-
 }
