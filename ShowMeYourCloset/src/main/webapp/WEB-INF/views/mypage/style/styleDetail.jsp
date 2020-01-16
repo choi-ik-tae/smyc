@@ -129,10 +129,8 @@
 </style>
 </head>
 <body>
-
 	<div class="wrapper-all">
 		<div class="wrapper">
-
 			<div class="detailDress">
 				<div class="imgDetail"></div>
 				<div class="infoDetail">
@@ -148,8 +146,6 @@
 					<input class="form-control" type="text" id="memo" disabled>
 				</div>
 			</div>
-
-
 			<div class="category Top" id="Top">
 				<c:if test="${dto.top !=null}">
 					<img src="${dto.top}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="categoryImg">
@@ -186,27 +182,23 @@
 			<div class="borderBtnBox"
 				style="position: absolute; bottom: 20px; width: 100%; text-align: center">
 				<span>
-					<button class="btn btn-secondary" style="width: 250px;">코디
-						자랑하기</button>
+					<button id="toBoast" type="button" class="btn btn-secondary" style="width: 250px;">코디 자랑하기</button>
 				</span>
 			</div>
-
 		</div>
 		<div class="form-wrapper styleInfo">
 			<div class="row">
 				<div class="col-12 p-5">
-					<label for="InputName">Style Name</label> <input type="text"
-						class="form-control" name="name" id="InputName"
-						value="${dto.name}" disabled>
+					<label for="InputName">Style Name</label> 
+					<input type="text" class="form-control" name="name" id="InputName" value="${dto.name}" disabled>
 				</div>
 				<div class="col-12 pl-5 pb-5">
 					<label>Season</label>
 					<div style="padding-left: 30px;">
 						<div class="btn-group-toggle" data-toggle="buttons">
 							<c:forEach items="${season}" var="s">
-								<label class="btn checkLabel" id="${s}Label"> <input
-									type="checkbox" name="season" class="checkList" value="${s}"
-									checked disabled> ${s}
+								<label class="btn checkLabel" id="${s}Label"> 
+									<input type="checkbox" name="season" class="checkList" value="${s}" checked disabled> ${s}
 								</label>
 							</c:forEach>
 						</div>
@@ -214,34 +206,29 @@
 				</div>
 				<div class="col-12 pl-5 pb-5 pr-5">
 					<label for="InputMemo">Memo</label>
-					<textarea class="form-control" style="height: 150px; resize: none;"
-						id="InputMemo" name="memo" disabled>${dto.memo}</textarea>
+					<textarea class="form-control" style="height: 150px; resize: none;" id="InputMemo" name="memo" disabled>${dto.memo}</textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12 pl-5 pb-5 pr-5">
 					<span style="float: right;" class="m-1">
-						<button type="button" id="styleModifyBtn"
-							class="btn btn-secondary">코디 수정</button>
-					</span> <span style="float: left" class="m-1">
+						<button type="button" id="styleModifyBtn" class="btn btn-secondary">코디 수정</button>
+					</span> 
+					<span style="float: left" class="m-1"> 
 						<button type="button" class="btn btn-secondary">돌아가기</button>
 					</span>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
-	
-	
-
 	<script>
-	
-	$("#styleModifyBtn").on("click",function(){
-		location.href="${pageContext.request.contextPath}/style/modifyPage?no="+${dto.no};
-	})
-		
-	  // 디테일 초기화
+		$("#toBoast").on("click",function(){
+			location.href="${pageContext.request.contextPath}/board/boastUpload?no="+${dto.no};
+		});
+		$("#styleModifyBtn").on("click",function(){
+			location.href="${pageContext.request.contextPath}/style/modifyPage?no="+${dto.no};
+		});
+		// 디테일 초기화
 		var init = function() {
 			$(".imgDetail").html("");
 			$("#name").val("");
@@ -250,51 +237,33 @@
 			$("#season").val("");
 			$("#memo").val("");
 		}
-
-		$(".category")
-				.on(
-						"click",
-						function() {
-							init();
-							var src = $(this).children("img").attr("src");
-
-							var img = $("<img onError='javascript:this.src='/imgs/shilouette/whiteBack.JPG''>");
-							img.attr("src", src);
-
-							$(".imgDetail").append(img);
-
-							$
-									.ajax(
-											{
-												url : "${pageContext.request.contextPath}/closet/styleDetailDress",
-												data : {
-													path : src
-												},
-												dataType : "json"
-											})
-									.done(
-											function(data) {
-												if (data != null) {
-													$("#name").val(data.name);
-													$("#categoryInput").val(
-															data.category);
-													if (data.pub == 'Y') {
-														$("#pub").val("공개");
-													} else if (data.pub == 'N') {
-														$("#pub").val("비공개");
-													} else {
-														$("#pub").val(data.pub);
-													}
-
-													$("#season").val(
-															data.season);
-													$("#memo").val(data.memo);
-												}
-											})
-
-						})
+	
+		$(".category").on("click",function() {
+			init();
+			var src = $(this).children("img").attr("src");
+			var img = $("<img onError='javascript:this.src='/imgs/shilouette/whiteBack.JPG''>");
+			img.attr("src", src);
+			$(".imgDetail").append(img);
+			$.ajax({
+				url : "${pageContext.request.contextPath}/closet/styleDetailDress",
+				data : { path : src },
+				dataType : "json"
+			}).done(function(data) {
+				if (data != null) {
+					$("#name").val(data.name);
+					$("#categoryInput").val(data.category);
+					if (data.pub == 'Y') {
+						$("#pub").val("공개");
+					} else if (data.pub == 'N') {
+						$("#pub").val("비공개");} 
+					else { 
+						$("#pub").val(data.pub);
+					}
+					$("#season").val(data.season);
+					$("#memo").val(data.memo);
+				}
+			})
+		});
 	</script>
-
-
 </body>
 </html>
