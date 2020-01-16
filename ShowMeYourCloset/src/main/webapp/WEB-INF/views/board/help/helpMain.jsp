@@ -95,7 +95,7 @@
             	text-decoration: none;
                 color: black;
                 width:100%;
-                hegiht:100%;
+                height:100%;
             }
             .gotoDetail:hover{
             	text-decoration: none !important;

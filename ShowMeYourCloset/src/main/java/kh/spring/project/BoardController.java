@@ -41,10 +41,8 @@ public class BoardController {
 			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
 
 			List<BoardDTO> list = boardService.selectByPage(start, end);
-			System.out.println(list.get(0).getWrite_date());
 			for (BoardDTO dto : list) {
 				dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
-				System.out.println(dto.getWrite_date());
 			}
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);
