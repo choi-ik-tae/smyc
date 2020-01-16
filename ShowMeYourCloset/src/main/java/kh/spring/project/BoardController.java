@@ -70,5 +70,9 @@ public class BoardController {
 
 		return "redirect:/board/helpBoard";
 	}
-
+	
+	@RequestMapping("/boastBoard")
+	public String boastBoard() {
+		return "board/boast/boastMain";
+	}
 }
