@@ -15,103 +15,83 @@
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
         <style>
-            .mainLogo{
-                position:relative;
-                height: 520px;
-                color: white;
-                font-size:50px;
-                font-weight: 700;
-                text-align: center;
-            }
-            #bk{
-
-            }
-            .mainLogo:after{
-                display: block;
-                position:absolute;
-                top:0;
-                left: 0;
-                background-image:url('/imgs/bg/clothesLogo2.jpg');
-                background-attachment: fixed; 
-                height: 100%;
-                width: 100%;
-                z-index: -1;
-                content: "";  
-                background-size: 100% 100%;
-            }
-            .contents{
-                height: 53px;
-                line-height: 53px;
-            }
-            #bottom{width: 100%;height: 150px; color:white;}
-            #bottom-logo{height: 150px; line-height: 150px;}
-            #bottom-contents{font-size: 10pt;color: white;}
-            .myinfoMenu>div{
-                height: 54px;
-            }
-            .myinfoMenu>div>button{
-                width: 100%;
-                height: 1005;
-            }
-            .boardMenu>div>button{
-                width: 100%;
-                height: 100%;
-            }
-            .boardMenu>div{
-                height: 54px;
-            }
-            #menu-nickname{
-                height: 180px;
-                text-align: center;
-                line-height: 180px;
-                color:darkslategrey;
-                font-weight: 700;
-                font-size: 25px;
-            }
-            .bar{
-                position:relative;
-                width: 30px;
-                height: 3px;
-                background: dimgray;
-            }
-            .bar-one{
-                top:35px;
-            }
-            .bar-two{
-                top:39px;
-            }
-            .bar-three{
-                top:43px;
-            }
-            .menuIcon{
-                line-height: 85px;
-                font-size:21px;
-                font-weight: 700;
-                color:dimgray;
-            }
-            .menu:hover{
-                background:rgba(255,255,255,0.1);
-            }
-            .title{
-                font-size: 28px;
-                color:dimgray;
-                font-weight: 700;
-                line-height: 95px;
-            }
-            #closeBtn{
-                display: none; 
-                background: white; 
-                font-size: 50px; 
-                text-align: center; 
-                font-weight: 700; 
-                color:black; 
-                height: 90px; 
-                width: 90px; 
-                padding-top:8px; 
-                margin:4px; 
-                border-radius: 3px;
-            }
-            .gotoDetail{
+        /*    div{border: 1px solid black;}*/
+		   *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+		    #bk{
+		        background-image:url('/imgs/bg/clothesLogo2.jpg');
+		        background-attachment: fixed; 
+		    }
+		    #bottom{width: 100%;height: 150px; color:white;}
+		    #bottom-logo{height: 150px; line-height: 150px;}
+		    #bottom-contents{font-size: 10pt;color: white;}
+		    .bar{
+		        position:relative;
+		        width: 30px;
+		        height: 3px;
+		        background: dimgray;
+		    }
+		    #title{
+		        font-size: 30px;
+		        color:dimgray;
+		        font-weight: 700;
+		        line-height: 100px;
+		    }
+		    #menuDiv{
+		        position:fixed;
+		        width: 100%;
+		        height: 100%;
+		        background: grey;
+		        z-index: 2;
+		        background: rgba(0,0,0,0.5);
+		        display: none;
+		    }
+		    .InfoMenu {
+		        position:fixed;
+		        width: 380px;
+		        height: 100%;
+		        background: white;
+		        z-index: 3
+		    }
+		    .navigator {
+		        background-color:white;
+		        border-bottom: 1px solid #bcbcbc;
+		        height:100px;
+		    }
+		    #menuIcon{
+		        margin-top: 43px;
+		    }
+		    .menu{
+		        width: 100%;
+		        height: 100%;
+		        position:fixed;
+		        display: none;
+		        z-index: 5;
+		    }
+		    .menubar{ background-color: white;}
+		    .mainblock{ background: rgba(0,0,0,0.5);}
+		    #menu-nickname {
+		        width:100%;
+		        height: 200px;
+		        line-height: 200px;
+		        font-size: 30pt;
+		    }
+		    #boast{
+		        border: 1px solid white;
+		        border-radius: 10px;
+		        position: absolute;
+		        background:rgba(255,255,255,0.9);
+		        width: 1000px;
+		        height: 300px;
+		        transform: translate(44%,40%);
+		    }
+		    #boastTitle{
+		        font-size: 40pt;
+		        font-weight: 800;
+		    }
+		    #searchBox>div{border: 1px solid black; border-radius: 5px; width:90px;}
+		    #searchBar{width: 95%; height: 80%; margin-top:10px; display: none;}
+		    .borderDelete{border: 0px;}
+		     .gotoDetail{
             	text-decoration: none;
                 color: black;
                 width:100%;
@@ -121,109 +101,137 @@
             	text-decoration: none !important;
             	color : black;        	
             }
-        </style>
+            .title{
+                font-size: 28px;
+                color:dimgray;
+                font-weight: 700;
+                line-height: 95px;
+            }
+		</style>
+
     </head>
     <body>
 
-        <div id="menuDiv" class="InfoMenu-container" style="position:absolute; width: 100%; height: 100%; background: grey; z-index: 2; background: rgba(0,0,0,0.5);display: none;">
-            <div class="InfoMenu" style="position:fixed;width: 380px; height: 100%; background: white; z-index: 3">
-                <div class="row mt-2">
+  <!-- 숨김 메뉴 -->
+    <div class="container-fulid p-0">
+        <div class="row m-0 menu">
+            <div class="p-0 menubar" style="width:23%;">
+                <div class="row m-0">
+                    <div class="col-12 p-2">
+                        <button id="closeMenu" type="button" class="btn btn-outline-dark form-control">close</button>
+                    </div>
+                </div>
+                <div class="row m-0" >
+                    <div class="col-12 text-center" id="menu-nickname">
+                    <c:choose>
+                    	<c:when test="${email==null }">
+                    		<span>로그인을 해주세요</span>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<span>${nick}</span>
+                    	</c:otherwise>
+                    </c:choose>
+                    </div>
+                </div><hr>
+                <div class="row m-0">
                     <div class="col-12">
-                        close X
+                        내 정보
                     </div>
-                </div>
-                <div class="row" >
-                    <div class="col-12" id="menu-nickname">
-                        쁘띠 때옹
-                    </div>
-                </div>
-                <div style="height: 40px; line-height: 38px;">
-                    내 정보 보기
-                </div>
-                <div class="row myinfoMenu">
+                </div><hr>
+                <div class="row m-0 myinfoMenu">
                     <div class="col-12">
-                        <button class="btn">내가 쓴 글 보기</button>
+                        <div class="row">
+                            <button type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 글</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 댓글</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn borderDelete btn-outline-dark form-control">마이 페이지</button>
+                        </div>
                     </div>
-                    <div class="col-12" >
-                        <button class="btn"> 내가 쓴 댓글 보기</button>
-                    </div>
-                    <div class="col-12" >
-                        <button class="btn">MyPage</button>
-                    </div>
-
-                </div>
-                <div style="height: 40px; line-height: 38px;">
-                    게시판 이동
-                </div>
-                <div class="row boardMenu">
-                    <div class="col-12" >
-                        <button class="btn"> HOME</button>
-                    </div>
-                    <div class="col-12" >
-                        <button class="btn">BoardBoard</button>
-                    </div>
+                </div><hr>
+                <div class="row m-0">
                     <div class="col-12">
-                        <button class="btn">HelpBoard</button>
+                        게시판
                     </div>
-
-
+                </div><hr>
+                <div class="row m-0">
+                   <div class="col-12">
+                        <div class="row">
+                            <button type="button" class="btn borderDelete btn-outline-dark form-control">메인 페이지</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn borderDelete btn-outline-dark form-control">자랑 게시판</button>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn borderDelete btn-outline-dark form-control">도움 게시판</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-        </div>
-        <div class="container-fuild" id="bk">
-            <div class="navigator row" style="background-color:white; height:100px;">
-                <div class="col-1 menu pl-4" id="menuCheck">
-                    <div class="row" style="height: 100px;">
-                        <div class="bar-Container col-4">
-                            <div class="bar bar-one"></div>
-                            <div class="bar bar-two"></div>
-                            <div class="bar bar-three"></div>
+            <div class="p-0 mainblock" style="width:77%;"></div>
+         </div>
+    </div>
+        <!-- 본문 -->    
+        <div class="container-fuild p-0" id="bk">
+            <!-- 네비 -->
+            <div class="navigator fixed-top row m-0">
+                <div class="col-1 p-0" id="btnMenu">
+                    <div class="row m-0">
+                        <div class="col-4 p-0">
+                            <div class="row m-0">
+                                <div class="col-12" id="menuIcon">
+                                    <div class="row m-0 mb-1 bar bar-one"></div>
+                                    <div class="row m-0 mb-1 mt-1 bar bar-two"></div>
+                                    <div class="row m-0 mb-1 bar bar-three"></div>        
+                                </div>
+                            </div>        
                         </div>
-                        <div class="menuIcon d-none d-md-block col-6">
-                            MENU    
-                        </div>
-                    </div>
-
-                </div>
-                <div class="d-none d-md-block col-10 title">
-                    <div class="searchDiv row" style="height: 0px; overflow: hidden;">
-                        <div class="col-1" style="text-align: center;">
-                            검색
-                        </div>
-                        <div class="col-11 pb-0">
-                            <input type="text" class="form-control" style="width: 100%;height: 98%;" placeholder="검색할 단어를 입력하세요">
+                        <div class="col-8 p-0 text-center d-none d-md-block" style="height: 100px; line-height: 100px;">
+                            <span style="font-size: 20pt;font-weight: 700;color:dimgray;">MENU</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="LogoDiv col-12"  style="text-align: center;">
-                            SHOW YOUR CLOSET
+                </div>
+                <div class="col-10 p-0 d-none d-md-block text-center">
+                    <span id="title">SHOW YOUR CLOSET</span>
+                    <input type="text" class="form-control" id="searchBar" name="target" placeholder="검색할 단어를 입력하세요">
+                </div>
+                <div id="searchBox" class="col-1 p-0 m-0">
+                    <div class="row" style="margin-top: 4px;">
+                        <div id="btnSearch" class="col-12 p-0">
+                            <img class="w-100" src="/imgs/btn/btnSearch.png">
                         </div>
-                    </div>                    
-                </div>
-                <div class="col-1" >
-                    <div id="searchBtn" style="background: white; width: 100; height: 100px;">
-                        <img src="/imgs/btn/searchIcon4.png" style="width: 100px; height: 100%;">
+                        <div id="btnCloseSearch" class="col-12 p-0" style="background-color: black; display: none;">
+                            <img class="p-3 w-100" src="/imgs/btn/btnSearchClose.png">
+                        </div>
                     </div>
-                    <div id="closeBtn">X</div>
                 </div>
-            </div> 
-            <div class="form-wrapper row">
-                <div class="col-12 mainLogo" id="mainLogo">
-                    <p style="margin-top: 95px;">Help Board</p>
-                    <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
-
-                        <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
-                        <span style="display: block;">여기서 도움을 요청해보세요</span>
-                        <span style="display: block;">내 옷으로 예쁘게 센스있게 꾸며보세요</span>
-                        <span style="display: block;">오늘 점심은 떡볶이를 먹을 것이다.</span>
-                        <span style="display: block;">크레이지 후라이.. 볶음밥 존맛탱구리...</span>
-                        <span style="display: block;">그렇다 좀 더 글을 길게 쓰기 위함이다.</span>
-                        좀 예쁘게
+            </div>
+            <!-- 상단 설명 -->
+            <div class="row m-0" style="height: 600px;">
+                <div class="col-12">
+                <!-- 위 메뉴 공백 채우기 -->
+                <div class="row" style="margin-top: 100px;"></div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12" id="boast">
+                                <div class="row">
+                                    <div class="col-12 mt-4 text-center" id="boastTitle">
+                                        Style HELP
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <p class="m-0">설명 주루룩</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-            </div> 
+            </div>
+            <!-- 게시글 주루룩 -->
             <div class="row" style="background: white">
                 <div class="col-10 mt-5" style="margin:auto; text-align: right;">
                     <button class="btn btn-info" id="helpUploadBtn" style="width: 130px;">도움 요청</button>
@@ -264,7 +272,8 @@
                 </div>
 
             </div> 
-            <div class="row">
+            
+            <div class="row m-0">
                 <div class="col-12" id="bottom" style="background: #5e5e5e; height: 250px;">
                     <div class="row mt-5" style="margin:auto;">
                         <div class="col-2" id="bottom-logo">Show Your Closet</div>
@@ -283,26 +292,30 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            $("#searchBtn").on("click",function(){
-                $(".LogoDiv").css("display","none");
-                $(".searchDiv").css("height","100px");
-                $("#searchBtn").css("display","none");
-                $("#closeBtn").css("display","block");
-            })
-            $("#closeBtn").on("click",function(){
-                $(".LogoDiv").css("display","block");
-                $(".searchDiv").css("height","0px");
-                $("#searchBtn").css("display","block");
-                $("#closeBtn").css("display","none");      
-            })
-            $("#menuCheck").on("click",function(){
-                $("#menuDiv").css("display","block");
-            })
-            $("#menuDiv").on("click",function(){
-                $("#menuDiv").css("display","none");
-            })
+        
+    <script>
+        $("#btnMenu").on("click",function(){
+            $(".menu").css("display","flex");
+            $(".navigator").css("z-index","1");
+        })
+        $(".mainblock").on("click",function(){
+            $(".menu").css("display","none");
+        })
+        $("#closeMenu").on("click",function(){
+            $(".menu").css("display","none");
+        })
+        $("#btnSearch").on("click",function(){
+            $("#btnCloseSearch").css("display","flex");
+            $("#btnSearch").css("display","none");
+            $("#searchBar").css("display","inline-block");
+            $("#title").css("display","none");
+        })
+        $("#btnCloseSearch").on("click",function(){
+            $("#btnSearch").css("display","flex");
+            $("#btnCloseSearch").css("display","none");
+            $("#searchBar").css("display","none");
+            $("#title").css("display","inline");
+        })
             $("#helpUploadBtn").on("click",function(){
             	if('${email}' == ""){
             		alert("로그인을 해주세요!");

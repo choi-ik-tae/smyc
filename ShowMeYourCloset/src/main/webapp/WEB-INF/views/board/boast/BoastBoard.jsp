@@ -175,10 +175,10 @@
                 <div id="searchBox" class="col-1 p-0 m-0">
                     <div class="row" style="margin-top: 4px;">
                         <div id="btnSearch" class="col-12 p-0">
-                            <img class="w-100" src="imgs/btn/btnSearch.png">
+                            <img class="w-100" src="/imgs/btn/btnSearch.png">
                         </div>
                         <div id="btnCloseSearch" class="col-12 p-0" style="background-color: black; display: none;">
-                            <img class="p-3 w-100" src="imgs/btn/btnSearchClose.png">
+                            <img class="p-3 w-100" src="/imgs/btn/btnSearchClose.png">
                         </div>
                     </div>
                 </div>
