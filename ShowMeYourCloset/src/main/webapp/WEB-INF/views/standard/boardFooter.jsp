@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="row">
+<div class="row m-0">
 	<div class="col-12" id="bottom">
-		<div class="row m-0">
+		<div class="row" style="margin: auto;">
 			<div class="col-2" id="bottom-logo">Show Your Closet</div>
 			<div class="col-10 align-self-center" id="bottom-contents">
 				<div class="row">서울 중구 남대문로 120 대일빌딩 3층 F Class (주) In Sync</div>

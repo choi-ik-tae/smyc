@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="row fixed-top align-items-center" id="top">
+<div class="row m-0 fixed-top align-items-center" id="top">
 	<div class="col-2 text-center">
 		<label class="m-0 logo">Show Your Closet</label>
 	</div>
@@ -11,7 +11,7 @@
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">StyleBoard</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">StyleBoast</a> 
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/board/boastBoard">StyleBoast</a> 
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/board/helpBoard">StyleHelp</a>
 				</div>
 			</li>
