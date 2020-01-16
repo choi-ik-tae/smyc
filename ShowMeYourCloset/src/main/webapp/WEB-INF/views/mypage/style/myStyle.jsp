@@ -302,19 +302,7 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-
 	<script>
-	    var url = location.href;
-	    var tmpUrl = url + ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime();
-	    var oReq = new XMLHttpRequest();
-	    oReq.open("GET", tmpUrl,  false); //또는 oReq.open("GET", tmpUrl,  true);
-	
-	    oReq.send(null);
-
-	</script>
-
-	<script>
-		
 			var detailStyle = function(no){
 				location.href="${pageContext.request.contextPath}/style/detailStyle?no="+no;
 				
@@ -338,7 +326,7 @@
 			$("#toStyle").on("click",function(){
 				location.href="${pageContext.request.contextPath}/myStyle";
 			});
-		</script>
+	</script>
 	<script>
        var url = location.href;
        var tmpUrl = url + ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime();
