@@ -19,6 +19,17 @@
 	<select id="helpBoardDetailPage" resultType="kh.spring.dto.BoardDTO">
 		select * from board where category='H' and no=#{value}
 	</select>
-	
+<!-- 	자랑게시판 업로드 -->
+	<insert id="boastBoardInsert">
+		insert into board values(board_seq.nextval,'B',#{s_no},#{email},#{nick},#{title},#{contents},sysdate,0)
+	</insert>
+<!-- 	자랑게시판 게시글 가져오기 -->
+	<select id="boastSelectAll" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category = 'B'
+	</select>
+<!-- 	자랑게시판 게시글 삭제 -->
+	<delete id="boastDelete">
+		delete from board where s_no = #{s_no}
+	</delete>
 	
 </mapper>

@@ -204,7 +204,7 @@
 						</div>
 						<div class="row mt-2">
 						<form action="${pageContext.request.contextPath}/board/boastUploadProc" method="post" id="frm">
-							<input type="hidden" name="dTitle" id="inputT">
+							<input type="hidden" name="title" id="inputT">
 							<input type="hidden" name="contents" id="inputC">
 							<input type="hidden" name="s_no" value="${style.no}">
 						</form>

@@ -106,14 +106,22 @@ public class BoardController {
 	@RequestMapping("/boastBoard")
 	public String boastBoard(Model m) {
 		String email = (String)session.getAttribute("email");
-		
-		List<StyleDTO> styleList = styleService.selectAll(email);
+		// 자랑게시판 게시물 총 출력
+		List<BoardDTO> boastList = boardService.boastSelectAll();
+		List<StyleDTO> styleList = new ArrayList<>();
+		for(BoardDTO tmp : boastList) {
+			styleList.add(styleService.detailStyle(tmp.getS_no()));
+		}
 		for(StyleDTO dto : styleList) {
 			if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
 				styleService.styleDelete(dto.getNo());
+				boardService.boastDelete(dto.getNo());
 			}
 		}
-		
+		boastList = boardService.boastSelectAll();
+		System.out.println(boastList.size());
+
+		m.addAttribute("boastList", boastList);
 		m.addAttribute("styleList", styleList);
 		m.addAttribute("email", email);
 		
@@ -141,7 +149,6 @@ public class BoardController {
 	@RequestMapping("/selectDressInfo")
 	@ResponseBody
 	public List<Map<String, Object>> selectDressInfo(String path) {
-		
 		DressDTO item = boardService.dressInfo(path);
 		DressImgDTO itemImg = cloService.dressSelectImg(item.getNo());
 		String[] season = cloService.splitDressSeason(item.getNo());
@@ -157,13 +164,20 @@ public class BoardController {
 	}
 	// 자랑게시판 업로드 실행
 	@RequestMapping("/boastUploadProc")
-	public String boastUploadProc(int s_no,String dTitle, String contents) {
+	public String boastUploadProc(BoardDTO dto) {
+		String email = (String) session.getAttribute("email");
+		String nick = (String) session.getAttribute("nick");
 		
-		System.out.println("=======");
-		System.out.println(s_no);
-		System.out.println(dTitle);
-		System.out.println(contents);
-		System.out.println("=======");
+		String contents = CheckXss.checkXss(dto.getContents());
+		String title = CheckXss.checkXss(dto.getTitle());
+		
+		dto.setS_no(dto.getS_no());
+		dto.setContents(contents);
+		dto.setTitle(title);
+		dto.setEmail(email);
+		dto.setNickname(nick);
+		
+		boardService.boastBoardInsert(dto);
 		
 		return "redirect:/";
 	}

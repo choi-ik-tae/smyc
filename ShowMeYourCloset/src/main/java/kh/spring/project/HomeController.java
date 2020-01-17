@@ -14,6 +14,7 @@ import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
 import kh.spring.dto.StyleDTO;
+import kh.spring.service.BoardService;
 import kh.spring.service.ClosetService;
 import kh.spring.service.MemberService;
 import kh.spring.service.StyleService;
@@ -30,6 +31,9 @@ public class HomeController {
 	@Autowired
 	private StyleService styleService;
 
+	@Autowired
+	private BoardService boardService;
+	
 	@Autowired
 	private HttpSession session;
 
@@ -124,6 +128,7 @@ public class HomeController {
 			for(StyleDTO dto : styleList) {
 				if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
 					styleService.styleDelete(dto.getNo());
+					boardService.boastDelete(dto.getNo());
 				}
 			}
 			if (season == null || season.equals("all")) {
