@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kh.spring.Utils.CheckXss;
 import kh.spring.Utils.Configuration;
 import kh.spring.Utils.DateFormat;
+import kh.spring.Utils.NavigatorUtil;
 import kh.spring.dto.BoardDTO;
 import kh.spring.dto.StyleDTO;
 import kh.spring.service.BoardService;
@@ -29,6 +31,7 @@ public class BoardController {
 	@Autowired
 	private HttpSession session;
 
+	// help 게시판으로 가기
 	@RequestMapping("/helpBoard")
 	public String helpBoard(Model model, String cpage) {
 
@@ -37,9 +40,9 @@ public class BoardController {
 		try {
 			if (cpage == null) {
 				cpage = 1 + "";
-				page = boardService.getPageNavi(1, allList.size());
+				page = NavigatorUtil.getPageNavi(1, allList.size());
 			} else {
-				page = boardService.getPageNavi(Integer.parseInt(cpage), allList.size());
+				page = NavigatorUtil.getPageNavi(Integer.parseInt(cpage), allList.size());
 			}
 
 			int start = (Integer.parseInt(cpage) * Configuration.recordCountPerPage) - Configuration.recordCountPerPage - 1;
@@ -58,13 +61,14 @@ public class BoardController {
 		return "board/help/helpMain";
 	}
 
+	// help게시판 게시글 등록
 	@RequestMapping("/helpUploadProc.do")
 	public String helpUploadProc(BoardDTO dto) {
 		String email = (String) session.getAttribute("email");
 		String nick = (String) session.getAttribute("nick");
 
-		String contents = boardService.checkXss(dto.getContents());
-		String title = boardService.checkXss(dto.getTitle());
+		String contents = CheckXss.checkXss(dto.getContents());
+		String title = CheckXss.checkXss(dto.getTitle());
 
 		dto.setContents(contents);
 		dto.setTitle(title);
@@ -76,6 +80,7 @@ public class BoardController {
 		return "redirect:/board/helpBoard";
 	}
 	
+	// help게시판 디테일
 	@RequestMapping("/helpDetail")
 	public String helpDetail(Model model,int no) {
 		System.out.println(no);
@@ -108,7 +113,6 @@ public class BoardController {
 			System.out.println("끄지라!");
 			return "redirec:/";
 		}
-		System.out.println(no);
 	
 		m.addAttribute("email",email);
 		

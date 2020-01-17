@@ -25,7 +25,7 @@
                     <div class="row commentContainer">
                     	<c:if test="${list.size()==0 }">
                     		<div class="col-12" style="text-align : center">
-                    			<span>등록된 도움 댓글이 없습니다.</span>
+                    			<span>등록된 도움 글이 없습니다.</span>
                     		</div>
                     	</c:if>
 	                    <c:forEach items="${list}" var="dto">
