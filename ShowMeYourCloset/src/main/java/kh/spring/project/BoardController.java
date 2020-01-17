@@ -101,10 +101,19 @@ public class BoardController {
 			System.out.println("끄지라!");
 			return "redirec:/";
 		}
-		System.out.println(no);
-	
-		m.addAttribute("email",email);
 		
-		return "redirec:/";
+		List<StyleDTO> styleList = styleService.selectAll(email);
+		for(StyleDTO dto : styleList) {
+			if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
+				styleService.styleDelete(dto.getNo());
+			}
+		}
+
+		
+		m.addAttribute("email",email);
+		m.addAttribute("styleList", styleList);
+		
+		
+		return "board/boast/boastUpload";
 	}
 }
