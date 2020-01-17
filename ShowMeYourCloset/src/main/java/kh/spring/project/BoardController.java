@@ -46,10 +46,8 @@ public class BoardController {
 			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
 
 			List<BoardDTO> list = boardService.selectByPage(start, end);
-			System.out.println(list.get(0).getWrite_date());
 			for (BoardDTO dto : list) {
 				dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
-				System.out.println(dto.getWrite_date());
 			}
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);
@@ -78,6 +76,14 @@ public class BoardController {
 		return "redirect:/board/helpBoard";
 	}
 	
+	@RequestMapping("/helpDetail")
+	public String helpDetail(Model model,int no) {
+		System.out.println(no);
+		BoardDTO dto = boardService.helpBoardDetailPage(no);
+		model.addAttribute("dto", dto);
+		return "board/help/helpBoardDetail";		
+	}
+	
 	@RequestMapping("/boastBoard")
 	public String boastBoard(Model m) {
 		String email = (String)session.getAttribute("email");
@@ -94,6 +100,7 @@ public class BoardController {
 		
 		return "board/boast/boastMain";
 	}
+
 	@RequestMapping("/boastUpload")
 	public String boastUpload(Model m,int no) {
 		String email = (String)session.getAttribute("email");
@@ -116,4 +123,5 @@ public class BoardController {
 		
 		return "board/boast/boastUpload";
 	}
+
 }

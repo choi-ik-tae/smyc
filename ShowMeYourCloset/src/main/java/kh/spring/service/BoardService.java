@@ -26,6 +26,9 @@ public class BoardService {
 		boardDAO.helpBoardInsert(dto);
 	}
 
+	public BoardDTO helpBoardDetailPage(int no){
+		return boardDAO.helpBoardDetailPage(no);
+	}
 	public String checkTime(Date time) {
 		return "";
 	}

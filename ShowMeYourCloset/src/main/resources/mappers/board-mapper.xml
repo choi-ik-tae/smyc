@@ -11,9 +11,13 @@
 	<insert id="helpBoardInsert">
 		insert into board values(board_seq.nextval,'H','',#{email},#{nick},#{title},#{contents},sysdate,0)
 	</insert>
-<!-- 	페이지 글 가져오기 -->
+<!--  도움 게시판 페이지 글 가져오기 -->
 	<select id="selectByPage" resultType="kh.spring.dto.BoardDTO">
 		select * from(select board.*,row_number() over (order by no desc) rown from board) where category='H' and (rown between #{start} and #{end})
+	</select>
+<!-- 	도움게시판 디테일 -->
+	<select id="helpBoardDetailPage" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category='H' and no=#{value}
 	</select>
 	
 	
