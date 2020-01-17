@@ -198,13 +198,12 @@
                         </div>
                     </div>
                     <!-- 상단 설명 -->
-                    <div class="row m-0" style="height: 100px; background:#bcbcbc;">
+                    <div class="row m-0" style="height: 100px;">
 
                     </div>
                     <!-- 게시글 주루룩 -->
-                    <div class="row" style="background: #bcbcbc;">
-
-                        <div class="col-10 form-title mt-1 mb-1 p-4" style="margin:auto ;border-radius: 10px; background: white;">
+                    <div class="row" >
+                        <div class="col-6 form-title mt-1 mb-1 p-4" style="margin:auto ;border-radius: 10px; border:1px solid #bcbcbc;">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="titleDiv" style="border: 1px solid #bcbcbc; height: 40px; border-radius: 5px; text-align: center; line-height: 40px;">
@@ -239,14 +238,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-12" >
-                                    <iframe class="comentDiv" src="${pageContext.request.contextPath}/advisor/helpStyleComent?b_no=${dto.no}" style="border : 1px solid #bcbcbc; width: 100%; min-height: 500px; border-radius: 5px;" ></iframe>
+                                    <iframe class="commentDiv" id="commentFrm" src="${pageContext.request.contextPath}/advisor/helpStyleComent?b_no=${dto.no}" scrolling = "no" style="border : 1px solid #bcbcbc; width: 100%; border-radius: 5px;" ></iframe>
                                 </div>
                             </div>
 
                         </div>
                     </div> 
                     <!-- 상단 설명 -->
-                    <div class="row m-0" style="height: 50px; background:#bcbcbc;">
+                    <div class="row m-0" style="height: 50px; ">
 
                     </div>
 
@@ -270,12 +269,34 @@
                     </div>
                 </div>
 
+              
                 <script>
+	                $(document).ready(function() {
+	                    
+	                    var lastHeight = 0;
+	                    var curHeight = 0;
+	                    var targetFrame = $('#commentFrm'); // custome id 입력
+	                    
+	                    $( "#commentFrm" ).on('load', function() { 
+	                        curHeight = targetFrame.contents().find('body').height();
+	                        targetFrame.css('height', curHeight + 'px' );
+	                    });
+	                    
+	                    setInterval(function(){
+	                        curHeight = targetFrame.contents().find('body').height();
+	                        if ( curHeight != lastHeight ) {
+	                          targetFrame.css('height', (lastHeight = curHeight) + 'px' );
+	                        }
+	                      },500);
+	                    
+	                });
+          
+	                
                     $("#styleComentBtn").on("click",function(){
-                        $(".comentDiv").attr("src","${pageContext.request.contextPath}/advisor/helpStyleComent?b_no=${dto.no}");
+                        $(".commentDiv").attr("src","${pageContext.request.contextPath}/advisor/helpStyleComent?b_no=${dto.no}");
                     })
                     $("#nomalComentBtn").on("click",function(){
-                        $(".comentDiv").attr("src","${pageContext.request.contextPath}/comments/helpBoardComments");
+                        $(".commentDiv").attr("src","${pageContext.request.contextPath}/comments/helpBoardComments?b_no=${dto.no}");
                     })
                     $("#btnMenu").on("click",function(){
                         $(".menu").css("display","flex");
@@ -287,6 +308,8 @@
                     $("#closeMenu").on("click",function(){
                         $(".menu").css("display","none");
                     })
+                    
+                    
                 </script>
             </body>
         </html>

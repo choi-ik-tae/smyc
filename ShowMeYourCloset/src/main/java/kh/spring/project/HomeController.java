@@ -72,7 +72,6 @@ public class HomeController {
 		String day = null;
 		try {
 			day = DateFormat.dateformat(info.getBuy_date());
-			System.out.println(day);
 		} catch (Exception e) {
 			day = null;
 		}
