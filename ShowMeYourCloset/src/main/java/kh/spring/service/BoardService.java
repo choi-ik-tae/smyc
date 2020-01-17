@@ -52,5 +52,17 @@ public class BoardService {
 	public DressDTO dressInfo(String path) {
 		return ddao.pathDetailDress(path);
 	}
+	// 자랑게시판 등록
+	public int boastBoardInsert(BoardDTO dto) {
+		return boardDAO.boastBoardInsert(dto);
+	}
+	// 자랑게시판 글 출력
+	public List<BoardDTO> boastSelectAll() {
+		return boardDAO.boastSelectAll();
+	}
+	// 자랑게시판 게시글 삭제
+	public int boastDelete(int s_no) {
+		return boardDAO.boastDelete(s_no);
+	}
 
 }

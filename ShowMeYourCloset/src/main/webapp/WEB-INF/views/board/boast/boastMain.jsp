@@ -146,34 +146,34 @@
 					<div class="col-9 m-auto">
 						<div class="row card-deck m-auto" id="boardList">
 						<c:choose>
-						<c:when test="${styleList.size() <= 0}">
+						<c:when test="${boastList.size() <= 0}">
 							등록된 게시물이 없습니다.
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${styleList}" var="style">
+							<c:forEach var="i" begin="0" end="${boastList.size() - 1}">
 							<!-- 반복 시작 -->
 							<div class="col-3 mb-4 mt-4 boardItem">
 								<div class="card">
 									<div class="card-img-box">
 										<c:choose>
-											<c:when test="${style.top == null}">
+											<c:when test="${styleList.get(i).top == null}">
 												<div class="card-img-top img-top" style="background: white;"></div>
 											</c:when>
 											<c:otherwise>
-												<img src="${style.top}" class="card-img-top w-100 img-top">
+												<img src="${styleList.get(i).top}" class="card-img-top w-100 img-top">
 											</c:otherwise>
 										</c:choose>
 										<c:choose>
-											<c:when test="${style.pants == null}">
+											<c:when test="${styleList.get(i).pants == null}">
 												<div class="card-img-top img-bottom" style="background: white;"></div>
 											</c:when>
 											<c:otherwise>
-												<img src="${style.pants}" class="card-img-top w-100 img-bottom">
+												<img src="${styleList.get(i).pants}" class="card-img-top w-100 img-bottom">
 											</c:otherwise>
 										</c:choose>
 									</div>
 									<div class="card-body"><hr>
-										<h5 class="card-title text-center">${style.name}</h5>
+										<h5 class="card-title text-center">${boastList.get(i).title}</h5>
 										<p class="card-text text-right">
 											<span style="font-weight: 800;">1234</span>&nbsp;&nbsp;<img src="/imgs/btn/like_after.png" style="width: 20px;" class="pb-1">
 										</p>

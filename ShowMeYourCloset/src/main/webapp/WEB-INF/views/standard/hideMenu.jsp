@@ -12,7 +12,7 @@
                 </div>
                 <div class="row m-0" >
                     <div class="col-12 text-center" id="menu-nickname">
-                        <span>쁘띠 때옹</span>
+                        <span>${nick}</span>
                     </div>
                 </div><hr>
                 <div class="row m-0">
