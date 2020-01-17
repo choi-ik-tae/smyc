@@ -18,9 +18,7 @@ public class AdvisorController {
 	private AdvisorService advisorService;
 	
 	@RequestMapping("/helpStyleComent")
-	public String helpStyleComent(Model model,int b_no) {
-		System.out.println(b_no);
-		
+	public String helpStyleComent(Model model,int b_no) {	
 		List<AdvisorDTO> list = advisorService.selectAdvisorAll(b_no);
 		model.addAttribute("list", list);		
 		return "board/help/helpBoardStyleComent";

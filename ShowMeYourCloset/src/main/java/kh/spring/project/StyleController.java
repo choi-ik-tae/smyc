@@ -76,7 +76,6 @@ public class StyleController {
 	
 	@RequestMapping("/detailStyle")
 	public String detailStyle(Model model , int no) {		
-		System.out.println("넘어옴? :::::"+no);
 		
 		String email  = (String)session.getAttribute("email");
 		
@@ -94,7 +93,6 @@ public class StyleController {
 	@RequestMapping("/modifyPage")
 	public String modifyPage(Model model, int no) {
 		String email  = (String)session.getAttribute("email");
-		System.out.println("수정 페이지 넘겨받은 no."+no);
 		
 		String gender = memService.selectGender(email);
 		StyleDTO dto = sService.detailStyle(no);
@@ -111,8 +109,6 @@ public class StyleController {
 	
 	@RequestMapping("/modifyProc")
 	public String modifyProc(StyleDTO dto) {
-		System.out.println(dto.getNo()+ dto.getTop());
-		
 		sService.styleModify(dto);
 		
 		return "redirect:/myStyle";
@@ -121,7 +117,6 @@ public class StyleController {
 	@RequestMapping("/styleDelete")
 	public String styleDelete(int no) {
 		
-		System.out.println("삭제할려고 넘겨받은 no."+no);
 		sService.styleDelete(no);
 		
 		return "redirect:/myStyle";
