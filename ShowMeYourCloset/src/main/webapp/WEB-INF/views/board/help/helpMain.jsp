@@ -12,15 +12,14 @@
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!-- Google font -->
-        <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
+   
         <style>
         /*    div{border: 1px solid black;}*/
 		   *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-		    #bk{
+		   /* #bk{
 		        background-image:url('/imgs/bg/clothesLogo2.jpg');
 		        background-attachment: fixed; 
-		    }
+		    }*/
 		    #bottom{width: 100%;height: 150px; color:white;}
 		    #bottom-logo{height: 150px; line-height: 150px;}
 		    #bottom-contents{font-size: 10pt;color: white;}
@@ -107,6 +106,26 @@
                 font-weight: 700;
                 line-height: 95px;
             }
+            .mainLogo{
+            	position:relative;
+                color: white;
+                font-size:50px;
+                font-weight: 700;
+                text-align: center;
+            }
+            .LogoDiv:after{
+                display: block;
+                position:absolute;
+                top:0;
+                left: 0;
+                background-image:url('/imgs/bg/clothesLogo2.jpg');
+                background-attachment: fixed; 
+                height: 100%;
+                width: 100%;
+                z-index: -1;
+                content: "";  
+                background-size: 100% 100%;
+            }
 		</style>
 
     </head>
@@ -159,13 +178,13 @@
                 <div class="row m-0">
                    <div class="col-12">
                         <div class="row">
-                            <button type="button" class="btn borderDelete btn-outline-dark form-control">메인 페이지</button>
+                            <button type="button" id="homeBtn" class="btn borderDelete btn-outline-dark form-control">메인 페이지</button>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn borderDelete btn-outline-dark form-control">자랑 게시판</button>
+                            <button type="button" id="boastBtn" class="btn borderDelete btn-outline-dark form-control">자랑 게시판</button>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn borderDelete btn-outline-dark form-control">도움 게시판</button>
+                            <button type="button" id="helpBtn" class="btn borderDelete btn-outline-dark form-control">도움 게시판</button>
                         </div>
                     </div>
                 </div>
@@ -209,32 +228,48 @@
                 </div>
             </div>
             <!-- 상단 설명 -->
-            <div class="row m-0" style="height: 600px;">
+            <div class="row m-0 LogoDiv" style="height: 600px;">
                 <div class="col-12">
                 <!-- 위 메뉴 공백 채우기 -->
                 <div class="row" style="margin-top: 100px;"></div>
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-12" id="boast">
-                                <div class="row">
-                                    <div class="col-12 mt-4 text-center" id="boastTitle">
-                                        Style HELP
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 text-center">
-                                        <p class="m-0">설명 주루룩</p>
-                                    </div>
-                                </div>
-                            </div>
+                           <div class="col-12 mainLogo" id="mainLogo">
+			                    <p class="mainLogo" style="margin-top: 95px;">HELP BOARD</p>
+			                    <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
+			                        <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
+			                        <span style="display: block;">여기서 도움을 요청해보세요</span>
+			                        <span style="display: block;">내 옷으로 예쁘게 센스있게 꾸며보세요</span>
+			                        <span style="display: block;">오늘 점심은 떡볶이를 먹을 것이다.</span>
+			                        <span style="display: block;">크레이지 후라이.. 볶음밥 존맛탱구리...</span>
+			                        <span style="display: block;">그렇다 좀 더 글을 길게 쓰기 위함이다.</span>
+			                        <span style="display: block;">좀 예쁘게</span>
+			                    </div>
+			                </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- 게시글 주루룩 -->
             <div class="row" style="background: white">
-                <div class="col-10 mt-5" style="margin:auto; text-align: right;">
-                    <button class="btn btn-info" id="helpUploadBtn" style="width: 130px;">도움 요청</button>
+                <div class="col-10 mt-5" style="margin:auto;">
+        			<div class="row">
+        				<div class="col-6">
+		                	<div class="row" style="float:left;">
+		                		<div class="col-9 pr-1">
+		                			<input id="inputSearch" type="text" class="form-control m-0 p-0" style="width:300px; display:inline-block;">
+		                		</div>
+		                		<div class="col-3 pl-2">
+		                			<button id="helpSearchBtn" class="btn btn-info m-0">search</button>
+		                		</div>
+		                	</div>
+	                	</div>
+	                	<div class="col-6">
+		                	<span style="float:right;">
+		                    	<button class="btn btn-info" id="helpUploadBtn" style="width: 130px;">도움 요청</button>
+		                    </span>
+	                    </div>
+                    </div>		
                 </div>
                 <div class="col-10 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">
                     <div class="row" style="height: 40px; line-height: 35px; border-bottom: 1px solid #bcbcbc;">
@@ -251,7 +286,7 @@
                         <div class="d-none d-md-block col-2">date</div>
                     </div>
 					<c:forEach items="${list}" var="dto">
-	                    <div class="row contents">
+	                    <div class="row contents mt-2 mb-2">
 	                        <div class="d-none d-md-block col-md-1">
 	                            ${dto.no}
 	                        </div>
@@ -294,6 +329,19 @@
         </div>
         
     <script>
+    	$("#helpSearchBtn").on("click",function(){
+    		var search = $("#inputSearch").val();
+    		location.href="${pageContext.request.contextPath}/board/helpSearch?search="+search;
+    	})
+    	$("#homeBtn").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/";
+    	})
+    	$("#boastBtn").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/board/boastBoard";
+    	})
+    	$("#helpBtn").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/board/helpBoard";
+    	})
         $("#btnMenu").on("click",function(){
             $(".menu").css("display","flex");
             $(".navigator").css("z-index","1");

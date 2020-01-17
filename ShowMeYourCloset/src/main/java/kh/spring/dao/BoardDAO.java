@@ -46,6 +46,22 @@ public class BoardDAO {
 	public BoardDTO helpBoardDetailPage(int no){
 		return sst.selectOne("Board.helpBoardDetailPage", no);
 	}
+	
+	// help게시판 검색 페이징
+	public List<BoardDTO> helpBoardSearch(int start, int end, String search){
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("start",start);
+		parm.put("end",end);
+		parm.put("search","%"+search+"%");
+		
+		return sst.selectList("Board.helpBoardSearch", parm);
+		
+	}
+	
+	// help 게시판 전체 뽑아오기
+	public List<BoardDTO> helpBoardAllSearch (String search){
+		return sst.selectList("Board.helpBoardAllSearch",search);
+	}
 
 	// boast 게시판 등록
 	public int boastBoardInsert(BoardDTO dto) {

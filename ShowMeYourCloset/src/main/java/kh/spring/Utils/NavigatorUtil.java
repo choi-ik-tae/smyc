@@ -3,7 +3,7 @@ package kh.spring.Utils;
 public class NavigatorUtil {
 	
 	// 페이지 네비게이터
-	public static String getPageNavi(int currentPage,int size) throws Exception {
+	public static String getPageNavi(int currentPage,int size ,int naviCountPerPage , int recordCountPerPage) throws Exception {
 		// 게시판 내의 총 글의 개수
 		
 		int recordTotalCount = size; // DB에서 총 컬럼 수 불려오는 함수로 변경

@@ -24,7 +24,7 @@
                 <div class="col-12 p-0" style="min-height: 200px; overflow: hidden;">
                     <div class="row commentContainer">
                     	<c:if test="${list.size()==0 }">
-                    		<div class="col-12" style="text-align : center">
+                    		<div class="col-12" style="text-align : center; line-height:200px;">
                     			<span>등록된 도움 글이 없습니다.</span>
                     		</div>
                     	</c:if>
@@ -48,13 +48,15 @@
             </div>
             <div class="row m-0 mt-3 mb-2">
                 <div class="col-12" style="text-align: center;">
-                    <span>1 2 3 4 5 6 7 8</span>
+                    <span>${page}</span>
                 </div>
             </div>
-            <div class="row m-0">
+            <div class="row m-0 ">
                 <div class="col-12" style="text-align: right;">
                     <button id="btn" class="btn btn-info"> 코디 도움 주기</button>
                 </div>
+            </div>
+            <div class="van" style="height:20px;">
             </div>
         </div>
 

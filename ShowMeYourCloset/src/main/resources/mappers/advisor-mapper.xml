@@ -6,4 +6,8 @@
  	<select id="selectAdvisorAll" resultType="kh.spring.dto.AdvisorDTO">
  		select * from advisor where b_no=#{value}
  	</select>
+ 	<!--  도움 댓글 페이지 별 글 가져오기 -->
+	<select id="selectByPage" resultType="kh.spring.dto.BoardDTO">
+		select * from(select advisor.*,row_number() over (order by no desc) rown from advisor) where b_no=#{b_no} and (rown between #{start} and #{end})
+	</select>
  </mapper>

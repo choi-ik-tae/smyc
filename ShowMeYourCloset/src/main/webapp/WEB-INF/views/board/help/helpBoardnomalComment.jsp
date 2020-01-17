@@ -32,7 +32,7 @@
 			</div>
 		<div class="row m-0" style="min-height: 420px;">
 			<c:if test="${list.size() == 0}">
-				<div class="col-12 commentDiv" id="init" style="text-align : center">
+				<div class="col-12 commentDiv" id="init" style="text-align : center; line-height:420px;">
 					<span>등록된 댓글이 없습니다.</span>
 				</div>
 			</c:if>
@@ -55,7 +55,7 @@
 									<span class="commentDelete" onclick="commentDelete('${dto.no}')">삭제 </span>
 								</c:when>
 								<c:otherwise>
-									<span class="commentNotify">신고</span>	
+									<span class="commentNotify" onclick="commentNodify('${dto.no}','${dto.nickname}')">신고</span>	
 								</c:otherwise>
 							</c:choose>
 							
@@ -70,13 +70,17 @@
 	</div>
 	
 	<script>
-	
-	
-		var check = 0;
-		
+			
 		var commentDelete = function(no){
 			console.log(no);
-			location.href="${pageContext.request.contextPath}/comments/deleteCommentsProc?no="+no+"&b_no=${b_no}";
+			location.href="${pageContext.request.contextPath}/comments/deleteCommentsProc?no="+no+"&b_no=${b_no}";		
+		}
+		
+		var commentNodify = function(no, nick){
+			var result = confirm(nick+"님을 신고하시겠습니까?");
+			if(result){
+				console.log(result);
+			}
 			
 		}
 	

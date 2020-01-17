@@ -19,6 +19,14 @@
 	<select id="helpBoardDetailPage" resultType="kh.spring.dto.BoardDTO">
 		select * from board where category='H' and no=#{value}
 	</select>
+<!-- 	도움게시판 검색 -->
+	<select id="helpBoardSearch" resultType="kh.spring.dto.BoardDTO">
+		select * from(select board.*,row_number() over (order by no desc) rown from board) where category='H' and (title like #{search} or contents like #{search}) and (rown between #{start} and #{end})
+	</select>
+<!-- 	도움게시판 전체 검색 -->
+	<select id="helpBoardAllSearch" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category='H' and (title like #{value} or contents like #{value})
+	</select>
 <!-- 	자랑게시판 업로드 -->
 	<insert id="boastBoardInsert">
 		insert into board values(board_seq.nextval,'B',#{s_no},#{email},#{nick},#{title},#{contents},sysdate,0)
@@ -31,5 +39,6 @@
 	<delete id="boastDelete">
 		delete from board where s_no = #{s_no}
 	</delete>
+
 	
 </mapper>

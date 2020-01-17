@@ -17,5 +17,9 @@ public class AdvisorService {
 	public List<AdvisorDTO> selectAdvisorAll(int b_no){
 		return advisorDAO.selectAdvisorAll(b_no);
 	}
+	
+	public List<AdvisorDTO> selectByPage(int start, int end, int b_no){
+		return advisorDAO.selectByPage(start, end, b_no);
+	}
 
 }
