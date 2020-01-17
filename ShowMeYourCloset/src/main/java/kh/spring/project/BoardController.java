@@ -1,6 +1,9 @@
 package kh.spring.project;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,14 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.Utils.CheckXss;
 import kh.spring.Utils.Configuration;
 import kh.spring.Utils.DateFormat;
 import kh.spring.Utils.NavigatorUtil;
 import kh.spring.dto.BoardDTO;
+import kh.spring.dto.DressDTO;
+import kh.spring.dto.DressImgDTO;
 import kh.spring.dto.StyleDTO;
 import kh.spring.service.BoardService;
+import kh.spring.service.ClosetService;
+import kh.spring.service.MemberService;
 import kh.spring.service.StyleService;
 
 @Controller
@@ -27,6 +35,12 @@ public class BoardController {
 
 	@Autowired
 	private StyleService styleService;
+	
+	@Autowired
+	private ClosetService cloService;
+	
+	@Autowired
+	private MemberService memService;
 	
 	@Autowired
 	private HttpSession session;
@@ -88,7 +102,7 @@ public class BoardController {
 		model.addAttribute("dto", dto);
 		return "board/help/helpBoardDetail";		
 	}
-	
+	// 자랑게시판 메인
 	@RequestMapping("/boastBoard")
 	public String boastBoard(Model m) {
 		String email = (String)session.getAttribute("email");
@@ -105,7 +119,7 @@ public class BoardController {
 		
 		return "board/boast/boastMain";
 	}
-
+	// 자랑게시판 업로드 페이지
 	@RequestMapping("/boastUpload")
 	public String boastUpload(Model m,int no) {
 		String email = (String)session.getAttribute("email");
@@ -113,10 +127,45 @@ public class BoardController {
 			System.out.println("끄지라!");
 			return "redirec:/";
 		}
-	
+
+		String gender = memService.selectGender(email);
+		StyleDTO style = styleService.detailStyle(no);
+
 		m.addAttribute("email",email);
+		m.addAttribute("style", style);
+		m.addAttribute("gender", gender);
 		
-		return "redirec:/";
+		return "board/boast/boastUpload";
+	}
+	// 자랑게시판 업로드 - 선택한 옷 정보 ajax 가져오기
+	@RequestMapping("/selectDressInfo")
+	@ResponseBody
+	public List<Map<String, Object>> selectDressInfo(String path) {
+		
+		DressDTO item = boardService.dressInfo(path);
+		DressImgDTO itemImg = cloService.dressSelectImg(item.getNo());
+		String[] season = cloService.splitDressSeason(item.getNo());
+		
+		List<Map<String, Object>> jsonList = new ArrayList<>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("dressInfo", item);
+		map.put("dressImg", itemImg);
+		map.put("season", season);
+		jsonList.add(map);
+		
+		return jsonList;
+	}
+	// 자랑게시판 업로드 실행
+	@RequestMapping("/boastUploadProc")
+	public String boastUploadProc(int s_no,String dTitle, String contents) {
+		
+		System.out.println("=======");
+		System.out.println(s_no);
+		System.out.println(dTitle);
+		System.out.println(contents);
+		System.out.println("=======");
+		
+		return "redirect:/";
 	}
 
 }
