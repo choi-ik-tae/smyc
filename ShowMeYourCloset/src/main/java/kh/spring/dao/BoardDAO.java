@@ -21,6 +21,7 @@ public class BoardDAO {
 		return sst.selectList("Board.helpBoardSelectAll");
 	}
 	
+	// help게시판 등록
 	public int helpBoardInsert(BoardDTO dto) {
 		Map<String, Object> parm = new HashMap<>();
 		parm.put("email",dto.getEmail());
@@ -31,6 +32,7 @@ public class BoardDAO {
 		return sst.insert("Board.helpBoardInsert",parm);
 	}
 	
+	// help게시판 네비 별 페이지 가져오기
 	public List<BoardDTO>selectByPage(int start, int end){
 		Map<String, Object> parm = new HashMap<>();
 		parm.put("start",start);
@@ -38,6 +40,11 @@ public class BoardDAO {
 		
 		return sst.selectList("Board.selectByPage", parm);
 		
+	}
+	
+	// help게시판 디테일
+	public BoardDTO helpBoardDetailPage(int no){
+		return sst.selectOne("Board.helpBoardDetailPage", no);
 	}
 
 }

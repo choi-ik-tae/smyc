@@ -71,8 +71,18 @@ public class BoardController {
 		return "redirect:/board/helpBoard";
 	}
 	
+	@RequestMapping("/helpDetail")
+	public String helpDetail(Model model,int no) {
+		System.out.println(no);
+		BoardDTO dto = boardService.helpBoardDetailPage(no);
+		model.addAttribute("dto", dto);
+		return "board/help/helpBoardDetail";		
+	}
+	
 	@RequestMapping("/boastBoard")
 	public String boastBoard() {
 		return "board/boast/boastMain";
 	}
+	
+
 }
