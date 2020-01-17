@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kh.spring.Utils.Configuration;
 import kh.spring.Utils.DateFormat;
 import kh.spring.dto.BoardDTO;
+import kh.spring.dto.StyleDTO;
 import kh.spring.service.BoardService;
+import kh.spring.service.StyleService;
 
 @Controller
 @RequestMapping("/board")
@@ -21,6 +23,9 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private StyleService styleService;
+	
 	@Autowired
 	private HttpSession session;
 
@@ -80,9 +85,34 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boastBoard")
-	public String boastBoard() {
+	public String boastBoard(Model m) {
+		String email = (String)session.getAttribute("email");
+		
+		List<StyleDTO> styleList = styleService.selectAll(email);
+		for(StyleDTO dto : styleList) {
+			if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
+				styleService.styleDelete(dto.getNo());
+			}
+		}
+		
+		m.addAttribute("styleList", styleList);
+		m.addAttribute("email", email);
+		
 		return "board/boast/boastMain";
 	}
+
+	@RequestMapping("/boastUpload")
+	public String boastUpload(Model m,int no) {
+		String email = (String)session.getAttribute("email");
+		if(email == null) {
+			System.out.println("끄지라!");
+			return "redirec:/";
+		}
+		System.out.println(no);
 	
+		m.addAttribute("email",email);
+		
+		return "redirec:/";
+	}
 
 }

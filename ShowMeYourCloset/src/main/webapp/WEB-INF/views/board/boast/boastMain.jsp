@@ -45,10 +45,12 @@
 </style>
 <script>
 	$(function() {
+		console.log($(".boardItem:hidden").length)
+		console.log($(".boardItem").length)
 		// 숨겨진 아이템이 1개 이상일 때 버튼 생성
-		if($(".boardItem:hidden").length >= 1) {
-            $("#load").css("display","inline-block");
-        }
+		if($(".boardItem").length == 9) {
+			$("#load").css("display","inline-block");
+		}
 		$(".boardItem").slice(0, 8).show(); // 8 개까지 먼저 출력
 		$(this).css("display", "flex");
 		$("#load").click(function(e) { // click event for load more
@@ -62,6 +64,11 @@
 </script>
     </head>
     <body>
+<c:choose>
+<c:when test="${email ==null }">
+	로그인을 하십시오.
+</c:when>
+<c:otherwise>
     <!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>
 	<!-- 본문 -->
@@ -138,142 +145,45 @@
 					<!-- 아이템 4개 씩 출력 -->
 					<div class="col-9 m-auto">
 						<div class="row card-deck m-auto" id="boardList">
-						
+						<c:choose>
+						<c:when test="${styleList.size() <= 0}">
+							등록된 게시물이 없습니다.
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${styleList}" var="style">
 							<!-- 반복 시작 -->
 							<div class="col-3 mb-4 mt-4 boardItem">
 								<div class="card">
 									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
+										<c:choose>
+											<c:when test="${style.top == null}">
+												<div class="card-img-top img-top" style="background: white;"></div>
+											</c:when>
+											<c:otherwise>
+												<img src="${style.top}" class="card-img-top w-100 img-top">
+											</c:otherwise>
+										</c:choose>
+										<c:choose>
+											<c:when test="${style.pants == null}">
+												<div class="card-img-top img-bottom" style="background: white;"></div>
+											</c:when>
+											<c:otherwise>
+												<img src="${style.pants}" class="card-img-top w-100 img-bottom">
+											</c:otherwise>
+										</c:choose>
 									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
+									<div class="card-body"><hr>
+										<h5 class="card-title text-center">${style.name}</h5>
+										<p class="card-text text-right">
+											<span style="font-weight: 800;">1234</span>&nbsp;&nbsp;<img src="/imgs/btn/like_after.png" style="width: 20px;" class="pb-1">
+										</p>
 									</div>
 								</div>
 							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-3 mb-4 mt-4 boardItem">
-								<div class="card">
-									<div class="card-img-box">
-										<img src="/imgs/shilouette/default_tshirt.png" class="card-img-top w-100 img-top"> 
-										<img src="/imgs/shilouette/default_pants.png" class="card-img-top w-100 img-bottom">
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">코디 이름</h5>
-										<p class="card-text">코디 메모</p>
-									</div>
-								</div>
-							</div>
+							</c:forEach>
 							<!-- -->
-							
+						</c:otherwise>
+						</c:choose>
 							<!-- 더 보기 버튼 -->
 							<div class="col-12 mb-3 text-center">
 								<a id="load" class="btn btn-outline-dark">Load More</a>
@@ -311,6 +221,7 @@
             $("#title").css("display","inline");
         })
     </script>
-    
+</c:otherwise>
+</c:choose>
     </body>
 </html>
