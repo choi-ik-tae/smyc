@@ -12,8 +12,7 @@
                 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-                <!-- Google font -->
-                <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
+
                 <style>
                     /*    div{border: 1px solid black;}*/
                     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
@@ -231,7 +230,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 mt-2" style="text-align: center;">
+                                <div class="col-12 mt-2 mb-2" style="text-align: center;">
                                     <button id="styleComentBtn" class="btn btn-outline-info" style="width: 150px;">코디 도움</button>
                                     <button id="nomalComentBtn" class="btn btn-outline-info" style="width: 150px;">댓글</button>
                                 </div>

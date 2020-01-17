@@ -40,6 +40,14 @@ public class BoardService {
 		return boardDAO.selectByPage(start, end);
 	}
 	
+	public List<BoardDTO> helpBoardSearch(int start, int end , String search){
+		return boardDAO.helpBoardSearch(start, end, search);
+	}
+	
+	public List<BoardDTO> helpBoardAllSearch(String search){
+		return boardDAO.helpBoardAllSearch(search);
+	}
+	
 	// 자랑게시판 업로드 - 선택한 옷 정보 가져오기
 	public DressDTO dressInfo(String path) {
 		return ddao.pathDetailDress(path);

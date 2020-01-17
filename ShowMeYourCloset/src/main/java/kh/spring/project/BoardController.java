@@ -54,9 +54,9 @@ public class BoardController {
 		try {
 			if (cpage == null) {
 				cpage = 1 + "";
-				page = NavigatorUtil.getPageNavi(1, allList.size());
+				page = NavigatorUtil.getPageNavi(1, allList.size(),10,15);
 			} else {
-				page = NavigatorUtil.getPageNavi(Integer.parseInt(cpage), allList.size());
+				page = NavigatorUtil.getPageNavi(Integer.parseInt(cpage), allList.size(),10,15);
 			}
 
 			int start = (Integer.parseInt(cpage) * Configuration.recordCountPerPage) - Configuration.recordCountPerPage - 1;
@@ -99,9 +99,44 @@ public class BoardController {
 	public String helpDetail(Model model,int no) {
 		System.out.println(no);
 		BoardDTO dto = boardService.helpBoardDetailPage(no);
+		try {
+			dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("dto", dto);
 		return "board/help/helpBoardDetail";		
 	}
+	
+	@RequestMapping("/helpSearch")
+	public String helpSearch(Model model,String search, String cpage) {
+		List<BoardDTO> allList = boardService.helpBoardAllSearch(search);
+		String page = null;
+		try {
+			if (cpage == null) {
+				cpage = 1 + "";
+				page = NavigatorUtil.getPageNavi(1, allList.size(),10,15);
+			} else {
+				page = NavigatorUtil.getPageNavi(Integer.parseInt(cpage), allList.size(),10,15);
+			}
+
+			int start = (Integer.parseInt(cpage) * Configuration.recordCountPerPage) - Configuration.recordCountPerPage - 1;
+			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
+
+			List<BoardDTO> list = boardService.helpBoardSearch(start, end, search);
+			for (BoardDTO dto : list) {
+				dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
+			}
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "board/help/helpMain";
+	
+	}
+	
 	// 자랑게시판 메인
 	@RequestMapping("/boastBoard")
 	public String boastBoard(Model m) {

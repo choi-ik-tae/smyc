@@ -199,7 +199,7 @@
             </div> 
             <div class="form-wrapper row">
                 <div class="col-12 mainLogo" id="mainLogo">
-                    <p style="margin-top: 95px;">Help Board</p>
+                    <p style="margin-top: 95px;">HELP BOARD</p>
                     <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
 
                         <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
