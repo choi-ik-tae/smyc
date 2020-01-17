@@ -203,7 +203,7 @@
                     </div>
                     <!-- 게시글 주루룩 -->
                     <div class="row" >
-                        <div class="col-6 form-title mt-1 mb-1 p-4" style="margin:auto ;border-radius: 10px; border:1px solid #bcbcbc;">
+                        <div class="col-6 form-title mt-4 mb-1 p-4" style="margin:auto ;border-radius: 10px; border:1px solid #bcbcbc;">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="titleDiv" style="border: 1px solid #bcbcbc; height: 40px; border-radius: 5px; text-align: center; line-height: 40px;">
