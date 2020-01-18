@@ -32,4 +32,13 @@ public class CommentDAO {
 	public int commentDelete(int no) {
 		return sst.delete("Comments.commentDelete", no);
 	}
+	
+	// 자랑게시글 댓글 바로 출력
+	public List<CommentDTO> selectByEmail(int b_no,String email) {
+		Map<String,Object> parm = new HashMap<>();
+		parm.put("b_no",b_no);
+		parm.put("email",email);
+		
+		return sst.selectList("Comments.selectByEmail",parm);
+	}
 }

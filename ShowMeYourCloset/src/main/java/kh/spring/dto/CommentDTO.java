@@ -1,5 +1,7 @@
 package kh.spring.dto;
 
+import kh.spring.Utils.DateFormat;
+
 public class CommentDTO {
 	private int no;
 	private int b_no;
@@ -52,7 +54,12 @@ public class CommentDTO {
 		this.contents = contents;
 	}
 	public String getWrite_date() {
-		return write_date;
+		String wd = write_date;
+		try {
+			return DateFormat.dateformat(wd);
+		} catch (Exception e) {
+			return write_date;
+		}
 	}
 	public void setWrite_date(String write_date) {
 		this.write_date = write_date;

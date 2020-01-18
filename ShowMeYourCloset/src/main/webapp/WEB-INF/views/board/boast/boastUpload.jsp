@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Document</title>
 <!-- Bootstap4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -16,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
+	.container-fulid {width: 1890px;max-width: none !important;}
    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
    	#title{font-size: 30px;color:dimgray;font-weight: 700;line-height: 100px;}
     .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:100px;}
@@ -46,7 +46,7 @@
             <!-- 네비 -->
             <div class="navigator fixed-top row m-0">
                 <div class="col-12 p-0 d-none d-md-block text-center">
-                    <span id="title">Boast Upload</span>
+                    <span id="title">BOAST BOARD</span>
                 </div>
             </div>
             <!-- 위 메뉴 공백 채우기 -->
@@ -188,18 +188,13 @@
 				<div class="row mt-3">
 					<div class="col-12 p-0">
 						<div class="row">
-							<div class="col-2 text-center align-self-center">
-								<label for="bTitle" class="m-0">제목</label>
-							</div>
-							<div class="col-10 text-center">
-								<input id="bTitle" name="bTitle" type="text"
-									class="form-control bg-white">
+							<div class="col-12 text-center">
+								<input id="bTitle" name="bTitle" type="text" class="form-control bg-white" placeholder="제목">
 							</div>
 						</div>
 						<div class="row mt-2">
 							<div class="col-12">
-								<textarea name="contents" id="contents" rows="15"
-									class="form-control bg-white" style="resize: none;"></textarea>
+								<textarea name="contents" id="contents" rows="15" class="form-control bg-white" style="resize: none;" placeholder="내용"></textarea>
 							</div>
 						</div>
 						<div class="row mt-2">
@@ -208,7 +203,7 @@
 							<input type="hidden" name="contents" id="inputC">
 							<input type="hidden" name="s_no" value="${style.no}">
 						</form>
-							<div class="col-12 text-center">
+							<div class="col-12 mt-2 text-center">
 								<button id="toBoast" type="button"
 									class="btn btn-sm btn-outline-dark">작성하기</button>
 								<button id="toBack" type="button"

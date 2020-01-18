@@ -18,11 +18,13 @@ import kh.spring.Utils.Configuration;
 import kh.spring.Utils.DateFormat;
 import kh.spring.Utils.NavigatorUtil;
 import kh.spring.dto.BoardDTO;
+import kh.spring.dto.CommentDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
 import kh.spring.dto.StyleDTO;
 import kh.spring.service.BoardService;
 import kh.spring.service.ClosetService;
+import kh.spring.service.CommentsService;
 import kh.spring.service.MemberService;
 import kh.spring.service.StyleService;
 
@@ -41,6 +43,9 @@ public class BoardController {
 	
 	@Autowired
 	private MemberService memService;
+	
+	@Autowired
+	private CommentsService comService;
 	
 	@Autowired
 	private HttpSession session;
@@ -63,9 +68,11 @@ public class BoardController {
 			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
 
 			List<BoardDTO> list = boardService.selectByPage(start, end);
+			/*
 			for (BoardDTO dto : list) {
 				dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
 			}
+			*/
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);
 			
@@ -99,11 +106,13 @@ public class BoardController {
 	public String helpDetail(Model model,int no) {
 		System.out.println(no);
 		BoardDTO dto = boardService.helpBoardDetailPage(no);
+		/*
 		try {
 			dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		*/
 		model.addAttribute("dto", dto);
 		return "board/help/helpBoardDetail";		
 	}
@@ -147,18 +156,26 @@ public class BoardController {
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
 		}
+		// 옷 삭제되었을때 자랑게시물 및 코디 지우기
 		for(StyleDTO dto : styleList) {
 			if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
 				styleService.styleDelete(dto.getNo());
 				boardService.boastDelete(dto.getNo());
 			}
 		}
+		styleList.clear();
+		// 지운거 반영해서 다시 호출
 		boastList = boardService.boastSelectAll();
-		System.out.println(boastList.size());
-
+		List<Integer> likeList = new ArrayList<>();
+		for(BoardDTO tmp : boastList) {
+			styleList.add(styleService.detailStyle(tmp.getS_no()));
+			likeList.add(boardService.boastLikeCount(tmp.getNo()));
+		}
+		
 		m.addAttribute("boastList", boastList);
 		m.addAttribute("styleList", styleList);
 		m.addAttribute("email", email);
+		m.addAttribute("likeList", likeList);
 		
 		return "board/boast/boastMain";
 	}
@@ -215,6 +232,52 @@ public class BoardController {
 		boardService.boastBoardInsert(dto);
 		
 		return "redirect:/";
+	}
+	// 자랑게시판 게시물 디테일
+	@RequestMapping("/boastDetailView")
+	public String boastDetailView(String target,Model m) {
+		String email = (String)session.getAttribute("email");
+		if(email == null) {
+			System.out.println("끄지라!");
+			return "redirec:/";
+		}		
+		String item = target.substring(5, target.length());
+		int no = Integer.parseInt(item);
+		if(boardService.boastSeletctByNo(no) == null) {
+			return "error";
+		}
+		BoardDTO boast = boardService.boastSeletctByNo(no);
+		int s_no = boardService.boastSeletctByNo(no).getS_no();
+		
+		String gender = memService.selectGender(email);
+		StyleDTO style = styleService.detailStyle(s_no);
+		int likeCliked = boardService.boastLikeClicked(boast.getNo(),email);
+		List<CommentDTO> comments = comService.commentsAll(boast.getNo());
+		
+		m.addAttribute("email",email);
+		m.addAttribute("style", style);
+		m.addAttribute("gender", gender);
+		m.addAttribute("boast", boast);
+		m.addAttribute("likeCliked", likeCliked);
+		m.addAttribute("comments", comments);
+		
+		return "board/boast/boastDetailView";
+	}
+	// 자랑게시판 좋아요 클릭
+	@RequestMapping("/likeClick")
+	@ResponseBody
+	public String likeClick(String val,int no) {
+		String email = (String)session.getAttribute("email");
+		String target = null;
+		if(val.contentEquals("btnLikeB")) {
+			boardService.boastLikeAdd(no, email);
+			target = "btnLikeA";
+		}else {
+			boardService.boastLikeCancel(no, email);
+			target = "btnLikeB";
+		}
+		
+		return target;
 	}
 
 }

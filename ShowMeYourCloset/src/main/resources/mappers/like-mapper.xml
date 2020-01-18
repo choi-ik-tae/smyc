@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Like">
+<!--    좋아요 추가 -->
+  	<insert id="likeAdd">
+  		insert into boardlike values(boardlike_seq.nextval,#{b_no},#{email},'B')
+  	</insert>
+<!--   	좋아요 취소-->
+  	<delete id="likeCancel">
+  		delete from boardlike where b_no = #{b_no} and email = #{email}
+  	</delete>
+<!--    자랑게시물 좋아요 수 카운트 -->
+	<select id="likeCount" resultType="Integer">
+		select count(*) from boardlike where b_no = #{b_no}
+	</select>
+<!-- 	좋아요 클릭 여부 -->
+	<select id="likeClicked" resultType="Integer">
+		select count(*) from boardlike where b_no = #{b_no} and email = #{email}
+	</select>
+</mapper>

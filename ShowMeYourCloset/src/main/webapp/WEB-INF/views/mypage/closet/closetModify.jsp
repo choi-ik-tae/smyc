@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Show Me Your Closet</title>
 <!-- Bootstap4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -45,7 +44,7 @@
 <body>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 <div class="container-fuild">
-	<div class="row mt-5" id="toTop">
+	<div class="row m-0 mt-5" id="toTop">
         <div class="col-12 mt-5">
             <div class="row">
                 <div class="col-12 text-center">
@@ -65,7 +64,7 @@
             </div>
         </div>
     </div>
-	<div class="row" id="dressBox">
+	<div class="row m-0" id="dressBox">
         <div class="col-12">
 	        <img src="${pageContext.request.contextPath}/imgs/closet/${closet.img}.png" id="closetImg">
             <div id="topBox">
@@ -134,7 +133,7 @@
             </div>
         </div>
     </div><hr>
-    <div class="row">
+    <div class="row m-0">
         <div class="col-12 text-center">
             <div class="row">
                 <div class="col-12">

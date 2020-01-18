@@ -25,5 +25,9 @@ public class CommentsService {
 	public void commentDelete(int no) {
 		commentDAO.commentDelete(no);
 	}
-
+	
+	// 자랑게시판 댓글 바로 출력
+	public List<CommentDTO> commentLast(int b_no,String email) {
+		return commentDAO.selectByEmail(b_no,email);
+	}
 }

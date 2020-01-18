@@ -31,6 +31,9 @@
                         <div class="row">
                         	<button id="toMypage" type="button" class="btn borderDelete btn-outline-dark form-control">마이 페이지</button>
                         </div>
+                        <div class="row">
+                        	<button id="toLogout" type="button" class="btn borderDelete btn-outline-dark form-control">로그아웃</button>
+                        </div>
                     </div>
                 </div><hr>
                 <div class="row m-0">
@@ -67,6 +70,9 @@
     	});
     	$("#toMypage").on("click",function(){
     		location.href="${pageContext.request.contextPath}/myInfo";
+    	});
+    	$("#toLogout").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/member/logoutProc";
     	});
     </script>
 <!--  -->

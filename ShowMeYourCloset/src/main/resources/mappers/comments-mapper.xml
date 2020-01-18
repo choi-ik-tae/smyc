@@ -15,4 +15,8 @@
   	<delete id="commentDelete">
   		delete from comments where no=#{value}
   	</delete>
+<!--   	댓글 바로 출력 -->
+	<select id="selectByEmail" resultType="kh.spring.dto.CommentDTO">
+		select * from comments where b_no = #{b_no} and email = #{email} order by no desc
+	</select>
   </mapper>

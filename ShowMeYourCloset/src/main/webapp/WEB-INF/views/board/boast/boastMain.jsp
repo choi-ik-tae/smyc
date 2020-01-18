@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Document</title>
 <!-- Bootstap4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -16,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
+	.container-fulid {width: 1890px;max-width: none !important;}
    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #bk{background-image:url('/imgs/bg/bg8.jpg');background-attachment: fixed; }
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
@@ -38,6 +38,7 @@
     .borderDelete{border: 0px;}
     #boast>div>div>p{font-size: 20pt; font-weight: 800;}
     .boardItem{display: none;}
+    .boardItem:hover{cursor:pointer;}
     .img-top{height: 50%;}
     .img-bottom{height: 50%;}
     .card-img-box{height: 300px;}
@@ -45,8 +46,6 @@
 </style>
 <script>
 	$(function() {
-		console.log($(".boardItem:hidden").length)
-		console.log($(".boardItem").length)
 		// 숨겨진 아이템이 1개 이상일 때 버튼 생성
 		if($(".boardItem").length == 9) {
 			$("#load").css("display","inline-block");
@@ -93,7 +92,7 @@
 				</div>
 			</div>
 			<div class="col-10 p-0 d-none d-md-block text-center">
-				<span id="title">SHOW YOUR CLOSET</span> <input type="text"
+				<span id="title">BOAST BOARD</span> <input type="text"
 					class="form-control" id="searchBar" name="target"
 					placeholder="검색할 단어를 입력하세요">
 			</div>
@@ -152,7 +151,7 @@
 						<c:otherwise>
 							<c:forEach var="i" begin="0" end="${boastList.size() - 1}">
 							<!-- 반복 시작 -->
-							<div class="col-3 mb-4 mt-4 boardItem">
+							<div class="col-3 mb-4 mt-4 boardItem" id="boast${boastList.get(i).no}">
 								<div class="card">
 									<div class="card-img-box">
 										<c:choose>
@@ -175,7 +174,7 @@
 									<div class="card-body"><hr>
 										<h5 class="card-title text-center">${boastList.get(i).title}</h5>
 										<p class="card-text text-right">
-											<span style="font-weight: 800;">1234</span>&nbsp;&nbsp;<img src="/imgs/btn/like_after.png" style="width: 20px;" class="pb-1">
+											<span style="font-weight: 800;">${likeList.get(i)}</span>&nbsp;&nbsp;<img src="/imgs/btn/like_after.png" style="width: 20px;" class="pb-1">
 										</p>
 									</div>
 								</div>
@@ -197,29 +196,32 @@
 	<!-- 푸터 -->
     <jsp:include page="../../standard/boardFooter.jsp" />
     
-    <script>        
+    <script>
+    	$(".boardItem").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/board/boastDetailView?target="+$(this).attr("id");
+    	});
         $("#btnMenu").on("click",function(){
             $(".menu").css("display","flex");
             $(".navigator").css("z-index","1");
-        })
+        });
         $(".mainblock").on("click",function(){
             $(".menu").css("display","none");
-        })
+        });
         $("#closeMenu").on("click",function(){
             $(".menu").css("display","none");
-        })
+        });
         $("#btnSearch").on("click",function(){
             $("#btnCloseSearch").css("display","flex");
             $("#btnSearch").css("display","none");
             $("#searchBar").css("display","inline-block");
             $("#title").css("display","none");
-        })
+        });
         $("#btnCloseSearch").on("click",function(){
             $("#btnSearch").css("display","flex");
             $("#btnCloseSearch").css("display","none");
             $("#searchBar").css("display","none");
             $("#title").css("display","inline");
-        })
+        });
     </script>
 </c:otherwise>
 </c:choose>

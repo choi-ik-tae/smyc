@@ -78,6 +78,10 @@ public class BoardDAO {
 	public List<BoardDTO> boastSelectAll() {
 		return sst.selectList("Board.boastSelectAll");
 	}
+	// boast 게시물 선택
+	public BoardDTO boastSelectByNo(int no) {
+		return sst.selectOne("Board.boastSelectByNo",no);
+	}
 	// boast 게시물 삭제
 	public int boastDelete(int s_no) {
 		return sst.delete("Board.boastDelete", s_no);

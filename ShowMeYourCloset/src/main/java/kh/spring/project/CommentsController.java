@@ -1,5 +1,6 @@
 package kh.spring.project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -64,5 +65,36 @@ public class CommentsController {
 		comService.commentDelete(no);
 		return "redirect:/comments/helpBoardComments?b_no="+b_no;		
 	}
+	
+	// 자랑게시판 댓글
+	@RequestMapping("/boastCommentInsert")
+	@ResponseBody
+	public List<CommentDTO> boastComments(int b_no,String contents) {
+		CommentDTO dto = new CommentDTO();
+		String email = (String) session.getAttribute("email");
+		String nickname = (String) session.getAttribute("nick");
 
+		dto.setEmail(email);
+		dto.setNickname(nickname);
+		dto.setB_no(b_no);
+		contents = CheckXss.checkXss(contents);
+		dto.setContents(contents);
+		// 댓글 입력
+		comService.commentInsert(dto);
+		// 입력한 댓글 뽑아오기
+		List<CommentDTO> cm = comService.commentLast(b_no,email);
+		List<CommentDTO> jsonList = new ArrayList<>();
+		if(cm.size() > 0) {
+			for(CommentDTO tmp : cm) {
+				jsonList.add(tmp);
+			}
+		}
+		return jsonList;
+	}
+	// 자랑게시판 댓글 삭제
+	@RequestMapping("/boastCommentDelete")
+	@ResponseBody
+	public void boastCommentInsert(int target) {
+		comService.commentDelete(target);
+	}
 }

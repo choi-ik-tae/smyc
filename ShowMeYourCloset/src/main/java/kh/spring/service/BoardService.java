@@ -1,14 +1,12 @@
 package kh.spring.service;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import kh.spring.Utils.Configuration;
 import kh.spring.dao.BoardDAO;
+import kh.spring.dao.BoardLikeDAO;
 import kh.spring.dao.DressDAO;
 import kh.spring.dto.BoardDTO;
 import kh.spring.dto.DressDTO;
@@ -22,6 +20,9 @@ public class BoardService {
 	@Autowired
 	private DressDAO ddao;
 	
+	@Autowired
+	private BoardLikeDAO ldao;
+
 	// help 전체 글 가져오기
 	public List<BoardDTO> helpBoardSelectAll() {
 		return boardDAO.helpBoardSelectAll();
@@ -60,9 +61,29 @@ public class BoardService {
 	public List<BoardDTO> boastSelectAll() {
 		return boardDAO.boastSelectAll();
 	}
+	// 자랑게시판 게시물 선택
+	public BoardDTO boastSeletctByNo(int no) {
+		return boardDAO.boastSelectByNo(no);
+	}
 	// 자랑게시판 게시글 삭제
 	public int boastDelete(int s_no) {
 		return boardDAO.boastDelete(s_no);
+	}
+	// 좋아요 카운트
+	public int boastLikeCount(int b_no) {
+		return ldao.likeCount(b_no);
+	}
+	// 좋아요 클릭
+	public int boastLikeAdd(int b_no,String email) {
+		return ldao.likeAdd(b_no, email);
+	}
+	// 좋아요 취소
+	public int boastLikeCancel(int b_no,String email) {
+		return ldao.likeCancel(b_no, email);
+	}
+	// 좋아요 클릭 여부
+	public int boastLikeClicked(int b_no,String email) {
+		return ldao.likeClicked(b_no, email);
 	}
 
 }

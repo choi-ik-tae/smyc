@@ -31,9 +31,13 @@
 	<insert id="boastBoardInsert">
 		insert into board values(board_seq.nextval,'B',#{s_no},#{email},#{nick},#{title},#{contents},sysdate,0)
 	</insert>
-<!-- 	자랑게시판 게시글 가져오기 -->
+<!-- 	자랑게시판 게시글 전체 가져오기 정렬은 기본으로 최근게시물 -->
 	<select id="boastSelectAll" resultType="kh.spring.dto.BoardDTO">
-		select * from board where category = 'B'
+		select * from board where category = 'B' order by no desc
+	</select>
+<!-- 	자랑게시판 게시글 선택 가져오기 -->
+	<select id="boastSelectByNo" resultType="kh.spring.dto.BoardDTO">
+		select * from board where no = #{no} 
 	</select>
 <!-- 	자랑게시판 게시글 삭제 -->
 	<delete id="boastDelete">

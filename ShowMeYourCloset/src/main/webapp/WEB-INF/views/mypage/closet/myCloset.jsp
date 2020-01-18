@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Show Me Your Closet</title>
 <!-- Bootstap4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -61,7 +60,7 @@
     <!-- 퀵 메뉴 -->
     <jsp:include page="../../standard/mypageQuickMenu.jsp" />
     
-	<div class="row mt-5" id="toTop">
+	<div class="row m-0 mt-5" id="toTop">
         <div class="col-12 mt-5">
             <div class="row">
                 <div class="col-12 text-center">
@@ -109,7 +108,7 @@
             </div>
         </div>
     </div>
-    <div class="row" id="dressBox">
+    <div class="row m-0" id="dressBox">
         <div class="col-12">
         <c:choose>
 	        <c:when test="${dressList.size() > 0}">
@@ -193,7 +192,7 @@
         </c:choose>
         </div>
     </div><hr>
-    <div class="row">
+    <div class="row m-0">
         <div class="col-8 m-auto p-0">
             <ul class="nav nav-tabs">
               <li class="nav-item">
@@ -214,7 +213,7 @@
             </ul>
         </div>
     </div>
-    <div class="row mt-1 mb-5">
+    <div class="row m-0 mt-1 mb-5">
 		<div class="col-8 m-auto p-0">
 			<div class="row row-cols-3 m-auto item-page">
 	        <!-- 파일 가져와서 뿌려주면 됨. 반복문사용 -->
