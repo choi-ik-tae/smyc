@@ -10,7 +10,12 @@
 	<select id="selectByPage" resultType="kh.spring.dto.AdvisorDTO">
 		select * from(select advisor.*,row_number() over (order by no desc) rown from advisor) where b_no=#{b_no} and (rown between #{start} and #{end})
 	</select>
+<!-- 	도움 댓글 등록 -->
 	<insert id="insertAdivisor">
 		insert into advisor values(advisor_seq.nextval,#{b_no},#{email},#{nickname},#{title},#{contents},#{top},#{pants},#{shoes},#{acc},'N',sysdate)
 	</insert>
+<!-- 	도움댓글 상세보기 -->
+	<select id="selectAdvisorDTO" resultType="kh.spring.dto.AdvisorDTO">
+		select * from advisor where no=#{value}
+	</select>
  </mapper>

@@ -116,4 +116,17 @@ public class AdvisorController {
 		return "redirect:/board/helpDetail?no="+dto.getB_no();
 		
 	}
+	
+	@RequestMapping("/detailAdvisor")
+	public String detailAdvisor(Model model,int no,String writer) {
+		AdvisorDTO dto = advisorService.selectAdvisorDTO(no);
+		
+		String gender = memService.selectGender(writer);
+		
+		model.addAttribute("gender", gender);
+		model.addAttribute("writer", writer);
+		model.addAttribute("dto",	dto);
+		
+		return "board/help/helpAdvisorDetail";
+	}
 }

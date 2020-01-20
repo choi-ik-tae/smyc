@@ -25,5 +25,9 @@ public class AdvisorService {
 	public void insertAdivisor(AdvisorDTO dto) {
 		advisorDAO.insertAdivisor(dto);
 	}
+	
+	public AdvisorDTO selectAdvisorDTO(int no) {
+		return advisorDAO.selectAdvisorDTO(no);
+	}
 
 }

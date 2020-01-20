@@ -42,4 +42,8 @@ public class AdvisorDAO {
 		parm.put("acc",dto.getAcc());
 		return sst.insert("Advisor.insertAdivisor",parm);
 	}
+	
+	public AdvisorDTO selectAdvisorDTO(int no) {
+		return sst.selectOne("Advisor.selectAdvisorDTO", no);
+	}
 }
