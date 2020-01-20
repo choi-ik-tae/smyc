@@ -20,7 +20,7 @@
                         내 정보
                     </div>
                 </div><hr>
-                <div class="row m-0 myinfoMenu">
+                <div class="row m-0 infoMenu">
                     <div class="col-12">
                         <div class="row">
                             <button type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 글</button>

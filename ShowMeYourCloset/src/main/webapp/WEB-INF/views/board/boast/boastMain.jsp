@@ -21,20 +21,14 @@
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: white;}
-    .bar{position:relative; width: 30px;height: 3px;background: dimgray;}
-    #title{font-size: 30px;color:dimgray;font-weight: 700;line-height: 100px;}
-    #menuDiv{position:fixed;width: 100%;height: 100%;background: grey;z-index: 2;background: rgba(0,0,0,0.5); display: none;}
-    .InfoMenu {position:fixed;width: 380px; height: 100%;background: white; z-index: 3}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:100px;}
-    #menuIcon{ margin-top: 43px;}
+    /* 숨김메뉴 */
     .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
+    /* 자랑게시판 상단 */
     #boast{border: 1px solid white;border-radius: 10px;position: absolute;background:rgba(255,255,255,0.9);width: 1000px;height: 300px;transform: translate(44%,40%);}
     #boastTitle{font-size: 40pt;font-weight: 800;}
-    #searchBox>div{border: 1px solid black; border-radius: 5px; width:90px;}
-    #searchBar{width: 95%; height: 80%; margin-top:10px; display: none;}
     .borderDelete{border: 0px;}
     #boast>div>div>p{font-size: 20pt; font-weight: 800;}
     .boardItem{display: none;}
@@ -42,7 +36,19 @@
     .img-top{height: 50%;}
     .img-bottom{height: 50%;}
     .card-img-box{height: 300px;}
-    #load{display:none;}
+    #load{display:none;}    
+    /* 네비바 */
+    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
+    #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
+    #categoryBar{height: 80%;}
+    #searchBar{width: 20%; height: 100%; display: none; font-weight: 800; line-height: 50px; margin-top: 6px;}
+    #toSearch{height: 100%; font-weight: 800;display: none; margin-bottom:5px;}
+   	#menuIcon{ margin-top: 17px;}
+    .bar{position:relative; width: 30px;height: 3px;background: dimgray;}
+    #menuText{ line-height: 50px; }
+    #btnMenu:hover{cursor:pointer;}
 </style>
 <script>
 	$(function() {
@@ -59,6 +65,12 @@
 				$(this).css("display", "none");
 			}
 		});
+		
+	    $("#categoryTab option[value]").each(function(){
+	    	if($(this).val() == "${target}") {
+	    		$(this).attr("selected",true);
+	    	}
+	    });
 	});
 </script>
     </head>
@@ -75,7 +87,7 @@
 		<!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">
-				<div class="row m-0">
+				<div class="row m-0" id="menuItem">
 					<div class="col-4 p-0">
 						<div class="row m-0">
 							<div class="col-12" id="menuIcon">
@@ -85,25 +97,33 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-8 p-0 text-center d-none d-md-block"
-						style="height: 100px; line-height: 100px;">
-						<span style="font-size: 20pt; font-weight: 700; color: dimgray;">MENU</span>
+					<div class="col-8 p-0 text-center d-none d-md-block">
+						<span id="menuText" style="font-weight: 700; color: dimgray;">MENU</span>
 					</div>
 				</div>
 			</div>
 			<div class="col-10 p-0 d-none d-md-block text-center">
-				<span id="title">BOAST BOARD</span> <input type="text"
-					class="form-control" id="searchBar" name="target"
-					placeholder="검색할 단어를 입력하세요">
+                <div class="row m-0">
+	                <div class="col-12" id="categoryBar">
+	                	<span id="bTitle" class="mr-3">STYLE BOAST</span>
+	                	<select id="categoryTab" name="category" class="form-control">
+	                		<option value="new">New</option>
+	                		<option value="trendy">Trendy</option>
+	                		<option value="popular">Popular</option>
+	                		<option value="random">Random</option>
+	                	</select>
+                        <input type="text" class="form-control" id="searchBar" name="target" placeholder="검색할 단어를 입력하세요">
+                        <button id="toSearch" type="button" class="btn btn btn-outline-dark">검색</button>
+	                </div>
+            	</div>
 			</div>
 			<div id="searchBox" class="col-1 p-0 m-0">
-				<div class="row" style="margin-top: 4px;">
+				<div class="row" style="margin-top: 4px; border:0px;">
 					<div id="btnSearch" class="col-12 p-0">
-						<img class="w-100" src="/imgs/btn/btnSearch.png">
+						<img src="/imgs/btn/btnSearch.png" style="width: 40px; border-radius: 5px;">
 					</div>
-					<div id="btnCloseSearch" class="col-12 p-0"
-						style="background-color: black; display: none;">
-						<img class="p-3 w-100" src="/imgs/btn/btnSearchClose.png">
+					<div id="btnCloseSearch" class="p-0" style="background-color: black; display: none;width: 40px; border-radius: 5px;">
+						<img src="/imgs/btn/btnSearchClose.png" class="p-1" style="width: 40px;">
 					</div>
 				</div>
 			</div>
@@ -112,7 +132,7 @@
 		<div class="row m-0" style="height: 600px;">
 			<div class="col-12">
 				<!-- 위 메뉴 공백 채우기 -->
-				<div class="row" style="margin-top: 100px;"></div>
+				<div class="row" style="margin-top: 50px;"></div>
 				<div class="col-12">
 					<div class="row">
 						<div class="col-12" id="boast">
@@ -195,10 +215,28 @@
 	</div>
 	<!-- 푸터 -->
     <jsp:include page="../../standard/boardFooter.jsp" />
-    
-    <script>
+    <form action = "${pageContext.request.contextPath}/board/boastBoard" method="post" id="alignFrm">
+    	<input type="hidden" name="Atarget" id="AlignTarget" value="">
+    </form>
+    <form action = "${pageContext.request.contextPath}/board/boastDetailView" method="post" id="detailFrm">
+    	<input type="hidden" name="Dtarget" id="detailTarget" value="">
+    </form>
+    <script>    	
+	    $("#btnMenu").on("mouseover",function(){
+	        $(".bar").css("background-color","black");
+	        $("#menuText").css("color","black");
+	    });
+	    $("#btnMenu").on("mouseout",function(){
+	        $(".bar").css("background-color","dimgray");
+	        $("#menuText").css("color","dimgray");
+	    });
+	    $("#categoryTab").on("change",function(){
+	    	$("#AlignTarget").val($("#categoryTab option:selected").val());
+	    	$("#alignFrm").submit();
+		});
     	$(".boardItem").on("click",function(){
-    		location.href="${pageContext.request.contextPath}/board/boastDetailView?target="+$(this).attr("id");
+    		$("detailTarget").val($(this).attr("id"));
+    		$("#detailFrm").submit();
     	});
         $("#btnMenu").on("click",function(){
             $(".menu").css("display","flex");
@@ -213,14 +251,18 @@
         $("#btnSearch").on("click",function(){
             $("#btnCloseSearch").css("display","flex");
             $("#btnSearch").css("display","none");
+            $("#toSearch").css("display","inline-block");
             $("#searchBar").css("display","inline-block");
-            $("#title").css("display","none");
+            $("#bTitle").css("display","none");
+            $("#categoryTab").css("display","none");
         });
         $("#btnCloseSearch").on("click",function(){
             $("#btnSearch").css("display","flex");
             $("#btnCloseSearch").css("display","none");
+            $("#toSearch").css("display","none");
             $("#searchBar").css("display","none");
-            $("#title").css("display","inline");
+            $("#bTitle").css("display","inline-block");
+            $("#categoryTab").css("display","inline-block");
         });
     </script>
 </c:otherwise>

@@ -149,10 +149,13 @@ public class BoardController {
 	
 	// 자랑게시판 메인
 	@RequestMapping("/boastBoard")
-	public String boastBoard(Model m) {
+	public String boastBoard(String Atarget,Model m) {
+		if(Atarget == null) {
+			Atarget = "new";
+		}
 		String email = (String)session.getAttribute("email");
 		// 자랑게시판 게시물 총 출력
-		List<BoardDTO> boastList = boardService.boastSelectAll();
+		List<BoardDTO> boastList = boardService.boastAlign(Atarget);
 		List<StyleDTO> styleList = new ArrayList<>();
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
@@ -166,7 +169,7 @@ public class BoardController {
 		}
 		styleList.clear();
 		// 지운거 반영해서 다시 호출
-		boastList = boardService.boastSelectAll();
+		boastList = boardService.boastAlign(Atarget);
 		List<Integer> likeList = new ArrayList<>();
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
@@ -177,6 +180,7 @@ public class BoardController {
 		m.addAttribute("styleList", styleList);
 		m.addAttribute("email", email);
 		m.addAttribute("likeList", likeList);
+		m.addAttribute("target", Atarget);
 		
 		return "board/boast/boastMain";
 	}
@@ -232,17 +236,17 @@ public class BoardController {
 		
 		boardService.boastBoardInsert(dto);
 		
-		return "redirect:/";
+		return "redirect:/board/boastBoard";
 	}
 	// 자랑게시판 게시물 디테일
 	@RequestMapping("/boastDetailView")
-	public String boastDetailView(String target,Model m) {
+	public String boastDetailView(String Dtarget,Model m) {
 		String email = (String)session.getAttribute("email");
 		if(email == null) {
 			System.out.println("끄지라!");
 			return "redirec:/";
 		}		
-		String item = target.substring(5, target.length());
+		String item = Dtarget.substring(5, Dtarget.length());
 		int no = Integer.parseInt(item);
 		if(boardService.boastSeletctByNo(no) == null) {
 			return "error";
@@ -279,6 +283,40 @@ public class BoardController {
 		}
 		
 		return target;
+	}
+	
+	// 자랑게시판 카테고리 별 재 정렬
+	@RequestMapping("/boastAlign")
+	public String boastAlign(String target,Model m) {
+		String email = (String)session.getAttribute("email");
+		// 자랑게시판 게시물 총 출력
+		List<BoardDTO> boastList = boardService.boastAlign(target);
+		List<StyleDTO> styleList = new ArrayList<>();
+		for(BoardDTO tmp : boastList) {
+			styleList.add(styleService.detailStyle(tmp.getS_no()));
+		}
+		// 옷 삭제되었을때 자랑게시물 및 코디 지우기
+		for(StyleDTO dto : styleList) {
+			if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
+				styleService.styleDelete(dto.getNo());
+				boardService.boastDelete(dto.getNo());
+			}
+		}
+		styleList.clear();
+		// 지운거 반영해서 다시 호출
+		boastList = boardService.boastAlign(target);
+		List<Integer> likeList = new ArrayList<>();
+		for(BoardDTO tmp : boastList) {
+			styleList.add(styleService.detailStyle(tmp.getS_no()));
+			likeList.add(boardService.boastLikeCount(tmp.getNo()));
+		}
+		
+		m.addAttribute("boastList", boastList);
+		m.addAttribute("styleList", styleList);
+		m.addAttribute("email", email);
+		m.addAttribute("likeList", likeList);
+		
+		return "board/boast/boastMain";
 	}
 
 }

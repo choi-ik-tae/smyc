@@ -43,6 +43,22 @@
 	<delete id="boastDelete">
 		delete from board where s_no = #{s_no}
 	</delete>
+<!-- 	자랑게시판 카테고리 별로 재정렬 -->
+	<select id="boastSelectNew" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category='B' order by no desc
+	</select>
+	<select id="boastSelectTrendy" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category='B' order by views desc
+	</select>
+	<select id="boastSelectPopular" resultType="Integer">
+		select b_no from boardlike where category='B' group by b_no order by count(*) desc
+	</select>
+	<select id="boastSelectRandom" resultType="kh.spring.dto.BoardDTO">
+		select * from( select * from board where category = 'B' order by DBMS_RANDOM.RANDOM )
+	</select>
+<!-- 	조회수 증가 -->
+	<update id="viewCountPlus">
+		update board set views = views+=1 where b_no = #{b_no}
+	</update>
 
-	
 </mapper>
