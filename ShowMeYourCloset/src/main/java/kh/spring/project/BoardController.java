@@ -133,9 +133,10 @@ public class BoardController {
 			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
 
 			List<BoardDTO> list = boardService.helpBoardSearch(start, end, search);
+			/*
 			for (BoardDTO dto : list) {
 				dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
-			}
+			}*/
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);
 			

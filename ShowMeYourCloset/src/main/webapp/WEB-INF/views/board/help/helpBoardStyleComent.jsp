@@ -28,16 +28,16 @@
                     			<span>등록된 도움 글이 없습니다.</span>
                     		</div>
                     	</c:if>
-	                    <c:forEach items="${list}" var="dto">
+	                    <c:forEach items="${list}" var="item">
 	                    	<div class="col-6">
 	                            <div class="row m-2 p-2" style="border: 1px solid #bcbcbc; border-radius: 5px;">
 	                                <div class="col-4 p-0" style="height: 100px;">
-	                                    <img src="${dto.top}" style="width: 100%; height: 100%;">
+	                                    <img src="${item.top}" style="width: 100%; height: 100%;">
 	                                </div>
 	                                <div class="col-8" >
 	                                    <div class="row" style="height: 100px;">
-	                                        <div class="col-12" style="height: 50%;">${dto.title}</div>
-	                                        <div class="col-12" style="height: 50%;">${dto.nickname}</div>
+	                                        <div class="col-12" style="height: 50%;">${item.title}</div>
+	                                        <div class="col-12" style="height: 50%;">${item.nickname}</div>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -62,7 +62,10 @@
 
         <script>
             $("#btn").on("click",function(){
-                alert("여기서도 버튼 클릭 돼요~~");
+            	parent.document.hiddenFrm.writer.value="${writer}";
+            	parent.document.hiddenFrm.b_no.value="${b_no}";
+            	
+            	parent.document.hiddenFrm.submit();
             })
         </script>
     </body>
