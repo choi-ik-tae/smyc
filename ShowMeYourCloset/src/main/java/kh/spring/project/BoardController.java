@@ -250,9 +250,10 @@ public class BoardController {
 		if(boardService.boastSeletctByNo(no) == null) {
 			return "error";
 		}
+		// 조회수 증가
+		boardService.viewCountPlus(no);
 		BoardDTO boast = boardService.boastSeletctByNo(no);
 		int s_no = boardService.boastSeletctByNo(no).getS_no();
-		
 		String gender = memService.selectGender(email);
 		StyleDTO style = styleService.detailStyle(s_no);
 		int likeCliked = boardService.boastLikeClicked(boast.getNo(),email);
@@ -280,16 +281,14 @@ public class BoardController {
 			boardService.boastLikeCancel(no, email);
 			target = "btnLikeB";
 		}
-		
 		return target;
 	}
-	
-	// 자랑게시판 카테고리 별 재 정렬
-	@RequestMapping("/boastAlign")
-	public String boastAlign(String target,Model m) {
+	// 자랑게시판 검색
+	@RequestMapping("/boastSearch")
+	public String boastBoardSearchAll(String keyWord,Model m) {
+		System.out.println(keyWord);
 		String email = (String)session.getAttribute("email");
-		// 자랑게시판 게시물 총 출력
-		List<BoardDTO> boastList = boardService.boastAlign(target);
+		List<BoardDTO> boastList = boardService.boastBoardSearchAll(keyWord);
 		List<StyleDTO> styleList = new ArrayList<>();
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
@@ -303,7 +302,7 @@ public class BoardController {
 		}
 		styleList.clear();
 		// 지운거 반영해서 다시 호출
-		boastList = boardService.boastAlign(target);
+		boastList = boardService.boastBoardSearchAll(keyWord);
 		List<Integer> likeList = new ArrayList<>();
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
@@ -315,7 +314,6 @@ public class BoardController {
 		m.addAttribute("email", email);
 		m.addAttribute("likeList", likeList);
 		
-		return "board/boast/boastMain";
+		return "board/boast/boastSearch";
 	}
-
 }

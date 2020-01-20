@@ -47,11 +47,12 @@ public class ClosetDAO {
 		return sst.selectOne("Closet.selectByDress", no);
 	}
 	// 옷장 수정
-	public int update(int no, String name, String img) {
+	public int update(int no, String name, String img,String pub) {
 		Map<String, Object> parm = new HashMap<>();
 		parm.put("no",no);
 		parm.put("name",name);
 		parm.put("img",img);
+		parm.put("pub",pub);
 		return sst.update("Closet.update",parm);
 	}
 	// 옷장 삭제

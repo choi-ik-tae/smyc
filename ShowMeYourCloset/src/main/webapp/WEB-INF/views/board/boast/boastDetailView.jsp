@@ -248,7 +248,7 @@
 								<button id="toBoastMain" type="button" class="btn btn-sm btn-outline-dark">돌아가기</button>
 							</div>
 							<div class="col-6 text-right">
-								<label for="" class="m-0" style="font-weight:800;">조회수 5</label>
+								<label for="" class="m-0" style="font-weight:800;">조회수 ${boast.views}</label>
 							</div>
 						</div>
 						<div class="row mt-2">

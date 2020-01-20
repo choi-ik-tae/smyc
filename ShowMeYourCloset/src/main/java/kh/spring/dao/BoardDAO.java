@@ -62,7 +62,10 @@ public class BoardDAO {
 	public List<BoardDTO> helpBoardAllSearch (String search){
 		return sst.selectList("Board.helpBoardAllSearch",search);
 	}
-
+	// 조회수 증가
+	public int viewCountPlus(int no) {
+		return sst.update("Board.viewCountPlus",no);
+	}
 	// boast 게시판 등록
 	public int boastBoardInsert(BoardDTO dto) {
 		Map<String, Object> parm = new HashMap<>();
@@ -101,5 +104,9 @@ public class BoardDAO {
 	// boast random
 	public List<BoardDTO> boastSelectRandom() {
 		return sst.selectList("Board.boastSelectRandom");
+	}
+	// 자랑 게시판 검색
+	public List<BoardDTO> boastBoardSearchAll(String keyWord) {
+		return sst.selectList("Board.boastBoardSearchAll","%"+keyWord+"%");
 	}
 }

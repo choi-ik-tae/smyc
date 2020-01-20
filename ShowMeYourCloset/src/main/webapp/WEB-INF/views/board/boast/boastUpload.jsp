@@ -32,8 +32,13 @@
     #dressImg{height: 400px; margin-top: 60px;}
     .dImgs{width:100%;height:100%;opacity:0.8;border-radius:20px;}
 </style>
+<script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
 </head>
 <body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
     <c:choose>
     <c:when test="${email == null}">
     	<script>

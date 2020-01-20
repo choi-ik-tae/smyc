@@ -214,8 +214,8 @@ public class ClosetService {
 		}
 	}
 	// 옷장 수정모드 - 옷장 이름, 이미지 변경
-	public void closetUpdate(int no,String img, String name) {
-		cdao.update(no, name, img);
+	public void closetUpdate(int no,String img, String name, String pub) {
+		cdao.update(no, name, img, pub);
 	}
 	// 이미지 경로 통해서 옷 상세정보 가져오기
 	public DressDTO pathDetailDress(String path) {

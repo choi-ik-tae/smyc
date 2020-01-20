@@ -17,7 +17,7 @@
 /*    div{border: 1px solid black;}*/
 	.container-fulid {width: 1890px;max-width: none !important;}
    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-    #bk{background-image:url('/imgs/bg/bg8.jpg');background-attachment: fixed; }
+    #bk{background-image:url('/imgs/bg/bg10.jpg');background-attachment: fixed;}
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: white;}
@@ -28,7 +28,7 @@
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
     /* 자랑게시판 상단 */
     #boast{border: 1px solid white;border-radius: 10px;position: absolute;background:rgba(255,255,255,0.9);width: 1000px;height: 300px;transform: translate(44%,40%);}
-    #boastTitle{font-size: 40pt;font-weight: 800;}
+    #boastText{font-size: 20pt; font-weight: 800;line-height: 300px;}
     .borderDelete{border: 0px;}
     #boast>div>div>p{font-size: 20pt; font-weight: 800;}
     .boardItem{display: none;}
@@ -106,12 +106,6 @@
                 <div class="row m-0">
 	                <div class="col-12" id="categoryBar">
 	                	<span id="bTitle" class="mr-3">STYLE BOAST</span>
-	                	<select id="categoryTab" name="category" class="form-control">
-	                		<option value="new">New</option>
-	                		<option value="trendy">Trendy</option>
-	                		<option value="popular">Popular</option>
-	                		<option value="random">Random</option>
-	                	</select>
                         <input type="text" class="form-control" id="searchBar" name="target" placeholder="검색할 단어를 입력하세요">
                         <button id="toSearch" type="button" class="btn btn btn-outline-dark">검색</button>
 	                </div>
@@ -129,7 +123,7 @@
 			</div>
 		</div>
 		<!-- 상단 설명 -->
-		<div class="row m-0" style="height: 600px;">
+		<div class="row m-0" style="height: 600px;" id="bodyTop">
 			<div class="col-12">
 				<!-- 위 메뉴 공백 채우기 -->
 				<div class="row" style="margin-top: 50px;"></div>
@@ -137,19 +131,15 @@
 					<div class="row">
 						<div class="col-12" id="boast">
 							<div class="row">
-								<div class="col-12 mt-4 text-center" id="boastTitle">
-									<span style="color: indianred">S</span>tyle <span
-										style="color: darkred">B</span>oast
-								</div>
-							</div>
-							<div class="row mt-4">
-								<div class="col-12 text-center">
-									<p class="mt-3">
-										당신의 <span style="color: indianred">스타일</span>을
-									</p>
-									<p>
-										<span style="color: darkred">자랑</span>해 보세요!
-									</p>
+								<div class="col-12 text-center" id="boastText">
+									<c:choose>
+										<c:when test="${boastList.size() > 0}">
+											총 ${boastList.size()} 건의 검색 결과가 있습니다.
+										</c:when>
+										<c:otherwise>
+											검색 결과가 없습니다.
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 						</div>
@@ -158,7 +148,7 @@
 			</div>
 		</div>
 		<!-- 게시글 주루룩 -->
-		<div class="row m-0 bg-white">
+		<div class="row m-0 bg-white" id="bodyContents">
 			<div class="col-12">
 				<div class="row">
 					<!-- 아이템 4개 씩 출력 -->
@@ -166,7 +156,10 @@
 						<div class="row card-deck m-auto" id="boardList">
 						<c:choose>
 						<c:when test="${boastList.size() <= 0}">
-							등록된 게시물이 없습니다.
+							<script>
+								$("#bodyTop").css("height","787px");
+								$("#bodyContents").remove();
+							</script>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="i" begin="0" end="${boastList.size() - 1}">
@@ -215,21 +208,18 @@
 	</div>
 	<!-- 푸터 -->
     <jsp:include page="../../standard/boardFooter.jsp" />
-    <form action = "${pageContext.request.contextPath}/board/boastBoard" method="post" id="alignFrm">
-    	<input type="hidden" name="Atarget" id="AlignTarget" value="">
-    </form>
     <form action = "${pageContext.request.contextPath}/board/boastDetailView" method="post" id="detailFrm">
     	<input type="hidden" name="Dtarget" id="detailTarget" value="">
     </form>
-    <form action = "${pageContext.request.contextPath}/board/boastSearch" method="post" id="searchFrm">
+	<form action = "${pageContext.request.contextPath}/board/boastSearch" method="post" id="searchFrm">
     	<input type="hidden" name="keyWord" id="searchTarget" value="">
     </form>
-    <script>
-    	$("#toSearch").on("click",function(){
-    		var keyword = $("#searchBar").val();
-    		$("#searchTarget").val(keyword);
-    		$("#searchFrm").submit();
-    	});
+    <script> 
+		$("#toSearch").on("click",function(){
+			var keyword = $("#searchBar").val();
+			$("#searchTarget").val(keyword);
+			$("#searchFrm").submit();
+		});
 	    $("#btnMenu").on("mouseover",function(){
 	        $(".bar").css("background-color","black");
 	        $("#menuText").css("color","black");
@@ -238,10 +228,6 @@
 	        $(".bar").css("background-color","dimgray");
 	        $("#menuText").css("color","dimgray");
 	    });
-	    $("#categoryTab").on("change",function(){
-	    	$("#AlignTarget").val($("#categoryTab option:selected").val());
-	    	$("#alignFrm").submit();
-		});
     	$(".boardItem").on("click",function(){
     		$("#detailTarget").val($(this).attr("id"));
     		$("#detailFrm").submit();
@@ -275,5 +261,5 @@
     </script>
 </c:otherwise>
 </c:choose>
-    </body>
+</body>
 </html>

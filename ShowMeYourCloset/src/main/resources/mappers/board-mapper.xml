@@ -58,7 +58,11 @@
 	</select>
 <!-- 	조회수 증가 -->
 	<update id="viewCountPlus">
-		update board set views = views+=1 where b_no = #{b_no}
+		update board set views = views + 1 where no = #{no}
 	</update>
+<!-- 	자랑게시판 전체 검색 -->
+	<select id="boastBoardSearchAll" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category='B' and (title like #{value} or contents like #{value})
+	</select>
 
 </mapper>

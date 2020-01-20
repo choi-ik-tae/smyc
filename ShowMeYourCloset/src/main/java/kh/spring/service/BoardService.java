@@ -49,7 +49,10 @@ public class BoardService {
 	public List<BoardDTO> helpBoardAllSearch(String search){
 		return boardDAO.helpBoardAllSearch(search);
 	}
-	
+	// 조회수 증가
+	public int viewCountPlus(int no) {
+		return boardDAO.viewCountPlus(no);
+	}
 	// 자랑게시판 업로드 - 선택한 옷 정보 가져오기
 	public DressDTO dressInfo(String path) {
 		return ddao.pathDetailDress(path);
@@ -104,5 +107,9 @@ public class BoardService {
 			result = boardDAO.boastSelectRandom();
 		}
 		return result;
+	}
+	// 자랑게시판 검색
+	public List<BoardDTO> boastBoardSearchAll(String keyWord) {
+		return boardDAO.boastBoardSearchAll(keyWord);
 	}
 }

@@ -165,14 +165,14 @@ public class ClosetContoller {
 	}
 	// 옷장 수정 - 수정완료
 	@RequestMapping("closetModifyProc")
-	public String closetModifyProc(String[] targets,int no, String closet, String dg,Model m) {
+	public String closetModifyProc(String[] targets,int no, String closet, String dg,String pub,Model m) {
 		List<Integer> nos = new ArrayList<>();
 		for(String tmp : targets) {
 			nos.add(Integer.parseInt(tmp));
 		}
 		String path = session.getServletContext().getRealPath("");
 		cloService.closetDeleteDress(nos,path);
-		cloService.closetUpdate(no, dg, closet);
+		cloService.closetUpdate(no, dg, closet, pub);
 		// 변경된 옷장 이름 보내주기 위함
 		String target = cloService.closetSelectName(no).getName();
 		m.addAttribute("target", target);

@@ -60,6 +60,11 @@
 						<label for="d2" class="ml-2 mr-4">브라운 <input type="radio" name="closetDesign" class="from-control" value="closet2" id="d2"></label>
 						<label for="d3" class="ml-2">베이지 <input type="radio" name="closetDesign" class="from-control" value="closet3" id="d3"></label>
 					</fieldset>
+					<fieldset style="border: 1px solid black" class="form-control text-left mt-3">
+						<span class="ml-5 mr-4">공개여부</span>
+						<label for="Y" class="ml-5 mr-4">공개 <input type="radio" name="closetPub" class="from-control" value="Y" id="y"></label> 
+						<label for="N" class="ml-4 mr-5">비공개 <input type="radio" name="closetPub" class="from-control" value="N" id="n"></label>
+					</fieldset>
                 </div>
             </div>
         </div>
@@ -133,7 +138,7 @@
             </div>
         </div>
     </div><hr>
-    <div class="row m-0">
+    <div class="row m-0 mb-3">
         <div class="col-12 text-center">
             <div class="row">
                 <div class="col-12">
@@ -152,6 +157,10 @@
         </div>
     </div>
 </div>
+    <c:choose>
+	    <c:when test="${closet.pub eq 'Y'}"><script>$("#y").prop("checked",true);</script></c:when>
+	    <c:when test="${closet.pub eq 'N'}"><script>$("#n").prop("checked",true);</script></c:when>
+    </c:choose>
     <c:choose>
 	    <c:when test="${closet.img eq 'closet1'}"><script>$("#d1").prop("checked",true);</script></c:when>
 	    <c:when test="${closet.img eq 'closet2'}"><script>$("#d2").prop("checked",true);</script></c:when>
@@ -184,7 +193,7 @@
     	if($("#closet").val() == "") {
     		$("#closet").val("${closet.name}");	
     	}
-    	location.href="${pageContext.request.contextPath}/closet/closetModifyProc?targets="+arr+"&no="+${closet.no}+"&closet="+$("#closet").val()+"&dg="+$("input[name='closetDesign']:checked").val();
+    	location.href="${pageContext.request.contextPath}/closet/closetModifyProc?targets="+arr+"&no="+${closet.no}+"&closet="+$("#closet").val()+"&dg="+$("input[name='closetDesign']:checked").val()+"&pub="+$("input[name='closetPub']:checked").val();
     });
 	$("#delete").on("click",function(){
 		var q = confirm("옷장안에 모든 옷이 삭제되며 저장한 코디에 영향을 끼치게 됩니다.<br> 정말 삭제하시겠습니까??");
