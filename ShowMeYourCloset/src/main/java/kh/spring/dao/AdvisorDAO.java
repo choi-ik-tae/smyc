@@ -28,4 +28,18 @@ public class AdvisorDAO {
 		
 		return sst.selectList("Advisor.selectByPage", parm);
 	}
+	
+	public int insertAdivisor(AdvisorDTO dto) {
+		Map<String,Object> parm = new HashMap<>();
+		parm.put("b_no",dto.getB_no());
+		parm.put("email",dto.getEmail());
+		parm.put("nickname",dto.getNickname());
+		parm.put("title",dto.getTitle());
+		parm.put("contents",dto.getContents());
+		parm.put("top",dto.getTop());
+		parm.put("pants",dto.getPants());
+		parm.put("shoes",dto.getShoes());
+		parm.put("acc",dto.getAcc());
+		return sst.insert("Advisor.insertAdivisor",parm);
+	}
 }
