@@ -86,4 +86,20 @@ public class BoardDAO {
 	public int boastDelete(int s_no) {
 		return sst.delete("Board.boastDelete", s_no);
 	}
+	// boast New
+	public List<BoardDTO> boastSelectNew() {
+		return sst.selectList("Board.boastSelectNew");
+	}
+	// boast Trendy
+	public List<BoardDTO> boastSelectTrendy() {
+		return sst.selectList("Board.boastSelectTrendy");
+	}
+	// boast popular
+	public List<Integer> boastSelectPopular() {
+		return sst.selectList("Board.boastSelectPopular");
+	}
+	// boast random
+	public List<BoardDTO> boastSelectRandom() {
+		return sst.selectList("Board.boastSelectRandom");
+	}
 }

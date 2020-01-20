@@ -17,13 +17,20 @@
 /*    div{border: 1px solid black;}*/
 	.container-fulid {width: 1890px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+    
+    #menuIcon{ margin-top: 17px;}
     .bar{position:relative; width: 30px;height: 3px;background: dimgray;}
-    #menuDiv{position:fixed;width: 100%;height: 100%;background: grey;z-index: 2;background: rgba(0,0,0,0.5); display: none;}
+    #menuText{ line-height: 50px; }
+    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
+    #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
+    #categoryBar{height: 80%;}
+    #searchBar{width: 20%; height: 100%; display: none; font-weight: 800; line-height: 50px; margin-top: 6px;}
+    #toSearch{height: 100%; font-weight: 800;display: none; margin-bottom:5px;}
+    
     .InfoMenu {position:fixed;width: 380px; height: 100%;background: white; z-index: 3}
    	#title{font-size: 30px;color:dimgray;font-weight: 700;line-height: 100px;}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:100px;}
-    #menuIcon{ margin-top: 43px;}
-    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5; top:0px;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
@@ -31,7 +38,6 @@
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: white;}
     #searchBox>div{border: 1px solid black; border-radius: 5px; width:90px;}
-    #searchBar{width: 95%; height: 80%; margin-top:10px; display: none;}
     .borderDelete{border: 0px;}
     #dressStyle{height: 800px;}
     #dressInfo{height: 800px; font-size: 10pt; font-weight: 800; display: none;}
@@ -44,6 +50,7 @@
     .dImgs{width:100%;height:100%;opacity:0.8;border-radius:20px;}
     .btnLike:hover{cursor:pointer}
     #comments{border:1px solid lightgray;border-radius: 5px;}
+    .space{margin-top:80px;margin-bottom:25px; margin-left:0px; margin-right:0px;}
 </style>
 </head>
 <body>
@@ -58,11 +65,11 @@
 	<!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>
 	<!-- 본문 -->
-    <div class="container-fulid">
+    <div class="container-fulid p-0">
 		<!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">
-				<div class="row m-0">
+				<div class="row m-0" id="menuItem">
 					<div class="col-4 p-0">
 						<div class="row m-0">
 							<div class="col-12" id="menuIcon">
@@ -72,33 +79,18 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-8 p-0 text-center d-none d-md-block"
-						style="height: 100px; line-height: 100px;">
-						<span style="font-size: 20pt; font-weight: 700; color: dimgray;">MENU</span>
+					<div class="col-8 p-0 text-center d-none d-md-block" id="menuText">
+						<span style="font-weight: 700; color: dimgray;">MENU</span>
 					</div>
 				</div>
 			</div>
 			<div class="col-10 p-0 d-none d-md-block text-center">
-				<span id="title">BOAST BOARD</span> <input type="text"
-					class="form-control" id="searchBar" name="target"
-					placeholder="검색할 단어를 입력하세요">
+				<span id="bTitle">BOAST BOARD</span>
 			</div>
-			<div id="searchBox" class="col-1 p-0 m-0">
-				<div class="row" style="margin-top: 4px;">
-					<div id="btnSearch" class="col-12 p-0">
-						<img class="w-100" src="/imgs/btn/btnSearch.png">
-					</div>
-					<div id="btnCloseSearch" class="col-12 p-0"
-						style="background-color: black; display: none;">
-						<img class="p-3 w-100" src="/imgs/btn/btnSearchClose.png">
-					</div>
-				</div>
-			</div>
+			<div id="searchBox" class="col-1 p-0 m-0"></div>
 		</div>
-            <!-- 위 메뉴 공백 채우기 -->
-            <div class="row" style="margin-top: 100px;"></div>
             <!-- 본문 -->
-            <div class="row m-0 mt-3 mb-3">
+            <div class="row space">
                 <div class="col-6 m-auto">
                     <div class="row">
                     <!-- 옷 이미지 -->
@@ -252,7 +244,10 @@
 							</div>
 						</div><hr class="m-0">
 						<div class="row mt-2">
-							<div class="col-12 text-right">
+							<div class="col-6 text-left">
+								<button id="toBoastMain" type="button" class="btn btn-sm btn-outline-dark">돌아가기</button>
+							</div>
+							<div class="col-6 text-right">
 								<label for="" class="m-0" style="font-weight:800;">조회수 5</label>
 							</div>
 						</div>
@@ -335,6 +330,9 @@
 			<jsp:include page="../../standard/boardFooter.jsp"/>			
     </div>
     <script>
+    	$("#toBoastMain").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/board/boastBoard";
+    	});
 	    var toDelete = function(no){
 	    	$.ajax({
 	    		url:"${pageContext.request.contextPath}/comments/boastCommentDelete",
@@ -489,14 +487,16 @@
         $("#btnSearch").on("click",function(){
             $("#btnCloseSearch").css("display","flex");
             $("#btnSearch").css("display","none");
-            $("#searchBar").css("display","inline-block");
+            $("#categoryBar").css("display","inline-block");
             $("#title").css("display","none");
+            $("#menuItem").css("display","none");
         });
         $("#btnCloseSearch").on("click",function(){
             $("#btnSearch").css("display","flex");
             $("#btnCloseSearch").css("display","none");
-            $("#searchBar").css("display","none");
+            $("#categoryBar").css("display","none");
             $("#title").css("display","inline");
+            $("#menuItem").css("display","flex");
         });
     </script>
     </c:otherwise>

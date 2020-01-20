@@ -1,5 +1,6 @@
 package kh.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +86,23 @@ public class BoardService {
 	public int boastLikeClicked(int b_no,String email) {
 		return ldao.likeClicked(b_no, email);
 	}
-
+	// 자랑게시판 카테고리 별 재 정렬
+	public List<BoardDTO> boastAlign(String target) {
+		List<BoardDTO> result = null;
+		if(target.contentEquals("new")) {
+			result = boardDAO.boastSelectNew();
+		} else if(target.contentEquals("trendy")) {
+			result = boardDAO.boastSelectTrendy();
+		} else if(target.contentEquals("popular")) {
+			List<BoardDTO> boast = new ArrayList<>();
+			List<Integer> nos = boardDAO.boastSelectPopular();
+			for(int tmp : nos) {
+				boast.add(boardDAO.boastSelectByNo(tmp));
+			}
+			result = boast;
+		} else if(target.contentEquals("random")) {
+			result = boardDAO.boastSelectRandom();
+		}
+		return result;
+	}
 }
