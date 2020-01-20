@@ -38,7 +38,7 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-12">
-					<button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					<button id="btnChangeImg" class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 						이미지 변경
 		  			</button>
 				</div>
@@ -181,13 +181,19 @@
     	</script>
     </c:forEach>
 	<script>
+		var check = 0;
+		$("#btnChangeImg").on("click",function(){
+			check = 1;
+		});
 		$("#modify").on("click",function(){
 			var target = $("#imgud").val();
-			if(target == "") {
-				alert("이미지를 등록해 주세요!")
-			} else {
-				$("#frm").submit();
+			if(check == 1) {
+				if(target == "") {
+					alert("이미지를 등록해 주세요!");
+					return;
+				}	
 			}
+			$("#frm").submit();
 		});
 		$("#toHome").on("click",function(){
 		   	//location.href="${pageContext.request.contextPath}/";

@@ -80,8 +80,13 @@ public class ClosetContoller {
 		
 		String path = session.getServletContext().getRealPath("files/" + nick);
 		DressImgDTO img = cloService.dressSelectImg(dto.getNo());
-		fdto.setSys_name(img.getSys_name());
 		String itemPath = img.getPath();
+		
+		if(file.getOriginalFilename() == "") {
+			fdto.setSys_name(img.getSys_name());
+			fdto.setOri_name(img.getOri_name());
+		}
+
 		cloService.dressModify(dto, fdto, file, path, nick, itemPath);
 		
 		return "redirect:/myCloset";
@@ -95,7 +100,6 @@ public class ClosetContoller {
 		if (target == null) {
 			List<String> base = cloService.closetSelectNameByEmail(email);
 			target = base.get(0);
-			System.out.println(target);
 		}
 		// 사용자 옷장 정보 가져가기
 		List<ClosetDTO> closetList = cloService.closetSeleteByEmail(email);

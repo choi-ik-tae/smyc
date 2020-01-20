@@ -164,6 +164,9 @@ public class ClosetService {
 			
 			File target = new File(path+"/"+fdto.getSys_name());
 			if (target.exists()) {
+				return result;
+			} else {
+				target = new File(path+itemPath.substring(12, itemPath.length()));
 				if(target.delete()){ 
 					System.out.println("파일삭제 성공");
 					String oriName = file.getOriginalFilename();
