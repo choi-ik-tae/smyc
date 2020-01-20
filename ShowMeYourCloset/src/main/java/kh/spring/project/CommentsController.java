@@ -30,15 +30,10 @@ public class CommentsController {
 	@RequestMapping("/helpBoardComments")
 	public String helpBoardComments(Model model, int b_no) {
 		List<CommentDTO> list = comService.commentsAll(b_no);
-		try {
-			for (CommentDTO dto : list) {
-				dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
-			}
-			model.addAttribute("list", list);
-			model.addAttribute("b_no", b_no);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		model.addAttribute("list", list);
+		model.addAttribute("b_no", b_no);
+		
 		return "board/help/helpBoardnomalComment";
 	}
 

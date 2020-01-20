@@ -23,13 +23,13 @@
             <div class="row m-0">
                 <div class="col-12 p-0" style="min-height: 200px; overflow: hidden;">
                     <div class="row commentContainer">
-                    	<c:if test="${list.size()==0 }">
+                    	<c:if test="${list.size()== null || list.size() == 0 }">
                     		<div class="col-12" style="text-align : center; line-height:200px;">
                     			<span>등록된 도움 글이 없습니다.</span>
                     		</div>
                     	</c:if>
 	                    <c:forEach items="${list}" var="item">
-	                    	<div class="col-6">
+	                    	<div class="col-6" onclick="detailAdvisor(${item.no})">
 	                            <div class="row m-2 p-2" style="border: 1px solid #bcbcbc; border-radius: 5px;">
 	                                <div class="col-4 p-0" style="height: 100px;">
 	                                    <img src="${item.top}" style="width: 100%; height: 100%;">
@@ -61,7 +61,20 @@
         </div>
 
         <script>
+        	var detailAdvisor = function(no){
+        		parent.document.detailFrm.writer.value="${writer}";
+        		parent.document.detailFrm.no.value=no;
+        		
+        		parent.document.detailFrm.submit();
+        	}
+        	
             $("#btn").on("click",function(){
+            	if("${email}" == ""){
+            		alert("로그인을 해주세요.");
+            		return ; 
+            		
+            	}
+            	
             	parent.document.hiddenFrm.writer.value="${writer}";
             	parent.document.hiddenFrm.b_no.value="${b_no}";
             	

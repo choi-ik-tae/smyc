@@ -320,6 +320,10 @@
 				<input type="hidden" name="writer">
 				<input type="hidden" name="b_no">
             </form>
+            <form action="${pageContext.request.contextPath}/advisor/detailAdvisor" id="detailFrm" name="detailFrm" method="post">
+            	<input type="hidden" name="writer">
+            	<input type="hidden" name="no">
+            </form>
 		</div>
 		<!-- 상단 설명 -->
 		<div class="row m-0" style="height: 50px;"></div>
