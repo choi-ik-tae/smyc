@@ -21,5 +21,9 @@ public class AdvisorService {
 	public List<AdvisorDTO> selectByPage(int start, int end, int b_no){
 		return advisorDAO.selectByPage(start, end, b_no);
 	}
+	
+	public void insertAdivisor(AdvisorDTO dto) {
+		advisorDAO.insertAdivisor(dto);
+	}
 
 }

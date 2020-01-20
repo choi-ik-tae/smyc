@@ -222,6 +222,7 @@
 		</div>
 	</div>
 	<script>
+		
 		$("#toBoast").on("click",function(){
 			location.href="${pageContext.request.contextPath}/board/boastUpload?no="+${dto.no};
 		});

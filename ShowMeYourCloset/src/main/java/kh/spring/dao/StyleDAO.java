@@ -101,4 +101,12 @@ public class StyleDAO {
 		
 		return sst.update("Style.updateItem",parm);
 	}
-}
+	// 도움 게시판 공개된 옷들만 가져오기
+	public List<String>selectPubCategoryAll(String email, String category, int c_no){
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("email",email);
+		parm.put("category",category);
+		parm.put("c_no",c_no);
+		return sst.selectList("Style.selectPubCategoryAll", parm); 
+	}
+} 

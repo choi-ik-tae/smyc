@@ -43,5 +43,9 @@
 	<update id="updateItem">
 		update style set ${category}=#{val} where ${category}=#{path}
 	</update>
+<!-- 	도움 게시판 공개된 옷들 가져오기 -->
+	<select id="selectPubCategoryAll" resultType="String">
+ 		select distinct path from dress d, dress_img img where (d.no = img.d_no) and (d.email=#{email}) and d.category=#{category} and d.c_no=#{c_no} and d.pub='Y'
+ 	</select>
  	
  </mapper>
