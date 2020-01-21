@@ -79,6 +79,12 @@
 <c:when test="${email ==null }">
 	로그인을 하십시오.
 </c:when>
+<c:when test="${result == 0}">
+	<script>
+		alert("이미 자랑한 스타일 입니다!");
+		location.href="${pageContext.request.contextPath}/myStyle";
+	</script>
+</c:when>
 <c:otherwise>
     <!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>
