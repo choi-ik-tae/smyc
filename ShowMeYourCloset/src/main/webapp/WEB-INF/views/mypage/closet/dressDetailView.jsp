@@ -14,11 +14,12 @@
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
-	.container-fulid {width: 1890px;max-width: none !important;}
+	.container {width: 800px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     html,body{height: 100%;}
     body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;}
     #preview{width:300px;height: 300px;}
+    .borderDelete{border: 0px;}
 </style>
 </head>
 <body>
@@ -35,7 +36,7 @@
 					<label for="closet" class="m-0 ">옷장</label>
 				</div>
 				<div class="col-10">
-					<input id="closet" class="w-100 form-control" name="closet" type="text" value="${closet.name}" readonly>
+					<input id="closet" class="w-100 form-control bg-white" name="closet" type="text" value="${closet.name}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -43,7 +44,7 @@
 					<label for="name" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="name" class="w-100 form-control" name="name" type="text" value="${info.name}" readonly>
+					<input id="name" class="w-100 form-control bg-white" name="name" type="text" value="${info.name}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -51,33 +52,28 @@
 					<label for="" class="m-0 ">카테고리</label>
 				</div>
 				<div class="col-10">
-					<input id="category" class="w-100 form-control" name="category" type="text" value="" readonly>
+					<input id="category" class="w-100 form-control bg-white" name="category" type="text" value="" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
 					<label for="" class="m-0 ">계절</label>
 				</div>
-				<div class="col-10">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="spring"
-							value="spring" disabled> <label class="form-check-label"
-							for="spring">봄</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="summer"
-							value="summer" disabled> <label class="form-check-label"
-							for="summer">여름</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="fall"
-							value="fall" disabled> <label class="form-check-label"
-							for="fall">가을</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="winter"
-							value="winter" disabled> <label class="form-check-label"
-							for="winter">겨울</label>
+				<!-- 계절 -->
+                <div class="col-10 text-center">
+					<div class="btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-sm btn-outline-dark borderDelete" id="spring">
+							<input type="checkbox" name="season" value="spring" disabled><span style="font-weight:800;">봄</span>
+						</label>
+						<label class="btn btn-sm btn-outline-dark borderDelete" id="summer">
+							<input type="checkbox" name="season" value="summer" disabled><span style="font-weight:800;">여름</span>
+						</label>
+						<label class="btn btn-sm btn-outline-dark borderDelete" id="fall">
+							<input type="checkbox" name="season" value="fall" disabled><span style="font-weight:800;">가을</span>
+						</label>
+						<label class="btn btn-sm btn-outline-dark borderDelete" id="winter">
+							<input type="checkbox" name="season" value="winter" disabled><span style="font-weight:800;">겨울</span>
+						</label>
 					</div>
 				</div>
 			</div>
@@ -85,14 +81,15 @@
 				<div class="col-2 align-self-center">
 					<label for="" class="m-0 ">공개여부</label>
 				</div>
+				<!-- 공개여부 -->
 				<div class="col-10">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="pub" id="y" value="Y" required disabled>
-						<label class="form-check-label" for="y">YES</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="pub" id="n" value="N" required disabled>
-                        <label class="form-check-label" for="n">NO</label>
+					<div class="btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-sm btn-outline-dark borderDelete" id="y">
+							<input id="btnY" type="radio" name="pub" value="Y" disabled><span style="font-weight:800;">YES</span>
+						</label>
+						<label class="btn btn-sm btn-outline-dark borderDelete" id="n">
+							<input id="btnN" type="radio" name="pub" value="N" disabled><span style="font-weight:800;">NO</span>
+						</label>
 					</div>
 				</div>
 			</div>
@@ -101,7 +98,7 @@
 					<label for="price" class="m-0 ">가격</label>
 				</div>
 				<div class="col-10">
-					<input id="price" class="w-100 form-control" name="price" type="text" value="${info.price}" readonly>
+					<input id="price" class="w-100 form-control bg-white" name="price" type="text" value="${info.price}" readonly>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -111,10 +108,10 @@
 				<div class="col-10">
 					<c:choose>
 					<c:when test="${day eq null}">
-						<input class="w-100 form-control" type="text" readonly>
+						<input class="w-100 form-control bg-white" type="text" readonly>
 					</c:when>
 					<c:otherwise>
-						<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31" value="${day}" readonly>
+						<input id="buy_date" class="w-100 form-control bg-white" name="buy_date" type="date" min="1950-01-01" max="2030-12-31" value="${day}" readonly>
 					</c:otherwise>
 					</c:choose>
 				</div>
@@ -124,7 +121,7 @@
 					<label for="" class="m-0 ">메모</label>
 				</div>
 				<div class="col-10">
-					<textarea class="form-control" rows="5" style="resize: none" name="memo" id="memo" readonly>${info.memo}</textarea>
+					<textarea class="form-control bg-white" rows="5" style="resize: none" name="memo" id="memo" readonly>${info.memo}</textarea>
 				</div>
 			</div>
 			<div class="row m-2">
@@ -141,8 +138,8 @@
 		<!-- 푸터 -->
     </div>
     <c:choose>
-	    <c:when test="${info.pub eq 'Y'}"><script>$("#y").prop("checked",true);</script></c:when>
-	    <c:when test="${info.pub eq 'N'}"><script>$("#n").prop("checked",true);</script></c:when>
+	    <c:when test="${info.pub eq 'Y'}"><script>$("#btnY").prop("checked",true);$("#y").addClass("active");</script></c:when>
+	    <c:when test="${info.pub eq 'N'}"><script>$("#btnN").prop("checked",true);$("#n").addClass("active");</script></c:when>
     </c:choose>
     <c:choose>
     	<c:when test="${info.category eq 'Top'}"><script>$("#category").val("상의");</script></c:when>
@@ -155,6 +152,7 @@
 	    	$("input[name=season]").each(function(){
 	            if($(this).val() == '${season}') {
 	                $(this).prop("checked",true);
+	                $("#${season}").addClass("active");
 	            }
 	        });
     	</script>

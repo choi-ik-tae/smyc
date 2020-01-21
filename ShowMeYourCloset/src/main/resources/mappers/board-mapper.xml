@@ -49,7 +49,7 @@
 	</select>
 <!-- 	자랑게시판 게시글 삭제 -->
 	<delete id="boastDelete">
-		delete from board where s_no = #{s_no}
+		delete from board where no = #{no}
 	</delete>
 <!-- 	자랑게시판 카테고리 별로 재정렬 -->
 	<select id="boastSelectNew" resultType="kh.spring.dto.BoardDTO">
@@ -76,4 +76,8 @@
 	<select id="boastIsExist" resultType="kh.spring.dto.BoardDTO">
 		select * from board where s_no = #{s_no}	
 	</select>
+<!-- 	자랑게시글 수정 -->
+	<update id="boastModify">
+		update board set title=#{title},contents=#{contents} where no=#{no}
+	</update>
 </mapper>

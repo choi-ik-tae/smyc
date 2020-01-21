@@ -91,14 +91,14 @@ public class ClosetContoller {
 		
 		String path = session.getServletContext().getRealPath("files/" + nick);
 		DressImgDTO img = cloService.dressSelectImg(dto.getNo());
-		String itemPath = img.getPath();
+		String itemSysName = img.getSys_name();
 		
 		if(file.getOriginalFilename() == "") {
 			fdto.setSys_name(img.getSys_name());
 			fdto.setOri_name(img.getOri_name());
 		}
 
-		cloService.dressModify(dto, fdto, file, path, nick, itemPath);
+		cloService.dressModify(dto, fdto, file, path, nick, itemSysName);
 		
 		return "redirect:/myCloset";
 	}	

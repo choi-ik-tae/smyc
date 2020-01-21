@@ -98,8 +98,8 @@ public class BoardDAO {
 		return sst.selectOne("Board.boastSelectByNo",no);
 	}
 	// boast 게시물 삭제
-	public int boastDelete(int s_no) {
-		return sst.delete("Board.boastDelete", s_no);
+	public int boastDelete(int no) {
+		return sst.delete("Board.boastDelete", no);
 	}
 	// boast New
 	public List<BoardDTO> boastSelectNew() {
@@ -124,5 +124,14 @@ public class BoardDAO {
 	// 게시물 중복 등록 검사
 	public BoardDTO boastIsExist(int s_no) {
 		return sst.selectOne("Board.boastIsExist",s_no);
+	}
+	// 자랑게시물 내용 수정
+	public int boastModify(int no,String title, String contents) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("no",no);
+		parm.put("title",title);
+		parm.put("contents",contents);
+		
+		return sst.update("Board.boastModify",parm);
 	}
 }

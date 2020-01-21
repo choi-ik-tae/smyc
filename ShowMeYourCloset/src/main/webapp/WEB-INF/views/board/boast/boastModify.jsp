@@ -241,117 +241,40 @@
 						</div>
 					</div>
 				</div>
-				<!-- 자랑게시글 작성 -->
-				<div class="row mt-3">
-					<div class="col-12 p-0">
-						<div class="row">
-							<div class="col-12 text-center">
-								<input id="bTitle" name="bTitle" type="text" class="form-control bg-white borderDelete p-0" value="${boast.title}" readonly>
-							</div>
-						</div><hr class="m-0">
-						<div class="row mt-2">
-							<div class="col-6 text-left align-self-center">
-								<label for="" class="m-0" style="font-weight:800;">${boast.nickname}</label>
-							</div>
-							<div class="col-6 text-right align-self-center">
-								<label for="" class="m-0" style="font-weight:800;">${boast.write_date}</label>
-							</div>
-						</div><hr class="m-0 mt-2">
-						<div class="row mt-2">
-							<div class="col-12">
-								<textarea name="contents" id="contents" rows="15" class="form-control bg-white borderDelete p-0" style="resize: none;" readonly>${boast.contents}</textarea>
-							</div>
-						</div><hr class="m-0">
-						<div class="row mt-2">
-							<div class="col-6 text-left">
-								<button id="toBoastMain" type="button" class="btn btn-sm btn-outline-dark">돌아가기</button>
-								<c:choose>
-								<c:when test="${email == boast.email}">
+				<!-- 글 수정 -->
+				<form action="${pageContext.request.contextPath}/board/boastModifyProc" method="post" id="boastModifyProcFrm">
+					<input type="hidden" name="no" value="${boast.no}">
+					<div class="row mt-3">
+						<div class="col-12 p-0">
+							<div class="row">
+								<div class="col-12 text-center">
+									<input id="bTitle" name="bTitle" type="text" class="form-control bg-white borderDelete p-0" value="${boast.title}">
+								</div>
+							</div><hr class="m-0">
+							<div class="row mt-2">
+								<div class="col-6 text-left align-self-center">
+									<label for="" class="m-0" style="font-weight:800;">${boast.nickname}</label>
+								</div>
+								<div class="col-6 text-right align-self-center">
+									<label for="" class="m-0" style="font-weight:800;">${boast.write_date}</label>
+								</div>
+							</div><hr class="m-0 mt-2">
+							<div class="row mt-2">
+								<div class="col-12">
+									<textarea name="contents" id="contents" rows="15" class="form-control bg-white borderDelete p-0" style="resize: none;">${boast.contents}</textarea>
+								</div>
+							</div><hr class="m-0">
+							<div class="row mt-2">
+								<div class="col-6 text-left">
+									<button id="toBack" type="button" class="btn btn-sm btn-outline-dark">돌아가기</button>
 									<button id="toBoastModify" type="button" class="btn btn-sm btn-outline-dark">수정</button>
-									<button id="toBoastDelete" type="button" class="btn btn-sm btn-outline-dark">삭제</button>
-								</c:when>
-								<c:otherwise>
-									<button id="toBoastReport" type="button" class="btn btn-sm btn-outline-dark">신고</button>
-								</c:otherwise>
-								</c:choose>
-							</div>
-							<div class="col-6 text-right">
-								<label for="" class="m-0" style="font-weight:800;">조회수 ${boast.views}</label>
+								</div>
+								<div class="col-6 text-right">
+								</div>
 							</div>
 						</div>
-						<div class="row mt-2">
-				            <div class="col-12 text-center">
-				            	<c:choose>
-					            	<c:when test="${likeCliked > 0}">
-					            		<img src="/imgs/btn/like_before.png" style="width: 50px;display:none;" class="mt-3 mb-2 btnLike" id="btnLikeB">
-				                		<img src="/imgs/btn/like_after.png" style="width: 50px;" class="mt-3 mb-2 btnLike" id="btnLikeA">
-					            	</c:when>
-					            	<c:otherwise>
-					            		<img src="/imgs/btn/like_before.png" style="width: 50px;" class="mt-3 mb-2 btnLike" id="btnLikeB">
-				                		<img src="/imgs/btn/like_after.png" style="width: 50px;display:none;" class="mt-3 mb-2 btnLike" id="btnLikeA">
-					            	</c:otherwise>
-				            	</c:choose>
-				            </div>
-				        </div>
-		<!-- 댓글 -->
-        <div class="row mt-2">
-            <div class="col-12 text-center">
-                <div class="row m-0 mt-2">
-                    <div class="col-12 p-0" id="comments">
-	                    <div class="row m-1 mt-2">
-		                    <div class="col-10">
-		                        <input type="text" class="form-control" name="comment" id="comment" placeholder="댓글입력">        
-		                    </div>
-		                    <div class="col-2">
-		                        <button id="btnComment" type="button" class="btn btn-outline-dark form-control">등록</button>
-		                    </div>
-		                </div>
-                        <div class="row m-0 mt-2" style="border-bottom:1px solid lightgray;">
-                        	<div class="col-12" id="callComment">
-	                        	<c:choose>
-		                        	<c:when test="${comments.size() > 0}">
-		                        	<c:forEach items="${comments}" var="cm">
-		                        		<!-- 댓글 존재하는 경우 -->
-		                        		<div class="row m-1 exist" style="border:1px solid lightgray;" id="no${cm.no}">
-				                            <div class="col-6 text-left" id="Ccontents">
-				                               	<span class="align-middle">${cm.contents}</span>
-				                            </div>
-				                            <div class="col-2" id="Cwriter">
-												<span class="align-middle">${cm.nickname}</span>
-				                            </div>
-				                            <div class="col-2" id="Cwrite_date">
-				                               	<span class="align-middle">${cm.write_date}</span>
-				                            </div>
-				                            <div class="col-2">
-											<c:choose>
-				                            	<c:when test="${email == cm.email}">
-				                            		<button type='button' class="btn btn-sm btn-outline-dark borderDelete" onclick="toDelete(${cm.no})" style="color:gray;">삭제</button>
-				                            	</c:when>
-				                            	<c:otherwise>
-				                            		<button type='button' class="btn btn-sm btn-outline-dark borderDelete" onclick="toReport(${cm.no})" style="color:gray;">신고</button>
-				                            	</c:otherwise>
-				                            </c:choose>
-				                            </div>
-		                        		</div>
-		                        	</c:forEach>
-		                        	</c:when>
-		                        	<c:otherwise>
-		                        		<!-- 댓글 없는 경우 -->
-		                        		<div class="row m-1" id="empty">
-				                        	<div class="col-12">
-				                        		<span class="align-middle">등록된 댓글이 없습니다.</span>
-				                        	</div>
-		                        		</div>
-		                        	</c:otherwise>
-	                        	</c:choose>
-                        	</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 					</div>
-				</div>
+				</form>
 			</div>
             </div>
             <!-- 푸터 -->
@@ -367,123 +290,9 @@
 	        });
     	</script>
     </c:forEach>
-    <form action="${pageContext.request.contextPath}/board/boastDelete" method="post" id="boastDeleteFrm">
-    	<input type="hidden" name="no" value="${boast.no}">
-    </form>
-    <form action="${pageContext.request.contextPath}/board/boastModify" method="post" id="boastModifyFrm">
-    	<input type="hidden" name="no" value="${boast.no}">
-    </form>
     <script>
     	$("#toBoastModify").on("click",function(){
-			$("#boastModifyFrm").submit();
-    	});
-    	$("#toBoastDelete").on("click",function(){
-			var q = confirm("정말 삭제하시겠습니까??");
-			if(q) {
-				$("#boastDeleteFrm").submit();
-			}
-    	});
-    	$("#toBoastMain").on("click",function(){
-    		location.href="${pageContext.request.contextPath}/board/boastBoard";
-    	});
-	    var toDelete = function(no){
-	    	$.ajax({
-	    		url:"${pageContext.request.contextPath}/comments/boastCommentDelete",
-    			method:"POST",
-    			data:{
-    				target:no
-				}
-	    	}).done(function(){
-	    		$("#no"+no).remove();
-	    		console.log($(".exist").length);
-	    		if($(".exist").length == 0) {
-    				var row = $("<div class='row m-1' id='empty'>");
-    				var col = $("<div class='col-12'>");
-    				var span = $("<span class='align-middle'>");
-    				var text = "등록된 댓글이 없습니다.";
-    				
-    				row.append(col);
-    				col.append(span);
-    				span.append(text);
-    				
-    				$("#callComment").append(row);
-    			}
-	    	}).fail(function(){
-	    		console.log("실패");
-	    	})
-		};
-    	$("#btnComment").on("click",function(){
-    		$.ajax({
-    			url:"${pageContext.request.contextPath}/comments/boastCommentInsert",
-    			method:"POST",
-    			data:{
-    				contents:$("#comment").val(),
-    				b_no:"${boast.no}"
-				},
-				dataType:"json"
-    		}).done(function(data){
-    			$("#comment").val("");
-    			
-    			if($("#empty").length > 0){
-    				$("#empty").remove();
-    			}
-    			
-    			var row = $("<div class='row m-1 exist' style='border:1px solid lightgray;' id='no"+data[0].no+"'>");
-    			var cmCol = $("<div class='col-6 pl-3 text-left' id='Ccontents'>");
-        		var cmSpan = $("<span class='align-middle'>");
-        		var cmText = data[0].contents;
-        		var wtCol = $("<div class='col-2' id='Cwriter'>");
-        		var wtSpan = $("<span class='align-middle'>");
-        		var wtText = data[0].nickname;
-        		var wdCol = $("<div class='col-2' id='Cwrite_date'>");
-        		var wdSpan = $("<span class='align-middle'>");
-        		var wdText = data[0].write_date;
-        		var btnCol = $("<div class='col-2'>");
-        		var btn = $("<button type='button' class='btn btn-sm btn-outline-dark borderDelete' onclick='toDelete("+data[0].no+")' style='color:gray;'>");
-        		var btnText = "삭제"; 
-    				
-    			cmCol.append(cmSpan);
-        		cmSpan.append(cmText);
-        		wtCol.append(wtSpan);
-        		wtSpan.append(wtText);
-        		wdCol.append(wdSpan);
-        		wdSpan.append(wdText);
-        		btnCol.append(btn);
-        		btn.append(btnText);
-        		row.append(cmCol);
-        		row.append(wtCol);
-        		row.append(wdCol);
-        		row.append(btnCol);
-        			
-        		$("#callComment").append(row);
-    		}).fail(function(data){
-    			console.log("실패");
-    		})
-    	});
-    	$(".btnLike").on("click",function(){
-    		$.ajax({
-    			url:"${pageContext.request.contextPath}/board/likeClick",
-    			method:"POST",
-    			data:{
-    				val:$(this).attr("id"),
-    				no:"${boast.no}"
-				}
-    		}).done(function(data){
-    			if(data == "btnLikeA") {
-    				console.log(data);
-    				$("#btnLikeA").css("display","inline");
-    				$("#btnLikeB").css("display","none");
-    			} else {
-    				console.log(data);
-    				$("#btnLikeA").css("display","none");
-    				$("#btnLikeB").css("display","inline");
-    			}
-    		}).fail(function(data){
-    			console.log("실패")
-    		});
-    		
-    		$("#btnLikeA").css("display","inline");
-    		$("#btnLikeB").css("display","none");
+			$("#boastModifyProcFrm").submit();
     	});
     	$("#toBack").on("click",function(){
     		history.back();

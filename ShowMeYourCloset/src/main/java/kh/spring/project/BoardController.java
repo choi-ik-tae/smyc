@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -263,10 +264,12 @@ public class BoardController {
 		StyleDTO style = styleService.detailStyle(s_no);
 		int likeCliked = boardService.boastLikeClicked(boast.getNo(),email);
 		List<CommentDTO> comments = comService.commentsAll(boast.getNo());
+		String[] season = style.getSeason().split(",");
 		
 		m.addAttribute("email",email);
 		m.addAttribute("style", style);
 		m.addAttribute("gender", gender);
+		m.addAttribute("season",season);
 		m.addAttribute("boast", boast);
 		m.addAttribute("likeCliked", likeCliked);
 		m.addAttribute("comments", comments);
@@ -330,5 +333,44 @@ public class BoardController {
 			return "be";
 		}
 		return "clean";
+	}
+	// 자랑게시물 삭제
+	@RequestMapping("/boastDelete")
+	public String boastDelete(int no) {
+		boardService.boastDelete(no);
+		return "redirect:/";
+	}
+	// 자랑게시물 수정 페이지 이동
+	@RequestMapping("/boastModify")
+	public String boastModify(int no,Model m) {
+		System.out.println("변경할 게시물 번호 : "+no);
+		String email = (String)session.getAttribute("email");
+		if(email == null) {
+			System.out.println("끄지라!");
+			return "redirec:/";
+		}		
+		BoardDTO boast = boardService.boastSeletctByNo(no);
+		int s_no = boardService.boastSeletctByNo(no).getS_no();
+		String gender = memService.selectGender(email);
+		StyleDTO style = styleService.detailStyle(s_no);
+		int likeCliked = boardService.boastLikeClicked(boast.getNo(),email);
+		List<CommentDTO> comments = comService.commentsAll(boast.getNo());
+		String[] season = style.getSeason().split(",");
+		
+		m.addAttribute("email",email);
+		m.addAttribute("style", style);
+		m.addAttribute("gender", gender);
+		m.addAttribute("season",season);
+		m.addAttribute("boast", boast);
+		m.addAttribute("likeCliked", likeCliked);
+		m.addAttribute("comments", comments);
+		
+		return "board/boast/boastModify";
+	}
+	// 자랑게시물 수정 실행
+	@RequestMapping("/boastModifyProc")
+	public String boastModifyProc(int no,String bTitle, String contents) {
+		boardService.boastModify(no, bTitle, contents);
+		return "redirect:/board/boastBoard";
 	}
 }
