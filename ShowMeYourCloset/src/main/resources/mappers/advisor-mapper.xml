@@ -18,4 +18,7 @@
 	<select id="selectAdvisorDTO" resultType="kh.spring.dto.AdvisorDTO">
 		select * from advisor where no=#{value}
 	</select>
- </mapper>
+	<update id="updateChoiceAdvisor">
+		update advisor set choice=#{choice} where no=#{no}
+	</update>
+ </mapper> 
