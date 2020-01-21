@@ -157,16 +157,18 @@ public class ClosetService {
 	}
 	// 옷 정보 수정 및 이미지 교체
 	@Transactional("txManager")
-	public int dressModify(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick, String itemPath) {
+	public int dressModify(DressDTO dto, DressImgDTO fdto, MultipartFile file, String path, String nick, String itemSysName) {
 		int result = ddao.update(dto);
 		if (result > 0) {
 			int seq = dto.getNo();
 			
 			File target = new File(path+"/"+fdto.getSys_name());
 			if (target.exists()) {
+				System.out.println("이미지 유지 : "+target);
 				return result;
 			} else {
-				target = new File(path+itemPath.substring(12, itemPath.length()));
+				target = new File(path+"/"+itemSysName);
+				System.out.println("이미지 변경 : "+target);
 				if(target.delete()){ 
 					System.out.println("파일삭제 성공");
 					String oriName = file.getOriginalFilename();
@@ -181,7 +183,7 @@ public class ClosetService {
 					}
 					fdto.setD_no(seq);
 					// 옷 수정 시 코디 아이템 수정
-					sdao.updateItem(dto.getCategory(), itemPath, "/files/" + nick + "/" + sysName);
+					sdao.updateItem(dto.getCategory(), "/files/" + nick + "/" + itemSysName, "/files/" + nick + "/" + sysName);
 					dmdao.update(fdto);
 				}else{ 
 					System.out.println("파일삭제 실패");

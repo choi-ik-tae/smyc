@@ -70,8 +70,8 @@ public class BoardService {
 		return boardDAO.boastSelectByNo(no);
 	}
 	// 자랑게시판 게시글 삭제
-	public int boastDelete(int s_no) {
-		return boardDAO.boastDelete(s_no);
+	public int boastDelete(int no) {
+		return boardDAO.boastDelete(no);
 	}
 	// 좋아요 카운트
 	public int boastLikeCount(int b_no) {
@@ -115,6 +115,10 @@ public class BoardService {
 	// 자랑게시글 중복 등록 검사
 	public BoardDTO boastIsExist(int s_no) {
 		return boardDAO.boastIsExist(s_no);
+	}
+	// 자랑게시물 내용 수정
+	public int boastModify(int no,String title,String contents) {
+		return boardDAO.boastModify(no,title,contents);
 	}
 	
 }
