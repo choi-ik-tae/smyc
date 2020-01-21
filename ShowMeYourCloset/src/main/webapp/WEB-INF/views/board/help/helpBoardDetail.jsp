@@ -20,227 +20,44 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <style>
-/*    div{border: 1px solid black;}*/
-* {
-	box-sizing: border-box;
-	font-family: 'Noto Sans KR', sans-serif;
-}
+		/*    div{border: 1px solid black;}*/
+		* {box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+		.updateBtn:hover{cursor:pointer;}
 
-#bottom {
-	width: 100%;
-	height: 150px;
-	color: white;
-}
-
-#bottom-logo {
-	height: 150px;
-	line-height: 150px;
-}
-
-#bottom-contents {
-	font-size: 10pt;
-	color: white;
-}
-
-.bar {
-	position: relative;
-	width: 30px;
-	height: 3px;
-	background: dimgray;
-}
-
-#title {
-	font-size: 30px;
-	color: dimgray;
-	font-weight: 700;
-	line-height: 100px;
-}
-
-#menuDiv {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: grey;
-	z-index: 2;
-	background: rgba(0, 0, 0, 0.5);
-	display: none;
-}
-
-.InfoMenu {
-	position: fixed;
-	width: 380px;
-	height: 100%;
-	background: white;
-	z-index: 3
-}
-
-.navigator {
-	background-color: white;
-	border-bottom: 1px solid #bcbcbc;
-	height: 100px;
-}
-
-#menuIcon {
-	margin-top: 43px;
-}
-
-.menu {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	display: none;
-	z-index: 5;
-}
-
-.menubar {
-	background-color: white;
-}
-
-.mainblock {
-	background: rgba(0, 0, 0, 0.5);
-}
-
-#menu-nickname {
-	width: 100%;
-	height: 200px;
-	line-height: 200px;
-	font-size: 30pt;
-}
-
-#boast {
-	border: 1px solid white;
-	border-radius: 10px;
-	position: absolute;
-	background: rgba(255, 255, 255, 0.9);
-	width: 1000px;
-	height: 300px;
-	transform: translate(44%, 40%);
-}
-
-#boastTitle {
-	font-size: 40pt;
-	font-weight: 800;
-}
-
-#searchBox>div {
-	border: 1px solid black;
-	border-radius: 5px;
-	width: 90px;
-}
-
-#searchBar {
-	width: 95%;
-	height: 80%;
-	margin-top: 10px;
-	display: none;
-}
-
-.borderDelete {
-	border: 0px;
-}
-
-.gotoDetail {
-	text-decoration: none;
-	color: black;
-	width: 100%;
-	height: 100%;
-}
-
-.gotoDetail:hover {
-	text-decoration: none !important;
-	color: black;
-}
-
-.title {
-	font-size: 28px;
-	color: dimgray;
-	font-weight: 700;
-	line-height: 95px;
-}
+		/* 네비바 */
+	    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
+	    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+	    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
+	    #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
+	    #categoryBar{height: 80%;}
+	    #searchBar{width: 20%; height: 100%; display: none; font-weight: 800; line-height: 50px; margin-top: 6px;}
+	    #toSearch{height: 100%; font-weight: 800;display: none; margin-bottom:5px;}
+	   	#menuIcon{ margin-top: 17px;}
+	    .bar{position:relative; width: 30px;height: 3px;background: dimgray;}
+	    #menuText{ line-height: 50px; }
+	    #btnMenu:hover{cursor:pointer;}
+	    /* 숨김메뉴 */
+	    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
+	    .menubar{ background-color: white;}
+	    .mainblock{ background: rgba(0,0,0,0.5);}
+	    #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
+	    .borderDelete{border: 0px;}
+		/* 	    푸터 */
+	    #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
+	    #bottom-logo{height: 150px; line-height: 150px;}
+	    #bottom-contents{font-size: 10pt;color: white;}
 </style>
 
 <body>
 
 	<!-- 숨김 메뉴 -->
-	<div class="container-fulid p-0">
-		<div class="row m-0 menu">
-			<div class="p-0 menubar" style="width: 23%;">
-				<div class="row m-0">
-					<div class="col-12 p-2">
-						<button id="closeMenu" type="button"
-							class="btn btn-outline-dark form-control">close</button>
-					</div>
-				</div>
-				<div class="row m-0">
-					<div class="col-12 text-center" id="menu-nickname">
-						<c:choose>
-							<c:when test="${email==null }">
-								<span>로그인을 해주세요</span>
-							</c:when>
-							<c:otherwise>
-								<span>${nick}</span>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
-				<hr>
-				<div class="row m-0">
-					<div class="col-12">내 정보</div>
-				</div>
-				<hr>
-				<div class="row m-0 myinfoMenu">
-					<div class="col-12">
-						<div class="row">
-							<button type="button"
-								class="btn borderDelete btn-outline-dark form-control">내가
-								쓴 글</button>
-						</div>
-						<div class="row">
-							<button type="button"
-								class="btn borderDelete btn-outline-dark form-control">내가
-								쓴 댓글</button>
-						</div>
-						<div class="row">
-							<button type="button"
-								class="btn borderDelete btn-outline-dark form-control">마이
-								페이지</button>
-						</div>
-					</div>
-				</div>
-				<hr>
-				<div class="row m-0">
-					<div class="col-12">게시판</div>
-				</div>
-				<hr>
-				<div class="row m-0">
-					<div class="col-12">
-						<div class="row">
-							<button type="button"
-								class="btn borderDelete btn-outline-dark form-control">메인
-								페이지</button>
-						</div>
-						<div class="row">
-							<button type="button"
-								class="btn borderDelete btn-outline-dark form-control">자랑
-								게시판</button>
-						</div>
-						<div class="row">
-							<button type="button"
-								class="btn borderDelete btn-outline-dark form-control">도움
-								게시판</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="p-0 mainblock" style="width: 77%;"></div>
-		</div>
-	</div>
+	<jsp:include page="../../standard/hideMenu.jsp"/>
 	<!-- 본문 -->
 	<div class="container-fuild p-0">
 		<!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">
-				<div class="row m-0">
+				<div class="row m-0" id="menuItem">
 					<div class="col-4 p-0">
 						<div class="row m-0">
 							<div class="col-12" id="menuIcon">
@@ -250,16 +67,13 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-8 p-0 text-center d-none d-md-block"
-						style="height: 100px; line-height: 100px;">
-						<span style="font-size: 20pt; font-weight: 700; color: dimgray;">MENU</span>
+					<div class="col-8 p-0 text-center d-none d-md-block" id="menuText">
+						<span style="font-weight: 700; color: dimgray;">MENU</span>
 					</div>
 				</div>
 			</div>
 			<div class="col-10 p-0 d-none d-md-block text-center">
-				<span id="title">SHOW YOUR CLOSET</span> <input type="text"
-					class="form-control" id="searchBar" name="target"
-					placeholder="검색할 단어를 입력하세요">
+				<span id="bTitle">HELP BOARD</span>
 			</div>
 			<div id="searchBox" class="col-1 p-0 m-0"></div>
 		</div>
@@ -271,9 +85,8 @@
 				style="margin: auto; border-radius: 10px; border: 1px solid #bcbcbc;">
 				<div class="row">
 					<div class="col-12">
-						<div class="titleDiv"
-							style="border: 1px solid #bcbcbc; height: 40px; border-radius: 5px; text-align: center; line-height: 40px;">
-							<span>${dto.title}</span>
+						<div class="titleDiv" style="border: 1px solid #bcbcbc; height: 40px; border-radius: 5px; text-align: center; line-height: 40px;">
+							<span class="titleSpan">${dto.title}</span>
 						</div>
 					</div>
 				</div>
@@ -285,12 +98,16 @@
 				</div>
 				<div class="row">
 					<div class="col-12 mt-2">
-						<div class="contentsDiv p-2"
-							style="border: 1px solid #bcbcbc; min-height: 300px; border-radius: 5px; white-space: pre;">${dto.contents}</div>
+						<div class="contentsDiv p-2" style="border: 1px solid #bcbcbc; min-height: 300px; border-radius: 5px; white-space: pre;">${dto.contents}</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-12" style="font-size: 13px;">
+						<c:if test="${dto.email == email}">
+							<span style="float:right" class="updateBtn deleteBtn ml-2">|&nbsp; 삭제  &nbsp;|</span>
+							<span style="float:right" class="updateBtn modifyBtn ml-2">|&nbsp; 수정</span>
+							<span style="float:right; display: none;" class="updateBtn modifyConfirm ml-2">|&nbsp; 수정확인</span>
+						</c:if>
 						<span style="float:right" class="ml-2">조회수 ${dto.views }</span> 
 						<span style="float:right">${dto.write_date } </span>
 						<span style="float:center;"><a id="facebook-link-btn" href="javascript:shareFacebook()"><img src="/imgs/btn/facebookLogo.png" style="width:44px;"></a></span>
@@ -324,29 +141,16 @@
             	<input type="hidden" name="writer">
             	<input type="hidden" name="no">
             </form>
+            <form action="${pageContext.request.contextPath}/board/modifyHelpBoard" id="boardModifyFrm" method="post">
+            	<input type="hidden" name="title" id="inputTitle">
+            	<input type="hidden" name="contents" id="inputContents">
+            	<input type="hidden" name="no" id="no" value="${dto.no}">
+            </form>
 		</div>
 		<!-- 상단 설명 -->
 		<div class="row m-0" style="height: 50px;"></div>
 
-		<div class="row m-0">
-			<div class="col-12" id="bottom"
-				style="background: #5e5e5e; height: 250px;">
-				<div class="row mt-5" style="margin: auto;">
-					<div class="col-2" id="bottom-logo">Show Your Closet</div>
-					<div class="col-10 align-self-center" id="bottom-contents">
-						<div class="row">서울 중구 남대문로 120 대일빌딩 3층 F Class (주) In Sync</div>
-						<div class="row">Copyright © 2020 InSync Inc. 모든 권리 보유.</div>
-						<div class="row">
-							대표전화&nbsp;&#124;&nbsp;010-8854-8699&nbsp;&#124;&nbsp;010-8077-1131
-						</div>
-						<div class="row">
-							<a href="#">개인정보 처리방침</a>&nbsp;&#124;&nbsp; <a href="#">약관</a>&nbsp;&#124;&nbsp;
-							<a href="#">법적 고지</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<jsp:include page="../../standard/boardFooter.jsp"/>
 	</div>
 	
 	
@@ -382,6 +186,34 @@
 	    }
 	</script>
 	<script>
+		$(".modifyBtn").on("click",function(){
+			$(".modifyConfirm").css("display","inline");
+			$(".modifyBtn").css("display","none");
+			$(".titleSpan").prop("contenteditable","true");
+			$(".contentsDiv").prop("contenteditable","true");	
+		})
+		$(".modifyConfirm").on("click",function(){
+			var result = confirm("수정을 진행 하시겠습니까?");
+			if(result){
+				if($(".titleSpan").text() == "" || $(".contentsDiv").html()== ""){
+					alert("내용을 입력해주세요");
+					return ;
+				}
+				var contents = $(".contentsDiv").html();
+				contents = contents.replace(/<br>/gi, "\n"); 
+				$("#inputTitle").val($(".titleSpan").text());
+				$("#inputContents").val($(".contentsDiv").html());
+				
+				$("#boardModifyFrm").submit();
+			}
+			
+		});
+		$(".deleteBtn").on("click",function(){
+			var result = confirm("정말 게시글을 삭제 하시겠습니까?");
+			if(result){
+				location.href="${pageContext.request.contextPath}/board/deleteHelpBoard?no=${dto.no}";
+			}
+		});
 		var format = function() {
 			var args = Array.prototype.slice.call(arguments, 1);
 			return arguments[0].replace(/\{(\d+)\}/g, function(match, index) {

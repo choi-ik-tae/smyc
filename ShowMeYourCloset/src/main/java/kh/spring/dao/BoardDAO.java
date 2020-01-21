@@ -62,6 +62,18 @@ public class BoardDAO {
 	public List<BoardDTO> helpBoardAllSearch (String search){
 		return sst.selectList("Board.helpBoardAllSearch",search);
 	}
+	//help 게시판 수정
+	public int helpBoardUpdate(String title, String contents, int no) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("title",title);
+		parm.put("contents",contents);
+		parm.put("no",no);
+		
+		return sst.update("Board.helpBoardUpdate", parm);
+	}
+	public int helpBoardDelete(int no) {
+		return sst.delete("Board.helpBoardDelete",no);
+	}
 	// 조회수 증가
 	public int viewCountPlus(int no) {
 		return sst.update("Board.viewCountPlus",no);

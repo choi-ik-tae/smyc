@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kh.spring.Utils.CheckXss;
 import kh.spring.Utils.NavigatorUtil;
 import kh.spring.dto.AdvisorDTO;
 import kh.spring.dto.ClosetDTO;
@@ -131,6 +132,8 @@ public class AdvisorController {
 		
 		dto.setEmail(email);
 		dto.setNickname(nickname);
+		dto.setTitle(CheckXss.checkXss(dto.getTitle()));
+		dto.setContents(CheckXss.checkXss(dto.getContents()));
 		
 		advisorService.insertAdivisor(dto);
 		

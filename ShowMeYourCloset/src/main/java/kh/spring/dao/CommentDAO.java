@@ -41,4 +41,8 @@ public class CommentDAO {
 		
 		return sst.selectList("Comments.selectByEmail",parm);
 	}
+	//게시글 삭제 시 관련 댓글 삭제
+	public int boardDelete(int no) {
+		return sst.delete("Comments.boardDelete",no);
+	}
 }

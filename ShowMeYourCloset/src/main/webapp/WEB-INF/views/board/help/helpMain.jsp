@@ -14,82 +14,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
    
         <style>
-        /*    div{border: 1px solid black;}*/
+       
 		   *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-		   /* #bk{
-		        background-image:url('/imgs/bg/clothesLogo2.jpg');
-		        background-attachment: fixed; 
-		    }*/
-		    #bottom{width: 100%;height: 150px; color:white;}
-		    #bottom-logo{height: 150px; line-height: 150px;}
-		    #bottom-contents{font-size: 10pt;color: white;}
-		    .bar{
-		        position:relative;
-		        width: 30px;
-		        height: 3px;
-		        background: dimgray;
-		    }
-		    #title{
-		        font-size: 30px;
-		        color:dimgray;
-		        font-weight: 700;
-		        line-height: 100px;
-		    }
-		    #menuDiv{
-		        position:fixed;
-		        width: 100%;
-		        height: 100%;
-		        background: grey;
-		        z-index: 2;
-		        background: rgba(0,0,0,0.5);
-		        display: none;
-		    }
-		    .InfoMenu {
-		        position:fixed;
-		        width: 380px;
-		        height: 100%;
-		        background: white;
-		        z-index: 3
-		    }
-		    .navigator {
-		        background-color:white;
-		        border-bottom: 1px solid #bcbcbc;
-		        height:100px;
-		    }
-		    #menuIcon{
-		        margin-top: 43px;
-		    }
-		    .menu{
-		        width: 100%;
-		        height: 100%;
-		        position:fixed;
-		        display: none;
-		        z-index: 5;
-		    }
-		    .menubar{ background-color: white;}
-		    .mainblock{ background: rgba(0,0,0,0.5);}
-		    #menu-nickname {
-		        width:100%;
-		        height: 200px;
-		        line-height: 200px;
-		        font-size: 30pt;
-		    }
-		    #boast{
-		        border: 1px solid white;
-		        border-radius: 10px;
-		        position: absolute;
-		        background:rgba(255,255,255,0.9);
-		        width: 1000px;
-		        height: 300px;
-		        transform: translate(44%,40%);
-		    }
-		    #boastTitle{
-		        font-size: 40pt;
-		        font-weight: 800;
-		    }
-		    #searchBox>div{border: 1px solid black; border-radius: 5px; width:90px;}
-		    #searchBar{width: 95%; height: 80%; margin-top:10px; display: none;}
-		    .borderDelete{border: 0px;}
 		     .gotoDetail{
             	text-decoration: none;
                 color: black;
@@ -100,12 +26,7 @@
             	text-decoration: none !important;
             	color : black;        	
             }
-            .title{
-                font-size: 28px;
-                color:dimgray;
-                font-weight: 700;
-                line-height: 95px;
-            }
+            
             .mainLogo{
             	position:relative;
                 color: white;
@@ -126,107 +47,75 @@
                 content: "";  
                 background-size: 100% 100%;
             }
+            /* 네비바 */
+		    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
+		    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+		    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
+		    #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
+		    #categoryBar{height: 80%;}
+		    #searchBar{width: 20%; height: 100%; display: none; font-weight: 800; line-height: 50px; margin-top: 6px;}
+		    #toSearch{height: 100%; font-weight: 800;display: none; margin-bottom:5px;}
+		   	#menuIcon{ margin-top: 17px;}
+		    .bar{position:relative; width: 30px;height: 3px;background: dimgray;}
+		    #menuText{ line-height: 50px; }
+		    #btnMenu:hover{cursor:pointer;}
+		    /* 숨김메뉴 */
+		    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
+		    .menubar{ background-color: white;}
+		    .mainblock{ background: rgba(0,0,0,0.5);}
+		    #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
+		    .borderDelete{border: 0px;}
+			/* 	    푸터 */
+		    #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
+		    #bottom-logo{height: 150px; line-height: 150px;}
+		    #bottom-contents{font-size: 10pt;color: white;}
 		</style>
 
     </head>
     <body>
-
-  <!-- 숨김 메뉴 -->
-    <div class="container-fulid p-0">
-        <div class="row m-0 menu">
-            <div class="p-0 menubar" style="width:23%;">
-                <div class="row m-0">
-                    <div class="col-12 p-2">
-                        <button id="closeMenu" type="button" class="btn btn-outline-dark form-control">close</button>
-                    </div>
-                </div>
-                <div class="row m-0" >
-                    <div class="col-12 text-center" id="menu-nickname">
-                    <c:choose>
-                    	<c:when test="${email==null }">
-                    		<span>로그인을 해주세요</span>
-                    	</c:when>
-                    	<c:otherwise>
-                    		<span>${nick}</span>
-                    	</c:otherwise>
-                    </c:choose>
-                    </div>
-                </div><hr>
-                <div class="row m-0">
-                    <div class="col-12">
-                        내 정보
-                    </div>
-                </div><hr>
-                <div class="row m-0 myinfoMenu">
-                    <div class="col-12">
-                        <div class="row">
-                            <button type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 글</button>
-                        </div>
-                        <div class="row">
-                            <button type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 댓글</button>
-                        </div>
-                        <div class="row">
-                            <button type="button" class="btn borderDelete btn-outline-dark form-control">마이 페이지</button>
-                        </div>
-                    </div>
-                </div><hr>
-                <div class="row m-0">
-                    <div class="col-12">
-                        게시판
-                    </div>
-                </div><hr>
-                <div class="row m-0">
-                   <div class="col-12">
-                        <div class="row">
-                            <button type="button" id="homeBtn" class="btn borderDelete btn-outline-dark form-control">메인 페이지</button>
-                        </div>
-                        <div class="row">
-                            <button type="button" id="boastBtn" class="btn borderDelete btn-outline-dark form-control">자랑 게시판</button>
-                        </div>
-                        <div class="row">
-                            <button type="button" id="helpBtn" class="btn borderDelete btn-outline-dark form-control">도움 게시판</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-0 mainblock" style="width:77%;"></div>
-         </div>
-    </div>
+    
+    <!-- 숨김 메뉴 -->
+	<jsp:include page="../../standard/hideMenu.jsp"/>
         <!-- 본문 -->    
         <div class="container-fuild p-0" id="bk">
-            <!-- 네비 -->
-            <div class="navigator fixed-top row m-0">
-                <div class="col-1 p-0" id="btnMenu">
-                    <div class="row m-0">
-                        <div class="col-4 p-0">
-                            <div class="row m-0">
-                                <div class="col-12" id="menuIcon">
-                                    <div class="row m-0 mb-1 bar bar-one"></div>
-                                    <div class="row m-0 mb-1 mt-1 bar bar-two"></div>
-                                    <div class="row m-0 mb-1 bar bar-three"></div>        
-                                </div>
-                            </div>        
-                        </div>
-                        <div class="col-8 p-0 text-center d-none d-md-block" style="height: 100px; line-height: 100px;">
-                            <span style="font-size: 20pt;font-weight: 700;color:dimgray;">MENU</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-10 p-0 d-none d-md-block text-center">
-                    <span id="title">SHOW YOUR CLOSET</span>
-                    <input type="text" class="form-control" id="searchBar" name="target" placeholder="검색할 단어를 입력하세요">
-                </div>
-                <div id="searchBox" class="col-1 p-0 m-0">
-                    <div class="row" style="margin-top: 4px;">
-                        <div id="btnSearch" class="col-12 p-0">
-                            <img class="w-100" src="/imgs/btn/btnSearch.png">
-                        </div>
-                        <div id="btnCloseSearch" class="col-12 p-0" style="background-color: black; display: none;">
-                            <img class="p-3 w-100" src="/imgs/btn/btnSearchClose.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <!-- 네비 -->
+			<div class="navigator fixed-top row m-0">
+				<div class="col-1 p-0" id="btnMenu">
+					<div class="row m-0" id="menuItem">
+						<div class="col-4 p-0">
+							<div class="row m-0">
+								<div class="col-12" id="menuIcon">
+									<div class="row m-0 mb-1 bar bar-one"></div>
+									<div class="row m-0 mb-1 mt-1 bar bar-two"></div>
+									<div class="row m-0 mb-1 bar bar-three"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-8 p-0 text-center d-none d-md-block">
+							<span id="menuText" style="font-weight: 700; color: dimgray;">MENU</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-10 p-0 d-none d-md-block text-center">
+	                <div class="row m-0">
+		                <div class="col-12" id="categoryBar">
+		                	<span id="bTitle" class="mr-3">HELP BOARD</span>
+	                        <input type="text" class="form-control" id="searchBar" name="target" placeholder="검색할 단어를 입력하세요">
+	                        <button id="toSearch" type="button" class="btn btn btn-outline-dark">검색</button>
+		                </div>
+	            	</div>
+				</div>
+				<div id="searchBox" class="col-1 p-0 m-0">
+					<div class="row" style="margin-top: 4px; border:0px;">
+						<div id="btnSearch" class="col-12 p-0">
+							<img src="/imgs/btn/btnSearch.png" style="width: 40px; border-radius: 5px;">
+						</div>
+						<div id="btnCloseSearch" class="p-0" style="background-color: black; display: none;width: 40px; border-radius: 5px;">
+							<img src="/imgs/btn/btnSearchClose.png" class="p-1" style="width: 40px;">
+						</div>
+					</div>
+				</div>
+			</div>
             <!-- 상단 설명 -->
             <div class="row m-0 LogoDiv" style="height: 600px;">
                 <div class="col-12">
@@ -252,7 +141,7 @@
             </div>
             <!-- 게시글 주루룩 -->
             <div class="row" style="background: white">
-                <div class="col-10 mt-5" style="margin:auto;">
+                <div class="col-10 mt-5 mb-2" style="margin:auto;">
         			<div class="row">
         				<div class="col-6">
 		                	<div class="row" style="float:left;">
@@ -272,26 +161,26 @@
                     </div>		
                 </div>
                 <div class="col-10 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">
-                    <div class="row" style="height: 40px; line-height: 35px; border-bottom: 1px solid #bcbcbc;">
+                    <div class="row" style="height: 40px; line-height: 35px; border-bottom: 1px solid #bcbcbc;font-size:17px; font-weight:600;">
                         <div class="d-none d-md-block col-md-1">
-                            no
+                            NO
                         </div>
                         <div class="col-8 col-sm-7 col-md-6">
-                            title
+                            TITLE
                         </div>
                         <div class="col-4 col-sm-3 col-md-2">
-                            nick
+                            NICKNAME
                         </div>
-                        <div class="d-none d-sm-block col-sm-2 col-md-1">hit</div>
-                        <div class="d-none d-md-block col-2">date</div>
+                        <div class="d-none d-sm-block col-sm-2 col-md-1">VIEW</div>
+                        <div class="d-none d-md-block col-2">DATE</div>
                     </div>
 					<c:forEach items="${list}" var="dto">
-	                    <div class="row contents mt-2 mb-2">
+	                    <div class="row contents mt-2 mb-2" style="border-radius:10px;" onclick="detailHelp(${dto.no})">
 	                        <div class="d-none d-md-block col-md-1">
 	                            ${dto.no}
 	                        </div>
 	                        <div class="col-8 col-sm-7 col-md-6" style="text-align: left;">
-	                            <a href="${pageContext.request.contextPath}/board/helpDetail?no=${dto.no}" class="gotoDetail">${dto.title}</a>
+	                            <a href="" class="gotoDetail">${dto.title}</a>
 	                        </div>
 	                        <div class="col-4 col-sm-3 col-md-2">
 	                            ${dto.nickname }
@@ -305,65 +194,84 @@
                 <div class="col-12 mt-2 mb-5"  style="text-align: center;">
                     ${page}
                 </div>
+                <form action="${pageContext.request.contextPath}/board/helpDetail" method="post" id="detailFrm">
+                	<input type="hidden" name="no" id="no">
+                	<input type="hidden" name="cpage" value="${cpage}">
+               </form>
 
             </div> 
             
-            <div class="row m-0">
-                <div class="col-12" id="bottom" style="background: #5e5e5e; height: 250px;">
-                    <div class="row mt-5" style="margin:auto;">
-                        <div class="col-2" id="bottom-logo">Show Your Closet</div>
-                        <div class="col-10 align-self-center" id="bottom-contents">
-                            <div class="row">서울 중구 남대문로 120 대일빌딩 3층 F Class (주) In Sync</div>
-                            <div class="row">Copyright © 2020 InSync Inc. 모든 권리 보유.</div>
-                            <div class="row">
-                                대표전화&nbsp;&#124;&nbsp;010-8854-8699&nbsp;&#124;&nbsp;010-8077-1131
-                            </div>
-                            <div class="row">
-                                <a href="#">개인정보 처리방침</a>&nbsp;&#124;&nbsp; <a href="#">약관</a>&nbsp;&#124;&nbsp;
-                                <a href="#">법적 고지</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <jsp:include page="../../standard/boardFooter.jsp"/>	
         </div>
         
-    <script>
-    	$("#helpSearchBtn").on("click",function(){
-    		var search = $("#inputSearch").val();
-    		location.href="${pageContext.request.contextPath}/board/helpSearch?search="+search;
-    	})
-    	$("#homeBtn").on("click",function(){
-    		location.href="${pageContext.request.contextPath}/";
-    	})
-    	$("#boastBtn").on("click",function(){
-    		location.href="${pageContext.request.contextPath}/board/boastBoard";
-    	})
-    	$("#helpBtn").on("click",function(){
-    		location.href="${pageContext.request.contextPath}/board/helpBoard";
-    	})
+        
+      <script>
+      	var detailHelp = function(no){
+      		$("#no").val(no);
+      		$("#detailFrm").submit();
+      	}
+      	$(".contents").on("mouseenter",function(){
+      		console.log($(this).children());
+      		$(this).children().css("background","rgba(188,188,188,0.2)");
+      	});
+      	$(".contents").on("mouseleave",function(){
+      		console.log($(this).children());
+      		$(this).children().css("background","");
+      	});
+    	$("#toSearch").on("click",function(){
+    		var keyword = $("#searchBar").val();
+    		$("#searchTarget").val(keyword);
+    		$("#searchFrm").submit();
+    	});
+	    $("#btnMenu").on("mouseover",function(){
+	        $(".bar").css("background-color","black");
+	        $("#menuText").css("color","black");
+	    });
+	    $("#btnMenu").on("mouseout",function(){
+	        $(".bar").css("background-color","dimgray");
+	        $("#menuText").css("color","dimgray");
+	    });
+	    $("#categoryTab").on("change",function(){
+	    	$("#AlignTarget").val($("#categoryTab option:selected").val());
+	    	$("#alignFrm").submit();
+		});
+    	$(".boardItem").on("click",function(){
+    		$("#detailTarget").val($(this).attr("id"));
+    		$("#detailFrm").submit();
+    	});
         $("#btnMenu").on("click",function(){
             $(".menu").css("display","flex");
             $(".navigator").css("z-index","1");
-        })
+        });
         $(".mainblock").on("click",function(){
             $(".menu").css("display","none");
-        })
+        });
         $("#closeMenu").on("click",function(){
             $(".menu").css("display","none");
-        })
+        });
         $("#btnSearch").on("click",function(){
             $("#btnCloseSearch").css("display","flex");
             $("#btnSearch").css("display","none");
+            $("#toSearch").css("display","inline-block");
             $("#searchBar").css("display","inline-block");
-            $("#title").css("display","none");
-        })
+            $("#bTitle").css("display","none");
+            $("#categoryTab").css("display","none");
+        });
         $("#btnCloseSearch").on("click",function(){
             $("#btnSearch").css("display","flex");
             $("#btnCloseSearch").css("display","none");
+            $("#toSearch").css("display","none");
             $("#searchBar").css("display","none");
-            $("#title").css("display","inline");
-        })
+            $("#bTitle").css("display","inline-block");
+            $("#categoryTab").css("display","inline-block");
+        });
+    </script>
+    <script>
+		    $("#helpSearchBtn").on("click",function(){
+		        var search = $("#inputSearch").val();
+		        location.href="${pageContext.request.contextPath}/board/helpSearch?search="+search;
+		     })
+			
             $("#helpUploadBtn").on("click",function(){
             	if('${email}' == ""){
             		alert("로그인을 해주세요!");

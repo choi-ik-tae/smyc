@@ -27,6 +27,14 @@
 	<select id="helpBoardAllSearch" resultType="kh.spring.dto.BoardDTO">
 		select * from board where category='H' and (title like #{value} or contents like #{value})
 	</select>
+<!-- 	도움게시판 수정 -->
+	<update id="helpBoardUpdate">
+		update board set title=#{title}, contents=#{contents} where category='H' and no=#{no}
+	</update>
+<!-- 	도움게시판 삭제 -->
+	<delete id="helpBoardDelete">
+		delete from board where no=#{value}
+	</delete>
 <!-- 	자랑게시판 업로드 -->
 	<insert id="boastBoardInsert">
 		insert into board values(board_seq.nextval,'B',#{s_no},#{email},#{nick},#{title},#{contents},sysdate,0)
