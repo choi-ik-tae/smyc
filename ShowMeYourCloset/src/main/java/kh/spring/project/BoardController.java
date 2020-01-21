@@ -64,7 +64,7 @@ public class BoardController {
 				page = NavigatorUtil.getPageNavi(Integer.parseInt(cpage), allList.size(),10,15);
 			}
 
-			int start = (Integer.parseInt(cpage) * Configuration.recordCountPerPage) - Configuration.recordCountPerPage - 1;
+			int start = (Integer.parseInt(cpage) * Configuration.recordCountPerPage) - Configuration.recordCountPerPage + 1;
 			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
 
 			List<BoardDTO> list = boardService.selectByPage(start, end);

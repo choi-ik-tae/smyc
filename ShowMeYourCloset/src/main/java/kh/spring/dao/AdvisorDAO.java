@@ -46,4 +46,12 @@ public class AdvisorDAO {
 	public AdvisorDTO selectAdvisorDTO(int no) {
 		return sst.selectOne("Advisor.selectAdvisorDTO", no);
 	}
+	
+	public int updateChoiceAdvisor(String choice , int no) {
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("choice",choice);
+		parm.put("no",no);
+		
+		return sst.update("Advisor.updateChoiceAdvisor",parm);
+	}
 }
