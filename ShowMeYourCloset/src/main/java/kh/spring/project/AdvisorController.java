@@ -40,26 +40,52 @@ public class AdvisorController {
 	@Autowired
 	private HttpSession session;
 	
+	@SuppressWarnings("unused")
 	@RequestMapping("/helpStyleComent")
 	public String helpStyleComent(Model model,String cpage,int b_no,String writer) {
-		System.out.println("글쓴이 이메일  :: "+writer);
+	
 		model.addAttribute("writer", writer);
 		model.addAttribute("b_no", b_no);
 		List<AdvisorDTO> allList = advisorService.selectAdvisorAll(b_no);
+		int choice_no = 0;
+		AdvisorDTO choiceDTO = null;
+		
+		System.out.println(allList.size());
+		
+		if(cpage==null) {
+			cpage = 1+"";
+		}
+
+		if(cpage.contentEquals("1")) {
+			for(AdvisorDTO dto : allList) {
+				if(dto.getChoice().equals("Y")) {
+					choiceDTO = dto;
+					choice_no = dto.getNo();
+				}
+			}
+		}
+	
+		model.addAttribute("choiceDto", choiceDTO);
+	
 		String page =null;
 		try {
-			if(cpage==null) {
-				cpage = 1+"";
-				page = NavigatorUtil.getPageNavi(1, allList.size(), 10, 6);
+			if(cpage.equals("1")) {
+				page = advisorService.getPageNavi(1, allList.size(), 10, 6 ,b_no,writer);
 			}else {
-				page = NavigatorUtil.getPageNavi(Integer.parseInt(cpage), allList.size(), 10, 6);
+				page = advisorService.getPageNavi(Integer.parseInt(cpage), allList.size(), 10, 6,b_no,writer);
 			}
 			
-			int start = (Integer.parseInt(cpage) * 6) - 6 - 1;
+			int start = (Integer.parseInt(cpage) * 6) - 6 + 1;
 			int end = Integer.parseInt(cpage) * 6;
 			
 			List<AdvisorDTO> list = advisorService.selectByPage(start, end, b_no);
-			System.out.println(list.get(0).getTop());
+	
+			for(int i = 0 ; i<list.size();i++) {
+				if(list.get(i).getNo() == choice_no) {
+					list.remove(i);
+				}
+			}
+	
 			model.addAttribute("list", list);
 			model.addAttribute("page",page);			
 		}catch(Exception e) {
@@ -106,8 +132,6 @@ public class AdvisorController {
 		String email = (String)session.getAttribute("email");
 		String nickname = (String)session.getAttribute("nick");
 		
-		System.out.println(dto.getTitle());
-		
 		dto.setEmail(email);
 		dto.setNickname(nickname);
 		
@@ -128,5 +152,28 @@ public class AdvisorController {
 		model.addAttribute("dto",	dto);
 		
 		return "board/help/helpAdvisorDetail";
+	}
+	
+	@RequestMapping("/choiceThisAdvisor")
+	@ResponseBody
+	public String choiceThisAdvisor(int no,int b_no) {
+		List<AdvisorDTO> list = advisorService.selectAdvisorAll(b_no);
+		
+		for(AdvisorDTO dto  : list) {
+			if(dto.getChoice().equals("Y")) {
+				return "fail";
+			}
+		}
+		
+		advisorService.updateChoiceAdvisor("Y", no);
+		
+		return "good";
+	}
+	
+	@RequestMapping("/choiceReturn")
+	@ResponseBody
+	public String choiceReturn(int no) {
+		advisorService.updateChoiceAdvisor("N", no);
+		return "";
 	}
 }
