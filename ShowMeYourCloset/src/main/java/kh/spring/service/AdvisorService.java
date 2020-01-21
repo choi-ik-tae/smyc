@@ -86,9 +86,6 @@ public class AdvisorService {
 			needNext = false;
 		}
 		
-		System.out.println("endNavi :::: "+endNavi);
-		System.out.println("startNavi :::: "+startNavi);
-
 		StringBuilder sb = new StringBuilder();
 		if (needPrev) {
 			sb.append("<a href='/advisor/helpStyleComent?cpage=" + (startNavi - 1) + "&b_no="+b_no+"&writer="+writer+"'>< </a>");

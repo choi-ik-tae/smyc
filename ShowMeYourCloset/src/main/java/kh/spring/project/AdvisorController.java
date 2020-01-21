@@ -40,7 +40,6 @@ public class AdvisorController {
 	@Autowired
 	private HttpSession session;
 	
-	@SuppressWarnings("unused")
 	@RequestMapping("/helpStyleComent")
 	public String helpStyleComent(Model model,String cpage,int b_no,String writer) {
 	
@@ -49,8 +48,6 @@ public class AdvisorController {
 		List<AdvisorDTO> allList = advisorService.selectAdvisorAll(b_no);
 		int choice_no = 0;
 		AdvisorDTO choiceDTO = null;
-		
-		System.out.println(allList.size());
 		
 		if(cpage==null) {
 			cpage = 1+"";
