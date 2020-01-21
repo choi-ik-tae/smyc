@@ -20,6 +20,32 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap"
 	rel="stylesheet">
+	
+<style>
+    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+    #closet{transform: translate(45%,5%); margin-bottom: 70px;}
+    .nav-font{font-size: 10pt; font-weight: 800;}
+    .item-page{border: 1px solid lightgray; border-radius: 5px; max-height:700px; overflow:auto;}
+    .item-page::-webkit-scrollbar {display:none;}
+    .item-page>div>div[class~='card']{cursor:pointer;}
+    #dressBox>div>div{background:rgba(255, 255, 255, 0.2);border-radius: 5px;color: white;font-size: 20pt;font-weight: 800;}
+    #accBox{position: absolute;left: 480px;top:50px;width:198px;height:500px;line-height: 500px; text-align: center;}
+    #topBox{position: absolute;left: 690px;top:50px;width:269px;height:668px;line-height: 668px; text-align: center;}
+    #pantsBox{position: absolute;left: 970px;top:50px;width:269px;height:668px;line-height: 668px; text-align: center;}
+    #shoesBox{position: absolute;left: 1250px;top:50px;width:200px;height:500px;line-height: 500px; text-align: center;}
+    .nav-item>a{color: black; font-size: 15pt;}
+    .logo{font-size: 15pt;}
+    #top{height: 80px;background-color:white;border-bottom: 1px solid gray;}
+    #bottom{background-color:white;border-top: 1px solid gray;width: 100%;height: 150px;}
+    #bottom-logo{height: 150px; line-height: 150px;}
+    #bottom-contents{font-size: 10pt;color: gray;}
+    .imgBox{position: relative; width:100%; height: 100%; overflow: auto; -ms-overflow-style: none;}
+    .imgBox::-webkit-scrollbar {display:none;}
+    .imgBox>img{border-radius: 20px;height: 130px;float: left;}
+    .closetTag{position: relative;width: 100%;height: 50px;line-height: 50px;}
+    .nav-link:hover{cursor: pointer;}
+</style>
+
 
 </head>
 <body>
@@ -29,43 +55,42 @@
 		<jsp:include page="../../standard/header.jsp" />
 
 		<div class="row mt-5" style="margin-top: 300px;">
-			<div class="col-12 mt-5">
-				<div class="row">
-					<div class="col-12 text-center">
-						<h1 style="font-weight: 800;">My Page</h1>
-					</div>
-				</div>
-				<div class="row mt-3">
-					<div class="col-12 text-center">
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<button type="button" class="btn btn-outline-dark">Info</button>
-							<button type="button" class="btn btn-outline-dark">Closet</button>
-							<button type="button" class="btn btn-outline-dark">Style</button>
+					<div class="col-12 mt-5">
+						<div class="row">
+							<div class="col-12 text-center">
+								<h1 style="font-weight: 800;">My Page</h1>
+							</div>
 						</div>
-						<hr>
+						<div class="row mt-3">
+							<div class="col-12 text-center">
+								<div class="btn-group" role="group" aria-label="Basic example">
+			                      <button id="toInfo" type="button" class="btn btn-outline-dark">Info</button>
+			                      <button id="toCloset" type="button" class="btn btn-outline-dark">Closet</button>
+			                      <button id="toStyle" type="button" class="btn btn-outline-dark">Style</button>
+								</div>
+								<hr>
+							</div>
+						</div>
+
 					</div>
 				</div>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12" style="text-align: center">
-				<h3>MY INFO</h3>
-				<hr style="width: 500px;">
-			</div>
-		</div>
+				<div class="row">
+					<div class="col-12" style="text-align: center">
+						<h3>MY INFO</h3>
+						<hr style="width: 500px;">
+					</div>
+				</div>
 
 		<c:choose>
 			<c:when test="${result==0}">
 				<div class="row">
-					<div class="col-sm-8 col-md-8 col-lg-4 p-3 mb-3" style="margin: auto; background: rgba(255, 255, 255, 0.9); border-radius: 20px;">
+					<div class="col-sm-8 col-md-8 col-lg-4 p-3 mb-3" style="text-align:center; margin:auto; background: rgba(255, 255, 255, 0.9); border-radius: 20px;">
 						<h4>비밀번호가 일치하지 않습니다.</h4>
 					</div>
 				</div>			
 			</c:when>
 			<c:otherwise>
-
-				<div class="row">
+			<div class="row">
 					<div class="col-sm-8 col-md-8 col-lg-4 p-3 mb-3"
 						style="margin: auto; background: rgba(255, 255, 255, 0.9); border-radius: 20px;">
 						<form
@@ -172,6 +197,18 @@
 			</div>
 		</div>
 	</div>
+	
+		<script>
+			$("#toInfo").on("click",function(){
+				location.href="${pageContext.request.contextPath}/myInfo";
+			});
+			$("#toCloset").on("click",function(){
+				location.href="${pageContext.request.contextPath}/myCloset";	
+			});
+			$("#toStyle").on("click",function(){
+				location.href="${pageContext.request.contextPath}/myStyle";
+			});
+		</script>
 	
 		<script>
 			$("#withDrawBtn").on("click",function(){

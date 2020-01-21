@@ -30,4 +30,8 @@ public class CommentsService {
 	public List<CommentDTO> commentLast(int b_no,String email) {
 		return commentDAO.selectByEmail(b_no,email);
 	}
+	//게시글 삭제 시 관련 댓글 삭제
+	public void boardDelete(int no) {
+		commentDAO.boardDelete(no);
+	}
 }

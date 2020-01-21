@@ -34,6 +34,10 @@ public class AdvisorService {
 	public void updateChoiceAdvisor(String choice, int no) {
 		advisorDAO.updateChoiceAdvisor(choice, no);
 	}
+	
+	public void helpBoardDelete(int no) {
+		advisorDAO.helpBoardDelete(no);
+	}
 
 	// 페이지 네비게이터
 	public String getPageNavi(int currentPage, int size, int naviCountPerPage, int recordCountPerPage, int b_no, String writer)
@@ -86,9 +90,6 @@ public class AdvisorService {
 			needNext = false;
 		}
 		
-		System.out.println("endNavi :::: "+endNavi);
-		System.out.println("startNavi :::: "+startNavi);
-
 		StringBuilder sb = new StringBuilder();
 		if (needPrev) {
 			sb.append("<a href='/advisor/helpStyleComent?cpage=" + (startNavi - 1) + "&b_no="+b_no+"&writer="+writer+"'>< </a>");

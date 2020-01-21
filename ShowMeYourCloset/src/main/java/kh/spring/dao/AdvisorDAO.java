@@ -54,4 +54,8 @@ public class AdvisorDAO {
 		
 		return sst.update("Advisor.updateChoiceAdvisor",parm);
 	}
+	
+	public int helpBoardDelete(int no) {
+		return sst.delete("Advisor.helpBoardDelete",no);
+	}
 }

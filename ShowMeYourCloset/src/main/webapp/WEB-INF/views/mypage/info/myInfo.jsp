@@ -48,7 +48,13 @@
 <body>
 	<c:choose>
 		<c:when test="${email ==null }">
-			로그인을 하십시오.
+			
+			<script>
+				alert("로그인 해주세요!");
+				location.href="${pageContext.request.contextPath}/signin";
+			</script>
+			
+			
 		</c:when>
 		<c:otherwise>
 			<div class="container-fuild">

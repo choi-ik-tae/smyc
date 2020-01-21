@@ -42,161 +42,58 @@
                 height: 53px;
                 line-height: 53px;
             }
-            #bottom{width: 100%;height: 150px; color:white;}
-            #bottom-logo{height: 150px; line-height: 150px;}
-            #bottom-contents{font-size: 10pt;color: white;}
-            .myinfoMenu>div{
-                height: 54px;
-            }
-            .myinfoMenu>div>button{
-                width: 100%;
-                height: 1005;
-            }
-            .boardMenu>div>button{
-                width: 100%;
-                height: 100%;
-            }
-            .boardMenu>div{
-                height: 54px;
-            }
-            #menu-nickname{
-                height: 180px;
-                text-align: center;
-                line-height: 180px;
-                color:darkslategrey;
-                font-weight: 700;
-                font-size: 25px;
-            }
-            .bar{
-                position:relative;
-                width: 30px;
-                height: 3px;
-                background: dimgray;
-            }
-            .bar-one{
-                top:35px;
-            }
-            .bar-two{
-                top:39px;
-            }
-            .bar-three{
-                top:43px;
-            }
-            .menuIcon{
-                line-height: 85px;
-                font-size:21px;
-                font-weight: 700;
-                color:dimgray;
-            }
-            .menu:hover{
-                background:rgba(255,255,255,0.1);
-            }
-            .title{
-                font-size: 28px;
-                color:dimgray;
-                font-weight: 700;
-                line-height: 95px;
-            }
-            #closeBtn{
-                display: none; 
-                background: white; 
-                font-size: 50px; 
-                text-align: center; 
-                font-weight: 700; 
-                color:black; 
-                height: 90px; 
-                width: 90px; 
-                padding-top:8px; 
-                margin:4px; 
-                border-radius: 3px;
-            }
-            .gotoDetail{
-                text-decoration: none !important;
-                color: black;
-            }
+            /* 네비바 */
+		    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
+		    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+		    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
+		    #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
+		    #categoryBar{height: 80%;}
+		    #searchBar{width: 20%; height: 100%; display: none; font-weight: 800; line-height: 50px; margin-top: 6px;}
+		    #toSearch{height: 100%; font-weight: 800;display: none; margin-bottom:5px;}
+		   	#menuIcon{ margin-top: 17px;}
+		    .bar{position:relative; width: 30px;height: 3px;background: dimgray;}
+		    #menuText{ line-height: 50px; }
+		    #btnMenu:hover{cursor:pointer;}
+		    /* 숨김메뉴 */
+		    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
+		    .menubar{ background-color: white;}
+		    .mainblock{ background: rgba(0,0,0,0.5);}
+		    #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
+		    .borderDelete{border: 0px;}
+			/* 	    푸터 */
+		    #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
+		    #bottom-logo{height: 150px; line-height: 150px;}
+		    #bottom-contents{font-size: 10pt;color: white;}
         </style>
     </head>
     <body>
 
-        <div id="menuDiv" class="InfoMenu-container" style="position:absolute; width: 100%; height: 100%; background: grey; z-index: 2; background: rgba(0,0,0,0.5);display: none;">
-            <div class="InfoMenu" style="position:fixed;width: 380px; height: 100%; background: white; z-index: 3">
-                <div class="row mt-2">
-                    <div class="col-12">
-                        close X
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-12" id="menu-nickname">
-                        쁘띠 때옹
-                    </div>
-                </div>
-                <div style="height: 40px; line-height: 38px;">
-                    내 정보 보기
-                </div>
-                <div class="row myinfoMenu">
-                    <div class="col-12">
-                        <button class="btn">내가 쓴 글 보기</button>
-                    </div>
-                    <div class="col-12" >
-                        <button class="btn"> 내가 쓴 댓글 보기</button>
-                    </div>
-                    <div class="col-12" >
-                        <button class="btn">MyPage</button>
-                    </div>
-
-                </div>
-                <div style="height: 40px; line-height: 38px;">
-                    게시판 이동
-                </div>
-                <div class="row boardMenu">
-                    <div class="col-12" >
-                        <button class="btn"> HOME</button>
-                    </div>
-                    <div class="col-12" >
-                        <button class="btn">BoardBoard</button>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn">HelpBoard</button>
-                    </div>
-
-
-                </div>
-            </div>
-
-        </div>
+      	<!-- 숨김 메뉴 -->
+		<jsp:include page="../../standard/hideMenu.jsp"/>
         <div class="container-fuild" id="bk">
-            <div class="navigator row" style="background-color:white; height:100px;">
-                <div class="col-1 menu pl-4" id="menuCheck">
-                    <div class="row" style="height: 100px;">
-                        <div class="bar-Container col-4">
-                            <div class="bar bar-one"></div>
-                            <div class="bar bar-two"></div>
-                            <div class="bar bar-three"></div>
-                        </div>
-                        <div class="menuIcon d-none d-md-block col-6">
-                            MENU    
-                        </div>
-                    </div>
-
-                </div>
-                <div class="d-none d-md-block col-10 title">
-                    <div class="searchDiv row" style="height: 0px; overflow: hidden;">
-                        <div class="col-1" style="text-align: center;">
-                            검색
-                        </div>
-                        <div class="col-11 pb-0">
-                            <input type="text" class="form-control" style="width: 100%;height: 98%;" placeholder="검색할 단어를 입력하세요">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="LogoDiv col-12"  style="text-align: center;">
-                            SHOW YOUR CLOSET
-                        </div>
-                    </div>                    
-                </div>
-                <div class="col-1" >
-                </div>
-            </div> 
+            <!-- 네비 -->
+			<div class="navigator fixed-top row m-0">
+				<div class="col-1 p-0" id="btnMenu">
+					<div class="row m-0" id="menuItem">
+						<div class="col-4 p-0">
+							<div class="row m-0">
+								<div class="col-12" id="menuIcon">
+									<div class="row m-0 mb-1 bar bar-one"></div>
+									<div class="row m-0 mb-1 mt-1 bar bar-two"></div>
+									<div class="row m-0 mb-1 bar bar-three"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-8 p-0 text-center d-none d-md-block" id="menuText">
+							<span style="font-weight: 700; color: dimgray;">MENU</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-10 p-0 d-none d-md-block text-center">
+					<span id="bTitle">HELP BOARD</span>
+				</div>
+				<div id="searchBox" class="col-1 p-0 m-0"></div>
+			</div>
             <div class="form-wrapper row">
                 <div class="col-12 mainLogo" id="mainLogo">
                     <p style="margin-top: 95px;">HELP BOARD</p>
@@ -244,26 +141,38 @@
 	                </div>
             </div> 
              </form>
-            <div class="row">
-                <div class="col-12" id="bottom" style="background: #5e5e5e; height: 250px;">
-                    <div class="row mt-5" style="margin:auto;">
-                        <div class="col-2" id="bottom-logo">Show Your Closet</div>
-                        <div class="col-10 align-self-center" id="bottom-contents">
-                            <div class="row">서울 중구 남대문로 120 대일빌딩 3층 F Class (주) In Sync</div>
-                            <div class="row">Copyright © 2020 InSync Inc. 모든 권리 보유.</div>
-                            <div class="row">
-                                대표전화&nbsp;&#124;&nbsp;010-8854-8699&nbsp;&#124;&nbsp;010-8077-1131
-                            </div>
-                            <div class="row">
-                                <a href="#">개인정보 처리방침</a>&nbsp;&#124;&nbsp; <a href="#">약관</a>&nbsp;&#124;&nbsp;
-                                <a href="#">법적 고지</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <jsp:include page="../../standard/boardFooter.jsp"/>	
         </div>
 
+		<!--  숨김메뉴 스크립트 -->
+        <script>
+	        $("#btnMenu").on("click",function(){
+	            $(".menu").css("display","flex");
+	            $(".navigator").css("z-index","1");
+	        });
+	        $(".mainblock").on("click",function(){
+	            $(".menu").css("display","none");
+	        });
+	        $("#closeMenu").on("click",function(){
+	            $(".menu").css("display","none");
+	        });
+	        $("#btnSearch").on("click",function(){
+	            $("#btnCloseSearch").css("display","flex");
+	            $("#btnSearch").css("display","none");
+	            $("#toSearch").css("display","inline-block");
+	            $("#searchBar").css("display","inline-block");
+	            $("#bTitle").css("display","none");
+	            $("#categoryTab").css("display","none");
+	        });
+	        $("#btnCloseSearch").on("click",function(){
+	            $("#btnSearch").css("display","flex");
+	            $("#btnCloseSearch").css("display","none");
+	            $("#toSearch").css("display","none");
+	            $("#searchBar").css("display","none");
+	            $("#bTitle").css("display","inline-block");
+	            $("#categoryTab").css("display","inline-block");
+	        });
+        </script>
         <script>
         	$("#uploadBtn").on("click",function(){
         		console.log($("#title").val());
@@ -274,12 +183,7 @@
         		}
         		$("#inputFrm").submit();    		
         	})
-            $("#menuCheck").on("click",function(){
-                $("#menuDiv").css("display","block");
-            })
-            $("#menuDiv").on("click",function(){
-                $("#menuDiv").css("display","none");
-            })
+           
         </script>
     </body>
 </html>

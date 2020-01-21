@@ -49,6 +49,12 @@ public class BoardService {
 	public List<BoardDTO> helpBoardAllSearch(String search){
 		return boardDAO.helpBoardAllSearch(search);
 	}
+	public void helpBoardUpdate(String title, String contents, int no) {
+		boardDAO.helpBoardUpdate(title, contents, no);
+	}
+	public void helpBoardDelete(int no) {
+		boardDAO.helpBoardDelete(no);
+	}
 	// 조회수 증가
 	public int viewCountPlus(int no) {
 		return boardDAO.viewCountPlus(no);

@@ -22,6 +22,7 @@ import kh.spring.dto.CommentDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
 import kh.spring.dto.StyleDTO;
+import kh.spring.service.AdvisorService;
 import kh.spring.service.BoardService;
 import kh.spring.service.ClosetService;
 import kh.spring.service.CommentsService;
@@ -48,12 +49,14 @@ public class BoardController {
 	private CommentsService comService;
 	
 	@Autowired
+	private AdvisorService advisorService;
+	
+	@Autowired
 	private HttpSession session;
 
 	// help 게시판으로 가기
 	@RequestMapping("/helpBoard")
 	public String helpBoard(Model model, String cpage) {
-
 		List<BoardDTO> allList = boardService.helpBoardSelectAll();
 		String page = null;
 		try {
@@ -63,25 +66,19 @@ public class BoardController {
 			} else {
 				page = NavigatorUtil.getPageNavi(Integer.parseInt(cpage), allList.size(),10,15);
 			}
-
+			
 			int start = (Integer.parseInt(cpage) * Configuration.recordCountPerPage) - Configuration.recordCountPerPage + 1;
 			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
 
 			List<BoardDTO> list = boardService.selectByPage(start, end);
-			/*
-			for (BoardDTO dto : list) {
-				dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
-			}
-			*/
+			
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);
+			model.addAttribute("cpage",cpage);
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {e.printStackTrace();}
 		return "board/help/helpMain";
 	}
-
 	// help게시판 게시글 등록
 	@RequestMapping("/helpUploadProc.do")
 	public String helpUploadProc(BoardDTO dto) {
@@ -100,23 +97,17 @@ public class BoardController {
 
 		return "redirect:/board/helpBoard";
 	}
-	
 	// help게시판 디테일
 	@RequestMapping("/helpDetail")
-	public String helpDetail(Model model,int no) {
-		System.out.println(no);
+	public String helpDetail(Model model,int no ) {
 		BoardDTO dto = boardService.helpBoardDetailPage(no);
-		/*
-		try {
-			dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		*/
+		boardService.viewCountPlus(no);
+		
 		model.addAttribute("dto", dto);
+		
 		return "board/help/helpBoardDetail";		
 	}
-	
+	// help게시판 검색
 	@RequestMapping("/helpSearch")
 	public String helpSearch(Model model,String search, String cpage) {
 		List<BoardDTO> allList = boardService.helpBoardAllSearch(search);
@@ -133,10 +124,7 @@ public class BoardController {
 			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
 
 			List<BoardDTO> list = boardService.helpBoardSearch(start, end, search);
-			/*
-			for (BoardDTO dto : list) {
-				dto.setWrite_date(DateFormat.dateformat(dto.getWrite_date()));
-			}*/
+			
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);
 			
@@ -144,9 +132,27 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		return "board/help/helpMain";
-	
 	}
-	
+	// help 게시판 수정
+	@RequestMapping("/modifyHelpBoard")
+	public String modifyHelpBoard(String title, String contents, int no) {
+		contents = contents.replaceAll("<br>", "\n");
+		
+		boardService.helpBoardUpdate(title, contents, no);
+		
+		return "redirect:/board/helpDetail?no="+no;		
+	}
+	//help게시판 삭제
+	@RequestMapping("/deleteHelpBoard")
+	public String deleteHelpBoard(int no) {
+		System.out.println(no);
+		boardService.helpBoardDelete(no);
+		comService.boardDelete(no);
+		advisorService.helpBoardDelete(no);
+		
+		return "redirect:/board/helpBoard";
+		
+	}
 	// 자랑게시판 메인
 	@RequestMapping("/boastBoard")
 	public String boastBoard(String Atarget,Model m) {
