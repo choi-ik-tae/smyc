@@ -21,10 +21,10 @@
     .item-page::-webkit-scrollbar {display:none;}
     .item-page>div>div[class~='card']{cursor:pointer;}
     #dressBox>div>div{background:rgba(255, 255, 255, 0.2);border-radius: 5px;color: white;font-size: 20pt;font-weight: 800;}
-    #accBox{position: absolute;left: 480px;top:50px;width:198px;height:500px;line-height: 500px; text-align: center;}
-    #topBox{position: absolute;left: 690px;top:50px;width:269px;height:668px;line-height: 668px; text-align: center;}
-    #pantsBox{position: absolute;left: 970px;top:50px;width:269px;height:668px;line-height: 668px; text-align: center;}
-    #shoesBox{position: absolute;left: 1250px;top:50px;width:200px;height:500px;line-height: 500px; text-align: center;}
+    #accBox{position: absolute;left: 465px;top:50px;width:198px;height:500px;line-height: 500px; text-align: center;}
+    #topBox{position: absolute;left: 675px;top:50px;width:269px;height:668px;line-height: 668px; text-align: center;}
+    #pantsBox{position: absolute;left: 955px;top:50px;width:269px;height:668px;line-height: 668px; text-align: center;}
+    #shoesBox{position: absolute;left: 1235px;top:50px;width:200px;height:500px;line-height: 500px; text-align: center;}
     .nav-item>a{color: black; font-size: 15pt;}
     .logo{font-size: 15pt;}
     #top{height: 80px;background-color:white;border-bottom: 1px solid gray;}
@@ -94,6 +94,7 @@
 										<script>
 											$("#${closet.name}").prop("selected",true);
 											$("#targetCloset").val("${closet.no}");
+											console.log(${closet.no});
 										</script>
 									</c:if>
 								</c:forEach>
@@ -109,7 +110,7 @@
         </div>
     </div>
     <div class="row m-0" id="dressBox">
-        <div class="col-12">
+        <div class="col-12 p-0">
         <c:choose>
 	        <c:when test="${dressList.size() > 0}">
 	        <img src="${pageContext.request.contextPath}/imgs/closet/${img}.png" id="closetImg">
@@ -193,7 +194,7 @@
         </div>
     </div><hr>
     <div class="row m-0">
-        <div class="col-8 m-auto p-0">
+        <div class="col-6 m-auto p-0">
             <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a id="allView" class="nav-link"><span class="nav-font">All</span></a>
@@ -214,7 +215,7 @@
         </div>
     </div>
     <div class="row m-0 mt-1 mb-5">
-		<div class="col-8 m-auto p-0">
+		<div class="col-6 m-auto p-0">
 			<div class="row row-cols-3 m-auto item-page">
 	        <!-- 파일 가져와서 뿌려주면 됨. 반복문사용 -->
 	        <c:choose>

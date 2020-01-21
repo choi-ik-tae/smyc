@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.Utils.CheckXss;
 import kh.spring.Utils.Configuration;
-import kh.spring.Utils.DateFormat;
 import kh.spring.Utils.NavigatorUtil;
 import kh.spring.dto.BoardDTO;
 import kh.spring.dto.CommentDTO;
@@ -175,7 +174,6 @@ public class BoardController {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
 			likeList.add(boardService.boastLikeCount(tmp.getNo()));
 		}
-		
 		m.addAttribute("boastList", boastList);
 		m.addAttribute("styleList", styleList);
 		m.addAttribute("email", email);
@@ -221,7 +219,7 @@ public class BoardController {
 	}
 	// 자랑게시판 업로드 실행
 	@RequestMapping("/boastUploadProc")
-	public String boastUploadProc(BoardDTO dto) {
+	public String boastUploadProc(BoardDTO dto, Model m) {
 		String email = (String) session.getAttribute("email");
 		String nick = (String) session.getAttribute("nick");
 		
@@ -235,7 +233,7 @@ public class BoardController {
 		dto.setNickname(nick);
 		
 		boardService.boastBoardInsert(dto);
-		
+
 		return "redirect:/board/boastBoard";
 	}
 	// 자랑게시판 게시물 디테일
@@ -316,5 +314,15 @@ public class BoardController {
 		m.addAttribute("likeList", likeList);
 		
 		return "board/boast/boastSearch";
+	}
+	// 자랑게시물 중복 검사
+	@RequestMapping("/boastIsExist")
+	@ResponseBody
+	public String boastIsExist(String s_no) {
+		BoardDTO result = boardService.boastIsExist(Integer.parseInt(s_no));
+		if(result != null) {
+			return "be";
+		}
+		return "clean";
 	}
 }

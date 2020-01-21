@@ -14,11 +14,11 @@
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
-	.container-fulid {width: 1890px;max-width: none !important;}
+	.container {width: 800px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-    html,body{height: 100%;}
-    body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;}
     #preview{width:300px;height: 300px;}
+    #bg{background:rgba(255,255,255,0.9); border-radius: 10px;}
+    body{background-image: url(/imgs/bg/bg21.jpg);}
 </style>
 <script type="text/javascript">
  window.history.forward();
@@ -27,13 +27,14 @@
 </head>
 <body>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
-    <div class="container text-center">
+    <div class="container mt-5 text-center">
         <!-- 헤더 -->
-        
+        <div class="col-12 p-2" id="bg">
 		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post" id="frm">
 			<div class="row m-2">
-				<div class="col-auto m-auto p-0 align-items-center"
-					style="border: 1px solid gray;" id="preview"></div>
+				<div class="col-auto m-auto p-0 align-items-center" style="border: 1px solid lightgray;" id="preview">
+					<img src="/imgs/btn/image.png" class="w-50" style="margin-top:80px;">	
+				</div>
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
@@ -87,24 +88,24 @@
 				</div>
 				<div class="col-10">
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="spring"
-							value="spring"> <label class="form-check-label"
-							for="spring">봄</label>
+						<label class="form-check-label" for="spring">
+							<input class="form-check-input" type="checkbox" name="season" id="spring" value="spring"> 봄
+						</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="summer"
-							value="summer"> <label class="form-check-label"
-							for="summer">여름</label>
+						<label class="form-check-label" for="summer">
+							<input class="form-check-input" type="checkbox" name="season" id="summer" value="summer"> 여름
+						</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="fall"
-							value="fall"> <label class="form-check-label"
-							for="fall">가을</label>
+						<label class="form-check-label" for="fall">
+							<input class="form-check-input" type="checkbox" name="season" id="fall" value="fall"> 가을
+						</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="winter"
-							value="winter"> <label class="form-check-label"
-							for="winter">겨울</label>
+						<label class="form-check-label" for="winter">
+							<input class="form-check-input" type="checkbox" name="season" id="winter" value="winter"> 겨울
+						</label>
 					</div>
 				</div>
 			</div>
@@ -114,10 +115,14 @@
 				</div>
 				<div class="col-10">
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="pub" id="y" value="Y" required> <label class="form-check-label" for="y">YES</label>
+						<label class="form-check-label" for="y">
+							<input class="form-check-input" type="radio" name="pub" id="y" value="Y" required> YES
+						</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="pub" id="n" value="N" required> <label class="form-check-label" for="n">NO</label>
+						<label class="form-check-label" for="n">
+							<input class="form-check-input" type="radio" name="pub" id="n" value="N" required> NO
+						</label>
 					</div>
 				</div>
 			</div>
@@ -152,7 +157,7 @@
 				</div>
 			</div>
 		</form>
-
+		</div>
 		<!-- 푸터 -->
     </div>
 	<script>
@@ -173,12 +178,11 @@
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
 				reader.onload = function(e) {
-					$('#preview').html(
-							"<img class='w-100 h-100' src="+ e.target.result +">");
+					$('#preview').html("<img class='w-100 h-100' src="+ e.target.result +">");
 				}
 				reader.readAsDataURL(input.files[0]);
 			} else {
-				$('#preview').html("");
+				$('#preview').html("<img src='/imgs/btn/image.png' class='w-50' style='margin-top:80px;'>");
 			}
 		}
 		$("#imgud").on('change', function() {

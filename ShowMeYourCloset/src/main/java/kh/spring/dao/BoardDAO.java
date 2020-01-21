@@ -109,4 +109,8 @@ public class BoardDAO {
 	public List<BoardDTO> boastBoardSearchAll(String keyWord) {
 		return sst.selectList("Board.boastBoardSearchAll","%"+keyWord+"%");
 	}
+	// 게시물 중복 등록 검사
+	public BoardDTO boastIsExist(int s_no) {
+		return sst.selectOne("Board.boastIsExist",s_no);
+	}
 }

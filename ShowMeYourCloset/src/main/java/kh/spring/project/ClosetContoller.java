@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.Utils.CheckXss;
 import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
@@ -40,7 +41,12 @@ public class ClosetContoller {
 		String email = (String) session.getAttribute("email");
 		String nick = (String) session.getAttribute("nick");
 		dto.setEmail(email);
-
+		// 스크립트 방지
+		dto.setCategory(CheckXss.checkXss(dto.getCategory()));
+		dto.setName(CheckXss.checkXss(dto.getName()));
+		dto.setMemo(CheckXss.checkXss(dto.getMemo()));
+		dto.setPrice(CheckXss.checkXss(dto.getPrice()));
+		
 		String path = session.getServletContext().getRealPath("files/" + nick);
 		String rootPath = session.getServletContext().getRealPath("files");
 		cloService.dressUpload(dto, fdto, file, path, nick, rootPath);
@@ -77,6 +83,11 @@ public class ClosetContoller {
 		String email = (String) session.getAttribute("email");
 		String nick = (String) session.getAttribute("nick");
 		dto.setEmail(email);
+		// 스크립트 방지
+		dto.setCategory(CheckXss.checkXss(dto.getCategory()));
+		dto.setName(CheckXss.checkXss(dto.getName()));
+		dto.setMemo(CheckXss.checkXss(dto.getMemo()));
+		dto.setPrice(CheckXss.checkXss(dto.getPrice()));
 		
 		String path = session.getServletContext().getRealPath("files/" + nick);
 		DressImgDTO img = cloService.dressSelectImg(dto.getNo());
@@ -94,13 +105,16 @@ public class ClosetContoller {
 	// 내 옷장 조회
 	@RequestMapping("myCloset")
 	public String myCloset(Model m, String target) {
-		String email = (String) session.getAttribute("email");
+		String email = (String) session.getAttribute("email");		
 		if (email == null) { return "/mypage/closet/myCloset"; }
 		if (cloService.closetSeleteByEmail(email).size() <= 0) { int closetEmpty = 1; m.addAttribute("closetEmpty", closetEmpty); return "/mypage/closet/myCloset"; }
 		if (target == null) {
 			List<String> base = cloService.closetSelectNameByEmail(email);
-			target = base.get(0);
+			target = CheckXss.checkXss(base.get(0));
 		}
+		// 스크립트 필터
+		target = CheckXss.checkXss(target);
+		
 		// 사용자 옷장 정보 가져가기
 		List<ClosetDTO> closetList = cloService.closetSeleteByEmail(email);
 
@@ -176,9 +190,9 @@ public class ClosetContoller {
 		}
 		String path = session.getServletContext().getRealPath("");
 		cloService.closetDeleteDress(nos,path);
-		cloService.closetUpdate(no, dg, closet, pub);
+		cloService.closetUpdate(no, dg, CheckXss.checkXss(closet), pub);
 		// 변경된 옷장 이름 보내주기 위함
-		String target = cloService.closetSelectName(no).getName();
+		String target = CheckXss.checkXss(cloService.closetSelectName(no).getName());
 		m.addAttribute("target", target);
 		
 		return "redirect:/myCloset";

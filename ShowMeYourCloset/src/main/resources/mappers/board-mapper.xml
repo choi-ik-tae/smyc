@@ -64,5 +64,8 @@
 	<select id="boastBoardSearchAll" resultType="kh.spring.dto.BoardDTO">
 		select * from board where category='B' and (title like #{value} or contents like #{value})
 	</select>
-
+<!-- 	자랑게시글 중복 검사 -->
+	<select id="boastIsExist" resultType="kh.spring.dto.BoardDTO">
+		select * from board where s_no = #{s_no}	
+	</select>
 </mapper>

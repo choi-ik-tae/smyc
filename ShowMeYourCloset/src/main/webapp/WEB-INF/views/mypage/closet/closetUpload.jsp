@@ -14,10 +14,8 @@
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
-	.container-fulid {width: 1890px;max-width: none !important;}
+	.container {width: 1000px;max-width: none !important; margin-top:200px;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-    html,body{height: 100%;}
-    body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;}
     .preview{width:300px;height: 210px}
 </style>
 <script type="text/javascript">
@@ -29,7 +27,6 @@
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
     <div class="container text-center">
         <!-- 헤더 -->
-        
 		<form action="${pageContext.request.contextPath}/closet/closetUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
                 <div class="col-12">

@@ -227,9 +227,23 @@
     		history.back();
     	});
     	$("#toBoast").on("click",function(){
-    		$("#inputT").val($("#bTitle").val());
-    		$("#inputC").val($("#contents").val());
-    		$("#frm").submit();
+    		$.ajax({
+    			url:"${pageContext.request.contextPath}/board/boastIsExist",
+    			method:"POST",
+    			data:{
+    				s_no:"${style.no}"
+    			}
+    		}).done(function(data){
+    			if(data == 'be') {
+    				alert("이미 자랑한 스타일 입니다!!");
+    			} else {
+    	    		$("#inputT").val($("#bTitle").val());
+    	    		$("#inputC").val($("#contents").val());
+    	    		$("#frm").submit();	
+    			}
+    		}).fail(function(data){
+    			console.log("통신실패");ㅣ
+    		});
     	});
     	$(".dImgs").on("click",function(){
     		console.log($(this).attr("id"));
