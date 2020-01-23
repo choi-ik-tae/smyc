@@ -88,8 +88,9 @@
                 </div>
             </div>
             <div class="row m-0 ">
-                <div class="col-12" style="text-align: right;">
-                    <button id="btn" class="btn btn-info"> 코디 도움 주기</button>
+                <div class="col-12">
+                    <span style="float: left;"><button id="backBtn" class="btn btn-info">돌아가기</button> </span>
+                    <span style="float: right;"><button id="helpBtn" class="btn btn-info"> 코디 도움 주기</button></span>  
                 </div>
             </div>
             <div class="van" style="height:20px;">
@@ -103,8 +104,11 @@
         		
         		parent.document.detailFrm.submit();
         	}
+        	$("#backBtn").on("click",function(){
+        		parent.document.boardBack.submit();
+        	})
         	
-            $("#btn").on("click",function(){
+            $("#helpBtn").on("click",function(){
             	if("${email}" == ""){
             		alert("로그인을 해주세요.");
             		return ; 

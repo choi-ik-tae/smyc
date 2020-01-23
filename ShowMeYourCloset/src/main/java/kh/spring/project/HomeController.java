@@ -43,7 +43,6 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home(Model m, HttpServletRequest request) {
 		String ip=request.getRemoteAddr();
-		System.out.println(ip);
 		
 		return "index";
 	}

@@ -19,7 +19,8 @@
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<style>
+<style>     
+           
 		/*    div{border: 1px solid black;}*/
 		* {box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
 		.updateBtn:hover{cursor:pointer;}
@@ -46,6 +47,27 @@
 	    #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
 	    #bottom-logo{height: 150px; line-height: 150px;}
 	    #bottom-contents{font-size: 10pt;color: white;}
+	    
+	     .mainLogo{
+            	position:relative;
+                color: white;
+                font-size:50px;
+                font-weight: 700;
+                text-align: center;
+            }
+            .LogoDiv:after{
+                display: block;
+                position:absolute;
+                top:0;
+                left: 0;
+                background-image:url('/imgs/bg/clothesLogo2.jpg');
+                background-attachment: fixed; 
+                height: 600px;
+                width: 100%;
+                z-index: -1;
+                content: "";  
+                background-size: 100% 100%;
+            }
 </style>
 
 <body>
@@ -78,7 +100,30 @@
 			<div id="searchBox" class="col-1 p-0 m-0"></div>
 		</div>
 		<!-- 상단 설명 -->
-		<div class="row m-0" style="height: 100px;"></div>
+          <div class="row m-0 LogoDiv" style="height: 600px;">
+                <div class="col-12">
+                <!-- 위 메뉴 공백 채우기 -->
+                <div class="row" style="margin-top: 100px;"></div>
+                    <div class="col-12">
+                        <div class="row">
+                           <div class="col-12 mainLogo" id="mainLogo">
+			                    <p class="mainLogo" style="margin-top: 95px;">HELP BOARD</p>
+			                    <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
+			                        <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
+			                        <span style="display: block;">여기서 도움을 요청해보세요</span>
+			                        <span style="display: block;">내 옷으로 예쁘게 센스있게 꾸며보세요</span>
+			                        <span style="display: block;">오늘 점심은 떡볶이를 먹을 것이다.</span>
+			                        <span style="display: block;">크레이지 후라이.. 볶음밥 존맛탱구리...</span>
+			                        <span style="display: block;">그렇다 좀 더 글을 길게 쓰기 위함이다.</span>
+			                        <span style="display: block;">좀 예쁘게</span>
+			                    </div>
+			                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         <!-- 상단 설명 -->
+		<div class="row m-0" style="height: 50px;"></div>
 		<!-- 게시글 주루룩 -->
 		<div class="row">
 			<div class="col-12 col-md-6 form-title mt-4 mb-1 p-4"
@@ -136,15 +181,20 @@
 			<form action="${pageContext.request.contextPath}/advisor/advisorUpload" id="hiddenFrm" name="hiddenFrm" method="post">
 				<input type="hidden" name="writer">
 				<input type="hidden" name="b_no">
+				<input type="hidden" name="cpage" value="${cpage}">
             </form>
             <form action="${pageContext.request.contextPath}/advisor/detailAdvisor" id="detailFrm" name="detailFrm" method="post">
             	<input type="hidden" name="writer">
             	<input type="hidden" name="no">
+            	<input type="hidden" name="cpage" value="${cpage}">
             </form>
             <form action="${pageContext.request.contextPath}/board/modifyHelpBoard" id="boardModifyFrm" method="post">
             	<input type="hidden" name="title" id="inputTitle">
             	<input type="hidden" name="contents" id="inputContents">
             	<input type="hidden" name="no" id="no" value="${dto.no}">
+            </form>
+            <form action="${pageContext.request.contextPath}/board/helpBoard" id="boardBack" name="boardBack" method="post">
+            	<input type="hidden" name="cpage" value="${cpage}">
             </form>
 		</div>
 		<!-- 상단 설명 -->
