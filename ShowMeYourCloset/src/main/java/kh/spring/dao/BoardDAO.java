@@ -60,7 +60,9 @@ public class BoardDAO {
 	
 	// help 게시판 전체 뽑아오기
 	public List<BoardDTO> helpBoardAllSearch (String search){
-		return sst.selectList("Board.helpBoardAllSearch",search);
+		Map<String, Object> parm = new HashMap<>();
+		parm.put("search","%"+search+"%");
+		return sst.selectList("Board.helpBoardAllSearch",parm);
 	}
 	//help 게시판 수정
 	public int helpBoardUpdate(String title, String contents, int no) {

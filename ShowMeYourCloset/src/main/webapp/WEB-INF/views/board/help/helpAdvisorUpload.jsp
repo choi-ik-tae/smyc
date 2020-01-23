@@ -84,6 +84,7 @@
                 </div>
             </div>
             <form action="${pageContext.request.contextPath}/advisor/advisorUploadProc" method="post" id="uploadFrm">
+            		<input type="hidden" name="cpage" value="${cpage}">
             		<input type="hidden" name="top" id="topHidden">
 	            	<input type="hidden" name="pants" id="pantsHidden">
 	            	<input type="hidden" name="shoes" id="shoseHidden">
@@ -128,6 +129,11 @@
         		
         		if( $("#title").val() == ""){
         			alert("제목을 적어주세요");
+        			return;
+        		}
+        		
+        		if($("#contents").val()==""){
+        			alert("내용을 입력해주세요");
         			return;
         		}
         		

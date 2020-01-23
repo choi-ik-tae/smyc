@@ -69,6 +69,8 @@
 		    #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
 		    #bottom-logo{height: 150px; line-height: 150px;}
 		    #bottom-contents{font-size: 10pt;color: white;}
+		    
+		    .contents:hover{cursor:pointer;}
 		</style>
 
     </head>
@@ -141,7 +143,7 @@
             </div>
             <!-- 게시글 주루룩 -->
             <div class="row" style="background: white">
-                <div class="col-10 mt-5 mb-2" style="margin:auto;">
+                <div class="col-8 mt-5 mb-2" style="margin:auto;">
         			<div class="row">
         				<div class="col-6">
 		                	<div class="row" style="float:left;">
@@ -160,7 +162,7 @@
 	                    </div>
                     </div>		
                 </div>
-                <div class="col-10 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">
+                <div class="col-8 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">
                     <div class="row" style="height: 40px; line-height: 35px; border-bottom: 1px solid #bcbcbc;font-size:17px; font-weight:600;">
                         <div class="d-none d-md-block col-md-1">
                             NO
@@ -180,7 +182,7 @@
 	                            ${dto.no}
 	                        </div>
 	                        <div class="col-8 col-sm-7 col-md-6" style="text-align: left;">
-	                            <a href="" class="gotoDetail">${dto.title}</a>
+	                            ${dto.title}
 	                        </div>
 	                        <div class="col-4 col-sm-3 col-md-2">
 	                            ${dto.nickname }

@@ -99,11 +99,12 @@ public class BoardController {
 	}
 	// help게시판 디테일
 	@RequestMapping("/helpDetail")
-	public String helpDetail(Model model,int no ) {
+	public String helpDetail(Model model,int no, int cpage ) {
 		BoardDTO dto = boardService.helpBoardDetailPage(no);
 		boardService.viewCountPlus(no);
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("cpage",cpage);
 		
 		return "board/help/helpBoardDetail";		
 	}
@@ -111,16 +112,17 @@ public class BoardController {
 	@RequestMapping("/helpSearch")
 	public String helpSearch(Model model,String search, String cpage) {
 		List<BoardDTO> allList = boardService.helpBoardAllSearch(search);
+	
 		String page = null;
 		try {
 			if (cpage == null) {
 				cpage = 1 + "";
-				page = NavigatorUtil.getPageNavi(1, allList.size(),10,15);
+				page = boardService.helpSearchGetPageNavi(1, allList.size(),10,15,search);
 			} else {
-				page = NavigatorUtil.getPageNavi(Integer.parseInt(cpage), allList.size(),10,15);
+				page = boardService.helpSearchGetPageNavi(Integer.parseInt(cpage), allList.size(),10,15,search);
 			}
 
-			int start = (Integer.parseInt(cpage) * Configuration.recordCountPerPage) - Configuration.recordCountPerPage - 1;
+			int start = (Integer.parseInt(cpage) * Configuration.recordCountPerPage) - Configuration.recordCountPerPage + 1;
 			int end = Integer.parseInt(cpage) * Configuration.recordCountPerPage;
 
 			List<BoardDTO> list = boardService.helpBoardSearch(start, end, search);
@@ -145,7 +147,7 @@ public class BoardController {
 	//help게시판 삭제
 	@RequestMapping("/deleteHelpBoard")
 	public String deleteHelpBoard(int no) {
-		System.out.println(no);
+	
 		boardService.helpBoardDelete(no);
 		comService.boardDelete(no);
 		advisorService.helpBoardDelete(no);

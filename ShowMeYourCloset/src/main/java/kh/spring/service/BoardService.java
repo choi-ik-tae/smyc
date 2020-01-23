@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kh.spring.Utils.Configuration;
 import kh.spring.dao.BoardDAO;
 import kh.spring.dao.BoardLikeDAO;
 import kh.spring.dao.DressDAO;
@@ -54,6 +55,64 @@ public class BoardService {
 	}
 	public void helpBoardDelete(int no) {
 		boardDAO.helpBoardDelete(no);
+	}
+	public String helpSearchGetPageNavi(int currentPage,int size ,int naviCountPerPage , int recordCountPerPage,String search) throws Exception {		
+		int recordTotalCount = size; // DB에서 총 컬럼 수 불려오는 함수로 변경
+
+		int pageTotalCount = 0;
+
+		if (recordTotalCount % Configuration.recordCountPerPage > 0) {
+			// 총 글의 개수를 페이지당 보여줄 개수로 나누었을 때, 나머지가 생기면
+			// 총 페이지의 개수 + 1
+			// ex) 143 / 10 = 14 이고 나머지가 3이니 페이지는 총 15개가 되어야한다. 그래서 +1
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
+		}
+		// 현재 내가 위치하는 페이지
+		// int currentPage = 2;
+
+		// 현재 페이지 번호가 비정상 값일 때, 조정하는 보안 코드
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+
+		// 현재 내가 위치하고 있는 페이지에 따라 네비게이터 시작 페이지 값을 구하는 공식
+		int startNavi = ((currentPage - 1) / Configuration.naviCountPerPage) * Configuration.naviCountPerPage + 1;
+		int endNavi = startNavi +  Configuration.naviCountPerPage - 1;
+
+		// 페이지 끝 값이 비정상 값일 때, 조정하는 보안 코드
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+
+		// 이전과 이후가 필요한지 안한지 조정
+		boolean needPrev = true;
+		boolean needNext = true;
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		if (needPrev) {
+			sb.append("<a href='/board/helpSearch?cpage=" + (startNavi - 1) + "&search="+search+"'>< </a>");
+		}
+		for (int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a href='/board/helpSearch?cpage=" + i + "&search="+search+"'>");
+			sb.append(i + " ");
+			sb.append("</a>");
+		}
+		if (needNext) {
+			sb.append("<a href='/board/helpSearch?cpage=" + (endNavi + 1) + "&search="+search+"'> ></a>");
+		}
+
+		return sb.toString();
 	}
 	// 조회수 증가
 	public int viewCountPlus(int no) {

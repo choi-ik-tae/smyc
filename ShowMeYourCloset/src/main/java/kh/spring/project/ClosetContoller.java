@@ -255,7 +255,6 @@ public class ClosetContoller {
 	@ResponseBody
 	public Map<String, Object> styleDetailDress(String path) {
 
-		System.out.println(path);
 
 		Map<String, Object> map = new HashMap<>();
 		if (path != null) {

@@ -94,7 +94,7 @@ public class AdvisorController {
 	}
 
 	@RequestMapping("/advisorUpload")
-	public String advisorUpload(Model model, String writer, int b_no) {
+	public String advisorUpload(Model model, String writer, int b_no ,String cpage) {
 		String gender =memService.selectGender(writer);
 		List<ClosetDTO> closetList = closetService.closetSeleteByEmail(writer);
 		
@@ -108,6 +108,7 @@ public class AdvisorController {
 		model.addAttribute("closetList", closetList);
 		model.addAttribute("gender", gender);
 		model.addAttribute("writer", writer);
+		model.addAttribute("cpage",cpage);
 		return "board/help/helpAdvisorUpload";
 		
 	}
@@ -126,7 +127,7 @@ public class AdvisorController {
 	}
 	
 	@RequestMapping("/advisorUploadProc")
-	public String advisorUploadProc(AdvisorDTO dto) {
+	public String advisorUploadProc(AdvisorDTO dto,String cpage) {
 		String email = (String)session.getAttribute("email");
 		String nickname = (String)session.getAttribute("nick");
 		
@@ -137,12 +138,12 @@ public class AdvisorController {
 		
 		advisorService.insertAdivisor(dto);
 		
-		return "redirect:/board/helpDetail?no="+dto.getB_no();
+		return "redirect:/board/helpDetail?no="+dto.getB_no()+"&cpage="+cpage;
 		
 	}
 	
 	@RequestMapping("/detailAdvisor")
-	public String detailAdvisor(Model model,int no,String writer) {
+	public String detailAdvisor(Model model,int no,String writer,String cpage) {
 		AdvisorDTO dto = advisorService.selectAdvisorDTO(no);
 		
 		String gender = memService.selectGender(writer);
@@ -150,6 +151,7 @@ public class AdvisorController {
 		model.addAttribute("gender", gender);
 		model.addAttribute("writer", writer);
 		model.addAttribute("dto",	dto);
+		model.addAttribute("cpage",cpage);
 		
 		return "board/help/helpAdvisorDetail";
 	}
