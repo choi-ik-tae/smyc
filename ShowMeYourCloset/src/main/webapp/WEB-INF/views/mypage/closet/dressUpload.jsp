@@ -16,6 +16,7 @@
 <style>
 	.container {width: 800px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+    html,body{height: 100%;}
     #preview{width:300px;height: 300px;}
     #bg{background:rgba(255,255,255,1); border-radius: 10px;}
     body{background-image: url(/imgs/bg/bg21.jpg);}
@@ -66,7 +67,7 @@
 					<label for="" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="" class="w-100 form-control" name="name" type="text">
+					<input id="name" class="w-100 form-control" name="name" type="text">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -151,7 +152,7 @@
 				</div>
 			</div>
 			<div class="row m-2">
-				<div class="col-12 align-self-center">
+				<div class="col-12 m-3">
 					<button id="upload" type="button" class="btn btn-outline-dark">등록하기</button>
 					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
 				</div>
@@ -163,6 +164,20 @@
 	<script>
 		$("#upload").on("click",function(){
 			var target = $("#imgud").val();
+			
+			var name = $("#name").val();
+			var category = $("select[name='category']");
+			var season = $("input[name='season']");
+			var pub = $("input[name='pub']");
+
+            for(i=0;i<season.length;i++){
+                if($(input[i]).val()==""){
+                    alert("빈칸을 모두 채워주세요");
+                    return;
+                }
+            }
+			
+            
 			if(target == "") {
 				alert("이미지를 등록해 주세요!")
 			} else {

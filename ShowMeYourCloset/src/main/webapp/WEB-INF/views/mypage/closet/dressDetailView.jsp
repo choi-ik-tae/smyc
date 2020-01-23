@@ -137,7 +137,7 @@
 				</div>
 			</div>
 			<div class="row m-2">
-				<div class="col-12 align-self-center">
+				<div class="col-12 m-3">
 					<button id="toModify" type="button" class="btn btn-outline-dark">수정하기</button>
 					<button id="toDelete" type="button" class="btn btn-outline-dark">삭제하기</button>
 					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>

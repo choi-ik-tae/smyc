@@ -28,13 +28,13 @@
 </head>
 <body>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
-    <div class="container text-center">
+    <div class="container mt-5 text-center">
         <!-- 헤더 -->
-        
+        <div class="col-12" id="bg">
 		<form action="${pageContext.request.contextPath}/closet/dressModifyProc" enctype="multipart/form-data" method="post" id="frm">
 			<input type="hidden" name="no" value="${info.no}">
 			<div class="row m-2">
-				<div class="col-auto m-auto p-0 align-items-center" style="border: 1px solid gray;" id="preview">
+				<div class="col-auto m-auto p-0 align-items-center" id="preview">
 					<img class='w-100 h-100' src="${infoImg.path}">
 				</div>
 			</div>
@@ -160,13 +160,13 @@
 				</div>
 			</div>
 			<div class="row m-2">
-				<div class="col-12 align-self-center">
+				<div class="col-12 m-3">
 					<button id="modify" type="button" class="btn btn-outline-dark">수정하기</button>
 					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
 				</div>
 			</div>
 		</form>
-
+        </div>
 		<!-- 푸터 -->
     </div>
     <c:choose>

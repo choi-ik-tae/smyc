@@ -254,7 +254,6 @@ public class BoardController {
 	@RequestMapping("/boastDetailView")
 	public String boastDetailView(String Dtarget,String back,Model m) {
 		String email = (String)session.getAttribute("email");
-		
 		if(back == null) {
 			back = "default";
 		}
