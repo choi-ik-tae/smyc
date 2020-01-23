@@ -215,14 +215,16 @@
 						<button type="button" id="styleModifyBtn" class="btn btn-secondary">코디 수정</button>
 					</span> 
 					<span style="float: left" class="m-1"> 
-						<button type="button" class="btn btn-secondary">돌아가기</button>
+						<button type="button" class="btn btn-secondary" id="back">돌아가기</button>
 					</span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-		
+		$("#back").on("click",function(){
+			history.back();
+		})
 		$("#toBoast").on("click",function(){
 			location.href="${pageContext.request.contextPath}/board/boastUpload?no="+${dto.no};
 		});

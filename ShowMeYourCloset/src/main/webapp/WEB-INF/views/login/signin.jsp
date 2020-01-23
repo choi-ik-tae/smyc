@@ -21,12 +21,13 @@
 	a{
 		color : black;
 	}
+	.text-logo{cursor:pointer;}
 </style>
 
 </head>
 <body>
 	<form class="form-signin" action="${pageContext.request.contextPath}/member/signinProc" id="frm" method="post">
-		<h1 class="h3 mb-3 font-weight-normal text-center">Show Me Your Closet</h1>
+		<div class="text-logo"><h1 class="h3 mb-3 font-weight-normal text-center">Show Me Your Closet</h1></div>
 		<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required>
 		<input type="password" id="inputPassword" name="pw" class="form-control mb-3" placeholder="Password" required>
 		<div class="checkbox mb-3">
@@ -42,6 +43,9 @@
 	</form>
 	
 	<script>
+		$(".text-logo").on("click",function(){
+			location.href="${pageContext.request.contextPath}/";
+		})
 		$("#signInBtn").on("click",function(){
 			
 			$.ajax({

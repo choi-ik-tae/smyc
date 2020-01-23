@@ -217,6 +217,10 @@
                         <button class="btn btn-info" type="button" id="back">목록</button>
                     </div>
                 </div>
+                <form action="${pageContext.request.contextPath}/board/helpDetail" id="backFrm" method="post">
+                	<input type="hidden" name="no" value="${dto.b_no }">
+                	<input type="hidden" name="cpage" value="${cpage}">
+                </form> 
            
         </div> 
         </div>
@@ -225,7 +229,7 @@
         
         <script>
         	$("#back").on("click",function(){
-        		location.href="${pageContext.request.contextPath}/board/helpDetail?no=${dto.b_no}";
+        		backFrm.submit();
         	})
         </script>
 	<!--  숨김메뉴 스크립트 -->
