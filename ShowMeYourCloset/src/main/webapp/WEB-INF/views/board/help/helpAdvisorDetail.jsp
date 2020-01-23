@@ -56,12 +56,14 @@
 	    #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
 	    #bottom-logo{height: 150px; line-height: 150px;}
 	    #bottom-contents{font-size: 10pt;color: white;}
+	    .container-fuild{ width:1900px; max-width:none !important;}
+	   
     </style>
     <body>
     
     	<!-- 숨김 메뉴 -->
 		<jsp:include page="../../standard/hideMenu.jsp"/>
-        <div class="container-fulid p-0">
+        <div class="container-fuild fixed p-0 ">
         <!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">
@@ -85,6 +87,7 @@
 			</div>
 			<div id="searchBox" class="col-1 p-0 m-0"></div>
 		</div>
+		<div class="col-12" style="margin:auto">
 		<div class="bean" style="height:50px;"></div>
 		<div class="row">
 			<div class="col-7" style="margin:auto">
@@ -221,7 +224,7 @@
                 	<input type="hidden" name="no" value="${dto.b_no }">
                 	<input type="hidden" name="cpage" value="${cpage}">
                 </form> 
-           
+          	 </div>
         </div> 
         </div>
         <jsp:include page="../../standard/boardFooter.jsp"/>			

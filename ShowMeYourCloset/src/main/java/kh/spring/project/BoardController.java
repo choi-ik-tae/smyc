@@ -102,7 +102,7 @@ public class BoardController {
 	public String helpDetail(Model model,int no, String cpage ,String target ) {
 		BoardDTO dto = boardService.helpBoardDetailPage(no);
 		boardService.viewCountPlus(no);
-
+		
 		if(cpage == null) {
 			cpage= 1+"";
 		}
@@ -254,10 +254,7 @@ public class BoardController {
 	@RequestMapping("/boastDetailView")
 	public String boastDetailView(String Dtarget,String back,Model m) {
 		String email = (String)session.getAttribute("email");
-		if(email == null) {
-			System.out.println("끄지라!");
-			return "redirec:/";
-		}
+		
 		if(back == null) {
 			back = "default";
 		}

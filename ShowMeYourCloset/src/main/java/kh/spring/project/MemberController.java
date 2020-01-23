@@ -35,8 +35,6 @@ public class MemberController {
 	public String signup(Model model,MembersDTO dto,String phone1,String phone2,String phone3) {
 		String phone = phone1+phone2+phone3;
 		System.out.println(dto.getEmail());
-		System.out.println(phone);
-		System.out.println("성별 제대로? "+dto.getGender());
 		dto.setPhone(phone);
 		
 		try {
@@ -57,8 +55,6 @@ public class MemberController {
 	//회원가입 확인 (이메일 인증 보내고 넘어가는 창)
 	@RequestMapping("joinConfirm")
 	public String joinConrim(Model model,String email,String authkey) {
-		System.out.println(email);
-		System.out.println(authkey);
 		
 		memService.updateAuth(email);
 		
@@ -76,7 +72,6 @@ public class MemberController {
 		
 		if(result > 0) {
 			int auth = memService.returnAuthStatus(email);
-			System.out.println(auth);
 			if(auth == 1) {
 				
 				String nickname = memService.returnNickname(email);
@@ -97,7 +92,6 @@ public class MemberController {
 	@RequestMapping("nickCheckProc")
 	@ResponseBody
 	public String nickCheckProc(String nickname) {
-		System.out.println(nickname);
 		
 		int result=memService.checkNickName(nickname);
 		if(result >0) {
@@ -134,7 +128,6 @@ public class MemberController {
 	//비밀번호 찾기
 	@RequestMapping("/findPWProc")
 	public String findPWProc(Model model ,String email) {
-		System.out.println("하하하하핳 :: "+email);
 		
 		try {
 			String authkey=memService.sendFindPWEmail(email);
@@ -201,7 +194,6 @@ public class MemberController {
 	// 수정
 	@RequestMapping("/modifyProc")
 	public String modifyProc(MembersDTO dto) {
-		System.out.println(dto.getPhone());
 	
 		memService.modify(dto);
 		

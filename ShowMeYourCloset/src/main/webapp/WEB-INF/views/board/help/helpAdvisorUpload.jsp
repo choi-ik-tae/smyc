@@ -30,9 +30,11 @@
 		.categoryImgDiv{width:150px;height:150px;display:inline-block;padding:5px;}
 		.categoryImgDiv>img{width:100%;height:100%;}
 		.loadImg{width:100%; height:100%;}
+		.container{ width:1900px; max-width:none !important;}
     </style>
     <body>
         <div class="container">
+        	<div class="col-7" style="margin:auto;">
             <div class="categoryDiv">
                 <div class="category Top text-center" id="Top">TOP</div>
                 <div class="category Pants text-center" id="Pants">PANTS</div>
@@ -111,7 +113,8 @@
                     </div>
                 </div>
             </form>
-        </div> 
+       	 </div> 
+        </div>
         
         <script>
         //advisor등록
