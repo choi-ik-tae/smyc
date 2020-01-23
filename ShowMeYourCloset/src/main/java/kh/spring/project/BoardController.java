@@ -100,13 +100,8 @@ public class BoardController {
 	// help게시판 디테일
 	@RequestMapping("/helpDetail")
 	public String helpDetail(Model model,int no, String cpage ,String target ) {
-		System.out.println(cpage + " : "+ no);
 		BoardDTO dto = boardService.helpBoardDetailPage(no);
 		boardService.viewCountPlus(no);
-		
-
-			
-	
 		
 		if(cpage == null) {
 			cpage= 1+"";

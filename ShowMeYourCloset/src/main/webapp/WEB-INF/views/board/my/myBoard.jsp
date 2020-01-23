@@ -38,6 +38,7 @@
     .img-bottom{height: 50%;}
     .card-img-box{height: 300px;}
     #load{display:none;}    
+    .contents{cursor:pointer;}
     /* 네비바 */
     #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
     .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
@@ -104,7 +105,7 @@
 			<div class="col-10 p-0 d-none d-md-block text-center">
                 <div class="row m-0">
 	                <div class="col-12" id="categoryBar">
-	                	<span id="bTitle" class="mr-3">STYLE BOAST</span>
+	                	<span id="bTitle" class="mr-3">MY BOARD</span>
                         <input type="text" class="form-control" id="searchBar" name="target" placeholder="검색할 단어를 입력하세요">
                         <button id="toSearch" type="button" class="btn btn btn-outline-dark">검색</button>
 	                </div>
@@ -122,21 +123,11 @@
 			</div>
 		</div>
 		<!-- 상단 설명 -->
-		<div class="row m-0" style="height: 600px;">
+		<div class="row m-0" style="height: 300px;">
 			<div class="col-12">
 				<!-- 위 메뉴 공백 채우기 -->
 				<div class="row" style="margin-top: 50px;"></div>
-				<div class="col-12">
-					<div class="row">
-						<div class="col-12" id="boast">
-							<div class="row">
-								<div class="col-12 text-center" id="boastText">
-				                        
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 		<!-- 게시글 주루룩 -->
@@ -241,6 +232,10 @@
 							<!-- -->
 						</c:otherwise>
 						</c:choose>
+							<!-- 더 보기 버튼 -->
+							<div class="col-12 mb-3 text-center">
+								<a id="load" class="btn btn-outline-dark">Load More</a>
+							</div>
         				</div>
         			</div>
         		</div>
