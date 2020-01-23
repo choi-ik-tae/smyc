@@ -93,19 +93,20 @@
 }
 
 .imgDetail {
-	width: 480px;
-	height: 450px;
+	max-width: 480px;
+	max-height: 450px;
 	z-index: 1;
 	margin: auto;
 	margin-top: 23px;
 }
-
-.imgDetail>img {
-	width: 100%;
-	height: 100%;
+.imgDetail>img{
+	max-width: 480px;
+	max-height: 380px;
 }
 
+
 .infoDetail {
+	margin-top :50px;
 	width: 480px;
 	height: 300px;
 	z-index: 1;
@@ -131,19 +132,23 @@
 <body>
 	<div class="wrapper-all">
 		<div class="wrapper">
-			<div class="detailDress">
-				<div class="imgDetail"></div>
-				<div class="infoDetail">
-					<label>옷 이름</label> 
-					<input class="form-control" type="text" id="name" disabled> 
-					<label>카테고리</label> 
-					<input class="form-control" type="text" id="categoryInput" disabled>
-					<label>공개여부</label> 
-					<input class="form-control" type="text" id="pub" disabled> 
-					<label>계절</label> 
-					<input class="form-control" type="text" id="season" disabled> 
-					<label>메모</label>
-					<input class="form-control" type="text" id="memo" disabled>
+			<div class="detailDress" style="text-align:center;">
+				<div style="height:400px; line-height:400px;">
+					<div class="imgDetail"></div>
+				</div>
+				<div>
+					<div class="infoDetail">
+						<label>옷 이름</label> 
+						<input class="form-control" type="text" id="name" disabled> 
+						<label>카테고리</label> 
+						<input class="form-control" type="text" id="categoryInput" disabled>
+						<label>공개여부</label> 
+						<input class="form-control" type="text" id="pub" disabled> 
+						<label>계절</label> 
+						<input class="form-control" type="text" id="season" disabled> 
+						<label>메모</label>
+						<input class="form-control" type="text" id="memo" disabled>
+					</div>
 				</div>
 			</div>
 			<div class="category Top" id="Top">

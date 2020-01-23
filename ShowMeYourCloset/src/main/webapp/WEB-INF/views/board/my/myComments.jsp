@@ -103,7 +103,7 @@
 			<div class="col-10 p-0 d-none d-md-block text-center">
                 <div class="row m-0">
 	                <div class="col-12" id="categoryBar">
-	                	<span id="bTitle" class="mr-3">STYLE BOAST</span>
+	                	<span id="bTitle" class="mr-3">MY COMMENTS</span>
                         <input type="text" class="form-control" id="searchBar" name="target" placeholder="검색할 단어를 입력하세요">
                         <button id="toSearch" type="button" class="btn btn btn-outline-dark">검색</button>
 	                </div>
