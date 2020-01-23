@@ -99,10 +99,20 @@ public class BoardController {
 	}
 	// help게시판 디테일
 	@RequestMapping("/helpDetail")
-	public String helpDetail(Model model,int no, int cpage ) {
+	public String helpDetail(Model model,int no, String cpage ,String target ) {
+		System.out.println(cpage + " : "+ no);
 		BoardDTO dto = boardService.helpBoardDetailPage(no);
 		boardService.viewCountPlus(no);
 		
+
+			
+	
+		
+		if(cpage == null) {
+			cpage= 1+"";
+		}
+		
+		model.addAttribute("target", target);
 		model.addAttribute("dto", dto);
 		model.addAttribute("cpage",cpage);
 		
@@ -375,10 +385,37 @@ public class BoardController {
 		m.addAttribute("Dtarget", Dtarget);
 		return "redirect:/board/boastDetailView";
 	}
-	// 내가 작성한 댓글
-	@RequestMapping("/myComments")
-	public String myComments() {
+	// 내가 쓴 글 
+	@RequestMapping("/myBoard")
+	public String myBoard(Model model) {
+		String email= (String) session.getAttribute("email");
+		List<BoardDTO> helpList = boardService.myHelpSelectAll(email);
+		List<BoardDTO> boastList = boardService.myBoastSelectAll(email);
+		List<StyleDTO> styleList = new ArrayList<>();
+		for(BoardDTO tmp : boastList) {
+			styleList.add(styleService.detailStyle(tmp.getS_no()));
+		}
+		// 옷 삭제되었을때 자랑게시물 및 코디 지우기
+		for(StyleDTO dto : styleList) {
+			if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
+				styleService.styleDelete(dto.getNo());
+				boardService.boastDelete(dto.getNo());
+			}
+		}
+		styleList.clear();
+		// 지운거 반영해서 다시 호출
+		boastList = boardService.myBoastSelectAll(email);
+		List<Integer> likeList = new ArrayList<>();
+		for(BoardDTO tmp : boastList) {
+			styleList.add(styleService.detailStyle(tmp.getS_no()));
+			likeList.add(boardService.boastLikeCount(tmp.getNo()));
+		}
 		
-		return "board/my/myComments";
+		model.addAttribute("boastList", boastList);
+		model.addAttribute("styleList", styleList);
+		model.addAttribute("helpList", helpList);
+		model.addAttribute("likeList", likeList);
+		
+		return "board/my/myBoard";
 	}
 }
