@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.Utils.CheckXss;
-import kh.spring.Utils.DateFormat;
 import kh.spring.dto.CommentDTO;
+import kh.spring.service.BoardService;
 import kh.spring.service.CommentsService;
 
 @Controller
@@ -23,6 +23,9 @@ public class CommentsController {
 	@Autowired
 	private CommentsService comService;
 
+	@Autowired
+	private BoardService bService;
+	
 	@Autowired
 	private HttpSession session;
 
@@ -92,4 +95,32 @@ public class CommentsController {
 	public void boastCommentInsert(int target) {
 		comService.commentDelete(target);
 	}
+	// 내가 작성한 댓글
+	@RequestMapping("/myComments")
+	public String myComments(Model m) {
+		String email = (String) session.getAttribute("email");
+		List<CommentDTO> Comments = comService.commentsSelectAllByEmail(email);
+		m.addAttribute("Comments", Comments);
+		return "board/my/myComments";
+	}
+	// 댓글 원문으로 이동
+	@RequestMapping("/toBoard")
+	public String toBoard(String no,Model m) {
+		int target = Integer.parseInt((no.substring(4, no.length())));
+		String category = bService.selectCategory(target);
+		
+		String loc = null;
+		String Dtarget = "boast"+target;
+		
+		if(category.contentEquals("B")) {
+			m.addAttribute("Dtarget", Dtarget);
+			loc = "redirect:/board/boastDetailView";
+		} else {
+			m.addAttribute("no", target);
+			m.addAttribute("cpage", 1);
+			loc = "redirect:/board/helpDetail";
+		}
+		return loc;
+	}
+	
 }

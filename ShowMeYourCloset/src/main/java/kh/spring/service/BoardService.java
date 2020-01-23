@@ -188,5 +188,8 @@ public class BoardService {
 	public int boastModify(int no,String title,String contents) {
 		return boardDAO.boastModify(no,title,contents);
 	}
-	
+	// 카테고리 가져오기
+	public String selectCategory(int no) {
+		return boardDAO.selectCategory(no);
+	}
 }

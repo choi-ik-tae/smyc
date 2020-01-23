@@ -164,7 +164,6 @@ public class BoardController {
 		String email = (String)session.getAttribute("email");
 		// 자랑게시판 게시물 총 출력
 		List<BoardDTO> boastList = boardService.boastAlign(Atarget);
-		System.out.println(boastList.size());
 		List<StyleDTO> styleList = new ArrayList<>();
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
@@ -374,11 +373,5 @@ public class BoardController {
 		String Dtarget = "boast"+no;
 		m.addAttribute("Dtarget", Dtarget);
 		return "redirect:/board/boastDetailView";
-	}
-	// 내가 작성한 댓글
-	@RequestMapping("/myComments")
-	public String myComments() {
-		
-		return "board/my/myComments";
 	}
 }

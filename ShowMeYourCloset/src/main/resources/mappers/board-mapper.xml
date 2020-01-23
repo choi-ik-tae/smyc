@@ -80,4 +80,8 @@
 	<update id="boastModify">
 		update board set title=#{title},contents=#{contents} where no=#{no}
 	</update>
+<!-- 	게시물 카테고리 가져오기 -->
+	<select id="selectCategory" resultType="String">
+		select category from board where no = #{no}
+	</select>
 </mapper>
