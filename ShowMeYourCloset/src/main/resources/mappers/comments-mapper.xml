@@ -23,4 +23,8 @@
 	<delete id="boardDelete">
 		delete from comments where b_no=#{value}
 	</delete>
+<!-- 	모든 댓글 가져오기 -->
+	<select id="commentsSelectAllByEmail" resultType="kh.spring.dto.CommentDTO">
+		select * from comments where email = #{email}
+	</select>
   </mapper>

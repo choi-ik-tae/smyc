@@ -169,7 +169,6 @@ public class BoardController {
 		String email = (String)session.getAttribute("email");
 		// 자랑게시판 게시물 총 출력
 		List<BoardDTO> boastList = boardService.boastAlign(Atarget);
-		System.out.println(boastList.size());
 		List<StyleDTO> styleList = new ArrayList<>();
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
@@ -253,12 +252,15 @@ public class BoardController {
 	}
 	// 자랑게시판 게시물 디테일
 	@RequestMapping("/boastDetailView")
-	public String boastDetailView(String Dtarget,Model m) {
+	public String boastDetailView(String Dtarget,String back,Model m) {
 		String email = (String)session.getAttribute("email");
 		if(email == null) {
 			System.out.println("끄지라!");
 			return "redirec:/";
-		}		
+		}
+		if(back == null) {
+			back = "default";
+		}
 		String item = Dtarget.substring(5, Dtarget.length());
 		int no = Integer.parseInt(item);
 		if(boardService.boastSeletctByNo(no) == null) {
@@ -274,6 +276,7 @@ public class BoardController {
 		List<CommentDTO> comments = comService.commentsAll(boast.getNo());
 		String[] season = style.getSeason().split(",");
 		
+		m.addAttribute("back", back);
 		m.addAttribute("email",email);
 		m.addAttribute("style", style);
 		m.addAttribute("gender", gender);

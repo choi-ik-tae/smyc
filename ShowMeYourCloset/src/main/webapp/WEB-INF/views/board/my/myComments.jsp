@@ -139,10 +139,10 @@
 			</div>
 		</div>
 		<!-- 게시글 주루룩 -->
-        <div class="row m-0 bg-white">
+        <div class="row m-0 mb-3 bg-white">
             <div class="col-8 m-auto">
                 <hr class="m-2">
-                <div class="row text-center" style="font-weight: 800">
+                <div class="row m-0 text-center" style="font-weight: 800">
                     <div class="col-10">
                         댓글
                     </div>
@@ -150,30 +150,41 @@
                         작성날짜
                     </div>
                 </div><hr class="m-2">
-                <div class="row text-center">
-                    <div class="col-9 text-left">
-                        으이이이이이잉
-                    </div>
-                    <div class="col-1">
-                        원문보기
-                    </div>
-                    <div class="col-2">
-                        2020-01-23
-                    </div>
-                </div>
+                <!-- 반복문 ㄱㄱ -->
+                <c:choose>
+                	<c:when test="${Comments.size() > 0}">
+                	<c:forEach items="${Comments}" var="cm">
+                	<div class="row m-0 mb-2 text-center">
+	                    <div class="col-9 text-left">
+	                    	${cm.contents}
+	                    </div>
+	                    <div class="col-1">
+	                    	<button type="button" class="btn btn-sm btn-outline-dark toBoard" id="b_no${cm.b_no}">원문보기</button>
+	                    </div>
+	                    <div class="col-2">
+	                    	${cm.write_date}
+	                    </div>
+                	</div>
+                	</c:forEach>
+                	</c:when>
+                	<c:otherwise>
+                	
+                	</c:otherwise>
+                </c:choose>
+                <!--  -->
             </div>
         </div>
 	</div>
 	<!-- 푸터 -->
-    <jsp:include page="../../standard/boardFooter.jsp" />
-    
-    <form action = "${pageContext.request.contextPath}/board/boastBoard" method="post" id="alignFrm">
-    	<input type="hidden" name="Atarget" id="AlignTarget" value="">
+    <jsp:include page="../../standard/boardFooter.jsp" />    
+    <form action = "${pageContext.request.contextPath}/comments/toBoard" method="post" id="toBoardFrm">
+    	<input type="hidden" name="no" id="boardNo" value="">
     </form>
-    <form action = "${pageContext.request.contextPath}/board/boastDetailView" method="post" id="detailFrm">
-    	<input type="hidden" name="Dtarget" id="detailTarget" value="">
-    </form>
-    <script>    	
+    <script>
+    	$(".toBoard").on("click",function(){
+			$("#boardNo").val($(this).attr("id"));
+    		$("#toBoardFrm").submit();    		
+    	});
 	    $("#btnMenu").on("mouseover",function(){
 	        $(".bar").css("background-color","black");
 	        $("#menuText").css("color","black");
@@ -182,14 +193,6 @@
 	        $(".bar").css("background-color","dimgray");
 	        $("#menuText").css("color","dimgray");
 	    });
-	    $("#categoryTab").on("change",function(){
-	    	$("#AlignTarget").val($("#categoryTab option:selected").val());
-	    	$("#alignFrm").submit();
-		});
-    	$(".boardItem").on("click",function(){
-    		$("#detailTarget").val($(this).attr("id"));
-    		$("#detailFrm").submit();
-    	});
         $("#btnMenu").on("click",function(){
             $(".menu").css("display","flex");
             $(".navigator").css("z-index","1");

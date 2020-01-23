@@ -106,7 +106,6 @@
         	}
         	$("#backBtn").on("click",function(){
         		var target = parent.document.boardBack.target.value;
-        		console.log(target);
         		
         		if(target == "my"){
         			parent.history.back();

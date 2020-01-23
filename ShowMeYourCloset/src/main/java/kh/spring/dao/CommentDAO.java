@@ -45,4 +45,8 @@ public class CommentDAO {
 	public int boardDelete(int no) {
 		return sst.delete("Comments.boardDelete",no);
 	}
+	// 모든 댓글 가져오기
+	public List<CommentDTO> commentsSelectAllByEmail(String email) {
+		return sst.selectList("Comments.commentsSelectAllByEmail",email);
+	}
 }

@@ -75,10 +75,10 @@
     		location.href="${pageContext.request.contextPath}/member/logoutProc";
     	});
     	$("#toMyComments").on("click",function(){
-    		location.href="${pageContext.request.contextPath}/board/myComments";
-    	})
+    		location.href="${pageContext.request.contextPath}/comments/myComments";
+    	});
     	$("#toMyBoard").on("click",function(){
     		location.href="${pageContext.request.contextPath}/board/myBoard";
-    	})
+    	});
     </script>
 <!--  -->

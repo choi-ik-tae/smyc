@@ -264,7 +264,7 @@
 						</div><hr class="m-0">
 						<div class="row mt-2">
 							<div class="col-6 text-left">
-								<button id="toBoastMain" type="button" class="btn btn-sm btn-outline-dark">돌아가기</button>
+								<button id="toBack" type="button" class="btn btn-sm btn-outline-dark">돌아가기</button>
 								<c:choose>
 								<c:when test="${email == boast.email}">
 									<button id="toBoastModify" type="button" class="btn btn-sm btn-outline-dark">수정</button>
@@ -383,9 +383,6 @@
 				$("#boastDeleteFrm").submit();
 			}
     	});
-    	$("#toBoastMain").on("click",function(){
-    		location.href="${pageContext.request.contextPath}/board/boastBoard";
-    	});
 	    var toDelete = function(no){
 	    	$.ajax({
 	    		url:"${pageContext.request.contextPath}/comments/boastCommentDelete",
@@ -486,7 +483,13 @@
     		$("#btnLikeB").css("display","none");
     	});
     	$("#toBack").on("click",function(){
-    		history.back();
+    		var back = '${back}';
+    		console.log(back);
+    		if(back == 'my') {
+    			history.back();	
+    		} else {
+    			location.href="${pageContext.request.contextPath}/board/boastBoard";	
+    		}
     	});
     	$(".dImgs").on("click",function(){
     		console.log($(this).attr("id"));
