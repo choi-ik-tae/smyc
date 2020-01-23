@@ -14,9 +14,11 @@
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
+	.container {width: 800px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     html,body{height: 100%;}
-    body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;}
+    body {background-image: url(/imgs/bg/bg21.jpg);}
+    #bg{background:rgba(255,255,255,1); border-radius: 10px;}
     #preview{width:300px;height: 300px;}
 </style>
 <script type="text/javascript">

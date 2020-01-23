@@ -270,7 +270,7 @@ public class BoardController {
 		boardService.viewCountPlus(no);
 		BoardDTO boast = boardService.boastSeletctByNo(no);
 		int s_no = boardService.boastSeletctByNo(no).getS_no();
-		String gender = memService.selectGender(email);
+		String gender = memService.selectGender(boast.getEmail());
 		StyleDTO style = styleService.detailStyle(s_no);
 		int likeCliked = boardService.boastLikeClicked(boast.getNo(),email);
 		List<CommentDTO> comments = comService.commentsAll(boast.getNo());

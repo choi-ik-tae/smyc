@@ -14,20 +14,32 @@
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
-	.container {width: 800px;max-width: none !important;}
+	.container-fulid {width: 1900px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-    html,body{height: 100%;}
-    body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;}
+    html,body{height: 100%;}    
     #preview{width:300px;height: 300px;}
     .borderDelete{border: 0px;}
+    .logo{font-size: 15pt;}
+    #top{height: 80px;background-color:white;border-bottom: 1px solid gray;}
+    #bottom{background-color:white;border-top: 1px solid gray; width: 100%;height: 150px;}
+    #bottom-logo{height: 150px; line-height: 150px;}
+    #bottom-contents{font-size: 10pt;color: gray;}
+	.nav-font{font-size: 10pt; font-weight: 800;}
+    .nav-link:hover{cursor: pointer;}
+    .nav-item>a{color: black; font-size: 15pt;}
 </style>
 </head>
 <body>
-    <div class="container text-center">
+    <div class="container-fulid text-center">
         <!-- 헤더 -->
-		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post">
+    	<jsp:include page="../../standard/header.jsp" />
+    	<!-- 빈공간 메꾸기 -->
+    	<div class="row m-0" style="height:80px;"></div>
+    	<div class="row m-0">
+    	<div class="col-5 m-auto">
+    	<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
-				<div class="col-auto m-auto p-0 align-items-center" style="border: 1px solid gray;" id="preview">
+				<div class="col-auto m-auto p-0 align-items-center" id="preview">
                     <img class='w-100 h-100' src="${img.path}">
 				</div>
 			</div>
@@ -132,11 +144,14 @@
 				</div>
 			</div>
 		</form>
+		</div>
+		</div>
+		<!-- 푸터 -->
+    	<jsp:include page="../../standard/footer.jsp" />
+	</div>
 		<form action="${pageContext.request.contextPath}/closet/dressDelete" method="post" id="frm">
 			<input type="hidden" name="no" value="${info.no}">
 		</form>
-		<!-- 푸터 -->
-    </div>
     <c:choose>
     	<c:when test="${not empty info.pub}">
     		<script>

@@ -17,7 +17,7 @@
 	.container {width: 800px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #preview{width:300px;height: 300px;}
-    #bg{background:rgba(255,255,255,0.9); border-radius: 10px;}
+    #bg{background:rgba(255,255,255,1); border-radius: 10px;}
     body{background-image: url(/imgs/bg/bg21.jpg);}
 </style>
 <script type="text/javascript">
@@ -32,7 +32,7 @@
         <div class="col-12 p-2" id="bg">
 		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post" id="frm">
 			<div class="row m-2">
-				<div class="col-auto m-auto p-0 align-items-center" style="border: 1px solid lightgray;" id="preview">
+				<div class="col-auto m-auto p-0 align-items-center" id="preview">
 					<img src="/imgs/btn/image.png" class="w-50" style="margin-top:80px;">	
 				</div>
 			</div>
