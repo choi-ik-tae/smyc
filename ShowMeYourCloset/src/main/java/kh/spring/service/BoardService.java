@@ -188,5 +188,10 @@ public class BoardService {
 	public int boastModify(int no,String title,String contents) {
 		return boardDAO.boastModify(no,title,contents);
 	}
-	
+	public List<BoardDTO> myBoastSelectAll(String email){
+		return boardDAO.myBoastSelectAll(email);
+	}
+	public List<BoardDTO> myHelpSelectAll(String email){
+		return boardDAO.myHelpSelectAll(email);
+	}
 }

@@ -136,4 +136,12 @@ public class BoardDAO {
 		
 		return sst.update("Board.boastModify",parm);
 	}
+	// 내가 쓴 자랑 게시글
+	public List<BoardDTO> myBoastSelectAll(String email){
+		return sst.selectList("Board.myBoastSelectAll",email);
+	}
+	// 내가 쓴 도움 게시글
+	public List<BoardDTO> myHelpSelectAll(String email){
+		return sst.selectList("Board.myHelpSelectAll",email);
+	}
 }
