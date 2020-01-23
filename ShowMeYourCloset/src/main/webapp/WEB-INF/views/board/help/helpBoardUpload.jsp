@@ -112,7 +112,7 @@
             </div>
             <form action="${pageContext.request.contextPath}/board/helpUploadProc.do" method="post" id="inputFrm"> 
             <div class="row" style="background: white">
-                <div class="col-7  mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px;">
+                <div class="col-sm-12 col-md-7  mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px;">
                     <span class="mb-1" style="display: block; font-weight: 600; font-size: 15px;"> * Help 게시판 등록 이용 설명</span>
                     <span style="display: block">1. 다른 사용자들에게 내 옷장 안 옷들로 코디 도움을 요청하는 게시판 입니다.</span>
                     <span style="display: block">2. <span style="color:indianred; font-weight: 600;">코디 도움 요청</span>에 벗어난 글 혹은 잡담의 글은 <span style="color:indianred; font-weight: 600;">삼가</span>해 주세요.</span>
@@ -123,7 +123,7 @@
 
                 </div>
                 
-	                <div class="col-7 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">     	
+	                <div class="col-sm-12 col-md-7 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">     	
 	                        <div class="form-row form-group">
 	                            <div class="col-2">
 	                                <label for="title">글 제목</label>
@@ -136,7 +136,7 @@
 	                            <textarea class="form-control" style="resize: none;" rows="20" name="contents" id="contents"></textarea>
 	                        </div>
 	                </div>
-	                <div class="col-7  mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px; text-align: right;">
+	                <div class="col-sm-23 col-md-7 mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px; text-align: right;">
 	                    <button id="uploadBtn" class="btn btn-info" type="button">도움 요청하기</button>
 	                </div>
             </div> 
