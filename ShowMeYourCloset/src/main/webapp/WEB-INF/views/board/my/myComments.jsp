@@ -72,7 +72,10 @@
     <body>
 <c:choose>
 <c:when test="${email ==null }">
-	로그인을 하십시오.
+	<script>
+		alert("로그인을 해주세요");
+		location.href="${pageContext.request.contextPath}/";
+	</script>
 </c:when>
 <c:otherwise>
     <!-- 숨김 메뉴 -->

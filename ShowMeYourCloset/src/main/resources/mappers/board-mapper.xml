@@ -84,4 +84,12 @@
 	<select id="selectCategory" resultType="String">
 		select category from board where no = #{no}
 	</select>
+<!-- 	내가 쓴 자랑 게시판 전체 가져오기 -->
+	<select id="myBoastSelectAll" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category = 'B' and email=#{email} order by no desc
+	</select>
+<!-- 	내가 쓴 도움 게시판 전체 가져오기 -->
+	<select id="myHelpSelectAll" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category='H' and email=#{email} order by no desc
+	</select>
 </mapper>

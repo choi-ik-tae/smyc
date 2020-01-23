@@ -105,7 +105,13 @@
         		parent.document.detailFrm.submit();
         	}
         	$("#backBtn").on("click",function(){
-        		parent.document.boardBack.submit();
+        		var target = parent.document.boardBack.target.value;
+        		
+        		if(target == "my"){
+        			parent.history.back();
+        		}else{
+        			parent.document.boardBack.submit();
+        		}
         	})
         	
             $("#helpBtn").on("click",function(){

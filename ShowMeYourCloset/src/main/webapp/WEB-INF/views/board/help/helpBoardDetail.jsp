@@ -195,6 +195,7 @@
             </form>
             <form action="${pageContext.request.contextPath}/board/helpBoard" id="boardBack" name="boardBack" method="post">
             	<input type="hidden" name="cpage" value="${cpage}">
+            	<input type="hidden" name="target" value="${target}">
             </form>
 		</div>
 		<!-- 상단 설명 -->

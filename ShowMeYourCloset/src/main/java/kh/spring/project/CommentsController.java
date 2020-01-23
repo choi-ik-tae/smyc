@@ -114,10 +114,12 @@ public class CommentsController {
 		
 		if(category.contentEquals("B")) {
 			m.addAttribute("Dtarget", Dtarget);
+			m.addAttribute("back", "my");
 			loc = "redirect:/board/boastDetailView";
 		} else {
 			m.addAttribute("no", target);
 			m.addAttribute("cpage", 1);
+			m.addAttribute("target", "my");
 			loc = "redirect:/board/helpDetail";
 		}
 		return loc;

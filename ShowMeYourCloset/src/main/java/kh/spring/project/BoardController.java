@@ -99,10 +99,15 @@ public class BoardController {
 	}
 	// help게시판 디테일
 	@RequestMapping("/helpDetail")
-	public String helpDetail(Model model,int no, int cpage ) {
+	public String helpDetail(Model model,int no, String cpage ,String target ) {
 		BoardDTO dto = boardService.helpBoardDetailPage(no);
 		boardService.viewCountPlus(no);
+
+		if(cpage == null) {
+			cpage= 1+"";
+		}
 		
+		model.addAttribute("target", target);
 		model.addAttribute("dto", dto);
 		model.addAttribute("cpage",cpage);
 		
@@ -247,12 +252,15 @@ public class BoardController {
 	}
 	// 자랑게시판 게시물 디테일
 	@RequestMapping("/boastDetailView")
-	public String boastDetailView(String Dtarget,Model m) {
+	public String boastDetailView(String Dtarget,String back,Model m) {
 		String email = (String)session.getAttribute("email");
 		if(email == null) {
 			System.out.println("끄지라!");
 			return "redirec:/";
-		}		
+		}
+		if(back == null) {
+			back = "default";
+		}
 		String item = Dtarget.substring(5, Dtarget.length());
 		int no = Integer.parseInt(item);
 		if(boardService.boastSeletctByNo(no) == null) {
@@ -268,6 +276,7 @@ public class BoardController {
 		List<CommentDTO> comments = comService.commentsAll(boast.getNo());
 		String[] season = style.getSeason().split(",");
 		
+		m.addAttribute("back", back);
 		m.addAttribute("email",email);
 		m.addAttribute("style", style);
 		m.addAttribute("gender", gender);
@@ -373,5 +382,38 @@ public class BoardController {
 		String Dtarget = "boast"+no;
 		m.addAttribute("Dtarget", Dtarget);
 		return "redirect:/board/boastDetailView";
+	}
+	// 내가 쓴 글 
+	@RequestMapping("/myBoard")
+	public String myBoard(Model model) {
+		String email= (String) session.getAttribute("email");
+		List<BoardDTO> helpList = boardService.myHelpSelectAll(email);
+		List<BoardDTO> boastList = boardService.myBoastSelectAll(email);
+		List<StyleDTO> styleList = new ArrayList<>();
+		for(BoardDTO tmp : boastList) {
+			styleList.add(styleService.detailStyle(tmp.getS_no()));
+		}
+		// 옷 삭제되었을때 자랑게시물 및 코디 지우기
+		for(StyleDTO dto : styleList) {
+			if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
+				styleService.styleDelete(dto.getNo());
+				boardService.boastDelete(dto.getNo());
+			}
+		}
+		styleList.clear();
+		// 지운거 반영해서 다시 호출
+		boastList = boardService.myBoastSelectAll(email);
+		List<Integer> likeList = new ArrayList<>();
+		for(BoardDTO tmp : boastList) {
+			styleList.add(styleService.detailStyle(tmp.getS_no()));
+			likeList.add(boardService.boastLikeCount(tmp.getNo()));
+		}
+		
+		model.addAttribute("boastList", boastList);
+		model.addAttribute("styleList", styleList);
+		model.addAttribute("helpList", helpList);
+		model.addAttribute("likeList", likeList);
+		
+		return "board/my/myBoard";
 	}
 }

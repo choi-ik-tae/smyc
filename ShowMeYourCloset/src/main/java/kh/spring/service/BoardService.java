@@ -192,4 +192,10 @@ public class BoardService {
 	public String selectCategory(int no) {
 		return boardDAO.selectCategory(no);
 	}
+	public List<BoardDTO> myBoastSelectAll(String email){
+		return boardDAO.myBoastSelectAll(email);
+	}
+	public List<BoardDTO> myHelpSelectAll(String email){
+		return boardDAO.myHelpSelectAll(email);
+	}
 }
