@@ -41,5 +41,10 @@ public class BoardLikeDAO {
 		
 		return sst.selectOne("Like.likeClicked",parm);
 	}
+	// 삭제된 게시물 좋아요 다 취소
+	public int likeDelete(int b_no) {
+		return sst.delete("Like.likeDelete",b_no);
+	}
+	
 	
 }

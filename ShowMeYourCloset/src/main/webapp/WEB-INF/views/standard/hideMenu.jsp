@@ -23,10 +23,10 @@
                 <div class="row m-0 infoMenu">
                     <div class="col-12">
                         <div class="row">
-                            <button type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 글</button>
+                            <button id="toMyBoard" type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 글</button>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 댓글</button>
+                            <button id="toMyComments" type="button" class="btn borderDelete btn-outline-dark form-control">내가 쓴 댓글</button>
                         </div>
                         <div class="row">
                         	<button id="toMypage" type="button" class="btn borderDelete btn-outline-dark form-control">마이 페이지</button>
@@ -74,5 +74,11 @@
     	$("#toLogout").on("click",function(){
     		location.href="${pageContext.request.contextPath}/member/logoutProc";
     	});
+    	$("#toMyComments").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/board/my/myComments";
+    	})
+    	$("#toMyBoard").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/board/my/myBoard";
+    	})
     </script>
 <!--  -->

@@ -162,6 +162,7 @@ public class BoardController {
 		String email = (String)session.getAttribute("email");
 		// 자랑게시판 게시물 총 출력
 		List<BoardDTO> boastList = boardService.boastAlign(Atarget);
+		System.out.println(boastList.size());
 		List<StyleDTO> styleList = new ArrayList<>();
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
@@ -294,7 +295,6 @@ public class BoardController {
 	// 자랑게시판 검색
 	@RequestMapping("/boastSearch")
 	public String boastBoardSearchAll(String keyWord,Model m) {
-		System.out.println(keyWord);
 		String email = (String)session.getAttribute("email");
 		List<BoardDTO> boastList = boardService.boastBoardSearchAll(keyWord);
 		List<StyleDTO> styleList = new ArrayList<>();
@@ -338,16 +338,14 @@ public class BoardController {
 	@RequestMapping("/boastDelete")
 	public String boastDelete(int no) {
 		boardService.boastDelete(no);
-		return "redirect:/";
+		return "redirect:/board/boastBoard";
 	}
 	// 자랑게시물 수정 페이지 이동
 	@RequestMapping("/boastModify")
 	public String boastModify(int no,Model m) {
-		System.out.println("변경할 게시물 번호 : "+no);
 		String email = (String)session.getAttribute("email");
 		if(email == null) {
-			System.out.println("끄지라!");
-			return "redirec:/";
+			return "redirec:/signin";
 		}		
 		BoardDTO boast = boardService.boastSeletctByNo(no);
 		int s_no = boardService.boastSeletctByNo(no).getS_no();
@@ -369,8 +367,16 @@ public class BoardController {
 	}
 	// 자랑게시물 수정 실행
 	@RequestMapping("/boastModifyProc")
-	public String boastModifyProc(int no,String bTitle, String contents) {
+	public String boastModifyProc(int no,String bTitle, String contents,Model m) {
 		boardService.boastModify(no, bTitle, contents);
-		return "redirect:/board/boastBoard";
+		String Dtarget = "boast"+no;
+		m.addAttribute("Dtarget", Dtarget);
+		return "redirect:/board/boastDetailView";
+	}
+	// 내가 작성한 댓글
+	@RequestMapping("/myComments")
+	public String myComments() {
+		
+		return "board/my/myComments";
 	}
 }

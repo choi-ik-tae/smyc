@@ -84,11 +84,11 @@
 				<!-- 공개여부 -->
 				<div class="col-10">
 					<div class="btn-group-toggle" data-toggle="buttons">
-						<label class="btn btn-sm btn-outline-dark borderDelete" id="y">
-							<input id="btnY" type="radio" name="pub" value="Y" disabled><span style="font-weight:800;">YES</span>
+						<label class="btn btn-sm btn-outline-dark borderDelete" id="Y">
+							<input id="btnY" type="checkbox" name="pub" value="Y" disabled><span style="font-weight:800;">YES</span>
 						</label>
-						<label class="btn btn-sm btn-outline-dark borderDelete" id="n">
-							<input id="btnN" type="radio" name="pub" value="N" disabled><span style="font-weight:800;">NO</span>
+						<label class="btn btn-sm btn-outline-dark borderDelete" id="N">
+							<input id="btnN" type="checkbox" name="pub" value="N" disabled><span style="font-weight:800;">NO</span>
 						</label>
 					</div>
 				</div>
@@ -138,8 +138,14 @@
 		<!-- 푸터 -->
     </div>
     <c:choose>
-	    <c:when test="${info.pub eq 'Y'}"><script>$("#btnY").prop("checked",true);$("#y").addClass("active");</script></c:when>
-	    <c:when test="${info.pub eq 'N'}"><script>$("#btnN").prop("checked",true);$("#n").addClass("active");</script></c:when>
+    	<c:when test="${not empty info.pub}">
+    		<script>
+    			if($("#btn${info.pub}").val() == '${info.pub}'){
+    				$("#btn${info.pub}").prop("checked",true);
+	                $("#${info.pub}").addClass("active");
+    			}
+    		</script>
+    	</c:when>
     </c:choose>
     <c:choose>
     	<c:when test="${info.category eq 'Top'}"><script>$("#category").val("상의");</script></c:when>

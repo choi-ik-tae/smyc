@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.dao.BoardDAO;
 import kh.spring.dao.BoardLikeDAO;
@@ -76,8 +77,10 @@ public class BoardService {
 		return boardDAO.boastSelectByNo(no);
 	}
 	// 자랑게시판 게시글 삭제
-	public int boastDelete(int no) {
-		return boardDAO.boastDelete(no);
+	@Transactional("txManager")
+	public void boastDelete(int no) {
+		boardDAO.boastDelete(no);
+		ldao.likeDelete(no);
 	}
 	// 좋아요 카운트
 	public int boastLikeCount(int b_no) {
