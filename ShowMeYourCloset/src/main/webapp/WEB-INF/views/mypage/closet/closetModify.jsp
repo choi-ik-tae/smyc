@@ -41,7 +41,6 @@
  function noBack(){window.history.forward();}
 </script>
 </head>
-<body>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 <div class="container-fuild">
 	<div class="row m-0 mt-5" id="toTop">

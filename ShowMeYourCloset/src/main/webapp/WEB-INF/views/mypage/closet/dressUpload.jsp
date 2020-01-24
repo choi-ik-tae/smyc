@@ -26,11 +26,10 @@
  function noBack(){window.history.forward();}
 </script>
 </head>
-<body>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
     <div class="container mt-5 text-center">
         <!-- 헤더 -->
-        <div class="col-12 p-2" id="bg">
+        <div class="col-12 p-2 mb-5" id="bg">
 		<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post" id="frm">
 			<div class="row m-2">
 				<div class="col-auto m-auto p-0 align-items-center" id="preview">
@@ -64,7 +63,7 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
-					<label for="" class="m-0 ">옷 이름</label>
+					<label for="name" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
 					<input id="name" class="w-100 form-control" name="name" type="text">
@@ -72,7 +71,7 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
-					<label for="" class="m-0 ">카테고리</label>
+					<label for="category" class="m-0 ">카테고리</label>
 				</div>
 				<div class="col-10">
 					<select class="custom-select" name="category">
@@ -85,7 +84,7 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
-					<label for="" class="m-0 ">계절</label>
+					<label for="season" class="m-0 ">계절</label>
 				</div>
 				<div class="col-10">
 					<div class="form-check form-check-inline">
@@ -112,17 +111,17 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-2 align-self-center">
-					<label for="" class="m-0 ">공개여부</label>
+					<label for="pub" class="m-0 ">공개여부</label>
 				</div>
 				<div class="col-10">
 					<div class="form-check form-check-inline">
 						<label class="form-check-label" for="y">
-							<input class="form-check-input" type="radio" name="pub" id="y" value="Y" required> YES
+							<input class="form-check-input" type="radio" name="pub" id="y" value="Y"> YES
 						</label>
 					</div>
 					<div class="form-check form-check-inline">
 						<label class="form-check-label" for="n">
-							<input class="form-check-input" type="radio" name="pub" id="n" value="N" required> NO
+							<input class="form-check-input" type="radio" name="pub" id="n" value="N"> NO
 						</label>
 					</div>
 				</div>
@@ -140,7 +139,7 @@
 					<label for="buy_date" class="m-0 ">구매일자</label>
 				</div>
 				<div class="col-10">
-					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1950-01-01" max="2030-12-31">
+					<input id="buy_date" class="w-100 form-control" name="buy_date" type="date" min="1980-01-01" max="2020-12-31">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -153,8 +152,19 @@
 			</div>
 			<div class="row m-2">
 				<div class="col-12 m-3">
-					<button id="upload" type="button" class="btn btn-outline-dark">등록하기</button>
-					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
+					<div class="row">
+		                <div class="col-12">
+			                <p>
+			                	<span style="color:palevioletred">가격</span> <span style="color:indianred">구매일자</span> <span style="color:darkred">메모</span> 는 <span style="color:orangered">선택사항</span> 입니다.
+			                </p>
+		                </div>
+	           	 	</div>
+	           	 	<div class="row">
+	           	 		<div class="col-12">
+	           	 			<button id="upload" type="submit" class="btn btn-outline-dark">등록하기</button>
+							<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
+	           	 		</div>
+	           	 	</div>
 				</div>
 			</div>
 		</form>
@@ -162,26 +172,55 @@
 		<!-- 푸터 -->
     </div>
 	<script>
+		$("#name").on("blur",function(){
+			var name = $("#name").val().length;
+			if(name > 30){
+				alert("30자 이내로 작성해주세요!");
+				$("#name").val("");
+			}
+		});
+		$("#memo").on("blur",function(){
+			var name = $("#memo").val().length;
+			if(name > 100){
+				alert("100자 이내로 작성해주세요!");
+				$("#memo").val("");
+			}
+		});
 		$("#upload").on("click",function(){
 			var target = $("#imgud").val();
-			
 			var name = $("#name").val();
-			var category = $("select[name='category']");
-			var season = $("input[name='season']");
-			var pub = $("input[name='pub']");
-
-            for(i=0;i<season.length;i++){
-                if($(input[i]).val()==""){
-                    alert("빈칸을 모두 채워주세요");
-                    return;
-                }
-            }
-			
-            
-			if(target == "") {
-				alert("이미지를 등록해 주세요!")
+			var seasonCk = 0;
+			var pubCk = 0;
+            // 이미지 체크 검사
+			if(target == "" || target == null) {
+				alert("이미지를 등록해주세요!")
+				return false;
 			} else {
-				$("#frm").submit();
+				// 이름 입력 검사
+				if(name == "" || name == null) {
+					alert("옷 이름을 입력해주세요!");
+	            	return false;
+				}
+				// 계절 체크 검사
+	            $("input[name='season']").each(function(){
+	            	if($(this).prop("checked") == true){
+	            		seasonCk += 1;
+	            	}
+	            });
+	            if(seasonCk == 0) {
+	            	alert("계절을 한 가지 이상 선택해주세요!");
+	            	return false;
+	            }
+	            // 공개여부  체크검사
+	            $("input[name='pub']").each(function(){
+	            	if($(this).prop("checked") == true){
+	            		pubCk += 1;
+	            	}
+	            })
+	            if(pubCk == 0) {
+	            	alert("공개여부를 선택해주세요!");
+	            	return false;
+	            }
 			}
 		});
 		$("#toHome").on("click",function(){

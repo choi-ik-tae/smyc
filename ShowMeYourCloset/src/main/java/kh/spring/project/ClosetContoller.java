@@ -69,7 +69,12 @@ public class ClosetContoller {
 		String nick = (String) session.getAttribute("nick");
 		String path = session.getServletContext().getRealPath("files/" + nick);
 		String category = cloService.dressSelectInfo(no).getCategory();
-		String itemPath = cloService.dressSelectImg(no).getPath();		
+		String itemPath = cloService.dressSelectImg(no).getPath();
+		
+		System.out.println("path : "+path);
+		System.out.println("category : "+category);
+		System.out.println("itemPath : "+itemPath);
+		
 		int result = cloService.dressDelete(no,path,category,itemPath);
 		
 		if(result == 0) {

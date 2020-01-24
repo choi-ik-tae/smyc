@@ -36,6 +36,8 @@
     .imgBox>img{border-radius: 20px;height: 130px;float: left;}
     .closetTag{position: relative;width: 100%;height: 50px;line-height: 50px;}
     .nav-link:hover{cursor: pointer;}
+    .card-title{font-size:15pt; font-weight:800;}
+    .card-text{font-size:10pt; font-weight:800;}
 </style>
 </head>
 <body>

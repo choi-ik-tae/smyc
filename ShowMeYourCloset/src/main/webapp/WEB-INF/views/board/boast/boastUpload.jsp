@@ -37,7 +37,6 @@
  function noBack(){window.history.forward();}
 </script>
 </head>
-<body>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
     <c:choose>
     <c:when test="${email == null}">
