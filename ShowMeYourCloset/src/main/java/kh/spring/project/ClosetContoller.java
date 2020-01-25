@@ -58,8 +58,10 @@ public class ClosetContoller {
 	public String closetUpload(ClosetDTO dto) {
 		String email = (String) session.getAttribute("email");
 		dto.setEmail(email);
-
-		int result = cloService.closetUpload(dto);
+		dto.setName(CheckXss.checkXss(dto.getName()));
+		dto.setMemo(CheckXss.checkXss(dto.getMemo()));
+		
+		cloService.closetUpload(dto);
 
 		return "redirect:/myCloset";
 	}

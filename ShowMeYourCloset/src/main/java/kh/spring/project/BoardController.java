@@ -257,7 +257,8 @@ public class BoardController {
 		if(back == null) {
 			back = "default";
 		}
-		String item = Dtarget.substring(5, Dtarget.length());
+		String item = "";
+		try { item = Dtarget.substring(5, Dtarget.length()); } catch(Exception e) {return "error";}
 		int no = Integer.parseInt(item);
 		if(boardService.boastSeletctByNo(no) == null) {
 			return "error";
@@ -373,8 +374,8 @@ public class BoardController {
 	}
 	// 자랑게시물 수정 실행
 	@RequestMapping("/boastModifyProc")
-	public String boastModifyProc(int no,String bTitle, String contents,Model m) {
-		boardService.boastModify(no, bTitle, contents);
+	public String boastModifyProc(int no,String boastTitle, String contents,Model m) {
+		boardService.boastModify(no, CheckXss.checkXss(boastTitle), CheckXss.checkXss(contents));
 		String Dtarget = "boast"+no;
 		m.addAttribute("Dtarget", Dtarget);
 		return "redirect:/board/boastDetailView";

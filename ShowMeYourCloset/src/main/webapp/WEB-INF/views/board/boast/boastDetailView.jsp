@@ -374,6 +374,13 @@
     	<input type="hidden" name="no" value="${boast.no}">
     </form>
     <script>
+		$("#comment").on("blur",function(){
+			var comment = $("#comment").val().length;
+			if(comment > 30){
+				alert("30자 이내로 작성해주세요!");
+				$("#comment").val("");
+			}
+		});
     	$("#toBoastModify").on("click",function(){
 			$("#boastModifyFrm").submit();
     	});
@@ -410,6 +417,11 @@
 	    	})
 		};
     	$("#btnComment").on("click",function(){
+    		var comment = $("#comment").val();
+    		if(comment == "" || comment == null) {
+    			alert("댓글을 입력해주세요!");
+    			return false;
+    		}
     		$.ajax({
     			url:"${pageContext.request.contextPath}/comments/boastCommentInsert",
     			method:"POST",

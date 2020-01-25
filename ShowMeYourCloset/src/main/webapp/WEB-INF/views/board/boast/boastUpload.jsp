@@ -17,8 +17,7 @@
 /*    div{border: 1px solid black;}*/
 	.container-fulid {width: 1890px;max-width: none !important;}
    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-   	#title{font-size: 30px;color:dimgray;font-weight: 700;line-height: 100px;}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:100px;}
+
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: white;}
@@ -31,6 +30,17 @@
     #dressAcc{background:rgba(100,100,100,0.5); position:absolute; border-radius: 20px; top:350px; left: 10px; width: 130px; height: 130px; color: white;}
     #dressImg{height: 400px; margin-top: 60px;}
     .dImgs{width:100%;height:100%;opacity:0.8;border-radius:20px;}
+    .borderDelete{border: 0px;}
+    #menuIcon{ margin-top: 17px;}
+    .bar{position:relative; width: 30px;height: 3px;background: dimgray;}
+    #menuText{ line-height: 50px; }
+    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
+    .InfoMenu {position:fixed;width: 380px; height: 100%;background: white; z-index: 3}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5; top:0px;}
+    .menubar{ background-color: white;}
+    .mainblock{ background: rgba(0,0,0,0.5);}
+    #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
 </style>
 <script type="text/javascript">
  window.history.forward();
@@ -47,12 +57,29 @@
     </c:when>
     <c:otherwise>
     <div class="container-fulid">
-            <!-- 네비 -->
-            <div class="navigator fixed-top row m-0">
-                <div class="col-12 p-0 d-none d-md-block text-center">
-                    <span id="title">BOAST BOARD</span>
-                </div>
-            </div>
+		<!-- 네비 -->
+		<div class="navigator fixed-top row m-0">
+			<div class="col-1 p-0" id="btnMenu">
+				<div class="row m-0" id="menuItem">
+					<div class="col-4 p-0">
+						<div class="row m-0">
+							<div class="col-12" id="menuIcon">
+								<div class="row m-0 mb-1 bar bar-one"></div>
+								<div class="row m-0 mb-1 mt-1 bar bar-two"></div>
+								<div class="row m-0 mb-1 bar bar-three"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-8 p-0 text-center d-none d-md-block" id="menuText">
+						<span style="font-weight: 700; color: dimgray;">MENU</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-10 p-0 d-none d-md-block text-center">
+				<span id="bTitle">BOAST BOARD</span>
+			</div>
+			<div id="searchBox" class="col-1 p-0 m-0"></div>
+		</div>
             <!-- 위 메뉴 공백 채우기 -->
             <div class="row" style="margin-top: 100px;"></div>
             <!-- 본문 -->
@@ -165,8 +192,7 @@
 												class="form-check-label" for="fall">가을</label>
 										</div>
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="checkbox" name="season"
-												id="winter" value="winter" disabled> <label
+											<input class="form-check-input" type="checkbox" name="season" id="winter" value="winter" disabled> <label
 												class="form-check-label" for="winter">겨울</label>
 										</div>
 									</div>
@@ -176,8 +202,7 @@
 										<label for="memo" class="m-0">메모</label>
 									</div>
 									<div class="col-9">
-										<textarea name="memo" id="memo" rows="5"
-											class="form-control bg-white" style="resize: none;" readonly></textarea>
+										<textarea name="memo" id="memo" rows="5" class="form-control bg-white" style="resize: none;" readonly></textarea>
 									</div>
 								</div>
 							</div>
@@ -193,7 +218,7 @@
 					<div class="col-12 p-0">
 						<div class="row">
 							<div class="col-12 text-center">
-								<input id="bTitle" name="bTitle" type="text" class="form-control bg-white" placeholder="제목">
+								<input id="boastTitle" name="boastTitle" type="text" class="form-control bg-white" placeholder="제목">
 							</div>
 						</div>
 						<div class="row mt-2">
@@ -208,10 +233,8 @@
 							<input type="hidden" name="s_no" value="${style.no}">
 						</form>
 							<div class="col-12 mt-2 text-center">
-								<button id="toBoast" type="button"
-									class="btn btn-sm btn-outline-dark">작성하기</button>
-								<button id="toBack" type="button"
-									class="btn btn-sm btn-outline-dark">돌아가기</button>
+								<button id="toBoast" type="button" class="btn btn-sm btn-outline-dark">작성하기</button>
+								<button id="toBack" type="button" class="btn btn-sm btn-outline-dark">돌아가기</button>
 							</div>
 						</div>
 					</div>
@@ -222,12 +245,37 @@
 			<jsp:include page="../../standard/boardFooter.jsp"/>			
     </div>
     <script>
+		$("#boastTitle").on("blur",function(){
+			var title = $("#boastTitle").val().length;
+			if(title > 30){
+				alert("30자 이내로 작성해주세요!");
+				$("#boastTitle").val("");
+			}
+		});
+		$("#contents").on("blur",function(){
+			var contents = $("#contents").val().length;
+			if(contents > 100){
+				alert("100자 이내로 작성해주세요!");
+				$("#contents").val("");
+			}
+		});
     	$("#toBack").on("click",function(){
     		history.back();
     	});
     	$("#toBoast").on("click",function(){
-    		$("#inputT").val($("#bTitle").val());
-    		$("#inputC").val($("#contents").val());
+    		var title = $("#boastTitle").val();
+    		var contents = $("#contents").val();
+    		
+			if(title == "" || title == null) {
+				alert("제목을 입력해주세요!");
+            	return false;
+			}
+			if(contents == "" || contents == null) {
+				alert("내용을 입력해주세요!");
+            	return false;
+			}
+			$("#inputT").val(title);
+			$("#inputC").val(contents);
     		$("#frm").submit();
     	});
     	$(".dImgs").on("click",function(){
@@ -268,7 +316,31 @@
     		}).fail(function(data){
     			console.log("실패")
     		});
-    	})
+    	});
+        $("#btnMenu").on("click",function(){
+            $(".menu").css("display","flex");
+            $(".navigator").css("z-index","1");
+        });
+        $(".mainblock").on("click",function(){
+            $(".menu").css("display","none");
+        });
+        $("#closeMenu").on("click",function(){
+            $(".menu").css("display","none");
+        });
+        $("#btnSearch").on("click",function(){
+            $("#btnCloseSearch").css("display","flex");
+            $("#btnSearch").css("display","none");
+            $("#categoryBar").css("display","inline-block");
+            $("#title").css("display","none");
+            $("#menuItem").css("display","none");
+        });
+        $("#btnCloseSearch").on("click",function(){
+            $("#btnSearch").css("display","flex");
+            $("#btnCloseSearch").css("display","none");
+            $("#categoryBar").css("display","none");
+            $("#title").css("display","inline");
+            $("#menuItem").css("display","flex");
+        });
     </script>
     </c:otherwise>
     </c:choose>
