@@ -142,8 +142,11 @@
 </head>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
         <div class="wrapper-All">
+        	<!-- 헤더 -->
+			<jsp:include page="../../standard/header.jsp" />
+			<!-- 퀵 메뉴 -->
+			<jsp:include page="../../standard/mypageQuickMenu.jsp" />
 
-			
             <div class="categoryMenu p-3" >
             	
             </div>
