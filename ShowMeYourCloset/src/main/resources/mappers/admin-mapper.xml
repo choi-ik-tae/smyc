@@ -3,5 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="Admin">
- 
+<!-- 	회원 전체 수 -->
+ 	<select id="selectMembers" resultType="Integer">
+ 		select count(*) from members
+ 	</select>
+<!--  	남자 회원 수 -->
+	<select id="selectMemByM" resultType="Integer">
+		select count(*) from members where gender = 'M'
+	</select>
+<!-- 	여자 회원 수 -->
+	<select id="selectMemByW" resultType="Integer">
+		select count(*) from members where gender = 'W'
+	</select>
+	
+<!-- 	자랑게시판 조회수 순 -->
+	<select id="selectByBoastByView" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category = 'B' order by views desc
+	</select>
+<!-- 	자랑게시판 좋아요 순 -->
+	<select id="selectByBoastByLike" resultType="Integer">
+		select b_no from boardlike group by b_no order by count(b_no) desc
+	</select>
+<!-- 	도움게시판 조회수 순 -->
+	<select id="selectByHelpByView" resultType="kh.spring.dto.BoardDTO">
+		select * from board where category = 'H' order by views desc
+	</select>
  </mapper> 

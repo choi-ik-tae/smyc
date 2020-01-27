@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Bootstap4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -15,29 +14,36 @@
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
-	.container {width: 1000px;max-width: none !important; border:1px solid lightgray; height:600px;}
-	html,body{height: 100%;}
-    body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;padding-top: 40px;padding-bottom: 40px;}
+    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+	.container{width: 1000px;max-width: none !important;height:600px; margin-top:200px;}
+    .contents{margin-top:150px;}
     #title{height:200px; line-height:200px; font-size:30pt; font-weight:800;}
     .borderDelete{border: 0px;}
+    #toChart{height: 100px;}
+    #toBlock{height: 100px;}
+    .navi{border-bottom: 1px solid lightgray;font-weight: 800;font-size: 25pt;}
 </style>
 </head>
 <body>
 	<div class="container p-0">
+        <div class="row navi m-0 fixed-top">
+            <div class="col-12 text-center">
+                SHOW ME YOUR CLOSET
+            </div>
+        </div>
 		<div class="row m-0">
-			<div class="col-12 text-center" id="title">
-				관리자님 환영합니다.
-			</div>
-		</div>
-		<div class="row m-0">
-			<div class="col-12">
-				<button id="toChart" type="button" class="form-control btn btn-lg btn-outline-dark">통계</button>
-			</div>
-		</div>
-		<div class="row m-0 mt-2">
-			<div class="col-12">
-				<button id="toBlock" type="button" class="form-control btn btn-lg btn-outline-dark">차단</button>
-			</div>
+		    <div class="contents col-12">
+		        <div class="row m-0 mt-5">
+                    <div class="col-12">
+                        <button id="toChart" type="button" class="form-control btn btn-lg btn-outline-dark">통계</button>
+                    </div>
+                </div>
+                <div class="row m-0 mt-2">
+                    <div class="col-12">
+                        <button id="toBlock" type="button" class="form-control btn btn-lg btn-outline-dark">차단</button>
+                    </div>
+                </div>
+		    </div>
 		</div>
 	</div>
 	<script>
