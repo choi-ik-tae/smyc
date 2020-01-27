@@ -15,8 +15,8 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
-	.container-fulid {width: 1890px;max-width: none !important;}
-   *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+	.container-fulid {width: 1903px;max-width: none !important;}
+   	*{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
 
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
@@ -36,8 +36,8 @@
     #menuText{ line-height: 50px; }
     #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
     .InfoMenu {position:fixed;width: 380px; height: 100%;background: white; z-index: 3}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
-    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5; top:0px;}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1920px;max-width: none !important;}
+    .menu{width: 1903px;height: 100%;position:fixed;display: none;z-index: 5; top:0px;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}

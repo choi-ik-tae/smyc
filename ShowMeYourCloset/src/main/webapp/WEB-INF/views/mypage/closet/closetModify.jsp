@@ -14,6 +14,7 @@
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
+	.container-fuild {width: 1903px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #closetImg{transform: translate(45%,5%); margin-bottom: 70px;}
     .nav-font{font-size: 10pt; font-weight: 800;}
@@ -24,7 +25,7 @@
     #shoesBox{position: absolute;left: 1250px;top:50px;width:200px;height:500px;line-height: 500px; text-align: center;}
     .nav-item>a{color: black; font-size: 15pt;}
     .logo{font-size: 15pt;}
-    #top{height: 80px;background-color:white;border-bottom: 1px solid gray;}
+    #top{height: 80px;background-color:white;border-bottom: 1px solid gray; width: 1920px;max-width: none !important;}
     #bottom{background-color:white;border-top: 1px solid gray;width: 100%;height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: gray;}
