@@ -1,5 +1,40 @@
 package kh.spring.dao;
 
-public class AdminDAO {
+import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import kh.spring.dto.BoardDTO;
+
+@Repository
+public class AdminDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sst;
+	
+	// 총 회원
+	public int selectMembers() {
+		return sst.selectOne("Admin.selectMembers");
+	}
+	// 남자
+	public int selectMemByM() {
+		return sst.selectOne("Admin.selectMemByM");
+	}
+	// 여자
+	public int selectMemByW() {
+		return sst.selectOne("Admin.selectMemByW");
+	}
+	
+	public List<BoardDTO> selectByBoastByView() {
+		return sst.selectList("Admin.selectByBoastByView");
+	}
+	
+	public List<BoardDTO> selectByHelpByView() {
+		return sst.selectList("Admin.selectByHelpByView");
+	}
+	
+	
+	
 }

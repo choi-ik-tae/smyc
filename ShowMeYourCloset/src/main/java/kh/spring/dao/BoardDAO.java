@@ -103,6 +103,14 @@ public class BoardDAO {
 	public int boastDelete(int no) {
 		return sst.delete("Board.boastDelete", no);
 	}
+	// 스타일 삭제 시 boast 게시물 삭제
+	public int boastDeleteByStyle(int s_no) {
+		return sst.delete("Board.boastDeleteByStyle",s_no);
+	}
+	// 스타일 삭제 시 삭제 할 게시물 번호 출력
+	public int boastSelectByDelete(int s_no) {
+		return sst.selectOne("Board.selectByDelete",s_no);
+	}
 	// boast New
 	public List<BoardDTO> boastSelectNew() {
 		return sst.selectList("Board.boastSelectNew");

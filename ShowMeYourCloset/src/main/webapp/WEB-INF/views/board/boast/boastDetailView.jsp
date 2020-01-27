@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
-	.container-fulid {width: 1890px;max-width: none !important;}
+	.container-fulid {width: 1903px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     
     #menuIcon{ margin-top: 17px;}
@@ -29,8 +29,8 @@
     
     .InfoMenu {position:fixed;width: 380px; height: 100%;background: white; z-index: 3}
    	#title{font-size: 30px;color:dimgray;font-weight: 700;line-height: 100px;}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
-    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5; top:0px;}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1920px;max-width: none !important;}
+    .menu{width: 1903px;height: 100%;position:fixed;display: none;z-index: 5; top:0px;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
@@ -374,6 +374,13 @@
     	<input type="hidden" name="no" value="${boast.no}">
     </form>
     <script>
+		$("#comment").on("blur",function(){
+			var comment = $("#comment").val().length;
+			if(comment > 30){
+				alert("30자 이내로 작성해주세요!");
+				$("#comment").val("");
+			}
+		});
     	$("#toBoastModify").on("click",function(){
 			$("#boastModifyFrm").submit();
     	});
@@ -410,6 +417,11 @@
 	    	})
 		};
     	$("#btnComment").on("click",function(){
+    		var comment = $("#comment").val();
+    		if(comment == "" || comment == null) {
+    			alert("댓글을 입력해주세요!");
+    			return false;
+    		}
     		$.ajax({
     			url:"${pageContext.request.contextPath}/comments/boastCommentInsert",
     			method:"POST",

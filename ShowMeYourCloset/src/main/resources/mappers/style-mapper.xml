@@ -47,5 +47,8 @@
 	<select id="selectPubCategoryAll" resultType="String">
  		select distinct path from dress d, dress_img img where (d.no = img.d_no) and (d.email=#{email}) and d.category=#{category} and d.c_no=#{c_no} and d.pub='Y'
  	</select>
- 	
+<!--  	삭제할 옷 번호 출력 >> 자랑게시글 삭제용 -->
+	<select id="selectByDelete" resultType="Integer">
+		select no from style where ${category}=#{path}
+	</select>
  </mapper>

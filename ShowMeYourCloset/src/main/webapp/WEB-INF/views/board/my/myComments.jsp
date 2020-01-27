@@ -180,7 +180,15 @@
     <form action = "${pageContext.request.contextPath}/comments/toBoard" method="post" id="toBoardFrm">
     	<input type="hidden" name="no" id="boardNo" value="">
     </form>
+    <form action = "${pageContext.request.contextPath}/board/boastSearch" method="post" id="searchFrm">
+    	<input type="hidden" name="keyWord" id="searchTarget" value="">
+    </form>
     <script>
+		$("#toSearch").on("click",function(){
+			var keyword = $("#searchBar").val();
+			$("#searchTarget").val(keyword);
+			$("#searchFrm").submit();
+		});
     	$(".toBoard").on("click",function(){
 			$("#boardNo").val($(this).attr("id"));
     		$("#toBoardFrm").submit();    		

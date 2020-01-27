@@ -15,14 +15,13 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
-	.container-fulid {width: 1890px;max-width: none !important;}
-   *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
-    #bk{background-image:url('/imgs/bg/bg8.jpg');background-attachment: fixed; }
+   	*{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+    #bk{background-image:url('/imgs/bg/bg8.jpg');background-attachment: fixed; width: 1903px;max-width: none !important;}
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: white;}
     /* 숨김메뉴 */
-    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
+    .menu{width: 1903px;height: 100%;position:fixed;display: none;z-index: 5;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
@@ -39,7 +38,7 @@
     #load{display:none;}    
     /* 네비바 */
     #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1920px;max-width: none !important;}
     #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
     #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
     #categoryBar{height: 80%;}
@@ -76,9 +75,6 @@
     </head>
     <body>
 <c:choose>
-<c:when test="${email ==null }">
-	로그인을 하십시오.
-</c:when>
 <c:when test="${result == 0}">
 	<script>
 		alert("이미 자랑한 스타일 입니다!");
@@ -231,7 +227,12 @@
     	<input type="hidden" name="keyWord" id="searchTarget" value="">
     </form>
     <script>
+    	var email = '${email}';
     	$("#toSearch").on("click",function(){
+    		if(email == null || email == "") {
+    			alert("로그인해주세요!");
+    			return false;
+    		}
     		var keyword = $("#searchBar").val();
     		$("#searchTarget").val(keyword);
     		$("#searchFrm").submit();
@@ -249,6 +250,10 @@
 	    	$("#alignFrm").submit();
 		});
     	$(".boardItem").on("click",function(){
+    		if(email == null || email == "") {
+    			alert("로그인해주세요!");
+    			return false;
+    		}
     		$("#detailTarget").val($(this).attr("id"));
     		$("#detailFrm").submit();
     	});

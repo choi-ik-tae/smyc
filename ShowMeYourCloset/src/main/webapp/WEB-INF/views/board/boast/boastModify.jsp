@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
-	.container-fulid {width: 1890px;max-width: none !important;}
+	.container-fulid {width: 1903px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     
     #menuIcon{ margin-top: 17px;}
@@ -29,8 +29,8 @@
     
     .InfoMenu {position:fixed;width: 380px; height: 100%;background: white; z-index: 3}
    	#title{font-size: 30px;color:dimgray;font-weight: 700;line-height: 100px;}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
-    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5; top:0px;}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1920px;max-width: none !important;}
+    .menu{width: 1903px;height: 100%;position:fixed;display: none;z-index: 5; top:0px;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
@@ -52,8 +52,12 @@
     #comments{border:1px solid lightgray;border-radius: 5px;}
     .space{margin-top:80px;margin-bottom:25px; margin-left:0px; margin-right:0px;}
 </style>
+<script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
     <c:choose>
     <c:when test="${email == null}">
     	<script>
@@ -248,7 +252,7 @@
 						<div class="col-12 p-0">
 							<div class="row">
 								<div class="col-12 text-center">
-									<input id="bTitle" name="bTitle" type="text" class="form-control bg-white borderDelete p-0" value="${boast.title}">
+									<input id="boastTitle" name="boastTitle" type="text" class="form-control bg-white borderDelete p-0" value="${boast.title}">
 								</div>
 							</div><hr class="m-0">
 							<div class="row mt-2">
@@ -291,7 +295,32 @@
     	</script>
     </c:forEach>
     <script>
+		$("#boastTitle").on("blur",function(){
+			var title = $("#boastTitle").val().length;
+			if(title > 30){
+				alert("30자 이내로 작성해주세요!");
+				$("#boastTitle").val("");
+			}
+		});
+		$("#contents").on("blur",function(){
+			var contens = $("#contents").val().length;
+			if(contens > 100){
+				alert("100자 이내로 작성해주세요!");
+				$("#contents").val("");
+			}
+		});
     	$("#toBoastModify").on("click",function(){
+    		var title = $("#boastTitle").val();
+    		var contents = $("#contents").val();
+    		
+			if(title == "" || title == null) {
+				alert("제목을 입력해 주세요!");
+            	return false;
+			}
+			if(contents == "" || contents == null) {
+				alert("내용을 입력해 주세요!");
+            	return false;
+			}
 			$("#boastModifyProcFrm").submit();
     	});
     	$("#toBack").on("click",function(){

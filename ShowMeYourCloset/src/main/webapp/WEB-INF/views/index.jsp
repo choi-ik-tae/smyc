@@ -21,6 +21,10 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- index.css -->
 <link rel="stylesheet" type="text/css" href="/css/index.css">
+<style>
+	.container-fluid {width: 1920px;max-width: none !important;}
+	#top{width: 1920px;max-width: none !important;}
+</style>
 </head>
 <body>
 <div class="container-fluid p-0">
@@ -128,7 +132,7 @@
 		location.href = "${pageContext.request.contextPath}/styleUpload";
 	});
 	$(".loginck").on("click",function(){
-		alert("로그인하라우!")
+		alert("로그인하세요!")
 	});
 </script>
 </body>

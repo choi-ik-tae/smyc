@@ -13,7 +13,6 @@ public class BoardDTO {
 	private String write_date;
 	private String views;
 	
-	
 	public BoardDTO() {
 		super();
 		// TODO Auto-generated constructor stub
