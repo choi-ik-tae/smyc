@@ -1,9 +1,7 @@
 package kh.spring.project;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.BoardDTO;
+import kh.spring.dto.MembersDTO;
 import kh.spring.service.AdminService;
+import kh.spring.service.MemberService;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,6 +25,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adService;
+	
+	@Autowired
+	private MemberService memService;
 	
 	@RequestMapping("/adminMain")
 	public String adminMain() {
@@ -65,8 +69,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/block")
-	public String block() {
+	public String block(Model model) {
+		List<MembersDTO> list = memService.selectAll();
+		model.addAttribute("list", list);
 		return "admin/block";
+	}
+	
+	@RequestMapping("/blockProc")
+	@ResponseBody
+	public String blockProc(String email, String ban) {
+		memService.memberBan(email, ban);
+		return ban;		
 	}
 	
 }

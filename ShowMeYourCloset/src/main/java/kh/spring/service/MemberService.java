@@ -1,23 +1,18 @@
 package kh.spring.service;
 
-import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.Utils.EncrypyUtil;
 import kh.spring.Utils.MailUtils;
 import kh.spring.Utils.TempKey;
 import kh.spring.dao.ClosetDAO;
-import kh.spring.dao.DressDAO;
 import kh.spring.dao.MembersDAO;
 import kh.spring.dto.ClosetDTO;
-import kh.spring.dto.DressDTO;
-import kh.spring.dto.DressImgDTO;
 import kh.spring.dto.MembersDTO;
 
 
@@ -174,5 +169,15 @@ public class MemberService {
 		return mdao.selectGender(email);
 	}
 	
+	public List<MembersDTO>selectAll(){
+		return mdao.selectAll();
+	}
 	
+	public void memberBan(String email, String ban) {
+		mdao.memberBan(email, ban);
+	}
+	
+	public String returnBan(String email) {
+		return mdao.returnBan(email);
+	}
 }

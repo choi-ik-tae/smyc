@@ -72,7 +72,8 @@ public class MemberController {
 		
 		if(result > 0) {
 			int auth = memService.returnAuthStatus(email);
-			if(auth == 1) {
+			String ban = memService.returnBan(email);
+			if(auth == 1 && ban.contentEquals("N")) {
 				
 				String nickname = memService.returnNickname(email);
 				
@@ -80,6 +81,9 @@ public class MemberController {
 				session.setAttribute("nick", nickname);
 				
 				return "do";
+			}
+			if(ban.contentEquals("Y")) {
+				return "2";
 			}
 			
 		}
