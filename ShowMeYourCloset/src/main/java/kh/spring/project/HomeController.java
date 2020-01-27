@@ -200,4 +200,10 @@ public class HomeController {
 	public String helpUpload() {
 		return "board/help/helpBoardUpload";
 	}
+	
+	// 관리자 모드 입장
+	@RequestMapping("/adminLogin")
+	public String adminLogin() {
+		return "admin/adminLogin";
+	}
 }

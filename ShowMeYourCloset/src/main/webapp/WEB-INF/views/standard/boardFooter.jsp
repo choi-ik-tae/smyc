@@ -11,10 +11,6 @@
 				<div class="row">
 					대표전화&nbsp;&#124;&nbsp;010-8854-8699&nbsp;&#124;&nbsp;010-8077-1131
 				</div>
-				<div class="row">
-					<a href="#">개인정보 처리방침</a>&nbsp;&#124;&nbsp; <a href="#">약관</a>&nbsp;&#124;&nbsp;
-					<a href="#">법적 고지</a>
-				</div>
 			</div>
 		</div>
 	</div>
