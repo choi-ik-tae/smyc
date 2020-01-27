@@ -19,7 +19,7 @@
         <style>
             .imgBox{
                 position:absolute;
-                left:250px;
+                left:550px;
                 top:68px;
             }
             .category{
@@ -39,56 +39,51 @@
             .Top{
                 height: 200px;
                 line-height: 180px;
-                left: 350px;
+                left: 650px;
                 top:210px;
             }
             .Pants{
-                left: 350px;
+                left: 650px;
                 top: 420px;
                 height: 210px;
                 line-height: 210px;
             }
             .Shoes{
-                left: 350px;
+                left: 650px;
                 top: 640px;
                 height: 150px;
                 line-height: 150px;
             }
             .Acc{
                 top:300px;
-                left: 80px;
+                left: 380px;
                 height: 150px;
                 line-height: 150px;
             }
             .categoryMenu{
                 position:absolute;
                 height: 780px;
-                width: 530px;
+                width: 550px;
                 left: 950px;
-                top:80px;
+                top:160px;
                 z-index:2;
                 border-radius:10px;
-                background:#e8dfd8;
+                background:white;
+                border : 1px solid #bcbcbc;
             }
             #shilouette{
                 width: 400px;
             }
             .wrapper{
                 position: absolute;
-                border: 2px solid #bcbcbc;
                 height: 940px;
-                width: 1350px;
-                left: 300px;
-                border-radius: 20px;
-
+                min-width:100%;
+                top:80px;
             }
             .form-wrapper{
                 position:absolute;
-                left: 300px;
-                top:950px;
-                border : 2px solid #bcbcbc;
-                width: 1350px;
-                border-radius: 20px;
+                top:1530px;
+                min-width: 100%;
             }
             .seasonBtn{
                 margin-right: 2px;
@@ -128,10 +123,17 @@
             }
             .closetSelc{
             	position:absolute;
-            	left: 770px;
+            	left: 1070px;
             	top:30px;
             }
-
+			 #top{height: 80px;background-color:white;border-bottom: 1px solid gray;}
+		    #bottom{background-color:white;border-top: 1px solid gray; position:absolute; top:2150px;width: 100%;height: 150px;}
+		    #bottom-logo{height: 150px; line-height: 150px;}
+		    #bottom-contents{font-size: 10pt;color: gray;}
+		    .nav-item>a{color: black; font-size: 15pt;}
+   			.logo{font-size: 15pt;}
+   			.bg{background:rgba(255,255,255,1); border-radius: 10px;}
+    		body{background-image: url(/imgs/bg/test3.jpg); background-attachment: fixed;  background-repeat:no-repeat;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover; background-size: cover;}
         </style>
         
         <script type="text/javascript">
@@ -142,13 +144,14 @@
 </head>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
         <div class="wrapper-All">
+        	<!-- 헤더 -->
+			<jsp:include page="../../standard/header.jsp" />
 
-			
             <div class="categoryMenu p-3" >
             	
             </div>
 
-            <div class="wrapper">
+            <div class="wrapper bg">
             
             	<div class="closetSelc" style="width:300px;">
 					<select class="form-control" id="closet" name="closet" onchange="changeClosetSelect()">
@@ -180,13 +183,13 @@
 	            	<input type="hidden" name="pants" id="pantsHidden">
 	            	<input type="hidden" name="shoes" id="shoseHidden">
 	            	<input type="hidden" name="acc" id="accHidden">
-                <div class="form-wrapper">
+                <div class="form-wrapper bg">
                     <div class="row">
-                        <div class="col-12 p-5">
+                        <div class="col-7 p-5" style="margin:auto">
                             <label for="InputName">Style Name</label>
                             <input type="text" class="form-control" name="name" id="InputName">
                         </div>
-                        <div class="col-12 pl-5 pb-5">
+                        <div class="col-7 pl-5 pb-5" style="margin:auto">
                             <label>Season</label>
                             <div style="padding-left: 30px;">
                                  <div class="btn-group-toggle" data-toggle="buttons">
@@ -205,13 +208,18 @@
 					            </div>
                             </div>
                         </div>
-                        <div class="col-12 pl-5 pb-5 pr-5">
+                        <div class="col-7 pl-5 pb-5 pr-5" style="margin:auto">
                             <label for="InputMemo">Memo</label>
                             <textarea class="form-control" style="height: 150px; resize: none;" id="InputMemo" name="memo"></textarea>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 pl-5 pb-5 pr-5">
+		                <div class="col-7" style="text-align:center; margin:auto">
+							<span style="color:darkred">메모</span> 는 <span style="color:orangered">선택사항</span> 입니다.
+		                </div>
+	           	 	</div>
+                    <div class="row">
+                        <div class="col-7 pl-5 pb-5 pr-5" style="margin:auto">
                            <span style="float: right;">
                                 <button type="button" id="styleInsertBtn" class="btn btn-secondary">저장하기</button>
                             </span>
@@ -223,7 +231,9 @@
                 </div>
               
             </form>
+  			<jsp:include page="../../standard/footer.jsp" />         	 
         </div>
+        
         
         
 		<script>
