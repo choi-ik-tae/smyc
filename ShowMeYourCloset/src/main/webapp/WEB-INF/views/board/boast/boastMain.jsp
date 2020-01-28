@@ -197,7 +197,8 @@
 									</div>
 									<div class="card-body"><hr>
 										<h5 class="card-title text-center">${boastList.get(i).title}</h5>
-										<p class="card-text text-right">
+										<p class="card-text m-0 d-inline-block" style="width:120px;"><span style="font-weight: 800;">${boastList.get(i).nickname}</span></p>
+										<p class="card-text text-right d-inline-block" style="width:120px;">
 											<span style="font-weight: 800;">${likeList.get(i)}</span>&nbsp;&nbsp;<img src="/imgs/btn/like_after.png" style="width: 20px;" class="pb-1">
 										</p>
 									</div>
