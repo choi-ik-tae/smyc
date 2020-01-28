@@ -269,7 +269,7 @@ public class BoardController {
 		if(boardService.boastSeletctByNo(no) == null) {
 			return "error";
 		}
-		int count = notifyService.notifyCount("B", no);
+		int Bcount = notifyService.notifyCount("B", no);
 		// 조회수 증가
 		boardService.viewCountPlus(no);
 		BoardDTO boast = boardService.boastSeletctByNo(no);
@@ -278,6 +278,15 @@ public class BoardController {
 		StyleDTO style = styleService.detailStyle(s_no);
 		int likeCliked = boardService.boastLikeClicked(boast.getNo(),email);
 		List<CommentDTO> comments = comService.commentsAll(boast.getNo());
+		
+		for(int i = 0; i<comments.size();i++) {
+			int Ccount = notifyService.notifyCount("C", comments.get(i).getNo());
+			if(Ccount>4) {
+				comService.commentDelete(comments.get(i).getNo());
+				comments.remove(i);
+			}
+		}
+		
 		String[] season = style.getSeason().split(",");
 		
 		m.addAttribute("back", back);
@@ -288,7 +297,7 @@ public class BoardController {
 		m.addAttribute("boast", boast);
 		m.addAttribute("likeCliked", likeCliked);
 		m.addAttribute("comments", comments);
-		m.addAttribute("count",count);
+		m.addAttribute("Bcount",Bcount);
 		
 		return "board/boast/boastDetailView";
 	}

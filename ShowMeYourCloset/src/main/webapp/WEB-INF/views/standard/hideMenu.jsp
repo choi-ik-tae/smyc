@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 숨김 메뉴 -->
-    <div class="container-fulid p-0">
+    <div class="container-fluid p-0">
         <div class="row m-0 menu">
             <div class="p-0 menubar" style="width:23%;">
                 <div class="row m-0">

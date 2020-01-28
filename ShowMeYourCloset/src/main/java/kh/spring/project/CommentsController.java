@@ -95,14 +95,7 @@ public class CommentsController {
 		// 입력한 댓글 뽑아오기
 		List<CommentDTO> cm = comService.commentLast(b_no,email);
 		List<CommentDTO> jsonList = new ArrayList<>();
-		
-		for(int i = 0; i<cm.size();i++) {
-			int count = notifyService.notifyCount("C", cm.get(i).getNo());
-			if(count>4) {
-				comService.commentDelete(cm.get(i).getNo());
-				cm.remove(i);
-			}
-		}
+
 		if(cm.size() > 0) {
 			for(CommentDTO tmp : cm) {
 				jsonList.add(tmp);

@@ -61,6 +61,10 @@
     		location.href="${pageContext.request.contextPath}/";
     	</script>
     </c:when>
+    <c:when test="${Bcount > 4}">
+        <!-- 신고된 게시물 표시 -->
+        <jsp:include page="../../standard/notifyPost.jsp"/>
+    </c:when>
     <c:otherwise>
 	<!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>

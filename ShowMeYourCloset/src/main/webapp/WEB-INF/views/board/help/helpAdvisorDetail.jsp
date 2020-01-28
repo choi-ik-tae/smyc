@@ -24,7 +24,7 @@
         .Top{height: 180px;top:240px;left: 168px; }
         .Pants{height: 230px;top:430px;left: 168px; }
         .Shoes{height: 120px;top:680px; left: 168px; }
-        .Acc{height: 100px; top:206px; }
+        .Acc{height: 100px; top:200px; }
         .noneDiv {width:150px;height:150px;display:inline-block;padding:5px;}
 		.noneDiv>img{max-width:150px;height:100%;}
 		.categoryImgDiv{width:150px;height:150px;display:inline-block;padding:5px;}
@@ -33,6 +33,7 @@
 		.imgDetail {width:200px;height: 300px;z-index: 1;margin: auto;margin-top:120px; text-align:center}
 		#dressInfo{ display: none;}
    		#dressInfoBlock{height: 770px;background-color: dimgray; opacity: 0.4;font-weight: 800;line-height: 770px;font-size: 15pt;}
+   		.imgDetail>img{max-width:250px;}
 		
 		/* 네비바 */
 	    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}

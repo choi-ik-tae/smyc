@@ -6,7 +6,6 @@
         <meta charset="UTF-8">
         <title>Document</title>
         <!-- Bootstap4 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -42,9 +41,10 @@
                 height: 53px;
                 line-height: 53px;
             }
+            .container-fluid {width: 1903px;max-width: none !important;}
             /* 네비바 */
 		    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
-		    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+		    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1903px;max-width: none !important;}
 		    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
 		    #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
 		    #categoryBar{height: 80%;}
@@ -70,7 +70,7 @@
 
       	<!-- 숨김 메뉴 -->
 		<jsp:include page="../../standard/hideMenu.jsp"/>
-        <div class="container-fuild" id="bk">
+        <div class="container-fluid p-0" id="bk">
             <!-- 네비 -->
 			<div class="navigator fixed-top row m-0">
 				<div class="col-1 p-0" id="btnMenu">
@@ -94,7 +94,7 @@
 				</div>
 				<div id="searchBox" class="col-1 p-0 m-0"></div>
 			</div>
-            <div class="form-wrapper row">
+            <div class="form-wrapper row m-0">
                 <div class="col-12 mainLogo" id="mainLogo">
                     <p style="margin-top: 95px;">HELP BOARD</p>
                     <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
@@ -111,8 +111,8 @@
                 </div>
             </div>
             <form action="${pageContext.request.contextPath}/board/helpUploadProc.do" method="post" id="inputFrm"> 
-            <div class="row" style="background: white">
-                <div class="col-sm-12 col-md-7  mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px;">
+            <div class="row m-0" style="background: white">
+                <div class="col-7  mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px;">
                     <span class="mb-1" style="display: block; font-weight: 600; font-size: 15px;"> * Help 게시판 등록 이용 설명</span>
                     <span style="display: block">1. 다른 사용자들에게 내 옷장 안 옷들로 코디 도움을 요청하는 게시판 입니다.</span>
                     <span style="display: block">2. <span style="color:indianred; font-weight: 600;">코디 도움 요청</span>에 벗어난 글 혹은 잡담의 글은 <span style="color:indianred; font-weight: 600;">삼가</span>해 주세요.</span>
@@ -123,7 +123,7 @@
 
                 </div>
                 
-	                <div class="col-sm-12 col-md-7 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">     	
+	                <div class="col-7 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">     	
 	                        <div class="form-row form-group">
 	                            <div class="col-2">
 	                                <label for="title">글 제목</label>
@@ -136,7 +136,7 @@
 	                            <textarea class="form-control" style="resize: none;" rows="20" name="contents" id="contents"></textarea>
 	                        </div>
 	                </div>
-	                <div class="col-sm-23 col-md-7 mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px; text-align: right;">
+	                <div class="col-7 mt-2 mb-2 p-3" style="margin:auto;border-radius: 10px; font-size:12px; text-align: right;">
 	                    <button id="uploadBtn" class="btn btn-info" type="button">도움 요청하기</button>
 	                </div>
             </div> 

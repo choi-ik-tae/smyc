@@ -16,14 +16,14 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
-	.container-fulid {width: 1890px;max-width: none !important;}
-   *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+	.container-fluid {width: 1903px;max-width: none !important;}
+    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #bk{background-image:url('/imgs/bg/bg10.jpg');background-attachment: fixed;}
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: white;}
     /* 숨김메뉴 */
-    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
+    .menu{width: 1903px;height: 100%;position:fixed;display: none;z-index: 5;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
@@ -40,8 +40,8 @@
     #load{display:none;}    
     .contents{cursor:pointer;}
     /* 네비바 */
-    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;width: 1903px;}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1920px;max-width: none !important;}
     #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
     #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
     #categoryBar{height: 80%;}
@@ -83,7 +83,7 @@
     <!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>
 	<!-- 본문 -->
-	<div class="container-fuild p-0" id="bk">
+	<div class="container-fluid p-0" id="bk">
 		<!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">
@@ -97,12 +97,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-8 p-0 text-center d-none d-md-block">
+					<div class="col-8 p-0 text-center">
 						<span id="menuText" style="font-weight: 700; color: dimgray;">MENU</span>
 					</div>
 				</div>
 			</div>
-			<div class="col-10 p-0 d-none d-md-block text-center">
+			<div class="col-10 p-0 text-center">
                 <div class="row m-0">
 	                <div class="col-12" id="categoryBar">
 	                	<span id="bTitle" class="mr-3">MY BOARD</span>
@@ -142,17 +142,17 @@
         					</div>
         				</div>
         				<div class="row" style="height: 40px; line-height: 35px; border-top : 1px solid #bcbcbc; border-bottom: 1px solid #bcbcbc;font-size:17px; font-weight:600;">
-	                        <div class="d-none d-md-block col-md-1">
+	                        <div class="col-1">
 	                            NO
 	                        </div>
-	                        <div class="col-8 col-sm-7 col-md-6">
+	                        <div class="col-6">
 	                            TITLE
 	                        </div>
-	                        <div class="col-4 col-sm-3 col-md-2">
+	                        <div class="col-2">
 	                            NICKNAME
 	                        </div>
-	                        <div class="d-none d-sm-block col-sm-2 col-md-1">VIEW</div>
-	                        <div class="d-none d-md-block col-2">DATE</div>
+	                        <div class="col-1">VIEW</div>
+	                        <div class="col-2">DATE</div>
                    	 	</div>
                    	 	
                    	 	<c:choose>
@@ -166,17 +166,17 @@
                    	 		<c:otherwise>
                    	 			<c:forEach items="${helpList}" var="dto">
 				                    <div class="row contents mt-2 mb-2" style="border-radius:10px;" onclick="detailHelp(${dto.no})">
-				                        <div class="d-none d-md-block col-md-1">
+				                        <div class="col-1">
 				                            ${dto.no}
 				                        </div>
-				                        <div class="col-8 col-sm-7 col-md-6" style="text-align: left;">
+				                        <div class="col-6" style="text-align: left;">
 				                            ${dto.title}
 				                        </div>
-				                        <div class="col-4 col-sm-3 col-md-2">
+				                        <div class="col-2">
 				                            ${dto.nickname }
 				                        </div>
-				                        <div class="d-none d-sm-block col-sm-2 col-md-1">${dto.views}</div>
-				                        <div class="d-none d-md-block col-2">${dto.write_date}</div>
+				                        <div class="col-1">${dto.views}</div>
+				                        <div class="col-2">${dto.write_date}</div>
 				                    </div>
 		                    
 		                    	</c:forEach>
@@ -246,10 +246,9 @@
         		</div>
         	</div>
         </div>
-	</div>
 	<!-- 푸터 -->
     <jsp:include page="../../standard/boardFooter.jsp" />
-    
+	</div>
    
     <form action = "${pageContext.request.contextPath}/board/boastDetailView" method="post" id="detailFrm">
     	<input type="hidden" name="Dtarget" id="detailTarget" value="">

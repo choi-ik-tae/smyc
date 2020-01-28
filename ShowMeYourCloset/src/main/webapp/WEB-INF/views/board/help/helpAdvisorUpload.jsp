@@ -21,9 +21,9 @@
         .category-title{text-align: center;font-size: 30px; font-weight: 700;}
         .container{position:absolute;left:50%; transform: translate(-50%);}
         .categoryDiv>div{position:absolute; width: 220px; z-index: 1; border-radius: 10px; background:rgba(188, 188, 188,0.7); font-size: 20px; font-weight: 700;}
-        .Top{height: 180px;top:240px;left: 174px; line-height: 180px;}
-        .Pants{height: 230px;top:430px;left: 174px; line-height: 230px;}
-        .Shoes{height: 120px;top:670px; left: 174px; line-height: 120px;}
+        .Top{height: 180px;top:240px;left: 168px; line-height: 180px;}
+        .Pants{height: 230px;top:430px;left: 168px; line-height: 230px;}
+        .Shoes{height: 120px;top:670px; left: 168px; line-height: 120px;}
         .Acc{height: 100px; top:180px; line-height: 100px;}
         .noneDiv {width:150px;height:150px;display:inline-block;padding:5px;}
 		.noneDiv>img{width:100%;height:100%;}
