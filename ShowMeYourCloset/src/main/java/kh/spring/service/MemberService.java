@@ -46,8 +46,10 @@ public class MemberService {
 		sendMail.setSubject("[ShowMeYourCloset] 회원가입 이메일 인증");
 		sendMail.setText(new StringBuffer().append("<h1>이메일 인증</h1>")
 				.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료 됩니다.</p>")
-				.append("<a href='http://172.30.1.20:8090/member/joinConfirm?email=")
+				.append("<a href='http://192.168.60.11/member/joinConfirm?email=")
 				.append(dto.getEmail())
+				.append("&authkey=")
+				.append(dto.getAuthkey())
 				.append("' target='_blenk'>이메일 인증 확인 </a>")
 				.toString());
 		sendMail.setFrom("codud966@gmail.com", "[ShowMeYourCloset]");
@@ -94,6 +96,10 @@ public class MemberService {
 	public void updateAuth(String email) {
 		
 		mdao.updateAhthStatus(email);
+	}
+	
+	public String selectAuthKey(String email) {
+		return mdao.selectAuthKey(email);
 	}
 	
 	// 닉네임 가져오기

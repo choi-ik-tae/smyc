@@ -212,7 +212,7 @@ public class ClosetContoller {
 		
 		cloService.closetDelete(no, email, path);
 	
-		return "redirect:/";
+		return "redirect:/myCloset";
 	}
 
 	// 전체 옷 정보 ajax 통신

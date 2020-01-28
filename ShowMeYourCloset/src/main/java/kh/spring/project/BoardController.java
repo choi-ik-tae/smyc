@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,6 +26,7 @@ import kh.spring.service.BoardService;
 import kh.spring.service.ClosetService;
 import kh.spring.service.CommentsService;
 import kh.spring.service.MemberService;
+import kh.spring.service.NotifyService;
 import kh.spring.service.StyleService;
 
 @Controller
@@ -50,6 +50,9 @@ public class BoardController {
 	
 	@Autowired
 	private AdvisorService advisorService;
+	
+	@Autowired
+	private NotifyService notifyService;
 	
 	@Autowired
 	private HttpSession session;
@@ -170,6 +173,7 @@ public class BoardController {
 		// 자랑게시판 게시물 총 출력
 		List<BoardDTO> boastList = boardService.boastAlign(Atarget);
 		List<StyleDTO> styleList = new ArrayList<>();
+		
 		for(BoardDTO tmp : boastList) {
 			styleList.add(styleService.detailStyle(tmp.getS_no()));
 		}
@@ -263,6 +267,7 @@ public class BoardController {
 		if(boardService.boastSeletctByNo(no) == null) {
 			return "error";
 		}
+		int count = notifyService.notifyCount("B", no);
 		// 조회수 증가
 		boardService.viewCountPlus(no);
 		BoardDTO boast = boardService.boastSeletctByNo(no);
@@ -281,6 +286,7 @@ public class BoardController {
 		m.addAttribute("boast", boast);
 		m.addAttribute("likeCliked", likeCliked);
 		m.addAttribute("comments", comments);
+		m.addAttribute("count",count);
 		
 		return "board/boast/boastDetailView";
 	}

@@ -56,10 +56,16 @@ public class MemberController {
 	@RequestMapping("joinConfirm")
 	public String joinConrim(Model model,String email,String authkey) {
 		
-		memService.updateAuth(email);
-		
-		
-		model.addAttribute("auth_check", 1);
+		try {
+			String DBauthKey = memService.selectAuthKey(email);
+			
+			if(DBauthKey.contentEquals(authkey)) {
+				memService.updateAuth(email);
+				model.addAttribute("auth_check", 1);
+			}
+		}catch(Exception e) {
+			return "error";
+		}
 		
 		return "login/signupConfirm";
 	}
