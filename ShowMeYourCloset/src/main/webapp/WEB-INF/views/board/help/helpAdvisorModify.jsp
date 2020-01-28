@@ -177,10 +177,11 @@
                 	</c:choose>
                 </div>
             </div>
+          <form action="${pageContext.request.contextPath}/advisor/advisorModifyProc" method="post" id="uploadFrm">
             <div class="row mt-2 mb-2">
                <div class="col-12">
 	               <label>제목</label>
-	               <input type="text" class="form-control" name="title" id="title" value="${dto.title}" disabled>
+	               <input type="text" class="form-control" name="title" id="title" value="${dto.title}">
                </div>
                <div class="col-12">
                		<span style="float:left;font-size:13px;">${dto.write_date}</span>
@@ -201,132 +202,201 @@
                     
                 </div>
                 <!-- 처음 페이지 접근시 생성 -->
-				<div class="col-6 p-2 text-center" id="dressInfoBlock" style="border: 1px solid #bcbcbc;">
-					<span style="color:white;">옷을 선택해 주세요</span>
-				</div>
-                <div class="col-6 p-2" id="dressInfo" style="border: 1px solid #bcbcbc;">
+				<div class="col-6 p-2" style="border: 1px solid #bcbcbc;">
                     <div class="row">
-                		<div class="col-12 imgDetail"></div>
-                	</div>
-                	<div class="row">
-                		<div class="col-12">
-                			<div class="row">
-                				<div class="col-12">
-                					<label>옷 이름</label> 
-									<input class="form-control" type="text" id="name" disabled> 
-                				</div>
-                			</div>
-                			<div class="row">	
-                				<div class="col-12">
-                					<label>카테고리</label> 
-									<input class="form-control" type="text" id="categoryInput" disabled>
-                				</div>
-                			</div>
-                			<div class="row">
-                				<div class="col-12">
-	                				<label>계절</label> 
-									<input class="form-control" type="text" id="season" disabled>
-								</div> 
-                			</div>
- 
-                		</div>
-                	</div>
+                        <div class="col-12">
+                            <select class="form-control" id="closet" name="closet" onchange="changeClosetSelect()">
+                                <c:forEach var="closetDTO" items="${closetList}">
+									<option value="${closetDTO.no}" >${closetDTO.name}</option>
+								</c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 category-title">
+                            <span>TOP</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 categoryMenu">
+
+                        </div>
+                    </div>
+
                 </div>
            </div>
-            <c:if test="${writer == email}">
-	            <div class="row">
-	            	<c:choose>
-	            		<c:when test="${dto.choice == 'N' }">
-	            			<div class="col-12 mt-3" style="text-align:center">
-			            		<button id="selectThis" class="btn btn-success" style="width:200px;">채택하기</button>
-			            	</div>
-	            		</c:when>
-	            		<c:otherwise>
-	            			<div class="col-12 mt-3" style="text-align:center">
-			            		<button id="selectThis" class="btn btn-success" style="width:200px; background:#8a1b19;border:none; color:white">채택되었습니다</button>
-			            	</div>
-	            		</c:otherwise>
-	            	</c:choose>
-	            </div>
-            </c:if>
-
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12 mt-3 mb-3">
-                                <textarea class="form-control" style="resize: none;" rows="15" name="contents" id="contents" disabled>${dto.contents}</textarea>
+                                <textarea class="form-control" style="resize: none;" rows="15" name="contents" id="contents">${dto.contents}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-5">
                     <div class="col-6" style="text-align: left;">
-                        <button class="btn btn-info" type="button" id="back">목록</button>
+                        <button class="btn btn-info" type="button" id="back">돌아가기</button>
                     </div>
                     <div class="col-6" style="text-align: right;">
                     <c:choose>
 						<c:when test="${dto.email == email}">
-							<span style="float:right" class="updateBtn deleteBtn ml-2"><button class="btn btn-info" type="button" id="back">삭제</button></span>
-							<span style="float:right" class="updateBtn modifyBtn ml-2"><button class="btn btn-info" type="button" id="back">수정</button></span>
+							<span style="float:right" class="updateBtn modifyBtn ml-2"><button class="btn btn-info" type="button" id="advisorModifyBtn">수정</button></span>
 						</c:when>
-						<c:otherwise>
-							<span style="float:right" class="updateBtn notifyBtn ml-2"><button class="btn btn-info" type="button" id="back">신고</button></span>
-						</c:otherwise>
 					</c:choose>
 					</div>
                 </div>
-                <form action="${pageContext.request.contextPath}/board/helpDetail" id="backFrm" method="post">
-                	<input type="hidden" name="no" value="${dto.b_no }">
-                	<input type="hidden" name="cpage" value="${cpage}">
-                </form> 
-                <form action="${pageContext.request.contextPath}/advisor/advisorModify" id="modifyFrm" method="post">
-                	<input type="hidden" name="no" value="${dto.no}">
-                	<input type="hidden" name="gender" value="${gender}">
-                	<input type="hidden" name="cpage" value="${cpage}">
-                	<input type="hidden" name="writer" value="${writer}">
-                </form>
+                
+            		<input type="hidden" name="cpage" value="${cpage}">
+            		<input type="hidden" name="top" id="topHidden">
+	            	<input type="hidden" name="pants" id="pantsHidden">
+	            	<input type="hidden" name="shoes" id="shoseHidden">
+	            	<input type="hidden" name="acc" id="accHidden">
+	            	<input type="hidden" name="b_no" value="${dto.b_no}">
+	            	<input type="hidden" name="no" value="${dto.no}">
+	            </form>
+                
           	 </div>
         </div> 
         </div>
         <jsp:include page="../../standard/boardFooter.jsp"/>			
         </div>
+        <script>
+        $("#advisorModifyBtn").on("click",function(){
+    		var topSrc= $(".Top").children("img").attr("src");
+    		var pantsSrc= $(".Pants").children("img").attr("src");
+    		var shoseSrc= $(".Shoes").children("img").attr("src");
+    		var accSrc = $(".Acc").children("img").attr("src");
+    		
+    		
+    		if( topSrc == null && pantsSrc==null && shoseSrc==null && accSrc ==null){
+    			alert("하나 이상 옷을 선택해주세요");
+    			return;
+    		}
+    		
+    		if( $("#title").val() == ""){
+    			alert("제목을 적어주세요");
+    			return;
+    		}
+    		
+    		if($("#contents").val()==""){
+    			alert("내용을 입력해주세요");
+    			return;
+    		}
+    		
+    		$("#topHidden").val(topSrc);
+    		$("#pantsHidden").val(pantsSrc);
+    		$("#shoseHidden").val(shoseSrc);
+    		$("#accHidden").val(accSrc);
+    		
+    		var result = confirm("수정을 완료 하시겠습니까?");
+    		
+    		if(result){
+    			$("#uploadFrm").submit();
+    		}
+    		
+    	
+    	})
+        </script>
+        
+        <script>
+         	var category_id = null;
+         	var writer = "${writer}";
+         	
+         	
+         	// 메뉴 초기화
+        	var divInit = function(){
+        		$(".categoryMenu").html("");
+        		var div = $("<div class='noneDiv'>");
+        		var img = $("<img src='/imgs/shilouette/none.png'>")
+        		div.append(img);
+        		$(".categoryMenu").append(div);
+        	}
+         	
+        	// 동적 바인딩 이벤트 (끌어온 이미지 클릭 이벤트) 
+        	$("body").on("click",".categoryImgDiv",function(){
+        		var src= $(this).children("img").attr("src");
+         		var img = $("<img class='loadImg' id='"+category_id+"Img'>");
+        		img.attr("src",src);
+        		
+        		$("."+category_id).css("opacity","0.9").css("line-height","0px");
+        		$("."+category_id).html(img);
+        	})
+        	
+        	// 카테고리 로고 띄워주기
+        	$("body").on("click",".noneDiv",function(){
+        		var height = $("."+category_id).css("height");
+        		$("."+category_id).html("");
+        		$("."+category_id).text(category_id.toUpperCase()).css("opacity","0.7").css("line-height",height);
+        	})
+        
+	     	// 옷장 변경 이벤트
+			var changeClosetSelect = function(){
+	     		
+				divInit();
+	
+				var closet = $("#closet option:selected").val();
+				
+				if(category_id == null){
+					category_id ="Top";
+				}
+				selectDressAll(category_id , closet,writer);
+			}
+	     	
+			// 카테고리 클릭이나 옷장 변경 시  실행되는 ajax
+         	var selectDressAll = function(category , closet, writer){
+				console.log(category);
+				console.log(closet);
+				console.log(writer);
+         		
+         		$.ajax({
+            		url:"${pageContext.request.contextPath}/advisor/selectCategoryMenu",
+            		data:{
+            			category : category,
+            			c_no : closet,
+            			writer: writer
+            		},
+            		dataType:"json"
+            	}).done(function(data){        
+            		for(i=0;i<data.length;i++){
+            			var div=$("<div class='categoryImgDiv'>")
+            			var img = $("<img>");
+            			img.attr("src",data[i].file);
+            			div.append(img);
+            			$(".categoryMenu").append(div);
+            		}         		
+            		
+            	}).fail(function(){
+            		console.log("fail");            		
+            	})
+         		
+         	}
+	     	
+            $(".category").on("click",function(){
+                var id = $(this).attr("id");
+                $(".category-title").text(id.toUpperCase());
+                
+                category_id= id;
+				var closet = $("#closet").val();
+            	
+				divInit();
+				
+            	selectDressAll(category_id, closet, writer);
+                
+                $(".categoryMenu").css("opacity","0")
+                .animate({'opacity':1},300);
+            })
+            
+        </script>
         
         <script>
         	$(".modifyBtn").on("click",function(){
         		$("#modifyFrm").submit();
         	})
-        	$(".deleteBtn").on("click",function(){
-        		var result = confirm("정말 삭제하시겠습니까?");
-        		if(result){
-        			location.href="${pageContext.request.contextPath}/advisor/deleteAdvisor?no=${dto.no}&b_no=${dto.b_no}";
-        		}
-        	})
-        	$(".notifyBtn").on("click",function(){
-        		if("${email}" == ""){
-    				alert("로그인 후 이용가능한 기능입니다.");
-    				return;
-    			}
-    			
-    			var result = confirm("해당 게시글을 신고하시겠습니까?");
-    			if(result){
-    				$.ajax({
-    					url:"${pageContext.request.contextPath}/notify/notifyProc.do",
-    					data:{
-    						category : "A",
-    						c_no : "${dto.no}"
-    					}
-    				}).done(function(data){
-    					
-    					if(data == "good"){
-    						alert("정상적으로 신고가 완료 되었습니다.");
-    					}else{
-    						alert("이미 신고한 댓글 입니다.");
-    					}
-    				})
-    			}
-        	})
+        	
+        	
         	$("#back").on("click",function(){
-        		backFrm.submit();
+        		history.back();
         	})
         </script>
 	<!--  숨김메뉴 스크립트 -->
@@ -358,87 +428,8 @@
 	            $("#categoryTab").css("display","inline-block");
 	        });
         </script>
-        <script>
-	     // 디테일 초기화
-			var init = function() {
-				$(".imgDetail").html("");
-				$("#name").val("");
-				$("#categoryInput").val("");
-				$("#season").val("");
-			}
-        	$(".category").on("click",function(){
-        		$("#dressInfoBlock").css("display","none");
-        		$("#dressInfo").css("display","block");
-        		init();
-        		var src = $(this).children("img").attr("src");
-    			var img = $("<img onError='javascript:this.src='/imgs/shilouette/whiteBack.JPG''>");
-    			img.attr("src", src);
-    			$(".imgDetail").append(img);
-    			$.ajax({
-    				url : "${pageContext.request.contextPath}/closet/styleDetailDress",
-    				data : { path : src },
-    				dataType : "json"
-    			}).done(function(data) {
-    				if (data != null) {
-    					$("#name").val(data.name);
-    					$("#categoryInput").val(data.category);
-    					$("#season").val(data.season);
-    
-    				}
-    			})        		
-        	});
-        </script>
-        <script>
-//             채택하기 스크립트
-        	var check = "${dto.choice}";
-        	$("#selectThis").on("click",function(){   		
-        		
-        		if(check == "Y"){
-        			var result = confirm("이미 채택 된 댓글 입니다. 채택을 해제 하시겠습니까?");
-        			if(result){
-        				check = 0;
-        				$.ajax({
-        					url:"${pageContext.request.contextPath}/advisor/choiceReturn",
-        					data : {
-        						no : "${dto.no}"
-        					}
-        				}).done(function(){
-        					
-        					$("#selectThis")
-            				.css("background","")
-            				.css("color","")
-            				.css("border","")
-            				.text("채택하기");
-        					
-        				})
-        			}
-        			return;
-        		}else{
-	        		var result = confirm("채택은 하나의 게시물만 가능 합니다. 정말 채택하시겠습니까?");
-	        		
-	        		if(result){
-	        			check = 1;
-	        			$.ajax({
-	        				url:"${pageContext.request.contextPath}/advisor/choiceThisAdvisor",
-	        				data:{
-	        					no:"${dto.no}",
-	        					b_no : "${dto.b_no}"
-	        				}
-	        			}).done(function(data){
-	        				if(data == "fail"){
-	        					alert("이미 채택 된 게시물이 존재합니다.");
-	        				}else{
-	        					$("#selectThis")
-		        				.css("background","#8a1b19")
-		        				.css("color","white")
-		        				.css("border","none")
-		        				.text("채택되었습니다");
-	        				}
-	        			})
-	        		}
-        		}
-        	})
-        </script>
+        
+
        
 
     </body>
