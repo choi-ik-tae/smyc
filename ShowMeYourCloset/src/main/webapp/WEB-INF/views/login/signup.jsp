@@ -114,12 +114,10 @@
 										</select>
 									</div>
 									<div class="col-4">
-										<input type="text" name="phone2" id="secondPhone"
-											class="form-control">
+										<input type="text" name="phone2" id="secondPhone" class="form-control">
 									</div>
 									<div class="col-4">
-										<input type="text" name="phone3" id="thirdPhone"
-											class="form-control">
+										<input type="text" name="phone3" id="thirdPhone" class="form-control">
 									</div>
 								</div>
 							</div>
@@ -232,7 +230,20 @@
                 var pw = $("#InputPassword").val();
                 var pwOk = $("#InputRePassword").val();
                 var input = $("input");
-
+                var secondPhone = $("#secondPhone").val();
+                var thirdPhone = $("#thirdPhone").val();
+          
+                var regex = /^(\d{3,4})/;
+                
+                var secondResult = regex.exec(secondPhone);
+                var thiredResult = regex.exec(thirdPhone);
+                if(secondResult == null || thiredResult == null){
+                	alert("전화번호를 바르게 입력하세요.");
+                	return;
+                }
+                
+                
+                
                 for(i=0;i<input.length;i++){
                     if($(input[i]).val()==""){
                         alert("빈칸을 모두 채워주세요");
@@ -267,8 +278,11 @@
                 	return;
                 }
                 
-       
-    			$("#signupFrm").submit();
+                var finalResult = confirm("가입한 이메일로 인증메일이 발송됩니다.");
+                
+                if(finalResult){
+                	$("#signupFrm").submit();
+                }
 
             })
 

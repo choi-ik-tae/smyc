@@ -45,7 +45,7 @@
 	
 <!-- 	이메일 찾기 -->
 	<select id="findEmail" resultType="String">
-		select email from members where name=#{name} and phone=#{phone}
+		select email from members where nickname=#{nickname} and phone=#{phone}
 	</select>
 	
 <!-- 	비밀번호 변경 -->

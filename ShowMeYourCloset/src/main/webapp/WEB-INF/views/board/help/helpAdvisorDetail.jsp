@@ -216,9 +216,21 @@
                     </div>
                 </div>
                 <div class="row mb-5">
-                    <div class="col-12" style="text-align: left;">
+                    <div class="col-6" style="text-align: left;">
                         <button class="btn btn-info" type="button" id="back">목록</button>
                     </div>
+                    <div class="col-6" style="text-align: right;">
+                    <c:choose>
+						<c:when test="${dto.email == email}">
+							<span style="float:right" class="updateBtn deleteBtn ml-2"><button class="btn btn-info" type="button" id="back">삭제</button></span>
+							<span style="float:right" class="updateBtn modifyBtn ml-2"><button class="btn btn-info" type="button" id="back">수정</button></span>
+							<span style="float:right; display: none;" class="updateBtn modifyConfirm ml-2"><button class="btn btn-info" type="button" id="back">목록</button></span>
+						</c:when>
+						<c:otherwise>
+							<span style="float:right" class="updateBtn notifyBtn ml-2"><button class="btn btn-info" type="button" id="back">신고</button></span>
+						</c:otherwise>
+					</c:choose>
+					</div>
                 </div>
                 <form action="${pageContext.request.contextPath}/board/helpDetail" id="backFrm" method="post">
                 	<input type="hidden" name="no" value="${dto.b_no }">
