@@ -110,6 +110,8 @@ public class BoardController {
 			cpage= 1+"";
 		}
 		
+		int count = notifyService.notifyCount("B", no);
+		model.addAttribute("count", count);
 		model.addAttribute("target", target);
 		model.addAttribute("dto", dto);
 		model.addAttribute("cpage",cpage);

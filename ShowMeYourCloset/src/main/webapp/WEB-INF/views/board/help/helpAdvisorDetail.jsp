@@ -26,7 +26,7 @@
         .Shoes{height: 120px;top:680px; left: 168px; }
         .Acc{height: 100px; top:200px; }
         .noneDiv {width:150px;height:150px;display:inline-block;padding:5px;}
-		.noneDiv>img{width:100%;height:100%;}
+		.noneDiv>img{max-width:150px;height:100%;}
 		.categoryImgDiv{width:150px;height:150px;display:inline-block;padding:5px;}
 		.categoryImgDiv>img{width:100%;height:100%;}
 		.loadImg{width:100%; height:100%; opacity: 0.8;}
