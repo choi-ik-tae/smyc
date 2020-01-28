@@ -18,6 +18,7 @@
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     html,body{height: 100%;}
     #preview{width:300px;height: 300px;}
+    #preview>img{max-width:300px;max-height:300px;}
     #bg{background:rgba(255,255,255,1); border-radius: 10px;}
     body{background-image: url(/imgs/bg/bg21.jpg);}
 </style>

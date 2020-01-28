@@ -30,10 +30,10 @@
 		.categoryImgDiv{width:150px;height:150px;display:inline-block;padding:5px;}
 		.categoryImgDiv>img{width:100%;height:100%;}
 		.loadImg{width:100%; height:100%; opacity: 0.8;}
-		.imgDetail {width:200px;height: 300px;z-index: 1;margin: auto;margin-top:120px; text-align:center}
+		.imgDetail {width:200px;height: 300px;z-index: 1;margin: auto;margin-top:80px; text-align:center}
 		#dressInfo{ display: none;}
    		#dressInfoBlock{height: 770px;background-color: dimgray; opacity: 0.4;font-weight: 800;line-height: 770px;font-size: 15pt;}
-   		.imgDetail>img{max-width:250px;}
+   		.imgDetail>img{max-width:250px; max-height:300px;}
 		
 		/* 네비바 */
 	    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
