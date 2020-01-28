@@ -23,62 +23,67 @@
             <div class="row m-0">
                 <div class="col-12 p-0" style="min-height: 200px; overflow: hidden;">
                     <div class="row commentContainer">
-                    	<c:if test="${list.size()== null || list.size() == 0 }">
+                    <c:choose>
+                    	<c:when test="${(list.size()== 0 or list.size() ==null) and choiceDto == null  }">
                     		<div class="col-12" style="text-align : center; line-height:200px;">
                     			<span>등록된 도움 글이 없습니다.</span>
                     		</div>
-                    	</c:if>
-                    	<c:if test="${choiceDto != null}">
-                    		<div class="col-8" style="margin:auto; text-align:center">
-                    			<span><img src="/imgs/btn/crown.png" style="width:50px;"></span>
-                    			<span style="font-size:18px; font-weight:700; color:green">채택된 게시글</span>
-                    			<span><img src="/imgs/btn/crown.png" style="width:50px;"></span>
-                    		</div>
-                    		
-                    		<div class="col-8 pt-0" onclick="detailAdvisor(${choiceDto.no})" style="margin:auto">
-	                            <div class="row m-2 p-2" style="border: 2px solid green; border-radius: 5px;">
-	                                <div class="col-4 p-0" style="height: 100px;">
-	                                	<c:choose>
-	                                		<c:when test="${choiceDto.top == null}">
-	                                			<img src="/imgs/shilouette/default_tshirt.png" style="width: 100%; height: 100%;">
-	                                		</c:when>
-	                                		<c:otherwise>
-	                                			<img src="${choiceDto.top}" style="width: 100%; height: 100%;">
-	                                		</c:otherwise>
-	                                    </c:choose>
-	                                </div>
-	                                <div class="col-8" >
-	                                    <div class="row" style="height: 100px;">
-	                                        <div class="col-12" style="height: 50%;">${choiceDto.title}</div>
-	                                        <div class="col-12" style="height: 50%;">${choiceDto.nickname}</div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="col-12 mt-2 mb-1" ></div>
-                    	</c:if>
-	                    <c:forEach items="${list}" var="item">
-	                    	<div class="col-6" onclick="detailAdvisor(${item.no})">
-	                            <div class="row m-2 p-2" style="border: 1px solid #bcbcbc; border-radius: 5px;">
-	                                <div class="col-4 p-0" style="height: 100px;">
-	                                    <c:choose>
-	                                		<c:when test="${item.top == null}">
-	                                			<img src="/imgs/shilouette/default_tshirt.png" style="width: 100%; height: 100%;">
-	                                		</c:when>
-	                                		<c:otherwise>
-	                                			<img src="${item.top}" style="width: 100%; height: 100%;">
-	                                		</c:otherwise>
-	                                    </c:choose>
-	                                </div>
-	                                <div class="col-8" >
-	                                    <div class="row" style="height: 100px;">
-	                                        <div class="col-12" style="height: 50%;">${item.title}</div>
-	                                        <div class="col-12" style="height: 50%;">${item.nickname}</div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </c:forEach>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<c:if test="${choiceDto != null}">
+	                    		<div class="col-8" style="margin:auto; text-align:center">
+	                    			<span><img src="/imgs/btn/crown.png" style="width:50px;"></span>
+	                    			<span style="font-size:18px; font-weight:700; color:green">채택된 게시글</span>
+	                    			<span><img src="/imgs/btn/crown.png" style="width:50px;"></span>
+	                    		</div>
+	                    		<div class="col-8 pt-0" onclick="detailAdvisor(${choiceDto.no})" style="margin:auto">
+		                            <div class="row m-2 p-2" style="border: 2px solid green; border-radius: 5px;">
+		                                <div class="col-4 p-0" style="height: 100px;">
+		                                	<c:choose>
+		                                		<c:when test="${choiceDto.top == null}">
+		                                			<img src="/imgs/shilouette/default_tshirt.png" style="width: 100%; height: 100%;">
+		                                		</c:when>
+		                                		<c:otherwise>
+		                                			<img src="${choiceDto.top}" style="width: 100%; height: 100%;">
+		                                		</c:otherwise>
+		                                    </c:choose>
+		                                </div>
+		                                <div class="col-8" >
+		                                    <div class="row" style="height: 100px;">
+		                                        <div class="col-12" style="height: 50%;">${choiceDto.title}</div>
+		                                        <div class="col-12" style="height: 50%;">${choiceDto.nickname}</div>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <div class="col-12 mt-2 mb-1" ></div>
+	                    	</c:if>
+		                    <c:forEach items="${list}" var="item">
+		                    	<div class="col-6" onclick="detailAdvisor(${item.no})">
+		                            <div class="row m-2 p-2" style="border: 1px solid #bcbcbc; border-radius: 5px;">
+		                                <div class="col-4 p-0" style="height: 100px;">
+		                                    <c:choose>
+		                                		<c:when test="${item.top == null}">
+		                                			<img src="/imgs/shilouette/default_tshirt.png" style="width: 100%; height: 100%;">
+		                                		</c:when>
+		                                		<c:otherwise>
+		                                			<img src="${item.top}" style="width: 100%; height: 100%;">
+		                                		</c:otherwise>
+		                                    </c:choose>
+		                                </div>
+		                                <div class="col-8" >
+		                                    <div class="row" style="height: 100px;">
+		                                        <div class="col-12" style="height: 50%;">${item.title}</div>
+		                                        <div class="col-12" style="height: 50%;">${item.nickname}</div>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    	
                     </div>
                 </div>
             </div>
@@ -108,7 +113,7 @@
         		var target = parent.document.boardBack.target.value;
         		
         		if(target == "my"){
-        			parent.history.back();
+        			parent.document.myBack.submit();
         		}else{
         			parent.document.boardBack.submit();
         		}

@@ -203,6 +203,7 @@
             	<input type="hidden" name="cpage" value="${cpage}">
             	<input type="hidden" name="target" value="${target}">
             </form>
+            <form action="${pageContext.request.contextPath}/board/myBoard" id="myBack" name="myBack"></form>
 		</div>
 		<!-- 상단 설명 -->
 		<div class="row m-0" style="height: 50px;"></div>
