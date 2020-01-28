@@ -141,9 +141,9 @@ public class MemberService {
 	}
 
 	// 이메일 찾기
-	public String findEmail(String name, String phone) {
+	public String findEmail(String nickname, String phone) {
 		
-		String email = mdao.findEmail(name, phone);
+		String email = mdao.findEmail(nickname, phone);
 		
 		return email;
 	}

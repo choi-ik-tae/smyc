@@ -386,14 +386,14 @@
 					url:"${pageContext.request.contextPath}/notify/notifyProc.do",
 					data:{
 						category : "B",
-						c_no : ${boast.no}
+						c_no : "${boast.no}"
 					}
 				}).done(function(data){
 					
 					if(data == "good"){
 						alert("정상적으로 신고가 완료 되었습니다.");
 					}else{
-						alert("이미 신고한 댓글 입니다.");
+						alert("이미 신고한 게시글 입니다.");
 					}
 				})
 			

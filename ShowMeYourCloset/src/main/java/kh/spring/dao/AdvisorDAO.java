@@ -58,4 +58,8 @@ public class AdvisorDAO {
 	public int helpBoardDelete(int no) {
 		return sst.delete("Advisor.helpBoardDelete",no);
 	}
+	
+	public int deleteAdvisor(int no) {
+		return sst.delete("Advisor.deleteAdvisor", no);
+	}
 }

@@ -23,6 +23,10 @@
 		update advisor set choice=#{choice} where no=#{no}
 	</update>
 <!-- 	도움 댓글 삭제 -->
+	<delete id="deleteAdvisor">
+		delete from advisor where no=#{value}
+	</delete>
+<!-- 	도움 댓글 전체 삭제 -->
 	<delete id="helpBoardDelete">
 		delete from advisor where b_no=#{value}
 	</delete>

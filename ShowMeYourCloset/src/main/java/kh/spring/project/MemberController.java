@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.Utils.CheckXss;
 import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
@@ -36,6 +37,9 @@ public class MemberController {
 		String phone = phone1+phone2+phone3;
 		System.out.println(dto.getEmail());
 		dto.setPhone(phone);
+		dto.setName(CheckXss.checkXss(dto.getName()));
+		dto.setNickname(CheckXss.checkXss(dto.getNickname()));
+		dto.setEmail(CheckXss.checkXss(dto.getEmail()));
 		
 		try {
 			memService.create(dto);
@@ -125,9 +129,9 @@ public class MemberController {
 	//이메일 찾기
 	@RequestMapping(value="/idFindProc",produces = "text/html; charset=UTF-8")
 	@ResponseBody
-	public String idFindProc(String name, String phone) {
+	public String idFindProc(String nickname, String phone) {
 	
-		String email=memService.findEmail(name, phone);
+		String email=memService.findEmail(nickname, phone);
 		if(email==null) {
 			return "이메일이 존재하지 않습니다.";			
 		}

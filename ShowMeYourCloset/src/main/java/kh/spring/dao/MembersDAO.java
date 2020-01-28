@@ -74,9 +74,9 @@ public class MembersDAO {
 	}
 	
 //	이메일 찾기
-	public String findEmail(String name, String phone) {
+	public String findEmail(String nickname, String phone) {
 		Map<String ,String >parm = new HashMap<String, String>();
-		parm.put("name",name);
+		parm.put("nickname",nickname);
 		parm.put("phone",phone);
 		return sst.selectOne("Members.findEmail", parm);
 	}
