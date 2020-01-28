@@ -9,7 +9,7 @@
  	<select id="insertNotify">
  		insert into notify values(notify_seq.nextval,#{category},#{c_no},#{email},sysdate)
  	</select>
- 	<select id="notifyCount" resultType="String">
+ 	<select id="notifyCount" resultType="Integer">
  		select count(*) from notify where category=#{category} and c_no=#{c_no}
  	</select>
  </mapper>
