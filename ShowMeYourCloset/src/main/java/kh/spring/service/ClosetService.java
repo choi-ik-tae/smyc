@@ -19,6 +19,7 @@ import kh.spring.dao.StyleDAO;
 import kh.spring.dto.ClosetDTO;
 import kh.spring.dto.DressDTO;
 import kh.spring.dto.DressImgDTO;
+import kh.spring.dto.StyleDTO;
 
 @Service
 public class ClosetService {
@@ -155,9 +156,13 @@ public class ClosetService {
 					System.out.println("파일삭제 성공");
 					// 옷이 스타일에 등록 되어있을 때 그 스타일에 따른 자랑게시물 삭제
 					if(s_no > 0) {
-						bdao.boastDeleteByStyle(s_no);
-						cmdao.boardDelete(b_no);
-						ldao.likeDelete(b_no);
+						// 코디에 옷이 하나도 없을때 자랑게시물 삭제
+						StyleDTO sTarget = sdao.detailStyle(s_no);
+						if(sTarget.getTop() == null && sTarget.getPants() == null && sTarget.getAcc() == null && sTarget.getShoes() == null) {
+							bdao.boastDeleteByStyle(s_no);
+							cmdao.boardDelete(b_no);
+							ldao.likeDelete(b_no);
+						}
 					}
 					sdao.deleteItem(category, itemPath);
 					ddao.delete(no);

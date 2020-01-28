@@ -93,8 +93,8 @@
 	var BVchartLabels = ${boastTitle};
 	var BVchartData = ${boastView};
 	
-	var BLchartLabels = [];
-	var BLchartData = [];
+	var BLchartLabels = ${boastTitleByLike};
+	var BLchartData = ${boastViewByLike};
 	
 	var HVchartLabels = ${helpTitle};
 	var HVchartData = ${helpView};

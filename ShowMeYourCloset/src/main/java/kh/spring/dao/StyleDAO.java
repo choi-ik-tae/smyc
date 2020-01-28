@@ -98,7 +98,11 @@ public class StyleDAO {
 		parm.put("category",category);
 		parm.put("path",path);
 		
-		return sst.selectOne("Style.selectByDelete",parm);
+		StyleDTO result = sst.selectOne("Style.selectByDelete",parm);
+		if(result != null) {
+			return result.getNo();
+		}
+		return 0;
 	}
 	// 옷 수정시 코디 아이템 수정
 	public int updateItem(String category,String path,String val) {

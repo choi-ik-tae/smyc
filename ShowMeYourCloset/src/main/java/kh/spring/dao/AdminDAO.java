@@ -34,6 +34,16 @@ public class AdminDAO {
 	public List<BoardDTO> selectByHelpByView() {
 		return sst.selectList("Admin.selectByHelpByView");
 	}
+	// 좋아요순 자랑게시글 출력
+	public List<Integer> selectByBoastNoByLike() {
+		return sst.selectList("Admin.selectByBoastNoByLike");
+	}
+	public BoardDTO selectByBoastByNo(int no) {
+		return sst.selectOne("Admin.selectByBoastByNo",no);
+	}
+	public int selectLikeByBoastNo(int b_no) {
+		return sst.selectOne("Admin.selectLikeByBoastNo",b_no);
+	}
 	
 	
 	
