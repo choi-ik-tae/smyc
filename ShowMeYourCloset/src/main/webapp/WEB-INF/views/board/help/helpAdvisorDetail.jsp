@@ -145,7 +145,7 @@
                 			TOP
                 		</c:when>
                 		<c:otherwise>
-                			<img src="${dto.top}" class="loadImg">
+                			<img src="${dto.top}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="loadImg">
                 		</c:otherwise>
                 	</c:choose>
                 </div>
@@ -155,7 +155,7 @@
                 			PANTS
                 		</c:when>
                 		<c:otherwise>
-                			<img src="${dto.pants}" class="loadImg">
+                			<img src="${dto.pants}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="loadImg">
                 		</c:otherwise>
                 	</c:choose>
                 </div>
@@ -165,7 +165,7 @@
                 			SHOES
                 		</c:when>
                 		<c:otherwise>
-                			<img src="${dto.shoes}" class="loadImg">
+                			<img src="${dto.shoes}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="loadImg">
                 		</c:otherwise>
                 	</c:choose>
                 </div>
@@ -175,7 +175,7 @@
                 			ACC
                 		</c:when>
                 		<c:otherwise>
-                			<img src="${dto.acc}" class="loadImg">
+                			<img src="${dto.acc}" onError="javascript:this.src='/imgs/shilouette/whiteBack.JPG'" class="loadImg">
                 		</c:otherwise>
                 	</c:choose>
                 </div>

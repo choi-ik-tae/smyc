@@ -190,10 +190,13 @@
         }
     });
     $("#modify").on("click",function(){
-    	if($("#closet").val() == "") {
-    		$("#closet").val("${closet.name}");	
+    	var q = confirm("옷장을 정말 수정 하시겠습니까?");
+    	if(q){
+	    	if($("#closet").val() == "") {
+	    		$("#closet").val("${closet.name}");	
+	    	}
+	    	location.href="${pageContext.request.contextPath}/closet/closetModifyProc?targets="+arr+"&no="+${closet.no}+"&closet="+$("#closet").val()+"&dg="+$("input[name='closetDesign']:checked").val()+"&pub="+$("input[name='closetPub']:checked").val();
     	}
-    	location.href="${pageContext.request.contextPath}/closet/closetModifyProc?targets="+arr+"&no="+${closet.no}+"&closet="+$("#closet").val()+"&dg="+$("input[name='closetDesign']:checked").val()+"&pub="+$("input[name='closetPub']:checked").val();
     });
 	$("#delete").on("click",function(){
 		var q = confirm("옷장 안 모든 옷이 삭제되며 저장한 코디에 영향을 끼치게 됩니다.\n정말 삭제하시겠습니까??");
