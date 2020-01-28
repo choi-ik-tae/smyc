@@ -77,9 +77,28 @@
 		}
 		
 		var commentNodify = function(no, nick){
+			
+			if("${email}" == ""){
+				alert("로그인 후 이용가능한 기능입니다.");
+				return;
+			}
+			
 			var result = confirm(nick+"님을 신고하시겠습니까?");
 			if(result){
-				console.log(result);
+				$.ajax({
+					url:"${pageContext.request.contextPath}/notify/notifyProc.do",
+					data:{
+						category : "C",
+						c_no : no
+					}
+				}).done(function(data){
+					
+					if(data == "good"){
+						alert("정상적으로 신고가 완료 되었습니다.");
+					}else{
+						alert("이미 신고한 댓글 입니다.");
+					}
+				})
 			}
 			
 		}

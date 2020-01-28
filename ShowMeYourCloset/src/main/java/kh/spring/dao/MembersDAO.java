@@ -39,6 +39,11 @@ public class MembersDAO {
 		return sst.update("Members.updateAuthkey",parm);
 	}
 	
+//	권한 키 가져오기
+	public String selectAuthKey(String email) {
+		return sst.selectOne("Members.selectAuthKey", email);
+	}
+	
 //	권한 업데이트 권한 줘야 로그인 됨
 	public int updateAhthStatus(String email) {
 		return sst.update("Members.updateAuthStatus",email);

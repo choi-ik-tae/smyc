@@ -215,8 +215,8 @@
 	                , description:"${dto.nickname}의 코디를 도와주세요!"   // 콘텐츠 상세설명
 	                , imageUrl:"/imgs/shilouette/default_tshirt.png"   // 썸네일 이미지
 	                , link : {
-	                      mobileWebUrl:"http://192.168.60.54/board/helpDetail?no=${dto.no}"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
-	                    , webUrl:"http://192.168.60.54/board/helpDetail?no=${dto.no}" // PC버전 카카오톡에서 사용하는 웹 링크 URL
+	                      mobileWebUrl:"http://192.168.60.11/board/helpDetail?no=${dto.no}"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
+	                    , webUrl:"http://192.168.60.11/board/helpDetail?no=${dto.no}" // PC버전 카카오톡에서 사용하는 웹 링크 URL
 	                }
 	            }
 	            , social : {
@@ -228,8 +228,8 @@
 	                {
 	                      title:"코디 도와주러 가기"    // 버튼 제목
 	                    , link : {
-	                        mobileWebUrl:"http://192.168.60.54/board/helpDetail?no=${dto.no}"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
-	                      , webUrl:"http://192.168.60.54/board/helpDetail?no=${dto.no}" // PC버전 카카오톡에서 사용하는 웹 링크 URL
+	                        mobileWebUrl:"http://192.168.60.11/board/helpDetail?no=${dto.no}"   // 모바일 카카오톡에서 사용하는 웹 링크 URL
+	                      , webUrl:"http://192.168.60.11/board/helpDetail?no=${dto.no}" // PC버전 카카오톡에서 사용하는 웹 링크 URL
 	                    }
 	                }
 	            ]
