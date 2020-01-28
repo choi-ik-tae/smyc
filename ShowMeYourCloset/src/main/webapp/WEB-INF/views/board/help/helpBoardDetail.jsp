@@ -65,144 +65,153 @@
 
 <body>
 
-	<!-- 숨김 메뉴 -->
-	<jsp:include page="../../standard/hideMenu.jsp"/>
-	<!-- 본문 -->
-	<div class="container-fluid p-0">
-		<!-- 네비 -->
-		<div class="navigator fixed-top row m-0">
-			<div class="col-1 p-0" id="btnMenu">
-				<div class="row m-0" id="menuItem">
-					<div class="col-4 p-0">
-						<div class="row m-0">
-							<div class="col-12" id="menuIcon">
-								<div class="row m-0 mb-1 bar bar-one"></div>
-								<div class="row m-0 mb-1 mt-1 bar bar-two"></div>
-								<div class="row m-0 mb-1 bar bar-three"></div>
+	<c:choose>
+		<c:when test="${count > 4}">
+	        <!-- 신고된 게시물 표시 -->
+	        <jsp:include page="../../standard/notifyPost.jsp"/>
+    	</c:when>
+    	<c:otherwise>
+    		<!-- 숨김 메뉴 -->
+			<jsp:include page="../../standard/hideMenu.jsp"/>
+			<!-- 본문 -->
+			<div class="container-fluid p-0">
+				<!-- 네비 -->
+				<div class="navigator fixed-top row m-0">
+					<div class="col-1 p-0" id="btnMenu">
+						<div class="row m-0" id="menuItem">
+							<div class="col-4 p-0">
+								<div class="row m-0">
+									<div class="col-12" id="menuIcon">
+										<div class="row m-0 mb-1 bar bar-one"></div>
+										<div class="row m-0 mb-1 mt-1 bar bar-two"></div>
+										<div class="row m-0 mb-1 bar bar-three"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-8 p-0 text-center d-none d-md-block" id="menuText">
+								<span style="font-weight: 700; color: dimgray;">MENU</span>
 							</div>
 						</div>
 					</div>
-					<div class="col-8 p-0 text-center d-none d-md-block" id="menuText">
-						<span style="font-weight: 700; color: dimgray;">MENU</span>
+					<div class="col-10 p-0 d-none d-md-block text-center">
+						<span id="bTitle">HELP BOARD</span>
 					</div>
+					<div id="searchBox" class="col-1 p-0 m-0"></div>
 				</div>
-			</div>
-			<div class="col-10 p-0 d-none d-md-block text-center">
-				<span id="bTitle">HELP BOARD</span>
-			</div>
-			<div id="searchBox" class="col-1 p-0 m-0"></div>
-		</div>
-		<!-- 상단 설명 -->
-          <div class="row m-0 LogoDiv" style="height: 600px;">
-                <div class="col-12">
-                <!-- 위 메뉴 공백 채우기 -->
-                <div class="row" style="margin-top: 100px;"></div>
-                    <div class="col-12">
-                        <div class="row">
-                           <div class="col-12 mainLogo" id="mainLogo">
-			                    <p class="mainLogo" style="margin-top: 95px;">HELP BOARD</p>
-			                    <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
-			                        <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
-			                        <span style="display: block;">여기서 도움을 요청해보세요</span>
-			                        <span style="display: block;">내 옷으로 예쁘게 센스있게 꾸며보세요</span>
-			                        <span style="display: block;">오늘 점심은 떡볶이를 먹을 것이다.</span>
-			                        <span style="display: block;">크레이지 후라이.. 볶음밥 존맛탱구리...</span>
-			                        <span style="display: block;">그렇다 좀 더 글을 길게 쓰기 위함이다.</span>
-			                        <span style="display: block;">좀 예쁘게</span>
-			                    </div>
-			                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         <!-- 상단 설명 -->
-		<div class="row m-0" style="height: 50px;"></div>
-		<!-- 게시글 주루룩 -->
-		<div class="row m-0">
-			<div class="col-6 form-title mt-4 mb-1 p-4"
-				style="margin: auto; border-radius: 10px; border: 1px solid #bcbcbc;">
-				<div class="row">
-					<div class="col-12">
-						<div class="titleDiv" style="border: 1px solid #bcbcbc; height: 40px; border-radius: 5px; text-align: center; line-height: 40px;">
-							<span class="titleSpan">${dto.title}</span>
+				<!-- 상단 설명 -->
+		          <div class="row m-0 LogoDiv" style="height: 600px;">
+		                <div class="col-12">
+		                <!-- 위 메뉴 공백 채우기 -->
+		                <div class="row" style="margin-top: 100px;"></div>
+		                    <div class="col-12">
+		                        <div class="row">
+		                           <div class="col-12 mainLogo" id="mainLogo">
+					                    <p class="mainLogo" style="margin-top: 95px;">HELP BOARD</p>
+					                    <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
+					                        <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
+					                        <span style="display: block;">여기서 도움을 요청해보세요</span>
+					                        <span style="display: block;">내 옷으로 예쁘게 센스있게 꾸며보세요</span>
+					                        <span style="display: block;">오늘 점심은 떡볶이를 먹을 것이다.</span>
+					                        <span style="display: block;">크레이지 후라이.. 볶음밥 존맛탱구리...</span>
+					                        <span style="display: block;">그렇다 좀 더 글을 길게 쓰기 위함이다.</span>
+					                        <span style="display: block;">좀 예쁘게</span>
+					                    </div>
+					                </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		         <!-- 상단 설명 -->
+				<div class="row m-0" style="height: 50px;"></div>
+				<!-- 게시글 주루룩 -->
+				<div class="row m-0">
+					<div class="col-6 form-title mt-4 mb-1 p-4"
+						style="margin: auto; border-radius: 10px; border: 1px solid #bcbcbc;">
+						<div class="row">
+							<div class="col-12">
+								<div class="titleDiv" style="border: 1px solid #bcbcbc; height: 40px; border-radius: 5px; text-align: center; line-height: 40px;">
+									<span class="titleSpan">${dto.title}</span>
+								</div>
+							</div>
 						</div>
+						<div class="row">
+							<div class="col-12">
+								<span style="float: right;">${dto.nickname}</span>
+		
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 mt-2">
+								<div class="contentsDiv p-2" style="border: 1px solid #bcbcbc; min-height: 300px; border-radius: 5px; white-space: pre;">${dto.contents}</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12" style="font-size: 13px;">
+								<c:choose>
+									<c:when test="${dto.email == email}">
+										<span style="float:right" class="updateBtn deleteBtn ml-2">|&nbsp; 삭제  &nbsp;|</span>
+										<span style="float:right" class="updateBtn modifyBtn ml-2">|&nbsp; 수정</span>
+										<span style="float:right; display: none;" class="updateBtn modifyConfirm ml-2">|&nbsp; 수정확인</span>
+									</c:when>
+									<c:otherwise>
+										<span style="float:right" class="updateBtn notifyBtn ml-2">|&nbsp; 신고  &nbsp;|</span>
+									</c:otherwise>
+								</c:choose>
+								
+								<span style="float:right" class="ml-2">조회수 ${dto.views }</span> 
+								<span style="float:right">${dto.write_date } </span>
+								<span style="float:center;"><a id="facebook-link-btn" href="javascript:shareFacebook()"><img src="/imgs/btn/facebookLogo.png" style="width:44px;"></a></span>
+								<span>
+									<a id="kakao-link-btn" href="javascript:shareKakaotalk()">
+										<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width:30px;"/>
+									</a>
+								</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 mt-2 mb-2" style="text-align: center;">
+								<button id="styleComentBtn" class="btn btn-outline-info"
+									style="width: 150px;">코디 도움</button>
+								<button id="nomalComentBtn" class="btn btn-outline-info"
+									style="width: 150px;">댓글</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<iframe class="commentDiv" id="commentFrm" src="${pageContext.request.contextPath}/advisor/helpStyleComent?b_no=${dto.no}&writer=${dto.email}" scrolling="no"style="border: 1px solid #bcbcbc; width: 100%; border-radius: 5px;"></iframe>
+							</div>
+						</div>
+		
 					</div>
+					<form action="${pageContext.request.contextPath}/advisor/advisorUpload" id="hiddenFrm" name="hiddenFrm" method="post">
+						<input type="hidden" name="writer">
+						<input type="hidden" name="b_no">
+						<input type="hidden" name="cpage" value="${cpage}">
+		            </form>
+		            <form action="${pageContext.request.contextPath}/advisor/detailAdvisor" id="detailFrm" name="detailFrm" method="post">
+		            	<input type="hidden" name="writer">
+		            	<input type="hidden" name="no">
+		            	<input type="hidden" name="cpage" value="${cpage}">
+		            </form>
+		            <form action="${pageContext.request.contextPath}/board/modifyHelpBoard" id="boardModifyFrm" method="post">
+		            	<input type="hidden" name="title" id="inputTitle">
+		            	<input type="hidden" name="contents" id="inputContents">
+		            	<input type="hidden" name="no" id="no" value="${dto.no}">
+		            </form>
+		            <form action="${pageContext.request.contextPath}/board/helpBoard" id="boardBack" name="boardBack" method="post">
+		            	<input type="hidden" name="cpage" value="${cpage}">
+		            	<input type="hidden" name="target" value="${target}">
+		            </form>
+		            <form action="${pageContext.request.contextPath}/board/myBoard" id="myBack" name="myBack"></form>
 				</div>
-				<div class="row">
-					<div class="col-12">
-						<span style="float: right;">${dto.nickname}</span>
-
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 mt-2">
-						<div class="contentsDiv p-2" style="border: 1px solid #bcbcbc; min-height: 300px; border-radius: 5px; white-space: pre;">${dto.contents}</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12" style="font-size: 13px;">
-						<c:choose>
-							<c:when test="${dto.email == email}">
-								<span style="float:right" class="updateBtn deleteBtn ml-2">|&nbsp; 삭제  &nbsp;|</span>
-								<span style="float:right" class="updateBtn modifyBtn ml-2">|&nbsp; 수정</span>
-								<span style="float:right; display: none;" class="updateBtn modifyConfirm ml-2">|&nbsp; 수정확인</span>
-							</c:when>
-							<c:otherwise>
-								<span style="float:right" class="updateBtn notifyBtn ml-2">|&nbsp; 신고  &nbsp;|</span>
-							</c:otherwise>
-						</c:choose>
-						
-						<span style="float:right" class="ml-2">조회수 ${dto.views }</span> 
-						<span style="float:right">${dto.write_date } </span>
-						<span style="float:center;"><a id="facebook-link-btn" href="javascript:shareFacebook()"><img src="/imgs/btn/facebookLogo.png" style="width:44px;"></a></span>
-						<span>
-							<a id="kakao-link-btn" href="javascript:shareKakaotalk()">
-								<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width:30px;"/>
-							</a>
-						</span>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 mt-2 mb-2" style="text-align: center;">
-						<button id="styleComentBtn" class="btn btn-outline-info"
-							style="width: 150px;">코디 도움</button>
-						<button id="nomalComentBtn" class="btn btn-outline-info"
-							style="width: 150px;">댓글</button>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<iframe class="commentDiv" id="commentFrm" src="${pageContext.request.contextPath}/advisor/helpStyleComent?b_no=${dto.no}&writer=${dto.email}" scrolling="no"style="border: 1px solid #bcbcbc; width: 100%; border-radius: 5px;"></iframe>
-					</div>
-				</div>
-
+				<!-- 상단 설명 -->
+				<div class="row m-0" style="height: 50px;"></div>
+		
+				<jsp:include page="../../standard/boardFooter.jsp"/>
 			</div>
-			<form action="${pageContext.request.contextPath}/advisor/advisorUpload" id="hiddenFrm" name="hiddenFrm" method="post">
-				<input type="hidden" name="writer">
-				<input type="hidden" name="b_no">
-				<input type="hidden" name="cpage" value="${cpage}">
-            </form>
-            <form action="${pageContext.request.contextPath}/advisor/detailAdvisor" id="detailFrm" name="detailFrm" method="post">
-            	<input type="hidden" name="writer">
-            	<input type="hidden" name="no">
-            	<input type="hidden" name="cpage" value="${cpage}">
-            </form>
-            <form action="${pageContext.request.contextPath}/board/modifyHelpBoard" id="boardModifyFrm" method="post">
-            	<input type="hidden" name="title" id="inputTitle">
-            	<input type="hidden" name="contents" id="inputContents">
-            	<input type="hidden" name="no" id="no" value="${dto.no}">
-            </form>
-            <form action="${pageContext.request.contextPath}/board/helpBoard" id="boardBack" name="boardBack" method="post">
-            	<input type="hidden" name="cpage" value="${cpage}">
-            	<input type="hidden" name="target" value="${target}">
-            </form>
-            <form action="${pageContext.request.contextPath}/board/myBoard" id="myBack" name="myBack"></form>
-		</div>
-		<!-- 상단 설명 -->
-		<div class="row m-0" style="height: 50px;"></div>
-
-		<jsp:include page="../../standard/boardFooter.jsp"/>
-	</div>
+    	</c:otherwise>
+	</c:choose>
+	
 	
 	
 	<script type="text/javascript">
