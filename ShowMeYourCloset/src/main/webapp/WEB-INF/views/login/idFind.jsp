@@ -32,11 +32,11 @@
                           
                       </div>
                        <div class="col-12">
-                          <p style="font-size: 12px; color:#bcbcbc;">* 가입한 이름과 핸드폰 번호를 입력해주세요</p> 
+                          <p style="font-size: 12px; color:#bcbcbc;">* 가입한 닉네임과 핸드폰 번호를 입력해주세요</p> 
                        </div>
                         <div class="col-12" style="margin: auto">
                             <div class="form-group row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">NickName</label>
                                 <div class="col-sm-10">
                                     <input id="name" type="text" class="form-control" id="staticEmail">
                                 </div>
@@ -82,7 +82,7 @@
         		$.ajax({
         			url:"${pageContext.request.contextPath}/member/idFindProc",
         			data:{
-        				name:$("#name").val(),
+        				nickname:$("#name").val(),
         				phone:$("#phone").val()
         			}
         		}).done(function(data){

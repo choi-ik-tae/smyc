@@ -81,43 +81,28 @@
         <!-- 본문 -->    
         <div class="container-fuild p-0" id="bk">
            <!-- 네비 -->
-			<div class="navigator fixed-top row m-0">
-				<div class="col-1 p-0" id="btnMenu">
-					<div class="row m-0" id="menuItem">
-						<div class="col-4 p-0">
-							<div class="row m-0">
-								<div class="col-12" id="menuIcon">
-									<div class="row m-0 mb-1 bar bar-one"></div>
-									<div class="row m-0 mb-1 mt-1 bar bar-two"></div>
-									<div class="row m-0 mb-1 bar bar-three"></div>
-								</div>
+		<div class="navigator fixed-top row m-0">
+			<div class="col-1 p-0" id="btnMenu">
+				<div class="row m-0" id="menuItem">
+					<div class="col-4 p-0">
+						<div class="row m-0">
+							<div class="col-12" id="menuIcon">
+								<div class="row m-0 mb-1 bar bar-one"></div>
+								<div class="row m-0 mb-1 mt-1 bar bar-two"></div>
+								<div class="row m-0 mb-1 bar bar-three"></div>
 							</div>
 						</div>
-						<div class="col-8 p-0 text-center d-none d-md-block">
-							<span id="menuText" style="font-weight: 700; color: dimgray;">MENU</span>
-						</div>
 					</div>
-				</div>
-				<div class="col-10 p-0 d-none d-md-block text-center">
-	                <div class="row m-0">
-		                <div class="col-12" id="categoryBar">
-		                	<span id="bTitle" class="mr-3">HELP BOARD</span>
-	                        <input type="text" class="form-control" id="searchBar" name="target" placeholder="검색할 단어를 입력하세요">
-	                        <button id="toSearch" type="button" class="btn btn btn-outline-dark">검색</button>
-		                </div>
-	            	</div>
-				</div>
-				<div id="searchBox" class="col-1 p-0 m-0">
-					<div class="row" style="margin-top: 4px; border:0px;">
-						<div id="btnSearch" class="col-12 p-0">
-							<img src="/imgs/btn/btnSearch.png" style="width: 40px; border-radius: 5px;">
-						</div>
-						<div id="btnCloseSearch" class="p-0" style="background-color: black; display: none;width: 40px; border-radius: 5px;">
-							<img src="/imgs/btn/btnSearchClose.png" class="p-1" style="width: 40px;">
-						</div>
+					<div class="col-8 p-0 text-center d-none d-md-block" id="menuText">
+						<span style="font-weight: 700; color: dimgray;">MENU</span>
 					</div>
 				</div>
 			</div>
+			<div class="col-10 p-0 d-none d-md-block text-center">
+				<span id="bTitle">HELP BOARD</span>
+			</div>
+			<div id="searchBox" class="col-1 p-0 m-0"></div>
+		</div>
             <!-- 상단 설명 -->
             <div class="row m-0 LogoDiv" style="height: 600px;">
                 <div class="col-12">

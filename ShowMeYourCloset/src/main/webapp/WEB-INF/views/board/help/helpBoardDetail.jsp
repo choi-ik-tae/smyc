@@ -148,11 +148,17 @@
 				</div>
 				<div class="row">
 					<div class="col-12" style="font-size: 13px;">
-						<c:if test="${dto.email == email}">
-							<span style="float:right" class="updateBtn deleteBtn ml-2">|&nbsp; 삭제  &nbsp;|</span>
-							<span style="float:right" class="updateBtn modifyBtn ml-2">|&nbsp; 수정</span>
-							<span style="float:right; display: none;" class="updateBtn modifyConfirm ml-2">|&nbsp; 수정확인</span>
-						</c:if>
+						<c:choose>
+							<c:when test="${dto.email == email}">
+								<span style="float:right" class="updateBtn deleteBtn ml-2">|&nbsp; 삭제  &nbsp;|</span>
+								<span style="float:right" class="updateBtn modifyBtn ml-2">|&nbsp; 수정</span>
+								<span style="float:right; display: none;" class="updateBtn modifyConfirm ml-2">|&nbsp; 수정확인</span>
+							</c:when>
+							<c:otherwise>
+								<span style="float:right" class="updateBtn notifyBtn ml-2">|&nbsp; 신고  &nbsp;|</span>
+							</c:otherwise>
+						</c:choose>
+						
 						<span style="float:right" class="ml-2">조회수 ${dto.views }</span> 
 						<span style="float:right">${dto.write_date } </span>
 						<span style="float:center;"><a id="facebook-link-btn" href="javascript:shareFacebook()"><img src="/imgs/btn/facebookLogo.png" style="width:44px;"></a></span>
@@ -237,6 +243,31 @@
 	    }
 	</script>
 	<script>
+	
+		$(".notifyBtn").on("click",function(){
+			if("${email}" == ""){
+				alert("로그인 후 이용가능한 기능입니다.");
+				return;
+			}
+			
+			var result = confirm("해당 게시글을 신고하시겠습니까?");
+			if(result){
+				$.ajax({
+					url:"${pageContext.request.contextPath}/notify/notifyProc.do",
+					data:{
+						category : "B",
+						c_no : "${dto.no}"
+					}
+				}).done(function(data){
+					
+					if(data == "good"){
+						alert("정상적으로 신고가 완료 되었습니다.");
+					}else{
+						alert("이미 신고한 게시글 입니다.");
+					}
+				})
+			}
+		})
 		$(".modifyBtn").on("click",function(){
 			$(".modifyConfirm").css("display","inline");
 			$(".modifyBtn").css("display","none");

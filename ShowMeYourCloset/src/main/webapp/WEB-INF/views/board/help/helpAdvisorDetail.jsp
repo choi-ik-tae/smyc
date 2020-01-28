@@ -57,6 +57,27 @@
 	    #bottom-logo{height: 150px; line-height: 150px;}
 	    #bottom-contents{font-size: 10pt;color: white;}
 	    .container-fuild{ width:1900px; max-width:none !important;}
+	    
+	    .mainLogo{
+            	position:relative;
+                color: white;
+                font-size:50px;
+                font-weight: 700;
+                text-align: center;
+            }
+            .LogoDiv:after{
+                display: block;
+                position:absolute;
+                top:0;
+                left: 0;
+                background-image:url('/imgs/bg/clothesLogo2.jpg');
+                background-attachment: fixed; 
+                height: 600px;
+                width: 100%;
+                z-index: -1;
+                content: "";  
+                background-size: 100% 100%;
+            }
 	   
     </style>
     <body>
@@ -87,7 +108,32 @@
 			</div>
 			<div id="searchBox" class="col-1 p-0 m-0"></div>
 		</div>
-		<div class="col-12" style="margin:auto">
+		<!-- 상단 설명 -->
+          <div class="row m-0 LogoDiv" style="height: 600px;">
+                <div class="col-12">
+                <!-- 위 메뉴 공백 채우기 -->
+                <div class="row" style="margin-top: 100px;"></div>
+                    <div class="col-12">
+                        <div class="row">
+                           <div class="col-12 mainLogo" id="mainLogo">
+			                    <p class="mainLogo" style="margin-top: 95px;">HELP BOARD</p>
+			                    <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
+			                        <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
+			                        <span style="display: block;">여기서 도움을 요청해보세요</span>
+			                        <span style="display: block;">내 옷으로 예쁘게 센스있게 꾸며보세요</span>
+			                        <span style="display: block;">오늘 점심은 떡볶이를 먹을 것이다.</span>
+			                        <span style="display: block;">크레이지 후라이.. 볶음밥 존맛탱구리...</span>
+			                        <span style="display: block;">그렇다 좀 더 글을 길게 쓰기 위함이다.</span>
+			                        <span style="display: block;">좀 예쁘게</span>
+			                    </div>
+			                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         <!-- 상단 설명 -->
+		<div class="row m-0" style="height: 50px;"></div>
+		<div class="col-12" style="margin:auto;">
 		<div class="bean" style="height:50px;"></div>
 		<div class="row">
 			<div class="col-7" style="margin:auto">
@@ -216,9 +262,21 @@
                     </div>
                 </div>
                 <div class="row mb-5">
-                    <div class="col-12" style="text-align: left;">
+                    <div class="col-6" style="text-align: left;">
                         <button class="btn btn-info" type="button" id="back">목록</button>
                     </div>
+                    <div class="col-6" style="text-align: right;">
+                    <c:choose>
+						<c:when test="${dto.email == email}">
+							<span style="float:right" class="updateBtn deleteBtn ml-2"><button class="btn btn-info" type="button" id="back">삭제</button></span>
+							<span style="float:right" class="updateBtn modifyBtn ml-2"><button class="btn btn-info" type="button" id="back">수정</button></span>
+							<span style="float:right; display: none;" class="updateBtn modifyConfirm ml-2"><button class="btn btn-info" type="button" id="back">목록</button></span>
+						</c:when>
+						<c:otherwise>
+							<span style="float:right" class="updateBtn notifyBtn ml-2"><button class="btn btn-info" type="button" id="back">신고</button></span>
+						</c:otherwise>
+					</c:choose>
+					</div>
                 </div>
                 <form action="${pageContext.request.contextPath}/board/helpDetail" id="backFrm" method="post">
                 	<input type="hidden" name="no" value="${dto.b_no }">
@@ -231,6 +289,36 @@
         </div>
         
         <script>
+        	$(".deleteBtn").on("click",function(){
+        		var result = confirm("정말 삭제하시겠습니까?");
+        		if(result){
+        			location.href="${pageContext.request.contextPath}/advisor/deleteAdvisor?no=${dto.no}&b_no=${dto.b_no}";
+        		}
+        	})
+        	$(".notifyBtn").on("click",function(){
+        		if("${email}" == ""){
+    				alert("로그인 후 이용가능한 기능입니다.");
+    				return;
+    			}
+    			
+    			var result = confirm("해당 게시글을 신고하시겠습니까?");
+    			if(result){
+    				$.ajax({
+    					url:"${pageContext.request.contextPath}/notify/notifyProc.do",
+    					data:{
+    						category : "A",
+    						c_no : "${dto.no}"
+    					}
+    				}).done(function(data){
+    					
+    					if(data == "good"){
+    						alert("정상적으로 신고가 완료 되었습니다.");
+    					}else{
+    						alert("이미 신고한 댓글 입니다.");
+    					}
+    				})
+    			}
+        	})
         	$("#back").on("click",function(){
         		backFrm.submit();
         	})
