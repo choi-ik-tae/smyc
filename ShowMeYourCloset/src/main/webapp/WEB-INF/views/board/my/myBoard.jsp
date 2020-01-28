@@ -16,14 +16,14 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
-	.container-fulid {width: 1890px;max-width: none !important;}
+	.container-fluid {width: 1903px;max-width: none !important;}
    *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #bk{background-image:url('/imgs/bg/bg10.jpg');background-attachment: fixed;}
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: white;}
     /* 숨김메뉴 */
-    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
+    .menu{width: 1903px;height: 100%;position:fixed;display: none;z-index: 5;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
@@ -40,7 +40,7 @@
     #load{display:none;}    
     .contents{cursor:pointer;}
     /* 네비바 */
-    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
+    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;width: 1903px;}
     .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
     #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
     #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
@@ -83,7 +83,7 @@
     <!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>
 	<!-- 본문 -->
-	<div class="container-fuild p-0" id="bk">
+	<div class="container-fluid p-0" id="bk">
 		<!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">

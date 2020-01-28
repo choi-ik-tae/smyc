@@ -15,14 +15,14 @@
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
 /*    div{border: 1px solid black;}*/
-	.container-fulid {width: 1890px;max-width: none !important;}
-   *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
+	.container-fluid {width: 1903px;max-width: none !important;}
+   	*{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     #bk{background-image:url('/imgs/bg/bg10.jpg');background-attachment: fixed;}
     #bottom{width: 100%;color:white;background: #5e5e5e; height: 150px;}
     #bottom-logo{height: 150px; line-height: 150px;}
     #bottom-contents{font-size: 10pt;color: white;}
     /* 숨김메뉴 */
-    .menu{width: 100%;height: 100%;position:fixed;display: none;z-index: 5;}
+    .menu{width: 1903px;height: 100%;position:fixed;display: none;z-index: 5;}
     .menubar{ background-color: white;}
     .mainblock{ background: rgba(0,0,0,0.5);}
     #menu-nickname {width:100%;height: 200px;line-height: 200px;font-size: 30pt;}
@@ -50,6 +50,8 @@
     #menuText{ line-height: 50px; }
     #btnMenu:hover{cursor:pointer;}
     .line{border: 1px solid lightgray;}
+    
+    .cms{height:500px;}
 </style>
 <script>
 	$(function() {
@@ -81,7 +83,7 @@
     <!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>
 	<!-- 본문 -->
-	<div class="container-fuild p-0" id="bk">
+	<div class="container-fluid p-0" id="bk">
 		<!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">
@@ -125,29 +127,18 @@
 			<div class="col-12">
 				<!-- 위 메뉴 공백 채우기 -->
 				<div class="row" style="margin-top: 50px;"></div>
-				<div class="col-12">
-					<div class="row">
-						<div class="col-12" id="boast">
-							<div class="row">
-								<div class="col-12 text-center" id="boastText">
-				                        
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- 게시글 주루룩 -->
-        <div class="row m-0 mb-3 bg-white">
-            <div class="col-8 m-auto">
+        <div class="row m-0 bg-white">
+            <div class="col-8 m-auto cms">
                 <hr class="m-2">
-                <div class="row m-0 text-center" style="font-weight: 800">
+                <div class="row m-0 text-center" style="font-weight: 800;">
                     <div class="col-10">
-                        댓글
+						댓글
                     </div>
                     <div class="col-2">
-                        작성날짜
+						작성날짜
                     </div>
                 </div><hr class="m-2">
                 <!-- 반복문 ㄱㄱ -->
@@ -168,15 +159,17 @@
                 	</c:forEach>
                 	</c:when>
                 	<c:otherwise>
-                	
+                	<div class="row m-0 text-center">
+	                	작성한 댓글이 없습니다.
+                	</div>
                 	</c:otherwise>
                 </c:choose>
                 <!--  -->
             </div>
         </div>
+		<!-- 푸터 -->
+	    <jsp:include page="../../standard/boardFooter.jsp" />   
 	</div>
-	<!-- 푸터 -->
-    <jsp:include page="../../standard/boardFooter.jsp" />    
     <form action = "${pageContext.request.contextPath}/comments/toBoard" method="post" id="toBoardFrm">
     	<input type="hidden" name="no" id="boardNo" value="">
     </form>

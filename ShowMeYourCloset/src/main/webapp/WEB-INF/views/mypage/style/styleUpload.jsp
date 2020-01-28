@@ -7,15 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Bootstap4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
-
-
         <style>
             .imgBox{
                 position:absolute;
@@ -126,14 +123,15 @@
             	left: 1070px;
             	top:30px;
             }
-			 #top{height: 80px;background-color:white;border-bottom: 1px solid gray;}
-		    #bottom{background-color:white;border-top: 1px solid gray; position:absolute; top:2150px;width: 100%;height: 150px;}
+			#top{height: 80px;background-color:white;border-bottom: 1px solid gray;width: 1903px;max-width: none !important;}
+			#bottom {background-color: white;border-top: 1px solid gray;width: 100%;height: 150px;}
 		    #bottom-logo{height: 150px; line-height: 150px;}
 		    #bottom-contents{font-size: 10pt;color: gray;}
 		    .nav-item>a{color: black; font-size: 15pt;}
    			.logo{font-size: 15pt;}
    			.bg{background:rgba(255,255,255,1); border-radius: 10px;}
     		body{background-image: url(/imgs/bg/test3.jpg); background-attachment: fixed;  background-repeat:no-repeat;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover; background-size: cover;}
+    		.form-wrapper{width: 1903px;max-width: none !important;}
         </style>
         
         <script type="text/javascript">
@@ -184,7 +182,7 @@
 	            	<input type="hidden" name="shoes" id="shoseHidden">
 	            	<input type="hidden" name="acc" id="accHidden">
                 <div class="form-wrapper bg">
-                    <div class="row">
+                    <div class="row m-0">
                         <div class="col-7 p-5" style="margin:auto">
                             <label for="InputName">Style Name</label>
                             <input type="text" class="form-control" name="name" id="InputName">
@@ -213,12 +211,12 @@
                             <textarea class="form-control" style="height: 150px; resize: none;" id="InputMemo" name="memo"></textarea>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row m-0">
 		                <div class="col-7" style="text-align:center; margin:auto">
 							<span style="color:darkred">메모</span> 는 <span style="color:orangered">선택사항</span> 입니다.
 		                </div>
 	           	 	</div>
-                    <div class="row">
+                    <div class="row m-0">
                         <div class="col-7 pl-5 pb-5 pr-5" style="margin:auto">
                            <span style="float: right;">
                                 <button type="button" id="styleInsertBtn" class="btn btn-secondary">저장하기</button>
@@ -228,14 +226,10 @@
                             </span>
                         </div>
                     </div>
-                </div>
-              
+                    <jsp:include page="../../standard/footer.jsp" />
+                </div>             	     
             </form>
-  			<jsp:include page="../../standard/footer.jsp" />         	 
         </div>
-        
-        
-        
 		<script>
 		
 			$("#goBack").on("click",function(){

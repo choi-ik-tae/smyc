@@ -214,9 +214,9 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<!-- 푸터 -->
     <jsp:include page="../../standard/boardFooter.jsp" />
+	</div>
     <form action = "${pageContext.request.contextPath}/board/boastBoard" method="post" id="alignFrm">
     	<input type="hidden" name="Atarget" id="AlignTarget" value="">
     </form>

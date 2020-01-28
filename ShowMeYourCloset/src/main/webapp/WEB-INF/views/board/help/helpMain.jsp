@@ -142,7 +142,7 @@
                 </div>
             </div>
             <!-- 게시글 주루룩 -->
-            <div class="row" style="background: white">
+            <div class="row m-0" style="background: white">
                 <div class="col-8 mt-5 mb-2" style="margin:auto;">
         			<div class="row">
         				<div class="col-6">
