@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.Utils.CheckXss;
-import kh.spring.Utils.NavigatorUtil;
 import kh.spring.dto.AdvisorDTO;
 import kh.spring.dto.ClosetDTO;
 import kh.spring.service.AdvisorService;
 import kh.spring.service.ClosetService;
 import kh.spring.service.MemberService;
+import kh.spring.service.NotifyService;
 import kh.spring.service.StyleService;
 
 @Controller
@@ -39,6 +39,9 @@ public class AdvisorController {
 	private ClosetService closetService;
 	
 	@Autowired
+	private NotifyService notifyService;
+	
+	@Autowired
 	private HttpSession session;
 	
 	@RequestMapping("/helpStyleComent")
@@ -49,6 +52,14 @@ public class AdvisorController {
 		List<AdvisorDTO> allList = advisorService.selectAdvisorAll(b_no);
 		int choice_no = 0;
 		AdvisorDTO choiceDTO = null;
+		
+		for(int i = 0; i<allList.size();i++) {
+			int count = notifyService.notifyCount("A", allList.get(i).getNo());
+			if(count>4) {
+				allList.remove(i);
+				advisorService.deleteAdvisor(allList.get(i).getNo());
+			}
+		}
 		
 		if(cpage==null) {
 			cpage = 1+"";
@@ -177,5 +188,11 @@ public class AdvisorController {
 	public String choiceReturn(int no) {
 		advisorService.updateChoiceAdvisor("N", no);
 		return "";
+	}
+	
+	@RequestMapping("/deleteAdvisor")
+	public String deleteAdvisor(int no,int b_no) {
+		advisorService.deleteAdvisor(no);
+		return "redirect:/board/helpDetail?no="+b_no;
 	}
 }
