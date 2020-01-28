@@ -254,11 +254,11 @@ public class BoardController {
 	@RequestMapping("/boastDetailView")
 	public String boastDetailView(String Dtarget,String back,Model m) {
 		String email = (String)session.getAttribute("email");
-		
 		if(back == null) {
 			back = "default";
 		}
-		String item = Dtarget.substring(5, Dtarget.length());
+		String item = "";
+		try { item = Dtarget.substring(5, Dtarget.length()); } catch(Exception e) {return "error";}
 		int no = Integer.parseInt(item);
 		if(boardService.boastSeletctByNo(no) == null) {
 			return "error";
@@ -267,7 +267,7 @@ public class BoardController {
 		boardService.viewCountPlus(no);
 		BoardDTO boast = boardService.boastSeletctByNo(no);
 		int s_no = boardService.boastSeletctByNo(no).getS_no();
-		String gender = memService.selectGender(email);
+		String gender = memService.selectGender(boast.getEmail());
 		StyleDTO style = styleService.detailStyle(s_no);
 		int likeCliked = boardService.boastLikeClicked(boast.getNo(),email);
 		List<CommentDTO> comments = comService.commentsAll(boast.getNo());
@@ -374,8 +374,8 @@ public class BoardController {
 	}
 	// 자랑게시물 수정 실행
 	@RequestMapping("/boastModifyProc")
-	public String boastModifyProc(int no,String bTitle, String contents,Model m) {
-		boardService.boastModify(no, bTitle, contents);
+	public String boastModifyProc(int no,String boastTitle, String contents,Model m) {
+		boardService.boastModify(no, CheckXss.checkXss(boastTitle), CheckXss.checkXss(contents));
 		String Dtarget = "boast"+no;
 		m.addAttribute("Dtarget", Dtarget);
 		return "redirect:/board/boastDetailView";

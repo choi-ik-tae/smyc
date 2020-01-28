@@ -60,8 +60,11 @@
 					$("#result").html("* 가입하지 않은 회원이거나, 이메일 혹은 패스워드가 일치하지 않습니다.")
 					.css("color","red");
 				}else if(data == 1){
-					$("#result").html("* 인증되지 않은 이메일입니다. 이메일 인증을 진행해주세요.")
+					$("#result").html("* 인증되지 않은 이메일입니다. <br>&nbsp;&nbsp;이메일 인증을 진행해주세요.")
 					.css("color","green");
+				}else if(data == 2){
+					$("#result").html("* 유해성 문제로 로그인이 차단 되었습니다. <br>&nbsp;&nbsp;관리자에게 문의하세요.")
+					.css("color","red");
 				}else{
 					location.href="${pageContext.request.contextPath}/";
 				}

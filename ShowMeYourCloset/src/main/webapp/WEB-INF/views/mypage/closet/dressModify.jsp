@@ -14,9 +14,11 @@
 <!-- Google font -->
 <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
+	.container {width: 800px;max-width: none !important;}
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     html,body{height: 100%;}
-    body {display: -ms-flexbox;display: flex;-ms-flex-align: center;align-items: center;}
+    body {background-image: url(/imgs/bg/bg21.jpg);}
+    #bg{background:rgba(255,255,255,1); border-radius: 10px;}
     #preview{width:300px;height: 300px;}
 </style>
 <script type="text/javascript">
@@ -24,15 +26,14 @@
  function noBack(){window.history.forward();}
 </script>
 </head>
-<body>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
-    <div class="container text-center">
+    <div class="container mt-5 text-center">
         <!-- 헤더 -->
-        
+        <div class="col-12" id="bg">
 		<form action="${pageContext.request.contextPath}/closet/dressModifyProc" enctype="multipart/form-data" method="post" id="frm">
 			<input type="hidden" name="no" value="${info.no}">
 			<div class="row m-2">
-				<div class="col-auto m-auto p-0 align-items-center" style="border: 1px solid gray;" id="preview">
+				<div class="col-auto m-auto p-0 align-items-center" id="preview">
 					<img class='w-100 h-100' src="${infoImg.path}">
 				</div>
 			</div>
@@ -77,7 +78,7 @@
 					<label for="" class="m-0 ">옷 이름</label>
 				</div>
 				<div class="col-10">
-					<input id="closet" class="w-100 form-control" name="name" type="text" value="${info.name}">
+					<input id="name" class="w-100 form-control" name="name" type="text" value="${info.name}">
 				</div>
 			</div>
 			<div class="row m-2">
@@ -99,9 +100,8 @@
 				</div>
 				<div class="col-10">
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" name="season" id="spring"
-							value="spring"> <label class="form-check-label"
-							for="spring">봄</label>
+						<input class="form-check-input" type="checkbox" name="season" id="spring" value="spring">
+						<label class="form-check-label" for="spring">봄</label>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="checkbox" name="season" id="summer"
@@ -158,13 +158,24 @@
 				</div>
 			</div>
 			<div class="row m-2">
-				<div class="col-12 align-self-center">
-					<button id="modify" type="button" class="btn btn-outline-dark">수정하기</button>
-					<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
+				<div class="col-12 m-3">
+					<div class="row">
+		                <div class="col-12">
+			                <p>
+			                	<span style="color:palevioletred">가격</span> <span style="color:indianred">구매일자</span> <span style="color:darkred">메모</span> 는 <span style="color:orangered">선택사항</span> 입니다.
+			                </p>
+		                </div>
+	           	 	</div>
+	           	 	<div class="row">
+	           	 		<div class="col-12">
+	           	 			<button id="upload" type="submit" class="btn btn-outline-dark">등록하기</button>
+							<button id="toHome" type="button" class="btn btn-outline-dark">돌아가기</button>
+	           	 		</div>
+	           	 	</div>
 				</div>
 			</div>
 		</form>
-
+        </div>
 		<!-- 푸터 -->
     </div>
     <c:choose>
@@ -181,19 +192,90 @@
     	</script>
     </c:forEach>
 	<script>
-		var check = 0;
+		$("#name").on("blur",function(){
+			var name = $("#name").val().length;
+			if(name > 30){
+				alert("30자 이내로 작성해주세요!");
+				$("#name").val("");
+			}
+		});
+		$("#memo").on("blur",function(){
+			var name = $("#memo").val().length;
+			if(name > 100){
+				alert("100자 이내로 작성해주세요!");
+				$("#memo").val("");
+			}
+		});
+		var check = 0;		
 		$("#btnChangeImg").on("click",function(){
+			$('#preview').html("<img src='/imgs/btn/image.png' class='w-50' style='margin-top:80px;'>");
 			check = 1;
 		});
 		$("#modify").on("click",function(){
 			var target = $("#imgud").val();
+			var name = $("#name").val();
+			var seasonCk = 0;
+			var pubCk = 0;
+			
+			// 이미지 변경 했을 때
 			if(check == 1) {
-				if(target == "") {
+				if(target == "" || target == null) {
 					alert("이미지를 등록해 주세요!");
-					return;
-				}	
+					return false;
+				}
+				// 이름 입력 검사
+				if(name == "" || name == null) {
+					alert("옷 이름을 입력해주세요!");
+	            	return false;
+				}
+				// 계절 체크 검사
+	            $("input[name='season']").each(function(){
+	            	if($(this).prop("checked") == true){
+	            		seasonCk += 1;
+	            	}
+	            });
+	            if(seasonCk == 0) {
+	            	alert("계절을 한 가지 이상 선택해주세요!");
+	            	return false;
+	            }
+	            // 공개여부  체크검사
+	            $("input[name='pub']").each(function(){
+	            	if($(this).prop("checked") == true){
+	            		pubCk += 1;
+	            	}
+	            })
+	            if(pubCk == 0) {
+	            	alert("공개여부를 선택해주세요!");
+	            	return false;
+	            }
+	        // 이미지 변경 안했을 때
+			} else {
+				// 이름 입력 검사
+				if(name == "" || name == null) {
+					alert("옷 이름을 입력해주세요!");
+	            	return false;
+				}
+				// 계절 체크 검사
+	            $("input[name='season']").each(function(){
+	            	if($(this).prop("checked") == true){
+	            		seasonCk += 1;
+	            	}
+	            });
+	            if(seasonCk == 0) {
+	            	alert("계절을 한 가지 이상 선택해주세요!");
+	            	return false;
+	            }
+	            // 공개여부  체크검사
+	            $("input[name='pub']").each(function(){
+	            	if($(this).prop("checked") == true){
+	            		pubCk += 1;
+	            	}
+	            })
+	            if(pubCk == 0) {
+	            	alert("공개여부를 선택해주세요!");
+	            	return false;
+	            }
 			}
-			$("#frm").submit();
 		});
 		$("#toHome").on("click",function(){
 		   	//location.href="${pageContext.request.contextPath}/";
@@ -209,7 +291,7 @@
 				}
 				reader.readAsDataURL(input.files[0]);
 			} else {
-				$('#preview').html("");
+				$('#preview').html("<img src='/imgs/btn/image.png' class='w-50' style='margin-top:80px;'>");
 			}
 		}
 		$("#imgud").on('change', function() {

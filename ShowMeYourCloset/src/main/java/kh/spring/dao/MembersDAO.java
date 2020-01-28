@@ -1,6 +1,7 @@
 package kh.spring.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -109,6 +110,21 @@ public class MembersDAO {
 	
 	public String selectGender(String email) {
 		return sst.selectOne("Members.selectGender", email);	
+	}
+	
+	public List<MembersDTO> selectAll(){
+		return sst.selectList("Members.selectAll");
+	}
+	
+	public int memberBan(String email, String ban) {
+		Map<String, String> parm = new HashMap<>();
+		parm.put("email",email);
+		parm.put("ban",ban);
+		return sst.update("Members.memberBan",parm);
+	}
+	
+	public String returnBan(String email) {
+		return sst.selectOne("Members.returnBan",email);
 	}
 
 

@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.dao.BoardDAO;
+import kh.spring.dao.BoardLikeDAO;
 import kh.spring.dao.ClosetDAO;
+import kh.spring.dao.CommentDAO;
 import kh.spring.dao.DressDAO;
 import kh.spring.dao.DressImgDAO;
 import kh.spring.dao.StyleDAO;
@@ -32,6 +35,15 @@ public class ClosetService {
 	@Autowired 
 	private StyleDAO sdao;
 	
+	@Autowired
+	private BoardDAO bdao;
+	
+	@Autowired
+	private BoardLikeDAO ldao;
+	
+	@Autowired
+	private CommentDAO cmdao;
+
 	// 옷장 등록
 	public int closetUpload(ClosetDTO dto) {
 		return cdao.insert(dto);
@@ -137,10 +149,16 @@ public class ClosetService {
 			
 			File file = new File(target);
 			if( file.exists() ){
-				// 옷 삭제 시 코디에서 옷 삭제
-				sdao.deleteItem(category, itemPath);
+				int s_no = sdao.selectByDelete(category, itemPath);
+				System.out.println("s_no : "+s_no);
+				int b_no = bdao.boastSelectByDelete(s_no);
+				System.out.println("b_no : "+b_no);
 				if(file.delete()){ 
 					System.out.println("파일삭제 성공");
+					bdao.boastDeleteByStyle(s_no);
+					cmdao.boardDelete(b_no);
+					ldao.likeDelete(b_no);
+					sdao.deleteItem(category, itemPath);
 					ddao.delete(no);
 					dmdao.delete(no);
 					result = 1;

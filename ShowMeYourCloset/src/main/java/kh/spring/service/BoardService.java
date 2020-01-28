@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kh.spring.Utils.Configuration;
 import kh.spring.dao.BoardDAO;
 import kh.spring.dao.BoardLikeDAO;
+import kh.spring.dao.CommentDAO;
 import kh.spring.dao.DressDAO;
 import kh.spring.dto.BoardDTO;
 import kh.spring.dto.DressDTO;
@@ -25,6 +26,9 @@ public class BoardService {
 	
 	@Autowired
 	private BoardLikeDAO ldao;
+	
+	@Autowired
+	private CommentDAO cdao;
 
 	// help 전체 글 가져오기
 	public List<BoardDTO> helpBoardSelectAll() {
@@ -140,6 +144,7 @@ public class BoardService {
 	public void boastDelete(int no) {
 		boardDAO.boastDelete(no);
 		ldao.likeDelete(no);
+		cdao.boardDelete(no);
 	}
 	// 좋아요 카운트
 	public int boastLikeCount(int b_no) {

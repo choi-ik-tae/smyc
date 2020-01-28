@@ -51,6 +51,10 @@
 	<delete id="boastDelete">
 		delete from board where no = #{no}
 	</delete>
+<!-- 	옷이나 코디 삭제시 자랑게시글 삭제 -->
+	<delete id="boastDeleteByStyle">
+		delete from board where s_no = #{s_no}
+	</delete>
 <!-- 	자랑게시판 카테고리 별로 재정렬 -->
 	<select id="boastSelectNew" resultType="kh.spring.dto.BoardDTO">
 		select * from board where category='B' order by no desc
@@ -91,5 +95,9 @@
 <!-- 	내가 쓴 도움 게시판 전체 가져오기 -->
 	<select id="myHelpSelectAll" resultType="kh.spring.dto.BoardDTO">
 		select * from board where category='H' and email=#{email} order by no desc
+	</select>
+<!-- 스타일 삭제 시 삭제될 자랑 게시글 번호 가져오기 -->
+	<select id="selectByDelete" resultType="Integer">
+		select no from board where s_no = #{s_no}
 	</select>
 </mapper>
