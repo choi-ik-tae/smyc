@@ -1,11 +1,14 @@
 package kh.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.spring.dto.AdminDTO;
 import kh.spring.dto.BoardDTO;
 
 @Repository
@@ -44,7 +47,13 @@ public class AdminDAO {
 	public int selectLikeByBoastNo(int b_no) {
 		return sst.selectOne("Admin.selectLikeByBoastNo",b_no);
 	}
-	
+	public AdminDTO adminLogin(String email, String pw) {
+		Map<String, String> parm = new HashMap<>();
+		parm.put("id", email);
+		parm.put("pw", pw);
+		
+		return sst.selectOne("Admin.adminLogin", parm);
+	}
 	
 	
 }

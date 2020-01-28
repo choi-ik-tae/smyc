@@ -44,7 +44,7 @@
 		                                			<img src="/imgs/shilouette/default_tshirt.png" style="width: 100%; height: 100%;">
 		                                		</c:when>
 		                                		<c:otherwise>
-		                                			<img src="${choiceDto.top}" alt="javascript:this.src='/imgs/shilouette/default_tshirt.png'" onerror="javascript:this.src='/imgs/shilouette/default_tshirt.png'" style="width: 100%; height: 100%;">
+		                                			<img src="${choiceDto.top}" alt="/imgs/shilouette/default_tshirt.png" onError="this.src='/imgs/shilouette/default_tshirt.png'" style="width: 100%; height: 100%;">
 		                                		</c:otherwise>
 		                                    </c:choose>
 		                                </div>

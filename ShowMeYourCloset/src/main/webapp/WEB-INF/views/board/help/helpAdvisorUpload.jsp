@@ -33,6 +33,12 @@
 		.container{ width:1900px; max-width:none !important;}
     </style>
     <body>
+    	<c:if test="${admin ==null }">
+    		<script>
+    			alert("나가시라구여!!!");
+    			location.href="${pageContext.request.contextPath}/";
+    		</script>
+    	</c:if>
         <div class="container">
         	<div class="col-7" style="margin:auto;">
             <div class="categoryDiv">

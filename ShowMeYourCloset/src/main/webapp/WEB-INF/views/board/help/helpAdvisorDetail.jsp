@@ -116,16 +116,13 @@
                 <div class="row" style="margin-top: 100px;"></div>
                     <div class="col-12">
                         <div class="row">
-                           <div class="col-12 mainLogo" id="mainLogo">
-			                    <p class="mainLogo" style="margin-top: 95px;">HELP BOARD</p>
-			                    <div class="p-3" style="font-size:15px; color:white; font-weight: 700; background: rgba(0,0,0,0.5); width: 500px; margin: auto; border-radius: 10px;">
+                            <div class="col-12 mainLogo" id="mainLogo">
+			                    <p class="mainLogo" style="margin-top: 95px;"><span style="color:indianred;">H</span>ELP <span style="color:darkred;">B</span>OARD</p>
+			                    <div class="p-3" style="font-size:18px; color:white; font-weight: 700; background: rgba(0,0,0,0.7); width: 500px; margin: auto; border-radius: 10px;">
 			                        <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
-			                        <span style="display: block;">여기서 도움을 요청해보세요</span>
-			                        <span style="display: block;">내 옷으로 예쁘게 센스있게 꾸며보세요</span>
-			                        <span style="display: block;">오늘 점심은 떡볶이를 먹을 것이다.</span>
-			                        <span style="display: block;">크레이지 후라이.. 볶음밥 존맛탱구리...</span>
-			                        <span style="display: block;">그렇다 좀 더 글을 길게 쓰기 위함이다.</span>
-			                        <span style="display: block;">좀 예쁘게</span>
+			                        <span style="display: block;">자유롭게 대화를 나누며 <span style="color:indianred">코디를 완성</span> 시키세요</span>
+			                        <span style="display: block;">또 친구들의 코디를 도와주세요!</span>
+			                        <span style="display: block;">친구들에게 자신의 <span style="color:darkred">센스</span>를 뽐내보세요</span>
 			                    </div>
 			                </div>
                         </div>
