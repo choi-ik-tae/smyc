@@ -109,7 +109,11 @@ public class BoardDAO {
 	}
 	// 스타일 삭제 시 삭제 할 게시물 번호 출력
 	public int boastSelectByDelete(int s_no) {
-		return sst.selectOne("Board.selectByDelete",s_no);
+		BoardDTO result = sst.selectOne("Board.selectByDelete",s_no);
+		if(result != null) {
+			return result.getNo();
+		}
+		return 0;
 	}
 	// boast New
 	public List<BoardDTO> boastSelectNew() {

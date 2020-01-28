@@ -18,6 +18,7 @@
     *{box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
     html,body{height: 100%;}    
     #preview{width:300px;height: 300px;}
+    #preview>img{max-width:300px;max-height:300px;}
     .borderDelete{border: 0px;}
     .logo{font-size: 15pt;}
     #top{height: 80px;background-color:white;border-bottom: 1px solid gray; width: 1920px;max-width: none !important;}
@@ -40,7 +41,7 @@
     	<form action="${pageContext.request.contextPath}/closet/dressUploadProc" enctype="multipart/form-data" method="post">
 			<div class="row m-2">
 				<div class="col-auto m-auto p-0 align-items-center" id="preview">
-                    <img class='w-100 h-100' src="${img.path}">
+                    <img class='' src="${img.path}">
 				</div>
 			</div>
 			<div class="row m-2">

@@ -168,7 +168,9 @@
 						<div class="row card-deck m-auto" id="boardList">
 						<c:choose>
 						<c:when test="${boastList.size() <= 0}">
-							등록된 게시물이 없습니다.
+							<div class="col-12 text-center" style="line-height:172px;">
+								등록된 게시물이 없습니다.
+							</div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="i" begin="0" end="${boastList.size() - 1}">
@@ -195,7 +197,8 @@
 									</div>
 									<div class="card-body"><hr>
 										<h5 class="card-title text-center">${boastList.get(i).title}</h5>
-										<p class="card-text text-right">
+										<p class="card-text m-0 d-inline-block" style="width:120px;"><span style="font-weight: 800;">${boastList.get(i).nickname}</span></p>
+										<p class="card-text text-right d-inline-block" style="width:120px;">
 											<span style="font-weight: 800;">${likeList.get(i)}</span>&nbsp;&nbsp;<img src="/imgs/btn/like_after.png" style="width: 20px;" class="pb-1">
 										</p>
 									</div>

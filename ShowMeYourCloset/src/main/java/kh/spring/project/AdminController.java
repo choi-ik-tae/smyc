@@ -30,8 +30,20 @@ public class AdminController {
 	private MemberService memService;
 	
 	@RequestMapping("/adminMain")
-	public String adminMain() {
-		return "admin/adminMain";
+	public String adminMain(String email, String pw) {
+		try {
+			System.out.println(email + " : "+pw);
+			int check=adService.adminLogin(email, pw);
+			if(check == 1) {
+				session.setAttribute("admin", email);
+				return "admin/adminMain";
+			}else {
+				System.out.println("마! 관리자도 아닌게... 끄지라!");
+				return "redirect:/";
+			}
+		}catch(Exception e) {
+			return "error";
+		}
 	}
 	
 	@RequestMapping("/chart")
@@ -41,6 +53,24 @@ public class AdminController {
 		int memW = adService.selectMemByW();
 		List<BoardDTO> boastboard = adService.selectByBoastByView();
 		List<BoardDTO> helpboard = adService.selectByHelpByView();
+		List<Integer> boastNoByLike = adService.selectByBoastNoByLike();
+		
+		List<BoardDTO> boastByLike = new ArrayList<>();
+		List<String> boastTitleByLike = new ArrayList<>();
+		List<Integer> boastLike = new ArrayList<>();
+		
+		if(boastNoByLike.size() > 0) {
+			for(int tmp : boastNoByLike) {
+				boastByLike.add(adService.selectByBoastByNo(tmp));
+			}
+			if(boastByLike != null) {
+				for(BoardDTO tmp : boastByLike) {
+					System.out.println(tmp.getTitle());
+					boastTitleByLike.add("'"+tmp.getTitle()+"'");
+					boastLike.add(adService.selectLikeByBoastNo(tmp.getNo()));
+				}
+			}
+		}
 		
 		List<Integer> memList = new ArrayList<>();
 		memList.add(mem);
@@ -64,6 +94,8 @@ public class AdminController {
 		m.addAttribute("boastView", boastView);
 		m.addAttribute("helpTitle", helpTitle);
 		m.addAttribute("helpView", helpView);
+		m.addAttribute("boastTitleByLike", boastTitleByLike);
+		m.addAttribute("boastLike", boastLike);
 		
 		return "admin/chart";
 	}

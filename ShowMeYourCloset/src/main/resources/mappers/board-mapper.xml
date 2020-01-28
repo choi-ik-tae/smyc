@@ -97,7 +97,7 @@
 		select * from board where category='H' and email=#{email} order by no desc
 	</select>
 <!-- 스타일 삭제 시 삭제될 자랑 게시글 번호 가져오기 -->
-	<select id="selectByDelete" resultType="Integer">
-		select no from board where s_no = #{s_no}
+	<select id="selectByDelete" resultType="kh.spring.dto.BoardDTO">
+		select * from board where s_no = #{s_no}
 	</select>
 </mapper>

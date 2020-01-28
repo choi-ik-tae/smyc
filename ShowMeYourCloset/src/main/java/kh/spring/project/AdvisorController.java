@@ -191,8 +191,45 @@ public class AdvisorController {
 	}
 	
 	@RequestMapping("/deleteAdvisor")
-	public String deleteAdvisor(int no,int b_no) {
+	public String deleteAdvisor(int no , int b_no) {
 		advisorService.deleteAdvisor(no);
 		return "redirect:/board/helpDetail?no="+b_no;
+	}
+	
+	@RequestMapping("/advisorModify")
+	public String advisorModify(Model model,int no, String gender, int cpage,String writer) {
+		AdvisorDTO dto = advisorService.selectAdvisorDTO(no);
+		
+		List<ClosetDTO> closetList = closetService.closetSeleteByEmail(writer);
+		
+		for(int i = 0; i<closetList.size();i++) {
+			if(closetList.get(i).getPub().contentEquals("N")) {
+				closetList.remove(i);
+			}
+		}
+		
+		model.addAttribute("closetList", closetList);
+		model.addAttribute("gender", gender);
+		model.addAttribute("dto", dto);
+		model.addAttribute("cpage",cpage);
+		model.addAttribute("writer", writer);
+		
+		return "board/help/helpAdvisorModify";
+	}
+	
+	@RequestMapping("/advisorModifyProc")
+	public String advisorModifyProc(AdvisorDTO dto,String cpage) {
+		
+		System.out.println(dto.getTop() + " : "+dto.getPants());
+		System.out.println("이건 내용 제목 :: "+dto.getTitle()+ " : "+dto.getContents());
+		
+		dto.setTitle(CheckXss.checkXss(dto.getTitle()));
+		dto.setContents(CheckXss.checkXss(dto.getContents()));
+		
+		advisorService.modifyAdvisor(dto);
+		
+		return "redirect:/board/helpDetail?no="+dto.getB_no()+"&cpage="+cpage;
+		
+		
 	}
 }

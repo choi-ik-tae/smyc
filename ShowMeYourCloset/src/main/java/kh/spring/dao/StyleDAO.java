@@ -93,12 +93,12 @@ public class StyleDAO {
 		return sst.update("Style.deleteItem",parm);
 	}
 	// 삭제할 코디 번호 출력
-	public int selectByDelete(String category,String path) {
+	public List<StyleDTO> selectByDelete(String category,String path) {
 		Map<String, Object> parm = new HashMap<>();
 		parm.put("category",category);
 		parm.put("path",path);
 		
-		return sst.selectOne("Style.selectByDelete",parm);
+		return sst.selectList("Style.selectByDelete",parm);
 	}
 	// 옷 수정시 코디 아이템 수정
 	public int updateItem(String category,String path,String val) {

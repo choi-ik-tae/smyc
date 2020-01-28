@@ -113,12 +113,7 @@
 			</div>
 			<div id="searchBox" class="col-1 p-0 m-0">
 				<div class="row" style="margin-top: 4px; border:0px;">
-					<div id="btnSearch" class="col-12 p-0">
-						<img src="/imgs/btn/btnSearch.png" style="width: 40px; border-radius: 5px;">
-					</div>
-					<div id="btnCloseSearch" class="p-0" style="background-color: black; display: none;width: 40px; border-radius: 5px;">
-						<img src="/imgs/btn/btnSearchClose.png" class="p-1" style="width: 40px;">
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -227,7 +222,8 @@
 									</div>
 									<div class="card-body"><hr>
 										<h5 class="card-title text-center">${boastList.get(i).title}</h5>
-										<p class="card-text text-right">
+										<p class="card-text m-0 d-inline-block" style="width:120px;"><span style="font-weight: 800;">${boastList.get(i).nickname}</span></p>
+										<p class="card-text text-right d-inline-block" style="width:120px;">
 											<span style="font-weight: 800;">${likeList.get(i)}</span>&nbsp;&nbsp;<img src="/imgs/btn/like_after.png" style="width: 20px;" class="pb-1">
 										</p>
 									</div>

@@ -62,4 +62,17 @@ public class AdvisorDAO {
 	public int deleteAdvisor(int no) {
 		return sst.delete("Advisor.deleteAdvisor", no);
 	}
+	
+	public int modifyAdvisor(AdvisorDTO dto) {
+		Map<String,Object> parm = new HashMap<>();
+		parm.put("no",dto.getNo());
+		parm.put("title",dto.getTitle());
+		parm.put("contents",dto.getContents());
+		parm.put("top",dto.getTop());
+		parm.put("pants",dto.getPants());
+		parm.put("shoes",dto.getShoes());
+		parm.put("acc",dto.getAcc());
+		
+		return sst.update("Advisor.modifyAdvisor", parm);
+	}
 }

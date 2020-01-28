@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import kh.spring.dao.BoardDAO;
 import kh.spring.dao.ClosetDAO;
 import kh.spring.dao.StyleDAO;
 import kh.spring.dto.ClosetDTO;
@@ -18,6 +20,9 @@ public class StyleService {
 
 	@Autowired
 	private ClosetDAO cdao;
+	
+	@Autowired
+	private BoardDAO bdao;
 
 	public List<String> selectCategoryAll(String email, String category, int c_no) {
 
@@ -57,8 +62,10 @@ public class StyleService {
 	}
 
 	// 코디 삭제
+	@Transactional("txManager")
 	public void styleDelete(int no) {
 		sdao.styleDelete(no);
+		bdao.boastDeleteByStyle(no);
 	}
 
 	public List<String> selectPubCategoryAll(String email, String category, int c_no) {

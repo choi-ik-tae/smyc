@@ -168,39 +168,43 @@ public class BoardController {
 	// 자랑게시판 메인
 	@RequestMapping("/boastBoard")
 	public String boastBoard(String Atarget,Model m) {
-		if(Atarget == null) {
-			Atarget = "new";
-		}
-		String email = (String)session.getAttribute("email");
-		// 자랑게시판 게시물 총 출력
-		List<BoardDTO> boastList = boardService.boastAlign(Atarget);
-		List<StyleDTO> styleList = new ArrayList<>();
-		
-		for(BoardDTO tmp : boastList) {
-			styleList.add(styleService.detailStyle(tmp.getS_no()));
-		}
-		// 옷 삭제되었을때 자랑게시물 및 코디 지우기
-		for(StyleDTO dto : styleList) {
-			if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
-				styleService.styleDelete(dto.getNo());
-				boardService.boastDelete(dto.getNo());
+		try {
+			if(Atarget == null) {
+				Atarget = "new";
 			}
+			String email = (String)session.getAttribute("email");
+			// 자랑게시판 게시물 총 출력
+			List<BoardDTO> boastList = boardService.boastAlign(Atarget);
+			List<StyleDTO> styleList = new ArrayList<>();
+			
+			for(BoardDTO tmp : boastList) {
+				styleList.add(styleService.detailStyle(tmp.getS_no()));
+			}
+			// 옷 삭제되었을때 자랑게시물 및 코디 지우기
+			for(StyleDTO dto : styleList) {
+				if(dto.getTop() == null && dto.getPants()==null && dto.getAcc() ==null && dto.getShoes()==null) {
+					styleService.styleDelete(dto.getNo());
+					boardService.boastDelete(dto.getNo());
+				}
+			}
+			styleList.clear();
+			// 지운거 반영해서 다시 호출
+			boastList = boardService.boastAlign(Atarget);
+			List<Integer> likeList = new ArrayList<>();
+			for(BoardDTO tmp : boastList) {
+				styleList.add(styleService.detailStyle(tmp.getS_no()));
+				likeList.add(boardService.boastLikeCount(tmp.getNo()));
+			}
+			m.addAttribute("boastList", boastList);
+			m.addAttribute("styleList", styleList);
+			m.addAttribute("email", email);
+			m.addAttribute("likeList", likeList);
+			m.addAttribute("target", Atarget);
+			
+			return "board/boast/boastMain";
+		}catch(Exception e) {
+			return "error";
 		}
-		styleList.clear();
-		// 지운거 반영해서 다시 호출
-		boastList = boardService.boastAlign(Atarget);
-		List<Integer> likeList = new ArrayList<>();
-		for(BoardDTO tmp : boastList) {
-			styleList.add(styleService.detailStyle(tmp.getS_no()));
-			likeList.add(boardService.boastLikeCount(tmp.getNo()));
-		}
-		m.addAttribute("boastList", boastList);
-		m.addAttribute("styleList", styleList);
-		m.addAttribute("email", email);
-		m.addAttribute("likeList", likeList);
-		m.addAttribute("target", Atarget);
-		
-		return "board/boast/boastMain";
 	}
 	// 자랑게시판 업로드 페이지
 	@RequestMapping("/boastUpload")

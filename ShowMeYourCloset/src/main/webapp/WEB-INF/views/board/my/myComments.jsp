@@ -113,12 +113,7 @@
 			</div>
 			<div id="searchBox" class="col-1 p-0 m-0">
 				<div class="row" style="margin-top: 4px; border:0px;">
-					<div id="btnSearch" class="col-12 p-0">
-						<img src="/imgs/btn/btnSearch.png" style="width: 40px; border-radius: 5px;">
-					</div>
-					<div id="btnCloseSearch" class="p-0" style="background-color: black; display: none;width: 40px; border-radius: 5px;">
-						<img src="/imgs/btn/btnSearchClose.png" class="p-1" style="width: 40px;">
-					</div>
+					
 				</div>
 			</div>
 		</div>
