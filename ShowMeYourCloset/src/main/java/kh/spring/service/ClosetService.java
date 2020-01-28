@@ -150,14 +150,15 @@ public class ClosetService {
 			File file = new File(target);
 			if( file.exists() ){
 				int s_no = sdao.selectByDelete(category, itemPath);
-				System.out.println("s_no : "+s_no);
 				int b_no = bdao.boastSelectByDelete(s_no);
-				System.out.println("b_no : "+b_no);
 				if(file.delete()){ 
 					System.out.println("파일삭제 성공");
-					bdao.boastDeleteByStyle(s_no);
-					cmdao.boardDelete(b_no);
-					ldao.likeDelete(b_no);
+					// 옷이 스타일에 등록 되어있을 때 그 스타일에 따른 자랑게시물 삭제
+					if(s_no > 0) {
+						bdao.boastDeleteByStyle(s_no);
+						cmdao.boardDelete(b_no);
+						ldao.likeDelete(b_no);
+					}
 					sdao.deleteItem(category, itemPath);
 					ddao.delete(no);
 					dmdao.delete(no);
