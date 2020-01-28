@@ -41,6 +41,21 @@ public class AdminController {
 		int memW = adService.selectMemByW();
 		List<BoardDTO> boastboard = adService.selectByBoastByView();
 		List<BoardDTO> helpboard = adService.selectByHelpByView();
+		List<Integer> boastNoByLike = adService.selectByBoastNoByLike();
+		
+		List<BoardDTO> boastByLike = new ArrayList<>();
+		List<String> boastTitleByLike = new ArrayList<>();
+		List<Integer> boastViewByLike = new ArrayList<>();
+		
+		if(boastNoByLike.size() > 0) {
+			for(int tmp : boastNoByLike) {
+				boastByLike.add(adService.selectByBoastByNo(tmp));
+			}			
+			for(BoardDTO tmp : boastByLike) {
+				boastTitleByLike.add("'"+tmp.getTitle()+"'");
+				boastViewByLike.add(adService.selectLikeByBoastNo(tmp.getNo()));
+			}
+		}
 		
 		List<Integer> memList = new ArrayList<>();
 		memList.add(mem);
@@ -64,6 +79,8 @@ public class AdminController {
 		m.addAttribute("boastView", boastView);
 		m.addAttribute("helpTitle", helpTitle);
 		m.addAttribute("helpView", helpView);
+		m.addAttribute("boastTitleByLike", boastTitleByLike);
+		m.addAttribute("boastViewByLike", boastViewByLike);
 		
 		return "admin/chart";
 	}
