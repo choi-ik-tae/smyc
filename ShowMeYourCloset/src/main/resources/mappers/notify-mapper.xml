@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="Notify">
+ 	<select id="checkNotify" resultType="String">
+ 		select email from notify where category=#{category} and c_no=#{c_no} and email=#{email}
+ 	</select>
+ 	<select id="insertNotify">
+ 		insert into notify values(notify_seq.nextval,#{category},#{c_no},#{email},sysdate)
+ 	</select>
+ 	<select id="notifyCount" resultType="String">
+ 		select count(*) from notify where category=#{category} and c_no=#{c_no}
+ 	</select>
+ </mapper>

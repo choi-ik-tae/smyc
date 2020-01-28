@@ -15,6 +15,7 @@ import kh.spring.Utils.CheckXss;
 import kh.spring.dto.CommentDTO;
 import kh.spring.service.BoardService;
 import kh.spring.service.CommentsService;
+import kh.spring.service.NotifyService;
 
 @Controller
 @RequestMapping("/comments")
@@ -27,15 +28,27 @@ public class CommentsController {
 	private BoardService bService;
 	
 	@Autowired
+	private NotifyService notifyService;
+	
+	@Autowired
 	private HttpSession session;
 
 	// help 게시판 디테일 댓글 전체 리스트 ...!
 	@RequestMapping("/helpBoardComments")
 	public String helpBoardComments(Model model, int b_no) {
 		List<CommentDTO> list = comService.commentsAll(b_no);
-		
+	
+		for(int i = 0 ; i<list.size();i++) {
+			int count = notifyService.notifyCount("C", list.get(i).getNo());
+			if(count>4) {
+				comService.commentDelete(list.get(i).getNo());
+				list.remove(i);
+			}
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("b_no", b_no);
+		
+	
 		
 		return "board/help/helpBoardnomalComment";
 	}
@@ -82,6 +95,14 @@ public class CommentsController {
 		// 입력한 댓글 뽑아오기
 		List<CommentDTO> cm = comService.commentLast(b_no,email);
 		List<CommentDTO> jsonList = new ArrayList<>();
+		
+		for(int i = 0; i<cm.size();i++) {
+			int count = notifyService.notifyCount("C", cm.get(i).getNo());
+			if(count>4) {
+				comService.commentDelete(cm.get(i).getNo());
+				cm.remove(i);
+			}
+		}
 		if(cm.size() > 0) {
 			for(CommentDTO tmp : cm) {
 				jsonList.add(tmp);

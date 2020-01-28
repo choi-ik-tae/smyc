@@ -18,6 +18,11 @@
 		update members set authstatus=1 where email=#{value}
 	</update>
 	
+<!-- 	권한 키 가져오기 -->
+	<select id="selectAuthKey" resultType="String">
+		select authkey from members where email=#{email}
+	</select>
+	
 <!-- 	닉네임 중복 확인 -->
 	<select id="checkNickName" resultType="kh.spring.dto.MembersDTO">
 		select * from members where nickname=#{value}
