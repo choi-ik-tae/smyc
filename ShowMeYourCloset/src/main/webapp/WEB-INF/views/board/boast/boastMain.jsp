@@ -76,9 +76,6 @@
     </head>
     <body>
 <c:choose>
-<c:when test="${email ==null }">
-	로그인을 하십시오.
-</c:when>
 <c:when test="${result == 0}">
 	<script>
 		alert("이미 자랑한 스타일 입니다!");
