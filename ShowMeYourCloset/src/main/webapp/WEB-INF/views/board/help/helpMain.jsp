@@ -195,11 +195,11 @@
       		$("#detailFrm").submit();
       	}
       	$(".contents").on("mouseenter",function(){
-      		console.log($(this).children());
+      		
       		$(this).children().css("background","rgba(188,188,188,0.2)");
       	});
       	$(".contents").on("mouseleave",function(){
-      		console.log($(this).children());
+      		
       		$(this).children().css("background","");
       	});
     	$("#toSearch").on("click",function(){
