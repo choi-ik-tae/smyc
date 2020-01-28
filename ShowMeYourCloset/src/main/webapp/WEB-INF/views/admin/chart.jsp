@@ -100,7 +100,7 @@
 	var BVchartData = ${boastView};
 	
 	var BLchartLabels = ${boastTitleByLike};
-	var BLchartData = ${boastViewByLike};
+	var BLchartData = ${boastLike};
 	
 	var HVchartLabels = ${helpTitle};
 	var HVchartData = ${helpView};

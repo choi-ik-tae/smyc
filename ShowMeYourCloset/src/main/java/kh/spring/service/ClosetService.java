@@ -150,28 +150,33 @@ public class ClosetService {
 			
 			File file = new File(target);
 			if( file.exists() ){
-				int s_no = sdao.selectByDelete(category, itemPath);
-				int b_no = bdao.boastSelectByDelete(s_no);
-				if(file.delete()){ 
-					System.out.println("파일삭제 성공");
-					// 옷이 스타일에 등록 되어있을 때 그 스타일에 따른 자랑게시물 삭제
-					if(s_no > 0) {
-						// 코디에 옷이 하나도 없을때 자랑게시물 삭제
-						StyleDTO sTarget = sdao.detailStyle(s_no);
-						if(sTarget.getTop() == null && sTarget.getPants() == null && sTarget.getAcc() == null && sTarget.getShoes() == null) {
-							bdao.boastDeleteByStyle(s_no);
-							cmdao.boardDelete(b_no);
-							ldao.likeDelete(b_no);
+				List<StyleDTO> s_no = sdao.selectByDelete(category, itemPath);
+				if(s_no != null) {
+					for(StyleDTO tmp : s_no) {
+						int b_no = bdao.boastSelectByDelete(tmp.getNo());
+						if(file.delete()){ 
+							System.out.println("파일삭제 성공");
+							// 옷이 스타일에 등록 되어있을 때 그 스타일에 따른 자랑게시물 삭제
+							if(tmp.getNo() > 0) {
+								// 코디에 옷이 하나도 없을때 자랑게시물 삭제
+								StyleDTO sTarget = sdao.detailStyle(tmp.getNo());
+								if(sTarget.getTop() == null && sTarget.getPants() == null && sTarget.getAcc() == null && sTarget.getShoes() == null) {
+									bdao.boastDeleteByStyle(tmp.getNo());
+									cmdao.boardDelete(b_no);
+									ldao.likeDelete(b_no);
+								}
+							}
+							sdao.deleteItem(category, itemPath);
+							ddao.delete(no);
+							dmdao.delete(no);
+							result = 1;
+							break;
+						}else{ 
+							System.out.println("파일삭제 실패");
+							result = 0;
 						}
 					}
-					sdao.deleteItem(category, itemPath);
-					ddao.delete(no);
-					dmdao.delete(no);
-					result = 1;
-				}else{ 
-					System.out.println("파일삭제 실패");
-					result = 0;
-				} 
+				}
 			}else{ 
 				System.out.println("파일이 존재하지 않습니다.");
 				result = 0;
