@@ -97,12 +97,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-8 p-0 text-center d-none d-md-block">
+					<div class="col-8 p-0 text-center">
 						<span id="menuText" style="font-weight: 700; color: dimgray;">MENU</span>
 					</div>
 				</div>
 			</div>
-			<div class="col-10 p-0 d-none d-md-block text-center">
+			<div class="col-10 p-0 text-center">
                 <div class="row m-0">
 	                <div class="col-12" id="categoryBar">
 	                	<span id="bTitle" class="mr-3">STYLE BOAST</span>

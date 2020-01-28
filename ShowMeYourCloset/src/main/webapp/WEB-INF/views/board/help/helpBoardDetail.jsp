@@ -9,25 +9,18 @@
 <!-- 카카오톡 공유  -->
 <script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <!-- Bootstap4 -->
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>     
-           
 		/*    div{border: 1px solid black;}*/
 		* {box-sizing: border-box;font-family: 'Noto Sans KR', sans-serif;}
 		.updateBtn:hover{cursor:pointer;}
-
+		.container-fluid {width: 1903px;max-width: none !important;}
 		/* 네비바 */
 	    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
-	    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+	    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1903px;max-width: none !important;}
 	    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
 	    #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
 	    #categoryBar{height: 80%;}
@@ -75,7 +68,7 @@
 	<!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>
 	<!-- 본문 -->
-	<div class="container-fuild p-0">
+	<div class="container-fluid p-0">
 		<!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">
@@ -125,8 +118,8 @@
          <!-- 상단 설명 -->
 		<div class="row m-0" style="height: 50px;"></div>
 		<!-- 게시글 주루룩 -->
-		<div class="row">
-			<div class="col-12 col-md-6 form-title mt-4 mb-1 p-4"
+		<div class="row m-0">
+			<div class="col-6 form-title mt-4 mb-1 p-4"
 				style="margin: auto; border-radius: 10px; border: 1px solid #bcbcbc;">
 				<div class="row">
 					<div class="col-12">

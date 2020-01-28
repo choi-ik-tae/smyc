@@ -39,7 +39,7 @@
     #load{display:none;}    
     /* 네비바 */
     #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
-    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1920px;max-width: none !important;}
     #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
     #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
     #categoryBar{height: 80%;}
@@ -97,12 +97,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-8 p-0 text-center d-none d-md-block">
+					<div class="col-8 p-0 text-center">
 						<span id="menuText" style="font-weight: 700; color: dimgray;">MENU</span>
 					</div>
 				</div>
 			</div>
-			<div class="col-10 p-0 d-none d-md-block text-center">
+			<div class="col-10 p-0 text-center">
                 <div class="row m-0">
 	                <div class="col-12" id="categoryBar">
 	                	<span id="bTitle" class="mr-3">MY COMMENTS</span>

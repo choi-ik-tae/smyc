@@ -7,7 +7,6 @@
         <meta charset="UTF-8">
         <title>Document</title>
         <!-- Bootstap4 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -47,9 +46,10 @@
                 content: "";  
                 background-size: 100% 100%;
             }
+            .container-fluid {width: 1903px;max-width: none !important;}
             /* 네비바 */
 		    #title{font-size: 15px;color:dimgray;font-weight: 700;line-height: 100px;}
-		    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;}
+		    .navigator {background-color:white; border-bottom: 1px solid #bcbcbc;height:50px;width: 1903px;max-width: none !important;}
 		    #bTitle{font-size: 15px;color:dimgray;font-weight: 700;line-height: 50px;}
 		    #categoryTab{width: 20%; height: 100%;display:inline-block; font-weight: 800;}
 		    #categoryBar{height: 80%;}
@@ -79,7 +79,7 @@
     <!-- 숨김 메뉴 -->
 	<jsp:include page="../../standard/hideMenu.jsp"/>
         <!-- 본문 -->    
-        <div class="container-fuild p-0" id="bk">
+        <div class="container-fluid p-0" id="bk">
            <!-- 네비 -->
 		<div class="navigator fixed-top row m-0">
 			<div class="col-1 p-0" id="btnMenu">
@@ -149,31 +149,31 @@
                 </div>
                 <div class="col-8 form-title mt-1 mb-1 p-4" style="margin:auto ;border : 1px solid #bcbcbc;border-radius: 10px; text-align: center;">
                     <div class="row" style="height: 40px; line-height: 35px; border-bottom: 1px solid #bcbcbc;font-size:17px; font-weight:600;">
-                        <div class="d-none d-md-block col-md-1">
+                        <div class="col-1">
                             NO
                         </div>
-                        <div class="col-8 col-sm-7 col-md-6">
+                        <div class="col-6">
                             TITLE
                         </div>
-                        <div class="col-4 col-sm-3 col-md-2">
+                        <div class="col-2">
                             NICKNAME
                         </div>
-                        <div class="d-none d-sm-block col-sm-2 col-md-1">VIEW</div>
-                        <div class="d-none d-md-block col-2">DATE</div>
+                        <div class="col-1">VIEW</div>
+                        <div class="col-2">DATE</div>
                     </div>
 					<c:forEach items="${list}" var="dto">
 	                    <div class="row contents mt-2 mb-2" style="border-radius:10px;" onclick="detailHelp(${dto.no})">
-	                        <div class="d-none d-md-block col-md-1">
+	                        <div class="col-1">
 	                            ${dto.no}
 	                        </div>
-	                        <div class="col-8 col-sm-7 col-md-6" style="text-align: left;">
+	                        <div class="col-6" style="text-align: left;">
 	                            ${dto.title}
 	                        </div>
-	                        <div class="col-4 col-sm-3 col-md-2">
+	                        <div class="col-2">
 	                            ${dto.nickname }
 	                        </div>
-	                        <div class="d-none d-sm-block col-sm-2 col-md-1">${dto.views}</div>
-	                        <div class="d-none d-md-block col-2">${dto.write_date}</div>
+	                        <div class="col-1">${dto.views}</div>
+	                        <div class="col-2">${dto.write_date}</div>
 	                    </div>
                     
                     </c:forEach>
