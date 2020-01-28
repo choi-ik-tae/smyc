@@ -224,7 +224,17 @@
 			history.back();
 		})
 		$("#toBoast").on("click",function(){
-			location.href="${pageContext.request.contextPath}/board/boastUpload?no="+${dto.no};
+			$.ajax({
+				url : "${pageContext.request.contextPath}/board/boastIsExist",
+				data : { s_no : ${dto.no} }
+			}).done(function(data) {
+				if (data == 'be') {
+					alert("이미 자랑한 스타일입니다!");
+					return false;
+				} else {
+					location.href="${pageContext.request.contextPath}/board/boastUpload?no="+${dto.no};
+				}
+			});
 		});
 		$("#styleModifyBtn").on("click",function(){
 			location.href="${pageContext.request.contextPath}/style/modifyPage?no="+${dto.no};

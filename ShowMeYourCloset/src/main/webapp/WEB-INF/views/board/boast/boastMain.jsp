@@ -168,7 +168,9 @@
 						<div class="row card-deck m-auto" id="boardList">
 						<c:choose>
 						<c:when test="${boastList.size() <= 0}">
-							등록된 게시물이 없습니다.
+							<div class="col-12 text-center" style="line-height:172px;">
+								등록된 게시물이 없습니다.
+							</div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="i" begin="0" end="${boastList.size() - 1}">
