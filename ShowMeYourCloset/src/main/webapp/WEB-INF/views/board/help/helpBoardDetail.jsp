@@ -62,7 +62,7 @@
                 background-size: 100% 100%;
             }
 </style>
-
+</head>
 <body>
 
 	<c:choose>

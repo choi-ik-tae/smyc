@@ -178,9 +178,11 @@ public class ClosetService {
 						}
 					}
 				}else {
-					ddao.delete(no);
-					dmdao.delete(no);
-					result = 1;
+					if(file.delete()) {
+						ddao.delete(no);
+						dmdao.delete(no);
+						result = 1;
+					}
 				}
 			}else{ 
 				System.out.println("파일이 존재하지 않습니다.");

@@ -13,7 +13,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
-    </head>
+    
     <style>
 
         #target{height:770px;}
@@ -32,13 +32,8 @@
 		.loadImg{width:100%; height:100%;}
 		.container{ width:1900px; max-width:none !important;}
     </style>
+    </head>
     <body>
-    	<c:if test="${admin ==null }">
-    		<script>
-    			alert("나가시라구여!!!");
-    			location.href="${pageContext.request.contextPath}/";
-    		</script>
-    	</c:if>
         <div class="container">
         	<div class="col-7" style="margin:auto;">
             <div class="categoryDiv">

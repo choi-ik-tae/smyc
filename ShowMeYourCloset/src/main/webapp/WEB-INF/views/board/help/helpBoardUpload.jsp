@@ -14,17 +14,13 @@
         <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
         <style>
             .mainLogo{
-                position:relative;
-                height: 520px;
+            	position:relative;
                 color: white;
                 font-size:50px;
                 font-weight: 700;
                 text-align: center;
             }
-            #bk{
-
-            }
-            .mainLogo:after{
+            .LogoDiv:after{
                 display: block;
                 position:absolute;
                 top:0;
@@ -94,8 +90,14 @@
 				</div>
 				<div id="searchBox" class="col-1 p-0 m-0"></div>
 			</div>
-            <div class="form-wrapper row m-0">
-                 <div class="col-12 mainLogo" id="mainLogo">
+            <!-- 상단 설명 -->
+            <div class="row m-0 LogoDiv" style="height: 600px;">
+                <div class="col-12">
+                <!-- 위 메뉴 공백 채우기 -->
+                <div class="row" style="margin-top: 100px;"></div>
+                    <div class="col-12">
+                        <div class="row">
+                           <div class="col-12 mainLogo" id="mainLogo">
 			                    <p class="mainLogo" style="margin-top: 95px;"><span style="color:indianred;">H</span>ELP <span style="color:darkred;">B</span>OARD</p>
 			                    <div class="p-3" style="font-size:18px; color:white; font-weight: 700; background: rgba(0,0,0,0.7); width: 500px; margin: auto; border-radius: 10px;">
 			                        <span style="display: block;">코디에 자신이 없어도 괜찮아요!</span>
@@ -103,7 +105,10 @@
 			                        <span style="display: block;">또 친구들의 코디를 도와주세요!</span>
 			                        <span style="display: block;">친구들에게 자신의 <span style="color:darkred">센스</span>를 뽐내보세요</span>
 			                    </div>
-			      </div>
+			                </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <form action="${pageContext.request.contextPath}/board/helpUploadProc.do" method="post" id="inputFrm"> 
             <div class="row m-0" style="background: white">

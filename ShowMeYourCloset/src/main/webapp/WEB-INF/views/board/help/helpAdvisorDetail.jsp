@@ -13,9 +13,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Jua|Noto+Sans+KR&display=swap" rel="stylesheet">
-    </head>
+    
     <style>
-
         #target{height:770px;}
         .advisor-notify span{display: block; font-size:13px;}
         .category-title{text-align: center;font-size: 30px; font-weight: 700;}
@@ -59,20 +58,8 @@
 	    #bottom-contents{font-size: 10pt;color: white;}
 	    .container-fuild{ width:1900px; max-width:none !important;}
 	    
-	    .mainLogo{
-            	position:relative;
-                color: white;
-                font-size:50px;
-                font-weight: 700;
-                text-align: center;
-            }
-            .LogoDiv:after{
-                display: block;
-                position:absolute;
-                top:0;
-                left: 0;
-                background-image:url('/imgs/bg/clothesLogo2.jpg');
-                background-attachment: fixed; 
+	    .mainLogo{position:relative; color: white; font-size:50px;font-weight: 700; text-align: center;}
+        .LogoDiv:after{display: block; position:absolute;top:0; left: 0;background-image:url('/imgs/bg/clothesLogo2.jpg');background-attachment: fixed; 
                 height: 600px;
                 width: 100%;
                 z-index: -1;
@@ -81,6 +68,7 @@
             }
 	   
     </style>
+    </head>
     <body>
     
     	<!-- 숨김 메뉴 -->

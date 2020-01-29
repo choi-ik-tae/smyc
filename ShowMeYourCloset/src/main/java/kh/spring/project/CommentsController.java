@@ -113,6 +113,9 @@ public class CommentsController {
 	@RequestMapping("/myComments")
 	public String myComments(Model m) {
 		String email = (String) session.getAttribute("email");
+		if(email==null) {
+			return "error";
+		}
 		List<CommentDTO> Comments = comService.commentsSelectAllByEmail(email);
 		m.addAttribute("Comments", Comments);
 		return "board/my/myComments";

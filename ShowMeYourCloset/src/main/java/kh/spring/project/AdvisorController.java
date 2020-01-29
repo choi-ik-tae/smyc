@@ -106,6 +106,10 @@ public class AdvisorController {
 
 	@RequestMapping("/advisorUpload")
 	public String advisorUpload(Model model, String writer, int b_no ,String cpage) {
+		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		String gender =memService.selectGender(writer);
 		List<ClosetDTO> closetList = closetService.closetSeleteByEmail(writer);
 		
@@ -139,7 +143,10 @@ public class AdvisorController {
 	
 	@RequestMapping("/advisorUploadProc")
 	public String advisorUploadProc(AdvisorDTO dto,String cpage) {
-		String email = (String)session.getAttribute("email");
+		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		String nickname = (String)session.getAttribute("nick");
 		
 		dto.setEmail(email);
@@ -198,6 +205,10 @@ public class AdvisorController {
 	
 	@RequestMapping("/advisorModify")
 	public String advisorModify(Model model,int no, String gender, int cpage,String writer) {
+		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		AdvisorDTO dto = advisorService.selectAdvisorDTO(no);
 		
 		List<ClosetDTO> closetList = closetService.closetSeleteByEmail(writer);
@@ -219,10 +230,10 @@ public class AdvisorController {
 	
 	@RequestMapping("/advisorModifyProc")
 	public String advisorModifyProc(AdvisorDTO dto,String cpage) {
-		
-		System.out.println(dto.getTop() + " : "+dto.getPants());
-		System.out.println("이건 내용 제목 :: "+dto.getTitle()+ " : "+dto.getContents());
-		
+		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		dto.setTitle(CheckXss.checkXss(dto.getTitle()));
 		dto.setContents(CheckXss.checkXss(dto.getContents()));
 		

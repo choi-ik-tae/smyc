@@ -63,6 +63,9 @@ public class HomeController {
 	@RequestMapping("/dressUpload")
 	public String clothesUpload(Model m) {
 		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		List<ClosetDTO> list = cloService.closetSeleteByEmail(email);
 		m.addAttribute("list", list);
 
@@ -151,6 +154,10 @@ public class HomeController {
 	// 옷장 추가 등록
 	@RequestMapping("/closetUpload")
 	public String closetUpload() {
+		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		return "mypage/closet/closetUpload";
 	}
 
@@ -177,6 +184,9 @@ public class HomeController {
 	@RequestMapping("/styleUpload")
 	public String styleUpload(Model model) {
 		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		String gender = memService.selectGender(email);
 		List<ClosetDTO> closetList = styleService.selectClosetAll(email);
 

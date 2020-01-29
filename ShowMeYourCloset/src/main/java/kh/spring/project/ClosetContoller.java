@@ -34,7 +34,7 @@ public class ClosetContoller {
 
 	@Autowired
 	private HttpSession session;
-
+	
 	// 옷 등록 및 이미지 등록
 	@RequestMapping("/dressUploadProc")
 	public String clothesUpload(DressDTO dto, DressImgDTO fdto, MultipartFile file) {

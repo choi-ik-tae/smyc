@@ -61,6 +61,7 @@ public class BoardController {
 	@RequestMapping("/helpBoard")
 	public String helpBoard(Model model, String cpage) {
 		List<BoardDTO> allList = boardService.helpBoardSelectAll();
+		
 		String page = null;
 		try {
 			if (cpage == null) {
@@ -86,6 +87,9 @@ public class BoardController {
 	@RequestMapping("/helpUploadProc.do")
 	public String helpUploadProc(BoardDTO dto) {
 		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		String nick = (String) session.getAttribute("nick");
 
 		String contents = CheckXss.checkXss(dto.getContents());
@@ -148,6 +152,10 @@ public class BoardController {
 	// help 게시판 수정
 	@RequestMapping("/modifyHelpBoard")
 	public String modifyHelpBoard(String title, String contents, int no) {
+		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		contents = contents.replaceAll("<br>", "\n");
 		
 		boardService.helpBoardUpdate(title, contents, no);
@@ -176,6 +184,7 @@ public class BoardController {
 			// 자랑게시판 게시물 총 출력
 			List<BoardDTO> boastList = boardService.boastAlign(Atarget);
 			List<StyleDTO> styleList = new ArrayList<>();
+			System.out.println(boastList.size());
 			
 			for(BoardDTO tmp : boastList) {
 				styleList.add(styleService.detailStyle(tmp.getS_no()));
@@ -203,16 +212,16 @@ public class BoardController {
 			
 			return "board/boast/boastMain";
 		}catch(Exception e) {
+			e.printStackTrace();
 			return "error";
 		}
 	}
 	// 자랑게시판 업로드 페이지
 	@RequestMapping("/boastUpload")
 	public String boastUpload(Model m,int no) {
-		String email = (String)session.getAttribute("email");
+		String email = (String) session.getAttribute("email");
 		if(email == null) {
-			System.out.println("끄지라!");
-			return "redirec:/";
+			return "error";
 		}
 
 		String gender = memService.selectGender(email);
@@ -245,6 +254,9 @@ public class BoardController {
 	@RequestMapping("/boastUploadProc")
 	public String boastUploadProc(BoardDTO dto, Model m) {
 		String email = (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		String nick = (String) session.getAttribute("nick");
 		
 		String contents = CheckXss.checkXss(dto.getContents());
@@ -405,6 +417,9 @@ public class BoardController {
 	@RequestMapping("/myBoard")
 	public String myBoard(Model model) {
 		String email= (String) session.getAttribute("email");
+		if(email == null) {
+			return "error";
+		}
 		List<BoardDTO> helpList = boardService.myHelpSelectAll(email);
 		List<BoardDTO> boastList = boardService.myBoastSelectAll(email);
 		List<StyleDTO> styleList = new ArrayList<>();

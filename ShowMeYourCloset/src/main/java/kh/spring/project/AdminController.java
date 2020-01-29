@@ -32,7 +32,6 @@ public class AdminController {
 	@RequestMapping("/adminMain")
 	public String adminMain(String email, String pw) {
 		try {
-			System.out.println(email + " : "+pw);
 			int check=adService.adminLogin(email, pw);
 			if(check == 1) {
 				session.setAttribute("admin", email);
@@ -65,7 +64,6 @@ public class AdminController {
 			}
 			if(boastByLike != null) {
 				for(BoardDTO tmp : boastByLike) {
-					System.out.println(tmp.getTitle());
 					boastTitleByLike.add("'"+tmp.getTitle()+"'");
 					boastLike.add(adService.selectLikeByBoastNo(tmp.getNo()));
 				}
