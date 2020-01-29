@@ -79,12 +79,14 @@ public class ClosetContoller {
 			System.out.println("itemPath : "+itemPath);
 			
 			int result = cloService.dressDelete(no,path,category,itemPath);
+			System.out.println(result);
 			
 			if(result == 0) {
 				return "redirect:/errorFile";
 			}
 			return "redirect:/myCloset";
 		}catch(Exception e) {
+			e.printStackTrace();
 			return "error";
 		}
 	}
