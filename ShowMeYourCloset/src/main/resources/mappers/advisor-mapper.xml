@@ -30,4 +30,8 @@
 	<delete id="helpBoardDelete">
 		delete from advisor where b_no=#{value}
 	</delete>
+<!-- 	도움댓글 수정 -->
+	<update id="modifyAdvisor">
+		update advisor set title=#{title}, contents=#{contents},top=#{top},pants=#{pants},shoes=#{shoes},acc=#{acc} where no=#{no}
+	</update>
  </mapper> 

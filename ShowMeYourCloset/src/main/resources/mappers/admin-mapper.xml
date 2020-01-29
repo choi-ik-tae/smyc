@@ -34,4 +34,7 @@
 	<select id="selectByHelpByView" resultType="kh.spring.dto.BoardDTO">
 		select * from board where category = 'H' order by views desc
 	</select>
+	<select id="adminLogin" resultType="kh.spring.dto.AdminDTO">
+		select * from admin where id=#{id} and pw=#{pw}
+	</select>
  </mapper> 

@@ -27,6 +27,12 @@
 </style>
 </head>
 <body>
+	<c:if test="${admin ==null }">
+    		<script>
+    			alert("나가시라구여!!!");
+    			location.href="${pageContext.request.contextPath}/";
+    		</script>
+    	</c:if>
 	<div class="container p-0">
         <div class="row navi m-0 fixed-top">
             <div class="col-12 text-center">

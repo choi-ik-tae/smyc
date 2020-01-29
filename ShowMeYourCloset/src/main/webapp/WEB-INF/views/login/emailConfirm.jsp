@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script>
-		alert("이미 등록된 이메일 입니다.");
+		alert("이미 인증메일을 발송한 이메일입니다.");
 		
 		location.href="${pageContext.request.contextPath}/signin";
 	</script>

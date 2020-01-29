@@ -30,8 +30,20 @@ public class AdminController {
 	private MemberService memService;
 	
 	@RequestMapping("/adminMain")
-	public String adminMain() {
-		return "admin/adminMain";
+	public String adminMain(String email, String pw) {
+		try {
+			System.out.println(email + " : "+pw);
+			int check=adService.adminLogin(email, pw);
+			if(check == 1) {
+				session.setAttribute("admin", email);
+				return "admin/adminMain";
+			}else {
+				System.out.println("마! 관리자도 아닌게... 끄지라!");
+				return "redirect:/";
+			}
+		}catch(Exception e) {
+			return "error";
+		}
 	}
 	
 	@RequestMapping("/chart")

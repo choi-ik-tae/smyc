@@ -145,13 +145,15 @@ public class ClosetService {
 	public int dressDelete(int no,String path,String category,String itemPath) {
 		int result = 0;
 	
+		
 		if(dmdao.selectImgByDress(no) != null) {
 			String target = path + "/" + dmdao.selectImgByDress(no).getSys_name();
+	
 			
 			File file = new File(target);
 			if( file.exists() ){
 				List<StyleDTO> s_no = sdao.selectByDelete(category, itemPath);
-				if(s_no != null) {
+				if(s_no.size() > 0) {
 					for(StyleDTO tmp : s_no) {
 						int b_no = bdao.boastSelectByDelete(tmp.getNo());
 						if(file.delete()){ 
@@ -172,16 +174,20 @@ public class ClosetService {
 							result = 1;
 							break;
 						}else{ 
-							System.out.println("파일삭제 실패");
 							result = 0;
 						}
 					}
+				}else {
+					ddao.delete(no);
+					dmdao.delete(no);
+					result = 1;
 				}
 			}else{ 
 				System.out.println("파일이 존재하지 않습니다.");
 				result = 0;
 			}
 		}
+		System.out.println("여긴 어딘데?");
 		return result;
 	}
 	// 옷 정보 수정 및 이미지 교체

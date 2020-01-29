@@ -25,7 +25,15 @@
 </style>
 </head>
 <body>
-	<div class="container p-0">
+	<c:choose>
+		<c:when test="${admin == null }">
+			<script>
+				alert("관리자 아니면 나가세여~~");
+				location.href="${pageContext.request.contextPath}/";
+			</script>
+		</c:when>
+		<c:otherwise>
+			<div class="container p-0">
         <div class="row navi m-0 fixed-top">
             <div class="col-12 text-center">
                 SHOW ME YOUR CLOSET
@@ -46,6 +54,9 @@
 		    </div>
 		</div>
 	</div>
+		</c:otherwise>
+	</c:choose>
+	
 	<script>
 		$("#toChart").on("click",function(){
 			location.href="${pageContext.request.contextPath}/admin/chart";

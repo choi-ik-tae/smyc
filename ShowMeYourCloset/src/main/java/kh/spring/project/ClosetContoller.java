@@ -68,21 +68,27 @@ public class ClosetContoller {
 	// 옷 정보 삭제
 	@RequestMapping("/dressDelete")
 	public String dressDetailView(int no) {
-		String nick = (String) session.getAttribute("nick");
-		String path = session.getServletContext().getRealPath("files/" + nick);
-		String category = cloService.dressSelectInfo(no).getCategory();
-		String itemPath = cloService.dressSelectImg(no).getPath();
-		
-		System.out.println("path : "+path);
-		System.out.println("category : "+category);
-		System.out.println("itemPath : "+itemPath);
-		
-		int result = cloService.dressDelete(no,path,category,itemPath);
-		
-		if(result == 0) {
-			return "redirect:/errorFile";
+		try {
+			String nick = (String) session.getAttribute("nick");
+			String path = session.getServletContext().getRealPath("files/" + nick);
+			String category = cloService.dressSelectInfo(no).getCategory();
+			String itemPath = cloService.dressSelectImg(no).getPath();
+			
+			System.out.println("path : "+path);
+			System.out.println("category : "+category);
+			System.out.println("itemPath : "+itemPath);
+			
+			int result = cloService.dressDelete(no,path,category,itemPath);
+			System.out.println(result);
+			
+			if(result == 0) {
+				return "redirect:/errorFile";
+			}
+			return "redirect:/myCloset";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "error";
 		}
-		return "redirect:/myCloset";
 	}
 	// 옷 정보 수정
 	@RequestMapping("/dressModifyProc")
@@ -161,6 +167,7 @@ public class ClosetContoller {
 	// 옷장 수정 모드
 	@RequestMapping("/closetModify")
 	public String closetModify(int c_no,Model m) {
+		
 		String email = (String) session.getAttribute("email");
 		
 		// 옷장 정보
@@ -187,32 +194,41 @@ public class ClosetContoller {
 		m.addAttribute("accImgList", accImgList);
 		
 		return "mypage/closet/closetModify";
+		
 	}
 	// 옷장 수정 - 수정완료
 	@RequestMapping("closetModifyProc")
 	public String closetModifyProc(String[] targets,int no, String closet, String dg,String pub,Model m) {
-		List<Integer> nos = new ArrayList<>();
-		for(String tmp : targets) {
-			nos.add(Integer.parseInt(tmp));
+		try {
+			List<Integer> nos = new ArrayList<>();
+			for(String tmp : targets) {
+				nos.add(Integer.parseInt(tmp));
+			}
+			String path = session.getServletContext().getRealPath("");
+			cloService.closetDeleteDress(nos,path);
+			cloService.closetUpdate(no, dg, CheckXss.checkXss(closet), pub);
+			// 변경된 옷장 이름 보내주기 위함
+			String target = CheckXss.checkXss(cloService.closetSelectName(no).getName());
+			m.addAttribute("target", target);
+			
+			return "redirect:/myCloset";
+		}catch(Exception e) {
+			return "error";
 		}
-		String path = session.getServletContext().getRealPath("");
-		cloService.closetDeleteDress(nos,path);
-		cloService.closetUpdate(no, dg, CheckXss.checkXss(closet), pub);
-		// 변경된 옷장 이름 보내주기 위함
-		String target = CheckXss.checkXss(cloService.closetSelectName(no).getName());
-		m.addAttribute("target", target);
-		
-		return "redirect:/myCloset";
 	}
 	// 옷장 수정  - 수정삭제
 	@RequestMapping("closetDeleteProc")
 	public String closetDeleteProc(int no) {
-		String email = (String)session.getAttribute("email");
-		String path = session.getServletContext().getRealPath("");
+		try {
+			String email = (String)session.getAttribute("email");
+			String path = session.getServletContext().getRealPath("");
+			
+			cloService.closetDelete(no, email, path);
 		
-		cloService.closetDelete(no, email, path);
-	
-		return "redirect:/myCloset";
+			return "redirect:/myCloset";
+		}catch(Exception e) {
+			return "error";
+		}
 	}
 
 	// 전체 옷 정보 ajax 통신
